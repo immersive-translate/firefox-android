@@ -206,7 +206,7 @@ private fun JunoOnboardingContent(
             OnboardingPage(pageState = onboardingPageState)
         }
 
-        PagerIndicator(
+        /*PagerIndicator(
             pagerState = pagerState,
             activeColor = FirefoxTheme.colors.actionPrimary,
             inactiveColor = FirefoxTheme.colors.actionSecondary,
@@ -214,7 +214,7 @@ private fun JunoOnboardingContent(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(bottom = 16.dp),
-        )
+        )*/
     }
 }
 

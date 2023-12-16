@@ -19,6 +19,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -47,12 +48,14 @@ import org.mozilla.gecko.search.SearchWidgetProvider
  */
 class JunoOnboardingFragment : Fragment() {
 
-    private val pagesToDisplay by lazy {
+    /*private val pagesToDisplay by lazy {
         pagesToDisplay(
             canShowNotificationPage(requireContext()),
             canShowAddWidgetCard(),
         )
-    }
+    }*/
+    private lateinit var pagesToDisplay: List<OnboardingPageUiData>
+
     private val telemetryRecorder by lazy { JunoOnboardingTelemetryRecorder() }
     private val pinAppWidgetReceiver = WidgetPinnedReceiver()
 
@@ -97,6 +100,7 @@ class JunoOnboardingFragment : Fragment() {
     @Composable
     @Suppress("LongMethod")
     private fun ScreenContent() {
+        pagesToDisplay = pagesToDisplay()
         val context = LocalContext.current
         JunoOnboardingScreen(
             pagesToDisplay = pagesToDisplay,
@@ -220,7 +224,7 @@ class JunoOnboardingFragment : Fragment() {
 
     private fun isNotATablet() = !resources.getBoolean(R.bool.tablet)
 
-    private fun pagesToDisplay(
+    /*private fun pagesToDisplay(
         showNotificationPage: Boolean,
         showAddWidgetPage: Boolean,
     ): List<OnboardingPageUiData> {
@@ -233,5 +237,21 @@ class JunoOnboardingFragment : Fragment() {
             showAddWidgetPage,
             jexlConditions,
         ) { condition -> jexlHelper.evalJexlSafe(condition) }
+    }*/
+
+    @Composable
+    private fun pagesToDisplay(): List<OnboardingPageUiData> {
+        return listOf(
+            OnboardingPageUiData(
+                type = OnboardingPageUiData.Type.DEFAULT_BROWSER,
+                imageRes = R.drawable.ic_onboarding_welcome,
+                title = stringResource(R.string.juno_onboarding_default_browser_title_nimbus_2),
+                description = stringResource(R.string.juno_onboarding_default_browser_description_nimbus_2),
+                linkText = stringResource(R.string.juno_onboarding_default_browser_description_link_text),
+                primaryButtonLabel = stringResource(R.string.juno_onboarding_default_browser_positive_button),
+                secondaryButtonLabel = stringResource(R.string.juno_onboarding_default_browser_negative_button),
+            ),
+        )
     }
+
 }
