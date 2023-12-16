@@ -53,6 +53,7 @@
 	<color name="photonPink70A69">#b0c60084</color>
 	<color name="photonPink80">#ff7f145b</color>
 	<color name="photonPink90">#ff50134b</color>
+	<color name="iconBg">#FFEA4C89</color>
 
 	<!-- Green -->
 	<color name="photonGreen05">#ffe3fff3</color>
