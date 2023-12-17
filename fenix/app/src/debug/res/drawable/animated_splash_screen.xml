@@ -827,7 +827,7 @@
                     android:propertyName="scaleX"
                     android:startOffset="300"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -837,7 +837,7 @@
                     android:duration="1000"
                     android:propertyName="scaleX"
                     android:startOffset="1000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -849,7 +849,7 @@
                     android:propertyName="scaleX"
                     android:startOffset="2000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -859,7 +859,7 @@
                     android:duration="1000"
                     android:propertyName="scaleX"
                     android:startOffset="3000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -871,7 +871,7 @@
                     android:propertyName="scaleX"
                     android:startOffset="4000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -881,7 +881,7 @@
                     android:duration="1000"
                     android:propertyName="scaleX"
                     android:startOffset="5000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -893,7 +893,7 @@
                     android:propertyName="scaleX"
                     android:startOffset="6000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -903,7 +903,7 @@
                     android:duration="1000"
                     android:propertyName="scaleX"
                     android:startOffset="7000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -915,7 +915,7 @@
                     android:propertyName="scaleX"
                     android:startOffset="8000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -925,7 +925,7 @@
                     android:duration="1000"
                     android:propertyName="scaleX"
                     android:startOffset="9000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -937,7 +937,7 @@
                     android:propertyName="scaleX"
                     android:startOffset="10000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -947,7 +947,7 @@
                     android:duration="1000"
                     android:propertyName="scaleX"
                     android:startOffset="11000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -966,7 +966,7 @@
                     android:propertyName="scaleY"
                     android:startOffset="300"
                     android:valueFrom="0.75002400000000002"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -976,7 +976,7 @@
                     android:duration="1000"
                     android:propertyName="scaleY"
                     android:startOffset="1000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -988,7 +988,7 @@
                     android:propertyName="scaleY"
                     android:startOffset="2000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -998,7 +998,7 @@
                     android:duration="1000"
                     android:propertyName="scaleY"
                     android:startOffset="3000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -1010,7 +1010,7 @@
                     android:propertyName="scaleY"
                     android:startOffset="4000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -1020,7 +1020,7 @@
                     android:duration="1000"
                     android:propertyName="scaleY"
                     android:startOffset="5000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -1032,7 +1032,7 @@
                     android:propertyName="scaleY"
                     android:startOffset="6000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -1042,7 +1042,7 @@
                     android:duration="1000"
                     android:propertyName="scaleY"
                     android:startOffset="7000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -1054,7 +1054,7 @@
                     android:propertyName="scaleY"
                     android:startOffset="8000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -1064,7 +1064,7 @@
                     android:duration="1000"
                     android:propertyName="scaleY"
                     android:startOffset="9000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
@@ -1076,7 +1076,7 @@
                     android:propertyName="scaleY"
                     android:startOffset="10000"
                     android:valueFrom="0.75"
-                    android:valueTo="1"
+                    android:valueTo="0.9"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M0,0 C0.5,0 0.5,1 1,1" />
@@ -1086,7 +1086,7 @@
                     android:duration="1000"
                     android:propertyName="scaleY"
                     android:startOffset="11000"
-                    android:valueFrom="1"
+                    android:valueFrom="0.9"
                     android:valueTo="0.75"
                     android:valueType="floatType">
                     <aapt:attr name="android:interpolator">
