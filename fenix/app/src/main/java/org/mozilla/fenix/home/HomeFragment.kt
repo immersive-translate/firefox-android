@@ -1636,7 +1636,7 @@ class HomeFragment : Fragment() {
             else -> ColorStateList.valueOf(color)
         }
 
-        binding.wordmarkText.imageTintList = tintColor
+        //binding.wordmarkText.imageTintList = tintColor
         binding.privateBrowsingButton.buttonTintList = tintColor
     }
 

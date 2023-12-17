@@ -75,14 +75,23 @@
                     android:contentDescription="@null"
                     tools:ignore="ImageContrastCheck" />
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/wordmarkText"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/wordmark_text_height"
                     android:adjustViewBounds="true"
                     android:contentDescription="@null"
                     android:layout_marginTop="@dimen/wordmark_text_margin_top"
-                    app:srcCompat="?fenixWordmarkText" />
+                    app:srcCompat="?fenixWordmarkText" />-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/wordmark_text"
+                    android:textColor="?fenixWordmarkColor"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

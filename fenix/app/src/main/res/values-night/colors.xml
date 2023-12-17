@@ -184,4 +184,6 @@
 
     <!-- Private Mode mask icon circle fill colors -->
     <color name="mozac_ui_private_mode_circle_fill" tools:ignore="UnusedResources">@color/photonPurple60</color>
+
+    <color name="fenix_wordmark_color">@color/photonLightGrey10</color>
 </resources>
