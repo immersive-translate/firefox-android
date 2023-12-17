@@ -37,7 +37,8 @@ object SupportUtils {
     const val MEITUAN_URL = "https://tb.j5k6.com/6ZSOp"
     const val GOOGLE_US_URL = "https://www.google.com/webhp?client=firefox-b-1-m&channel=ts"
     const val GOOGLE_XX_URL = "https://www.google.com/webhp?client=firefox-b-m&channel=ts"
-    const val WHATS_NEW_URL = "https://www.mozilla.org/firefox/android/notes"
+    //const val WHATS_NEW_URL = "https://www.mozilla.org/firefox/android/notes"
+    const val WHATS_NEW_URL = "https://immersivetranslate.com/docs/CHANGELOG/"
 
     enum class SumoTopic(internal val topicStr: String) {
         HELP("faq-android"),

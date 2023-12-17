@@ -318,13 +318,13 @@ open class DefaultToolbarMenu(
         },
     )
 
-    private val saveToCollectionItem = BrowserMenuImageText(
+    /*private val saveToCollectionItem = BrowserMenuImageText(
         label = context.getString(R.string.browser_menu_save_to_collection_2),
         imageResource = R.drawable.ic_tab_collection,
         iconTintColorResource = primaryTextColor(),
     ) {
         onItemTapped.invoke(ToolbarMenu.Item.SaveToCollection)
-    }
+    }*/
 
     private val printPageItem = BrowserMenuImageText(
         label = context.getString(R.string.menu_print),
@@ -383,13 +383,13 @@ open class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.Quit)
     }
 
-    private fun syncMenuItem(): BrowserMenuItem {
+    /*private fun syncMenuItem(): BrowserMenuItem {
         return BrowserMenuSignIn(primaryTextColor()) {
             onItemTapped.invoke(
                 ToolbarMenu.Item.SyncAccount(accountManager.accountState),
             )
         }
-    }
+    }*/
 
     @VisibleForTesting(otherwise = PRIVATE)
     val coreMenuItems by lazy {
@@ -402,7 +402,7 @@ open class DefaultToolbarMenu(
                 historyItem,
                 downloadsItem,
                 extensionsItem,
-                syncMenuItem(),
+                //syncMenuItem(),
                 BrowserMenuDivider(),
                 findInPageItem,
                 desktopSiteItem,
@@ -414,7 +414,7 @@ open class DefaultToolbarMenu(
                 addToHomeScreenItem.apply { visible = ::canAddToHomescreen },
                 installToHomescreen.apply { visible = ::canInstall },
                 if (shouldShowTopSites) addRemoveTopSitesItem else null,
-                saveToCollectionItem,
+                //saveToCollectionItem,
                 if (FxNimbus.features.print.value().browserPrintEnabled) printPageItem else null,
                 BrowserMenuDivider(),
                 settingsItem,
