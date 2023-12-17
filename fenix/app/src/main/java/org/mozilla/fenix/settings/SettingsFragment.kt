@@ -416,7 +416,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             /* About preferences */
             resources.getString(R.string.pref_key_rate) -> {
                 try {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(SupportUtils.RATE_APP_URL)))
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SupportUtils.RATE_APP_URL))
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
                 } catch (e: ActivityNotFoundException) {
                     // Device without the play store installed.
                     // Opening the play store website.
