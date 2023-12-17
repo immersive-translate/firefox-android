@@ -76,12 +76,12 @@ import org.mozilla.fenix.GleanMetrics.Settings as SettingsMetrics
 class SettingsFragment : PreferenceFragmentCompat() {
 
     private val args by navArgs<SettingsFragmentArgs>()
-    private lateinit var accountUiView: AccountUiView
+    //private lateinit var accountUiView: AccountUiView
     private lateinit var addonFilePicker: AddonFilePicker
     private val profilerViewModel: ProfilerViewModel by activityViewModels()
     private val snackbarBinding = ViewBoundFeatureWrapper<SnackbarBinding>()
 
-    @VisibleForTesting
+    /*@VisibleForTesting
     internal val accountObserver = object : AccountObserver {
         private fun updateAccountUi(profile: Profile? = null) {
             val context = context ?: return
@@ -98,7 +98,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         override fun onLoggedOut() = updateAccountUi()
         override fun onProfileUpdated(profile: Profile) = updateAccountUi(profile)
         override fun onAuthenticationProblems() = updateAccountUi()
-    }
+    }*/
 
     // A flag used to track if we're going through the onCreate->onStart->onResume lifecycle chain.
     // If it's set to `true`, code in `onResume` can assume that `onCreate` executed a moment prior.
@@ -108,13 +108,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        accountUiView = AccountUiView(
+        /*accountUiView = AccountUiView(
             fragment = this,
             scope = lifecycleScope,
             accountManager = requireComponents.backgroundServices.accountManager,
             httpClient = requireComponents.core.client,
             updateFxAAllowDomesticChinaServerMenu = ::updateFxAAllowDomesticChinaServerMenu,
-        )
+        )*/
 
         addonFilePicker = AddonFilePicker(requireContext(), requireComponents.addonManager)
         addonFilePicker.registerForResults(this)
@@ -125,10 +125,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         // For example, if user is signed-in, and we don't perform this call in onCreate, we'll briefly
         // display a "Sign In" preference, which will then get replaced by the correct account information
         // once this call is ran in onResume shortly after.
-        accountUiView.updateAccountUIState(
+        /*accountUiView.updateAccountUIState(
             requireContext(),
             requireComponents.backgroundServices.accountManager.accountProfile(),
-        )
+        )*/
 
         val booleanPreferenceTelemetryAllowList = listOf(
             requireContext().getString(R.string.pref_key_show_search_suggestions),
@@ -207,7 +207,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         // Account UI state is updated as part of `onCreate`. To not do it twice in a row, we only
         // update it here if we're not going through the `onCreate->onStart->onResume` lifecycle chain.
-        update(shouldUpdateAccountUIState = !creatingFragment)
+        update(/*shouldUpdateAccountUIState = !creatingFragment*/)
 
         requireView().findViewById<RecyclerView>(R.id.recycler_view)
             ?.hideInitialScrollBar(viewLifecycleOwner.lifecycleScope)
@@ -223,26 +223,26 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onStart() {
         super.onStart()
         // Observe account changes to keep the UI up-to-date.
-        requireComponents.backgroundServices.accountManager.register(
+        /*requireComponents.backgroundServices.accountManager.register(
             accountObserver,
             owner = this,
             autoPause = true,
-        )
+        )*/
     }
 
     override fun onStop() {
         super.onStop()
         // If the screen isn't visible we don't need to show updates.
         // Also prevent the observer registered to the FXA singleton causing memory leaks.
-        requireComponents.backgroundServices.accountManager.unregister(accountObserver)
+        //requireComponents.backgroundServices.accountManager.unregister(accountObserver)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        accountUiView.cancel()
+        //accountUiView.cancel()
     }
 
-    private fun update(shouldUpdateAccountUIState: Boolean) {
+    private fun update(/*shouldUpdateAccountUIState: Boolean*/) {
         val settings = requireContext().settings()
 
         val aboutPreference = requirePreference<Preference>(R.string.pref_key_about)
@@ -274,12 +274,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         setupPreferences()
 
-        if (shouldUpdateAccountUIState) {
+        /*if (shouldUpdateAccountUIState) {
             accountUiView.updateAccountUIState(
                 requireContext(),
                 requireComponents.backgroundServices.accountManager.accountProfile(),
             )
-        }
+        }*/
     }
 
     @SuppressLint("InflateParams")
@@ -292,22 +292,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val directions: NavDirections? = when (preference.key) {
             /* Top level account preferences.
             Note: Only ONE of these preferences is visible at a time. */
-            resources.getString(R.string.pref_key_sign_in) -> {
+            /*resources.getString(R.string.pref_key_sign_in) -> {
                 SettingsMetrics.signIntoSync.add()
                 SettingsFragmentDirections.actionSettingsFragmentToTurnOnSyncFragment(
                     entrypoint = FenixFxAEntryPoint.SettingsMenu,
                 )
-            }
+            }*/
 
-            resources.getString(R.string.pref_key_account) -> {
+            /*resources.getString(R.string.pref_key_account) -> {
                 SettingsFragmentDirections.actionSettingsFragmentToAccountSettingsFragment()
-            }
+            }*/
 
-            resources.getString(R.string.pref_key_account_auth_error) -> {
+            /*resources.getString(R.string.pref_key_account_auth_error) -> {
                 SettingsFragmentDirections.actionSettingsFragmentToAccountProblemFragment(
                     entrypoint = FenixFxAEntryPoint.SettingsMenu,
                 )
-            }
+            }*/
 
             /* General preferences */
             resources.getString(R.string.pref_key_search_settings) -> {

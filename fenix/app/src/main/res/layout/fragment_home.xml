@@ -54,7 +54,7 @@
             <LinearLayout
                 android:id="@+id/wordmark"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginBottom="32dp"
@@ -67,12 +67,13 @@
 
                 <ImageView
                     android:id="@+id/wordmarkLogo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginEnd="10.dp"
                     android:adjustViewBounds="true"
                     app:srcCompat="?fenixWordmarkLogo"
                     android:contentDescription="@null"
+                    android:scaleType="fitCenter"
                     tools:ignore="ImageContrastCheck" />
 
                 <!--<ImageView
@@ -90,7 +91,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="@string/wordmark_text"
                     android:textColor="?fenixWordmarkColor"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

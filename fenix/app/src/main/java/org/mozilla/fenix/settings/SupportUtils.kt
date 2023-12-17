@@ -37,7 +37,8 @@ object SupportUtils {
     const val MEITUAN_URL = "https://tb.j5k6.com/6ZSOp"
     const val GOOGLE_US_URL = "https://www.google.com/webhp?client=firefox-b-1-m&channel=ts"
     const val GOOGLE_XX_URL = "https://www.google.com/webhp?client=firefox-b-m&channel=ts"
-    const val WHATS_NEW_URL = "https://www.mozilla.org/firefox/android/notes"
+    //const val WHATS_NEW_URL = "https://www.mozilla.org/firefox/android/notes"
+    const val WHATS_NEW_URL = "https://immersivetranslate.com/docs/CHANGELOG/"
     const val FXACCOUNT_SUMO_URL = "https://support.mozilla.org/kb/access-mozilla-services-firefox-account"
 
     // This is locale-less on purpose so that the content negotiation happens on the AMO side because the current
