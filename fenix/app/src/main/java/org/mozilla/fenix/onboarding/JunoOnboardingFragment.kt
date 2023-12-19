@@ -12,6 +12,7 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import mozilla.components.service.nimbus.evalJexlSafe
 import mozilla.components.support.base.ext.areNotificationsEnabledSafe
+import org.intellij.lang.annotations.Language
 import org.mozilla.fenix.R
 import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
 import org.mozilla.fenix.ext.components
@@ -239,12 +241,17 @@ class JunoOnboardingFragment : Fragment() {
         ) { condition -> jexlHelper.evalJexlSafe(condition) }
     }*/
 
+    @Suppress("DEPRECATION")
     @Composable
     private fun pagesToDisplay(): List<OnboardingPageUiData> {
+        val local = requireContext().resources.configuration.locale
+        val imageRes: Int = if (isChinese(local.language))
+            R.drawable.ic_app_nav_zh else R.drawable.ic_app_nav_en
         return listOf(
             OnboardingPageUiData(
                 type = OnboardingPageUiData.Type.DEFAULT_BROWSER,
-                imageRes = R.drawable.ic_onboarding_welcome,
+                // imageRes = R.drawable.ic_onboarding_welcome,
+                imageRes = imageRes,
                 title = stringResource(R.string.juno_onboarding_default_browser_title_nimbus_2),
                 description = stringResource(R.string.juno_onboarding_default_browser_description_nimbus_2),
                 linkText = stringResource(R.string.juno_onboarding_default_browser_description_link_text),
@@ -252,6 +259,10 @@ class JunoOnboardingFragment : Fragment() {
                 secondaryButtonLabel = stringResource(R.string.juno_onboarding_default_browser_negative_button),
             ),
         )
+    }
+
+    fun isChinese(language: String) : Boolean {
+        return language.endsWith("zh")
     }
 
 }

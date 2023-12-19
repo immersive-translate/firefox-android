@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
@@ -23,6 +24,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -72,7 +75,7 @@ fun OnboardingPage(
             .padding(bottom = if (pageState.secondaryButton == null) 32.dp else 24.dp)
             .then(modifier),
     ) {
-        val boxWithConstraintsScope = this
+        //val boxWithConstraintsScope = this
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -102,17 +105,18 @@ fun OnboardingPage(
                 Image(
                     painter = painterResource(id = pageState.imageRes),
                     contentDescription = null,
-                    modifier = Modifier.height(imageHeight(boxWithConstraintsScope)),
+                    modifier = Modifier.height(300.dp).width(300.dp),
+                    contentScale = ContentScale.Fit
                 )
 
-                Spacer(modifier = Modifier.height(32.dp))
+                /*Spacer(modifier = Modifier.height(32.dp))
 
                 Text(
                     text = pageState.title,
                     color = FirefoxTheme.colors.textPrimary,
                     textAlign = TextAlign.Center,
                     style = FirefoxTheme.typography.headline5,
-                )
+                )*/
 
                 Spacer(modifier = Modifier.height(16.dp))
 

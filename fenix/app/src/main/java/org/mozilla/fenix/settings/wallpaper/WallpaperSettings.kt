@@ -125,7 +125,8 @@ private fun WallpaperGroupHeading(
     // or invest in a method of localizing the remote strings themselves.
     if (collection.name == Wallpaper.classicFirefoxCollectionName) {
         Text(
-            text = stringResource(R.string.wallpaper_classic_title, stringResource(R.string.firefox)),
+            //text = stringResource(R.string.wallpaper_classic_title, stringResource(R.string.firefox)),
+            text = stringResource(R.string.wallpaper_classic_title_),
             color = FirefoxTheme.colors.textSecondary,
             style = FirefoxTheme.typography.subtitle2,
         )
