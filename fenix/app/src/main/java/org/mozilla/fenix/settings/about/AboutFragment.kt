@@ -28,6 +28,7 @@ import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.settings.about.AboutItemType.LICENSING_INFO
 import org.mozilla.fenix.settings.about.AboutItemType.PRIVACY_NOTICE
+import org.mozilla.fenix.settings.about.AboutItemType.PRIVACY_NOTICE_APP
 import org.mozilla.fenix.settings.about.AboutItemType.RIGHTS
 import org.mozilla.fenix.settings.about.AboutItemType.SUPPORT
 import org.mozilla.fenix.settings.about.AboutItemType.WHATS_NEW
@@ -119,11 +120,11 @@ class AboutFragment : Fragment(), AboutPageListener {
             ""
         }
 
-        val content = getString(R.string.about_content, appName)
+        //val content = getString(R.string.about_content, appName)
         val buildDate = BuildConfig.BUILD_DATE
 
         binding.aboutText.text = aboutText
-        binding.aboutContent.text = content
+        //binding.aboutContent.text = content
         binding.buildDate.text = buildDate
     }
 
@@ -141,7 +142,8 @@ class AboutFragment : Fragment(), AboutPageListener {
             AboutPageItem(
                 AboutItem.ExternalLink(
                     SUPPORT,
-                    SupportUtils.getSumoURLForTopic(context, SupportUtils.SumoTopic.HELP),
+                    //SupportUtils.getSumoURLForTopic(context, SupportUtils.SumoTopic.HELP),
+                    SupportUtils.TUTORIAL_URL
                 ),
                 getString(R.string.about_support),
             ),
@@ -155,6 +157,13 @@ class AboutFragment : Fragment(), AboutPageListener {
                     SupportUtils.getMozillaPageUrl(SupportUtils.MozillaPage.PRIVATE_NOTICE),
                 ),
                 getString(R.string.about_privacy_notice),
+            ),
+            AboutPageItem(
+                AboutItem.ExternalLink(
+                    PRIVACY_NOTICE_APP,
+                    SupportUtils.APP_PRIVACY_NOTICE
+                ),
+                getString(R.string.about_privacy_notice_app)
             ),
             AboutPageItem(
                 AboutItem.ExternalLink(
@@ -195,7 +204,8 @@ class AboutFragment : Fragment(), AboutPageListener {
                         WhatsNew.userViewedWhatsNew(requireContext())
                         Events.whatsNewTapped.record(NoExtras())
                     }
-                    SUPPORT, PRIVACY_NOTICE, LICENSING_INFO, RIGHTS -> {} // no telemetry needed
+                    SUPPORT, PRIVACY_NOTICE, PRIVACY_NOTICE_APP,
+                    LICENSING_INFO, RIGHTS -> {} // no telemetry needed
                 }
 
                 openLinkInNormalTab(item.url)

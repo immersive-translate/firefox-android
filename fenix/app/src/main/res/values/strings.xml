@@ -54,7 +54,8 @@
     <string name="recently_saved_menu_item_remove">Remove</string>
 
     <!-- About content. The first parameter is the name of the application. (For example: Fenix) -->
-    <string name="about_content">%1$s is produced by Mozilla.</string>
+    <!--<string name="about_content">%1$s is produced by Mozilla.</string>-->
+    <string name="about_content">Immersive Translate Browser is a customized product developed independently by Immersive Translate team, based on the technology of the Firefox browser, an open-source project by Mozilla.</string>
 
     <!-- Private Browsing -->
     <!-- Explanation for private browsing displayed to users on home view when they first enable private mode
@@ -1611,13 +1612,14 @@
     <string name="preference_etp_exceptions_icon_description">Enhanced tracking protection exception preference icon</string>
 
     <!-- About page link text to open support link -->
-    <string name="about_support">Support</string>
+    <string name="about_support">Tutorial</string>
     <!-- About page link text to list of past crashes (like about:crashes on desktop) -->
     <string name="about_crashes">Crashes</string>
     <!-- About page link text to open privacy notice link -->
-    <string name="about_privacy_notice">Privacy notice</string>
+    <string name="about_privacy_notice">Firefox Privacy notice</string>
+    <string name="about_privacy_notice_app">Immersive Translate Privacy Policy</string>
     <!-- About page link text to open know your rights link -->
-    <string name="about_know_your_rights">Know your rights</string>
+    <string name="about_know_your_rights">Know your rights about Firefox</string>
     <!-- About page link text to open licensing information link -->
     <string name="about_licensing_information">Licensing information</string>
     <!-- About page link text to open a screen with libraries that are used -->
