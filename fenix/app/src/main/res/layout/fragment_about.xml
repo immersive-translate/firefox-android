@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- This Source Code Form is subject to the terms of the Mozilla Public
+<?xml version="1.0" encoding="utf-8"?><!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/about_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,20 +15,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/wordmark"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/about_header_fenix_logo_height"
-            android:layout_marginStart="@dimen/about_header_icon_margin_start_end"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_wordmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/about_header_icon_margin_top"
-            android:layout_marginEnd="@dimen/about_header_icon_margin_start_end"
-            android:contentDescription="@string/app_name"
-            android:importantForAccessibility="no"
-            app:srcCompat="?fenixLogo"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.75" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/wordmark"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:contentDescription="@string/app_name"
+                android:importantForAccessibility="no"
+                app:srcCompat="?fenixLogo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/wordmark_text"
+                android:textColor="?fenixWordmarkColor"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <TextView
             android:id="@+id/about_content"
@@ -43,7 +56,7 @@
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/wordmark"
+            app:layout_constraintTop_toBottomOf="@id/ll_wordmark"
             app:layout_constraintWidth_percent="0.8"
             tools:text="@string/about_content" />
 
@@ -83,7 +96,7 @@
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/build_date"/>
+            app:layout_constraintTop_toBottomOf="@+id/build_date" />
 
         <View
             android:id="@+id/divider"
@@ -91,10 +104,10 @@
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/about_list_margin_top"
             android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/about_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/space"
-            app:layout_constraintBottom_toTopOf="@+id/about_list"/>
+            app:layout_constraintTop_toBottomOf="@+id/space" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/about_list"

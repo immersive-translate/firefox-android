@@ -63,7 +63,8 @@
     <string name="home_bookmarks_menu_item_remove">移除</string>
 
     <!-- About content. The first parameter is the name of the application. (For example: Fenix) -->
-    <string name="about_content">%1$s 由 Mozilla 倾力打造。</string>
+    <!--<string name="about_content">%1$s 由 Mozilla 倾力打造。</string>-->
+    <string name="about_content">沉浸式翻译浏览器是一款基于火狐浏览器技术的定制产品，由沉浸式翻译团队独立开发。火狐浏览器是Mozilla的一个开源项目。</string>
 
     <!-- Private Browsing -->
     <!-- Explanation for private browsing displayed to users on home view when they first enable private mode
@@ -1999,13 +2000,14 @@
     <string name="preference_etp_exceptions_icon_description">增强型跟踪保护例外首选项图标</string>
 
     <!-- About page link text to open support link -->
-    <string name="about_support">用户支持</string>
+    <string name="about_support">教程</string>
     <!-- About page link text to list of past crashes (like about:crashes on desktop) -->
     <string name="about_crashes">崩溃信息</string>
     <!-- About page link text to open privacy notice link -->
-    <string name="about_privacy_notice">隐私声明</string>
+    <string name="about_privacy_notice">Firefox 隐私声明</string>
+    <string name="about_privacy_notice_app">侵入式翻译 隐私声明</string>
     <!-- About page link text to open know your rights link -->
-    <string name="about_know_your_rights">了解您的权利</string>
+    <string name="about_know_your_rights">了解您关于 Firefox 的权利</string>
     <!-- About page link text to open licensing information link -->
     <string name="about_licensing_information">许可信息</string>
     <!-- About page link text to open a screen with libraries that are used -->
