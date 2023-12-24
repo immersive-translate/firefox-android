@@ -1,0 +1,67 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package org.mozilla.fenix.immersive_transalte
+
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import mozilla.components.feature.addons.Addon
+import mozilla.components.feature.addons.AddonManager
+
+
+/**
+ * created by xupx
+ * on 2023-12-24
+ */
+class ImmersiveTranslateService(
+    private val addonManager: AddonManager,
+) {
+    private val immersiveTranslateAddonGetter = ImmersiveTranslateAddonGetter(addonManager)
+    private var isChecked: Boolean = false
+
+    /**
+     * 检查安装更新插件
+     */
+    fun checkAndInstallOrUpdate() {
+        if (isChecked) {
+            return
+        }
+        isChecked = true
+        CoroutineScope(Dispatchers.IO).launch {
+            val addon = immersiveTranslateAddonGetter.createImmersiveAddon()
+            CoroutineScope(Dispatchers.Main).launch {
+                if (!addon.isInstalled()) {
+                    install(addon)
+                } else {
+                    update(addon)
+                }
+            }
+        }
+    }
+
+    /**
+     * 安装插件
+     */
+    private fun install(addon: Addon) {
+        addonManager.installAddon(
+            addon,
+            onSuccess = {},
+            onError = { _, _ ->
+            },
+        )
+    }
+
+    /**
+     * 更新插件
+     */
+    private fun update(addon: Addon) {
+        addonManager.updateAddon(
+            addon.id,
+            onFinish = { _ ->
+            },
+        )
+    }
+
+}
