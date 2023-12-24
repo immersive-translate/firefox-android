@@ -548,6 +548,8 @@ class HomeFragment : Fragment() {
 
         FxNimbus.features.homescreen.recordExposure()
 
+        autoCheckImmersive()
+
         // DO NOT MOVE ANYTHING BELOW THIS addMarker CALL!
         requireComponents.core.engine.profiler?.addMarker(
             MarkersFragmentLifecycleCallbacks.MARKER_NAME,
@@ -555,6 +557,13 @@ class HomeFragment : Fragment() {
             "HomeFragment.onCreateView",
         )
         return binding.root
+    }
+
+    /**
+     * auto check immersive translate addon
+     */
+    private fun autoCheckImmersive() {
+        requireComponents.immersiveTranslateService.checkAndInstallOrUpdate()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

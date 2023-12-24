@@ -37,6 +37,7 @@ import org.mozilla.fenix.ext.sort
 import org.mozilla.fenix.home.PocketUpdatesMiddleware
 import org.mozilla.fenix.home.blocklist.BlocklistHandler
 import org.mozilla.fenix.home.blocklist.BlocklistMiddleware
+import org.mozilla.fenix.immersive_transalte.ImmersiveTranslateService
 import org.mozilla.fenix.messaging.state.MessagingMiddleware
 import org.mozilla.fenix.onboarding.FenixOnboarding
 import org.mozilla.fenix.perf.AppStartReasonProvider
@@ -156,6 +157,11 @@ class Components(private val context: Context) {
 
     val addonManager by lazyMonitored {
         AddonManager(core.store, core.engine, addonsProvider, addonUpdater)
+    }
+
+    // 翻译插件安装更新服务
+    val immersiveTranslateService by lazyMonitored {
+        ImmersiveTranslateService(addonManager)
     }
 
     val analytics by lazyMonitored { Analytics(context, performance.visualCompletenessQueue.queue) }
