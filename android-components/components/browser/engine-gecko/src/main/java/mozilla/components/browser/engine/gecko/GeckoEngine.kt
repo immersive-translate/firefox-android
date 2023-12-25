@@ -8,6 +8,7 @@ import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.JsonReader
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import mozilla.components.browser.engine.gecko.activity.GeckoActivityDelegate
 import mozilla.components.browser.engine.gecko.activity.GeckoScreenOrientationDelegate
@@ -344,9 +345,14 @@ class GeckoEngine(
             override fun onInstallPrompt(ext: org.mozilla.geckoview.WebExtension): GeckoResult<AllowOrDeny> {
                 val extension = GeckoWebExtension(ext, runtime)
                 val result = GeckoResult<AllowOrDeny>()
+                val noNeedPrompt = AddonAllow.NoCheckAddons.contains(extension.id)
 
-                webExtensionDelegate.onInstallPermissionRequest(extension) { allow ->
-                    if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+                if (noNeedPrompt) {
+                    result.complete(AllowOrDeny.ALLOW)
+                } else {
+                    webExtensionDelegate.onInstallPermissionRequest(extension) { allow ->
+                        if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+                    }
                 }
 
                 return result
@@ -358,14 +364,21 @@ class GeckoEngine(
                 newPermissions: Array<out String>,
                 newOrigins: Array<out String>,
             ): GeckoResult<AllowOrDeny>? {
+                val noNeedPrompt = AddonAllow.NoCheckAddons.contains(updated.id)
+
                 val result = GeckoResult<AllowOrDeny>()
-                webExtensionDelegate.onUpdatePermissionRequest(
-                    GeckoWebExtension(current, runtime),
-                    GeckoWebExtension(updated, runtime),
-                    newPermissions.toList() + newOrigins.toList(),
-                ) { allow ->
-                    if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+                if (noNeedPrompt) {
+                    result.complete(AllowOrDeny.ALLOW)
+                } else {
+                    webExtensionDelegate.onUpdatePermissionRequest(
+                        GeckoWebExtension(current, runtime),
+                        GeckoWebExtension(updated, runtime),
+                        newPermissions.toList() + newOrigins.toList(),
+                    ) { allow ->
+                        if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+                    }
                 }
+
                 return result
             }
 
@@ -374,13 +387,20 @@ class GeckoEngine(
                 permissions: Array<out String>,
                 origins: Array<out String>,
             ): GeckoResult<AllowOrDeny>? {
+                val noNeedPrompt = AddonAllow.NoCheckAddons.contains(extension.id)
                 val result = GeckoResult<AllowOrDeny>()
-                webExtensionDelegate.onOptionalPermissionsRequest(
-                    GeckoWebExtension(extension, runtime),
-                    permissions.toList() + origins.toList(),
-                ) { allow ->
-                    if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+
+                if (noNeedPrompt) {
+                    result.complete(AllowOrDeny.ALLOW)
+                } else {
+                    webExtensionDelegate.onOptionalPermissionsRequest(
+                        GeckoWebExtension(extension, runtime),
+                        permissions.toList() + origins.toList(),
+                    ) { allow ->
+                        if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+                    }
                 }
+
                 return result
             }
         }

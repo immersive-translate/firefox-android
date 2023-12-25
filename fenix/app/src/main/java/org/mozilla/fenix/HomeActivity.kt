@@ -428,6 +428,15 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         components.notificationsDelegate.bindToActivity(this)
 
         StartupTimeline.onActivityCreateEndHome(this) // DO NOT MOVE ANYTHING BELOW HERE.
+
+        autoCheckImmersive()
+    }
+
+    /**
+     * auto check immersive translate addon
+     */
+    private fun autoCheckImmersive() {
+        components.immersiveTranslateService.checkAndInstallOrUpdate()
     }
 
     private fun maybeShowSplashScreen() {
