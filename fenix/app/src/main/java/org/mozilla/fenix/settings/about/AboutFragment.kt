@@ -144,7 +144,7 @@ class AboutFragment : Fragment(), AboutPageListener {
                 AboutItem.ExternalLink(
                     SUPPORT,
                     //SupportUtils.getSumoURLForTopic(context, SupportUtils.SumoTopic.HELP),
-                    SupportUtils.TUTORIAL_URL
+                    SupportUtils.APP_TUTORIAL_URL
                 ),
                 getString(R.string.about_support),
             ),
@@ -174,7 +174,11 @@ class AboutFragment : Fragment(), AboutPageListener {
                 getString(R.string.about_know_your_rights),
             ),
             AboutPageItem(
-                AboutItem.ExternalLink(LICENSING_INFO, ABOUT_LICENSE_URL),
+                // AboutItem.ExternalLink(LICENSING_INFO, ABOUT_LICENSE_URL),
+                AboutItem.ExternalLink(
+                    LICENSING_INFO,
+                    SupportUtils.APP_LICENSE
+                ),
                 getString(R.string.about_licensing_information),
             ),
             AboutPageItem(
