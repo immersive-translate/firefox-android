@@ -234,7 +234,10 @@ object WebExtensionSupport {
                     // for this reason we don't show any UI related to built-in extensions. Also,
                     // when the add-on has already been installed, we don't need to show anything
                     // either.
-                    val shouldDispatchAction = !installedExtensions.containsKey(extension.id) && !extension.isBuiltIn()
+                    val shouldSkipInstalledPrompt = AddonAllow.NoCheckAddons.contains(extension.id);
+                    val shouldDispatchAction = !shouldSkipInstalledPrompt &&
+                        (!installedExtensions.containsKey(extension.id)
+                        && !extension.isBuiltIn())
                     registerInstalledExtension(store, extension)
                     if (shouldDispatchAction) {
                         store.dispatch(
@@ -242,6 +245,11 @@ object WebExtensionSupport {
                                 WebExtensionPromptRequest.AfterInstallation.PostInstallation(extension),
                             ),
                         )
+                    }
+
+                    // 如果是静默安装的插件，直接同意在隐私浏览器中运行
+                    if (shouldSkipInstalledPrompt) {
+                        onAllowedInPrivateBrowsingChanged(extension)
                     }
                 }
 
