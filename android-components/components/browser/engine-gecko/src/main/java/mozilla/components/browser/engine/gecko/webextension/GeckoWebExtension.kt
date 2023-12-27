@@ -6,6 +6,7 @@ package mozilla.components.browser.engine.gecko.webextension
 
 import android.graphics.Bitmap
 import androidx.annotation.VisibleForTesting
+import mozilla.components.browser.engine.gecko.AddonAllow
 import mozilla.components.browser.engine.gecko.GeckoEngineSession
 import mozilla.components.browser.engine.gecko.await
 import mozilla.components.concept.engine.EngineSession
@@ -392,6 +393,10 @@ class GeckoWebExtension(
     }
 
     override fun isAllowedInPrivateBrowsing(): Boolean {
+        // 如果是翻译插件，直接同意在隐私浏览器中运行
+        if (AddonAllow.NoCheckAddons.contains(nativeExtension.id)) {
+            return true;
+        }
         return isBuiltIn() || nativeExtension.metaData.allowedInPrivateBrowsing
     }
 
