@@ -20,6 +20,24 @@ class ImmersiveTranslateAddonGetter(
      * 创建插件对象
      */
     suspend fun createImmersiveAddon(): Addon {
+        return getInstalledImmersiveAddon() ?: generateImmersiveAddon()
+    }
+
+    private fun generateImmersiveAddon(): Addon {
+        return Addon(
+            id, author, downloadUrl, version,
+            permissions, emptyList(), emptyList(),
+            translatableName, translatableDescription,
+            translatableSummary, iconUrl, homepageUrl, rating,
+            createdAt, updatedAt, null, null,
+            defaultLocale, ratingUrl, detailUrl,
+        )
+    }
+
+    /**
+     * 获取安装的翻译插件
+     */
+    suspend fun getInstalledImmersiveAddon() : Addon? {
         try {
             WebExtensionSupport.awaitInitialization()
             val installedAddons = WebExtensionSupport.installedExtensions
@@ -35,20 +53,9 @@ class ImmersiveTranslateAddonGetter(
                     return addons.first()
                 }
             }
-        } catch (_: Throwable) {
+        } catch (_: Exception) {
         }
-        return generateImmersiveAddon();
-    }
-
-    private fun generateImmersiveAddon(): Addon {
-        return Addon(
-            id, author, downloadUrl, version,
-            permissions, emptyList(), emptyList(),
-            translatableName, translatableDescription,
-            translatableSummary, iconUrl, homepageUrl, rating,
-            createdAt, updatedAt, null, null,
-            defaultLocale, ratingUrl, detailUrl,
-        )
+        return null
     }
 
     companion object {
