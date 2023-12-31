@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.addons.AddonManager
+import mozilla.components.feature.addons.update.AddonUpdater
 
 
 /**
@@ -20,6 +21,7 @@ class ImmersiveTranslateService(
 ) {
     private val immersiveTranslateAddonGetter = ImmersiveTranslateAddonGetter(addonManager)
     private var isChecked: Boolean = false
+    private var installedTsAddon: Addon? = null
 
     /**
      * 检查安装更新插件
@@ -35,6 +37,7 @@ class ImmersiveTranslateService(
                 if (!addon.isInstalled()) {
                     install(addon)
                 } else {
+                    installedTsAddon = addon
                     update(addon)
                 }
             }
@@ -47,7 +50,9 @@ class ImmersiveTranslateService(
     private fun install(addon: Addon) {
         addonManager.installAddon(
             addon,
-            onSuccess = {},
+            onSuccess = {
+                installedTsAddon = it
+            },
             onError = { _, _ ->
             },
         )
@@ -59,9 +64,27 @@ class ImmersiveTranslateService(
     private fun update(addon: Addon) {
         addonManager.updateAddon(
             addon.id,
-            onFinish = { _ ->
+            onFinish = { status ->
+                when(status) {
+                    AddonUpdater.Status.SuccessfullyUpdated -> {
+                        fetchInstalledTSAddon()
+                    }
+                    else -> {}
+                }
             },
         )
     }
 
+    /**
+     * 获取已安装翻译插件
+     */
+    private fun fetchInstalledTSAddon() {
+        CoroutineScope(Dispatchers.IO).launch {
+            installedTsAddon = immersiveTranslateAddonGetter.getInstalledImmersiveAddon()
+        }
+    }
+
+    fun getInstalledTSAddon() : Addon? {
+        return installedTsAddon
+    }
 }
