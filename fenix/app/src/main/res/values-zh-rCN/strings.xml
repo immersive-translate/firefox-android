@@ -376,7 +376,7 @@
     <!-- Description for set firefox as default browser screen used by Nimbus experiments. -->
     <string name="juno_onboarding_default_browser_description_nimbus_5" tools:ignore="UnusedResources">已知跟踪器？自动拦截！好用扩展？足足 700 款任您选！PDF 文档？内置阅读器轻松满足您的需求。</string>
     <!-- Description for set firefox as default browser screen used by Nimbus experiments. -->
-    <string name="juno_onboarding_default_browser_description_nimbus_2" moz:RemovedIn="124" tools:ignore="UnusedResources">这款由非营利组织支持的浏览器会自动阻止大公司在网上偷偷跟踪您。\n\n请阅读我们的隐私声明详细了解。</string>
+    <string name="juno_onboarding_default_browser_description_nimbus_2">让我们成为你探索世界的第一步：一键设置，享受更流畅、便捷的双语浏览体验。</string>
     <!-- Text for the link to the privacy notice webpage for set as firefox default browser screen.
     This is part of the string with the key "juno_onboarding_default_browser_description". -->
     <string name="juno_onboarding_default_browser_description_link_text" moz:RemovedIn="124" tools:ignore="UnusedResources">隐私声明</string>
