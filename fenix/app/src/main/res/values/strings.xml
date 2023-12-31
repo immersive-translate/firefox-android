@@ -323,7 +323,7 @@
         Note: The word "Firefox" should NOT be translated -->
     <string name="juno_onboarding_default_browser_description_nimbus" moz:removedIn="120" tools:ignore="UnusedResources">Firefox puts people over profits and defends your privacy by blocking cross-site trackers.\n\nLearn more in our privacy notice.</string>
     <!-- Description for set firefox as default browser screen used by Nimbus experiments. -->
-    <string name="juno_onboarding_default_browser_description_nimbus_2">Let us be your first step in exploring the world: One-click setup for a smoother and more convenient bilingual browsing experience.\n\nLearn more in our privacy notice.</string>
+    <string name="juno_onboarding_default_browser_description_nimbus_2">Let us be your first step in exploring the world: One-click setup for a smoother and more convenient bilingual browsing experience.</string>
     <!-- Text for the link to the privacy notice webpage for set as firefox default browser screen.
     This is part of the string with the key "juno_onboarding_default_browser_description". -->
     <string name="juno_onboarding_default_browser_description_link_text" tools:ignore="UnusedResources">privacy notice</string>

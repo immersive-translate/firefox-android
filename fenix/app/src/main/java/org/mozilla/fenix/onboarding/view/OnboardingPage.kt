@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.onboarding.view
 
+import android.text.TextUtils
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,11 +27,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.mozilla.fenix.R
 import org.mozilla.fenix.compose.LinkText
 import org.mozilla.fenix.compose.LinkTextState
@@ -123,6 +127,7 @@ fun OnboardingPage(
                 DescriptionText(
                     description = pageState.description,
                     linkTextState = pageState.linkTextState,
+                    fontSize = 18.sp
                 )
             }
 
@@ -132,6 +137,7 @@ fun OnboardingPage(
             ) {
                 PrimaryButton(
                     text = pageState.primaryButton.text,
+                    backgroundColor = colorResource(id = R.color.iconBg),
                     onClick = pageState.primaryButton.onClick,
                 )
 
@@ -155,6 +161,7 @@ fun OnboardingPage(
 private fun DescriptionText(
     description: String,
     linkTextState: LinkTextState?,
+    fontSize: TextUnit?
 ) {
     if (linkTextState != null && description.contains(linkTextState.text, ignoreCase = true)) {
         LinkText(
@@ -165,6 +172,7 @@ private fun DescriptionText(
         Text(
             text = description,
             color = FirefoxTheme.colors.textSecondary,
+            fontSize = fontSize ?: 16.sp,
             textAlign = TextAlign.Center,
             style = FirefoxTheme.typography.body2,
         )

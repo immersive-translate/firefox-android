@@ -254,7 +254,7 @@ class JunoOnboardingFragment : Fragment() {
                 imageRes = imageRes,
                 title = stringResource(R.string.juno_onboarding_default_browser_title_nimbus_2),
                 description = stringResource(R.string.juno_onboarding_default_browser_description_nimbus_2),
-                linkText = stringResource(R.string.juno_onboarding_default_browser_description_link_text),
+                // linkText = stringResource(R.string.juno_onboarding_default_browser_description_link_text),
                 primaryButtonLabel = stringResource(R.string.juno_onboarding_default_browser_positive_button),
                 secondaryButtonLabel = stringResource(R.string.juno_onboarding_default_browser_negative_button),
             ),
