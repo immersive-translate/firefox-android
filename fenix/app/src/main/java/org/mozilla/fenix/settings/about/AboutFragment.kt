@@ -22,6 +22,7 @@ import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
 import org.mozilla.fenix.crashes.CrashListActivity
 import org.mozilla.fenix.databinding.FragmentAboutBinding
+import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.settings.SupportUtils
@@ -105,8 +106,13 @@ class AboutFragment : Fragment(), AboutPageListener {
             val appServicesAbbreviation = getString(R.string.app_services_abbreviation)
             val appServicesVersion = mozilla.components.Build.applicationServicesVersion
 
+            val tsAddon = requireComponents.immersiveTranslateService.getInstalledTSAddon()
+            val tsVersion = tsAddon?.let {
+                "TS plugin:${it.version}"
+            } ?: ""
+
             String.format(
-                "%s (Build #%s)%s\n%s: %s\n%s: %s",
+                "%s (Build #%s)%s\n%s: %s\n%s: %s\n%s",
                 packageInfo.versionName,
                 versionCode,
                 maybeFenixVcsHash,
@@ -114,16 +120,17 @@ class AboutFragment : Fragment(), AboutPageListener {
                 geckoVersion,
                 appServicesAbbreviation,
                 appServicesVersion,
+                tsVersion
             )
         } catch (e: PackageManager.NameNotFoundException) {
             ""
         }
 
-        //val content = getString(R.string.about_content, appName)
+        val contentText = getString(R.string.about_content)
         val buildDate = BuildConfig.BUILD_DATE
 
         binding.aboutText.text = aboutText
-        //binding.aboutContent.text = content
+        binding.aboutContent.text = contentText
         binding.buildDate.text = buildDate
     }
 

@@ -116,7 +116,7 @@
     <dimen name="about_header_icon_margin_top">36dp</dimen>
     <dimen name="about_header_icon_margin_start_end">84dp</dimen>
     <dimen name="about_header_title_margin_top">16dp</dimen>
-    <dimen name="about_header_title_padding_start_end">84dp</dimen>
+    <dimen name="about_header_title_padding_start_end">32dp</dimen>
     <dimen name="about_header_build_info_margin_top">24dp</dimen>
     <dimen name="about_header_build_date_padding_top">24dp</dimen>
     <dimen name="about_header_build_date_padding_bottom">24dp</dimen>
