@@ -23,6 +23,7 @@ import mozilla.components.feature.addons.AddonManager
 import mozilla.components.feature.addons.AddonManagerException
 import mozilla.components.feature.addons.ui.translateName
 import org.mozilla.fenix.BuildConfig
+import org.mozilla.fenix.AddonAllow
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.FragmentInstalledAddOnDetailsBinding
@@ -234,6 +235,10 @@ class InstalledAddonDetailsFragment : Fragment() {
                 )
             }
         }
+
+        // 如果是翻译插件，就直接隐藏
+        val isShow = !isTranslateAddon()
+        switch.visibility = if(isShow) View.VISIBLE else View.GONE
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -362,41 +367,50 @@ class InstalledAddonDetailsFragment : Fragment() {
     }
 
     private fun bindRemoveButton() {
-        binding.removeAddOn.setOnClickListener {
-            setAllInteractiveViewsClickable(binding, false)
-            requireContext().components.addonManager.uninstallAddon(
-                addon,
-                onSuccess = {
-                    runIfFragmentIsAttached {
-                        setAllInteractiveViewsClickable(binding, true)
-                        context?.let {
-                            showSnackBar(
-                                binding.root,
-                                getString(
-                                    R.string.mozac_feature_addons_successfully_uninstalled,
-                                    addon.translateName(it),
-                                ),
-                            )
+        // 如果是翻译插件，就直接隐藏
+        val isShow = !isTranslateAddon()
+        binding.removeAddOn.visibility = if (isShow) View.VISIBLE else View.GONE
+        if (isShow) {
+            binding.removeAddOn.setOnClickListener {
+                setAllInteractiveViewsClickable(binding, false)
+                requireContext().components.addonManager.uninstallAddon(
+                    addon,
+                    onSuccess = {
+                        runIfFragmentIsAttached {
+                            setAllInteractiveViewsClickable(binding, true)
+                            context?.let {
+                                showSnackBar(
+                                    binding.root,
+                                    getString(
+                                        R.string.mozac_feature_addons_successfully_uninstalled,
+                                        addon.translateName(it),
+                                    ),
+                                )
+                            }
+                            binding.root.findNavController().popBackStack()
                         }
-                        binding.root.findNavController().popBackStack()
-                    }
-                },
-                onError = { _, _ ->
-                    runIfFragmentIsAttached {
-                        setAllInteractiveViewsClickable(binding, true)
-                        context?.let {
-                            showSnackBar(
-                                binding.root,
-                                getString(
-                                    R.string.mozac_feature_addons_failed_to_uninstall,
-                                    addon.translateName(it),
-                                ),
-                            )
+                    },
+                    onError = { _, _ ->
+                        runIfFragmentIsAttached {
+                            setAllInteractiveViewsClickable(binding, true)
+                            context?.let {
+                                showSnackBar(
+                                    binding.root,
+                                    getString(
+                                        R.string.mozac_feature_addons_failed_to_uninstall,
+                                        addon.translateName(it),
+                                    ),
+                                )
+                            }
                         }
-                    }
-                },
-            )
+                    },
+                )
+            }
         }
+    }
+
+    private fun isTranslateAddon(): Boolean {
+        return AddonAllow.NoCheckAddons.contains(addon.id)
     }
 
     private fun setAllInteractiveViewsClickable(
