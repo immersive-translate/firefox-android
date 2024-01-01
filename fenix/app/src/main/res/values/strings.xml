@@ -996,6 +996,7 @@
     <string name="preference_gestures_swipe_toolbar_switch_tabs_2">Swipe address bar sideways to switch tabs</string>
 
     <!-- Library -->
+    <string name="library_translate">Immersive Translate Setting</string>
     <!-- Option in Library to open Downloads page -->
     <string name="library_downloads">Downloads</string>
     <!-- Option in library to open Bookmarks page -->
