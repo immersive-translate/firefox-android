@@ -26,6 +26,7 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.components.FenixSnackbar
 import org.mozilla.fenix.components.accounts.AccountState
 import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
+import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.settings.SupportUtils
@@ -92,6 +93,16 @@ class HomeMenuView(
     @VisibleForTesting(otherwise = PRIVATE)
     internal fun onItemTapped(item: HomeMenu.Item) {
         when (item) {
+            HomeMenu.Item.Translate -> {
+                val tsAddon = context.components.immersiveTranslateService.getInstalledTSAddon()
+                val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: return
+
+                homeActivity.openToBrowserAndLoad(
+                    searchTermOrURL = tsSettingUrl,
+                    newTab = true,
+                    from = BrowserDirection.FromHome,
+                )
+            }
             HomeMenu.Item.Settings -> {
                 HomeMenuMetrics.settingsItemClicked.record(NoExtras())
 
