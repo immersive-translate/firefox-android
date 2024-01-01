@@ -30,6 +30,7 @@ import mozilla.components.feature.top.sites.TopSite
 import mozilla.components.service.glean.private.NoExtras
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.ui.widgets.withCenterAlignedButtons
+import org.mozilla.fenix.BrowserDirection
 import org.mozilla.fenix.GleanMetrics.AppMenu
 import org.mozilla.fenix.GleanMetrics.Collections
 import org.mozilla.fenix.GleanMetrics.Events
@@ -406,6 +407,34 @@ class DefaultBrowserToolbarMenuController(
                         .show()
                 }
             }
+
+            is ToolbarMenu.Item.Translate -> {
+                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon()
+                val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: return
+                activity.openToBrowserAndLoad(
+                    searchTermOrURL = tsSettingUrl,
+                    newTab = false,
+                    from = BrowserDirection.FromGlobal,
+                )
+
+                /*val addon = activity.components.immersiveTranslateService.getInstalledTSAddon()
+                val settingUrl = addon?.installedState?.optionsPageUrl ?: return
+                val directions = if (addon.installedState?.openOptionsPageInTab == true) {
+                    val components = activity.components
+                    val shouldCreatePrivateSession = activity.browsingModeManager.mode.isPrivate
+                    // If the addon settings page is already open in a tab, select that one
+                    components.useCases.tabsUseCases.selectOrAddTab(
+                        url = settingUrl,
+                        private = shouldCreatePrivateSession,
+                        ignoreFragment = true,
+                    )
+                    InstalledAddonDetailsFragmentDirections.actionGlobalBrowser(null)
+                } else {
+                    InstalledAddonDetailsFragmentDirections
+                        .actionInstalledAddonFragmentToAddonInternalSettingsFragment(addon)
+                }
+                navController.navigate(directions)*/
+            }
         }
     }
 
@@ -483,6 +512,9 @@ class DefaultBrowserToolbarMenuController(
                 Events.browserMenuAction.record(Events.BrowserMenuActionExtra("set_default_browser"))
             is ToolbarMenu.Item.RemoveFromTopSites ->
                 Events.browserMenuAction.record(Events.BrowserMenuActionExtra("remove_from_top_sites"))
+            is ToolbarMenu.Item.Translate -> {
+                // noting to do
+            }
         }
     }
 
