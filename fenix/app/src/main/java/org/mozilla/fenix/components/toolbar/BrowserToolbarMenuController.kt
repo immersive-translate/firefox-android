@@ -30,7 +30,6 @@ import mozilla.components.feature.top.sites.TopSite
 import mozilla.components.service.glean.private.NoExtras
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.ui.widgets.withCenterAlignedButtons
-import org.mozilla.fenix.BrowserDirection
 import org.mozilla.fenix.GleanMetrics.AppMenu
 import org.mozilla.fenix.GleanMetrics.Collections
 import org.mozilla.fenix.GleanMetrics.Events
@@ -409,13 +408,19 @@ class DefaultBrowserToolbarMenuController(
             }
 
             is ToolbarMenu.Item.Translate -> {
-                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon()
-                val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: return
+                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon() ?: return
+                /*val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: return
                 activity.openToBrowserAndLoad(
                     searchTermOrURL = tsSettingUrl,
                     newTab = false,
                     from = BrowserDirection.FromGlobal,
-                )
+                )*/
+
+                val browserAction = activity.components.core.store.state.extensions
+                        .values.first { it.id == tsAddon.id }.browserAction
+                browserAction?.let {
+                    it.onClick()
+                }
 
                 /*val addon = activity.components.immersiveTranslateService.getInstalledTSAddon()
                 val settingUrl = addon?.installedState?.optionsPageUrl ?: return

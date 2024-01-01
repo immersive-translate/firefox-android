@@ -94,14 +94,21 @@ class HomeMenuView(
     internal fun onItemTapped(item: HomeMenu.Item) {
         when (item) {
             HomeMenu.Item.Translate -> {
-                val tsAddon = context.components.immersiveTranslateService.getInstalledTSAddon()
+                /*val tsAddon = context.components.immersiveTranslateService.getInstalledTSAddon()
                 val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: return
 
                 homeActivity.openToBrowserAndLoad(
                     searchTermOrURL = tsSettingUrl,
                     newTab = true,
                     from = BrowserDirection.FromHome,
-                )
+                )*/
+
+                val tsAddon = context.components.immersiveTranslateService.getInstalledTSAddon() ?: return
+                val browserAction = context.components.core.store.state.extensions
+                    .values.first { it.id == tsAddon.id }.browserAction
+                browserAction?.let {
+                    it.onClick()
+                }
             }
             HomeMenu.Item.Settings -> {
                 HomeMenuMetrics.settingsItemClicked.record(NoExtras())
