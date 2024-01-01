@@ -396,14 +396,13 @@ class DefaultBrowserToolbarMenuController(
                 }
             }
 
-            ToolbarMenu.Item.Translate -> {
-                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon()
-                val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: return
-                activity.openToBrowserAndLoad(
-                    searchTermOrURL = tsSettingUrl,
-                    newTab = false,
-                    from = BrowserDirection.FromGlobal,
-                )
+            is ToolbarMenu.Item.Translate -> {
+                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon() ?: return
+                val browserAction = activity.components.core.store.state.extensions
+                    .values.first { it.id == tsAddon.id }.browserAction
+                browserAction?.let {
+                    it.onClick()
+                }
             }
         }
     }
