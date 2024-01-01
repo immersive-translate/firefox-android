@@ -46,6 +46,7 @@ class HomeMenu(
     private val onHighlightPresent: (BrowserMenuHighlight) -> Unit = {},
 ) {
     sealed class Item {
+        object Translate: Item()
         object Bookmarks : Item()
         object History : Item()
         object Downloads : Item()
@@ -117,6 +118,13 @@ class HomeMenu(
     @Suppress("ComplexMethod")
     private fun coreMenuItems(): List<BrowserMenuItem> {
         val settings = context.components.settings
+
+        val translateItem = BrowserMenuImageText(
+            context.getString(R.string.library_translate),
+            R.drawable.ic_wordmark_logo,
+        ) {
+            onItemTapped.invoke(Item.Translate)
+        }
 
         val bookmarksItem = BrowserMenuImageText(
             context.getString(R.string.library_bookmarks),
@@ -214,6 +222,7 @@ class HomeMenu(
         //val syncSignInMenuItem = if (accountAuthItem == null) syncSignInMenuItem() else null
 
         val menuItems = listOfNotNull(
+            translateItem,
             bookmarksItem,
             historyItem,
             downloadsItem,
