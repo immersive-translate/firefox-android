@@ -7,6 +7,7 @@ package org.mozilla.fenix.immersive_transalte
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.addons.AddonManager
@@ -83,6 +84,7 @@ class ImmersiveTranslateService(
      */
     private fun fetchInstalledTSAddon() {
         CoroutineScope(Dispatchers.IO).launch {
+            delay(500)
             installedTsAddon = immersiveTranslateAddonGetter.getInstalledImmersiveAddon()
         }
     }
