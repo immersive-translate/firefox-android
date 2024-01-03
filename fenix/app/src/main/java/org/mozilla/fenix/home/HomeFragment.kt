@@ -133,6 +133,7 @@ import org.mozilla.fenix.home.toolbar.DefaultToolbarController
 import org.mozilla.fenix.home.toolbar.SearchSelectorBinding
 import org.mozilla.fenix.home.toolbar.SearchSelectorMenuBinding
 import org.mozilla.fenix.home.topsites.DefaultTopSitesView
+import org.mozilla.fenix.immersive_transalte.ImmersiveTranslateFlow
 import org.mozilla.fenix.messaging.DefaultMessageController
 import org.mozilla.fenix.messaging.MessagingFeature
 import org.mozilla.fenix.nimbus.FxNimbus
@@ -140,6 +141,7 @@ import org.mozilla.fenix.perf.MarkersFragmentLifecycleCallbacks
 import org.mozilla.fenix.search.toolbar.DefaultSearchSelectorController
 import org.mozilla.fenix.search.toolbar.SearchSelectorMenu
 import org.mozilla.fenix.tabstray.Page
+import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.tabstray.TabsTrayAccessPoint
 import org.mozilla.fenix.theme.FirefoxTheme
 import org.mozilla.fenix.utils.Settings.Companion.TOP_SITES_PROVIDER_MAX_THRESHOLD
@@ -282,7 +284,12 @@ class HomeFragment : Fragment() {
             if (requireContext().settings().showPocketRecommendationsFeature) {
                 val categories = components.core.pocketStoriesService.getStories()
                     .groupBy { story -> story.category }
-                    .map { (category, stories) -> PocketRecommendedStoriesCategory(category, stories) }
+                    .map { (category, stories) ->
+                        PocketRecommendedStoriesCategory(
+                            category,
+                            stories,
+                        )
+                    }
 
                 components.appStore.dispatch(AppAction.PocketStoriesCategoriesChange(categories))
 
@@ -563,7 +570,21 @@ class HomeFragment : Fragment() {
      * auto check immersive translate addon
      */
     private fun autoCheckImmersive() {
+        if (!IS_FIRST_LAUNCHER) {
+            return
+        }
+        IS_FIRST_LAUNCHER = false
         requireComponents.immersiveTranslateService.checkAndInstallOrUpdate()
+        ImmersiveTranslateFlow.collect { installed ->
+            if (!installed) {
+                return@collect
+            }
+            (activity as HomeActivity).openToBrowserAndLoad(
+                searchTermOrURL = SupportUtils.APP_WELCOME_URL,
+                newTab = true,
+                from = BrowserDirection.FromHome,
+            )
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -645,7 +666,8 @@ class HomeFragment : Fragment() {
 
     private fun disableAppBarDragging() {
         if (binding.homeAppBar.layoutParams != null) {
-            val appBarLayoutParams = binding.homeAppBar.layoutParams as CoordinatorLayout.LayoutParams
+            val appBarLayoutParams =
+                binding.homeAppBar.layoutParams as CoordinatorLayout.LayoutParams
             val appBarBehavior = AppBarLayout.Behavior()
             appBarBehavior.setDragCallback(
                 object : AppBarLayout.Behavior.DragCallback() {
@@ -1042,8 +1064,10 @@ class HomeFragment : Fragment() {
                             onClick = {
                                 PrivateBrowsingShortcutCfr.addShortcut.record(NoExtras())
                                 PrivateShortcutCreateManager.createPrivateShortcut(context)
-                                context.settings().showedPrivateModeContextualFeatureRecommender = true
-                                context.settings().lastCfrShownTimeInMillis = System.currentTimeMillis()
+                                context.settings().showedPrivateModeContextualFeatureRecommender =
+                                    true
+                                context.settings().lastCfrShownTimeInMillis =
+                                    System.currentTimeMillis()
                                 dismissRecommendPrivateBrowsingShortcut()
                             },
                             colors = ButtonDefaults.buttonColors(backgroundColor = PhotonColors.LightGrey30),
@@ -1067,8 +1091,10 @@ class HomeFragment : Fragment() {
                         TextButton(
                             onClick = {
                                 PrivateBrowsingShortcutCfr.cancel.record()
-                                context.settings().showedPrivateModeContextualFeatureRecommender = true
-                                context.settings().lastCfrShownTimeInMillis = System.currentTimeMillis()
+                                context.settings().showedPrivateModeContextualFeatureRecommender =
+                                    true
+                                context.settings().lastCfrShownTimeInMillis =
+                                    System.currentTimeMillis()
                                 dismissRecommendPrivateBrowsingShortcut()
                             },
                             modifier = Modifier
@@ -1153,7 +1179,8 @@ class HomeFragment : Fragment() {
     private fun applyWallpaper(wallpaperName: String, orientationChange: Boolean, orientation: Int) {
         when {
             !shouldEnableWallpaper() ||
-                (wallpaperName == lastAppliedWallpaperName && !orientationChange) -> return
+                    (wallpaperName == lastAppliedWallpaperName && !orientationChange) -> return
+
             Wallpaper.nameIsDefault(wallpaperName) -> {
                 binding.wallpaperImageView.isVisible = false
                 lastAppliedWallpaperName = wallpaperName
@@ -1193,10 +1220,11 @@ class HomeFragment : Fragment() {
      */
     @VisibleForTesting
     internal fun applyWallpaperTextColor() {
-        val tintColor = when (val color = requireContext().settings().currentWallpaperTextColor.toInt()) {
-            0 -> null // a null ColorStateList will clear the current tint
-            else -> ColorStateList.valueOf(color)
-        }
+        val tintColor =
+            when (val color = requireContext().settings().currentWallpaperTextColor.toInt()) {
+                0 -> null // a null ColorStateList will clear the current tint
+                else -> ColorStateList.valueOf(color)
+            }
 
         //binding.wordmarkText.imageTintList = tintColor
         binding.privateBrowsingButton.imageTintList = tintColor
@@ -1238,5 +1266,7 @@ class HomeFragment : Fragment() {
 
         // Elevation for undo toasts
         internal const val TOAST_ELEVATION = 80f
+
+        var IS_FIRST_LAUNCHER = true
     }
 }

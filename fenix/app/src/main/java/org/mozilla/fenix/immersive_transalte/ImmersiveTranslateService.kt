@@ -6,6 +6,7 @@ package org.mozilla.fenix.immersive_transalte
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.addons.AddonManager
@@ -33,7 +34,7 @@ class ImmersiveTranslateService(
         isChecked = true
         CoroutineScope(Dispatchers.IO).launch {
             val addon = immersiveTranslateAddonGetter.createImmersiveAddon()
-            CoroutineScope(Dispatchers.Main).launch {
+            MainScope().launch {
                 if (!addon.isInstalled()) {
                     install(addon)
                 } else {
@@ -51,9 +52,11 @@ class ImmersiveTranslateService(
         addonManager.installAddon(
             addon.downloadUrl, null,
             onSuccess = {
-                installedTsAddon = it
+                fetchInstalledTSAddon()
+                ImmersiveTranslateFlow.emit(true)
             },
             onError = { _ ->
+                ImmersiveTranslateFlow.emit(false)
             },
         )
     }
@@ -65,7 +68,7 @@ class ImmersiveTranslateService(
         addonManager.updateAddon(
             addon.id,
             onFinish = { status ->
-                when(status) {
+                when (status) {
                     AddonUpdater.Status.SuccessfullyUpdated -> {
                         fetchInstalledTSAddon()
                     }
@@ -84,7 +87,7 @@ class ImmersiveTranslateService(
         }
     }
 
-    fun getInstalledTSAddon() : Addon? {
+    fun getInstalledTSAddon(): Addon? {
         return installedTsAddon
     }
 }

@@ -43,6 +43,8 @@ object SupportUtils {
     const val APP_PRIVACY_NOTICE = "https://immersivetranslate.com/docs/PRIVACY/"
     const val APP_LICENSE = "https://immersivetranslate.com/docs/"
     const val APP_EUAL = "https://immersivetranslate.com/docs/EULA/"
+    const val APP_WELCOME_URL = "https://onboarding.immersivetranslate.com/mobile/"
+    const val APP_OPT_URL = "moz-extension://28703037-4415-4822-84b6-8a591a2a56b1/options.html"
 
     enum class SumoTopic(internal val topicStr: String) {
         HELP("faq-android"),
