@@ -137,7 +137,7 @@ android {
                     // fatal consequences. For example see:
                     //  - https://issuetracker.google.com/issues/36924841
                     //  - https://issuetracker.google.com/issues/36905922
-                    "sharedUserId": "org.mozilla.firefox.sharedID",
+                    "sharedUserId": "com.immersivetranslate.browser.sharedID",
                     "deepLinkScheme": deepLinkSchemeValue,
             ])
         }
@@ -154,7 +154,7 @@ android {
                     // fatal consequences. For example see:
                     //  - https://issuetracker.google.com/issues/36924841
                     //  - https://issuetracker.google.com/issues/36905922
-                    "sharedUserId": "org.mozilla.firefox.sharedID",
+                    "sharedUserId": "com.immersivetranslate.browser.sharedID",
                     "deepLinkScheme": deepLinkSchemeValue,
             ])
         }
