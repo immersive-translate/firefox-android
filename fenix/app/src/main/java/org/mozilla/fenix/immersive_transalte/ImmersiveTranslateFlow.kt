@@ -24,7 +24,7 @@ object ImmersiveTranslateFlow {
 
     fun collect(block: (Boolean) -> Unit) {
         MainScope().launch {
-            delay(1500)
+            delay(1000)
             installFlow.collect {
                 block(it)
             }
