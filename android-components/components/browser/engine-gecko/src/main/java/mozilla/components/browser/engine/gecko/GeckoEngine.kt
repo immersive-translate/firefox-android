@@ -8,7 +8,6 @@ import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.JsonReader
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import mozilla.components.browser.engine.gecko.activity.GeckoActivityDelegate
 import mozilla.components.browser.engine.gecko.activity.GeckoScreenOrientationDelegate

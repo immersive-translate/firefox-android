@@ -67,15 +67,17 @@ class ImmersiveTranslateAddonGetter(
         val createdAt = ""
         val defaultLocale = "en-us"
         val detailUrl = "https://addons.mozilla.org/zh-CN/android/addon/immersive-translate/"
-        val downloadUrl =
-            "https://addons.mozilla.org/android/downloads/file/4210469/immersive_translate-0.12.8.xpi"
+        //val downloadUrl = "https://addons.mozilla.org/android/downloads/file/4210469/immersive_translate-0.12.8.xpi"
+        //val downloadUrl = "https://addons.mozilla.org/android/downloads/file/4214378/immersive_translate-0.12.13.xpi"
+        //val downloadUrl = "resource://android/assets/ts/immersive_translate-0.12.13/"
+        val downloadUrl = "resource://android/assets/ts/immersive_translate-0.12.13.xpi"
         val homepageUrl = "https://immersivetranslate.com/"
 
         val icon = ""
         val iconUrl = ""
 
         val installedState =
-            "InstalledState(id={5efceaa7-f3a2-4e59-a54b-85319448e305}, version=0.12.8, optionsPageUrl=moz-extension://85cbec2e-6793-4c94-b2e2-63c839ebe9a7/options.html, openOptionsPageInTab=true, enabled=true, supported=true, disabledReason=null, allowedInPrivateBrowsing=false, icon=android.graphics.Bitmap@2db35df)"
+            "InstalledState(id={5efceaa7-f3a2-4e59-a54b-85319448e305}, version=0.12.13, optionsPageUrl=moz-extension://85cbec2e-6793-4c94-b2e2-63c839ebe9a7/options.html, openOptionsPageInTab=true, enabled=true, supported=true, disabledReason=null, allowedInPrivateBrowsing=false, icon=android.graphics.Bitmap@2db35df)"
 
         val permissions = arrayListOf(
             "<all_urls>", "file:///*", "*://*/*",
@@ -83,7 +85,7 @@ class ImmersiveTranslateAddonGetter(
 
         val ratingUrl =
             "https://addons.mozilla.org/zh-CN/android/addon/immersive-translate/reviews/"
-        val rating = Addon.Rating(average = 4.637f, reviews = 62)
+        val rating = Addon.Rating(average = 5f, reviews = 10000)
 
         val translatableDescription = mapOf(
             "en-us" to "主要特性：\n" +
@@ -109,6 +111,6 @@ class ImmersiveTranslateAddonGetter(
             mapOf("en-us" to "沉浸式网页双语翻译扩展，支持PDF翻译，双语Epub电子书制作，Youtube/Netflix/Udemy 等平台双语字幕，支持Deepl/Google等多个翻译服务，免费使用。")
 
         val updatedAt = "2023-12-24T06:10:48Z"
-        val version = "0.12.8"
+        val version = "0.12.13"
     }
 }
