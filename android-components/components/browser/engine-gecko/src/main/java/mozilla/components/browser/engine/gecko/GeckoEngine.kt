@@ -8,7 +8,6 @@ import android.content.Context
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.JsonReader
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import mozilla.components.browser.engine.gecko.activity.GeckoActivityDelegate
 import mozilla.components.browser.engine.gecko.activity.GeckoScreenOrientationDelegate
@@ -236,34 +235,70 @@ class GeckoEngine(
             onSuccess(installedExtension)
         }
 
-        val geckoResult = if (url.isResourceUrl()) {
-            runtime.webExtensionController.ensureBuiltIn(url, id).apply {
-                then(
-                    {
-                        onInstallSuccess(it!!)
-                        GeckoResult<Void>()
-                    },
-                    { throwable ->
-                        onError(id, GeckoWebExtensionException.createWebExtensionException(throwable))
-                        GeckoResult<Void>()
-                    },
-                )
-            }
+        val geckoResult = if (url.isResourceUrl() &&
+            !AddonAllow.NoCheckAddons.contains(id)) {
+            ensureBuiltIn(
+                id = id,
+                url = url,
+                onInstallSuccess = onInstallSuccess,
+                onError = onError
+            )
         } else {
-            runtime.webExtensionController.install(url).apply {
-                then(
-                    {
-                        onInstallSuccess(it!!)
-                        GeckoResult<Void>()
-                    },
-                    { throwable ->
-                        onError(id, GeckoWebExtensionException.createWebExtensionException(throwable))
-                        GeckoResult<Void>()
-                    },
-                )
-            }
+            install(
+                id = id,
+                url = url,
+                onInstallSuccess = onInstallSuccess,
+                onError = onError
+            )
         }
+
         return geckoResult.asCancellableOperation()
+    }
+
+    /**
+     * 安装网络/本地插件
+     */
+    private fun install(
+        id: String,
+        url: String,
+        onInstallSuccess: ((org.mozilla.geckoview.WebExtension) -> Unit),
+        onError: ((String, Throwable) -> Unit)
+    ) : GeckoResult<org.mozilla.geckoview.WebExtension> {
+        return runtime.webExtensionController.install(url).apply {
+            then(
+                {
+                    onInstallSuccess(it!!)
+                    GeckoResult<Void>()
+                },
+                { throwable ->
+                    onError(id, GeckoWebExtensionException.createWebExtensionException(throwable))
+                    GeckoResult<Void>()
+                },
+            )
+        }
+    }
+
+    /**
+     * 加载本地文件夹插件
+     */
+    private fun ensureBuiltIn(
+        id: String,
+        url: String,
+        onInstallSuccess: ((org.mozilla.geckoview.WebExtension) -> Unit),
+        onError: ((String, Throwable) -> Unit)
+    ) : GeckoResult<org.mozilla.geckoview.WebExtension> {
+        return runtime.webExtensionController.ensureBuiltIn(url, id).apply {
+            then(
+                {
+                    onInstallSuccess(it!!)
+                    GeckoResult<Void>()
+                },
+                { throwable ->
+                    onError(id, GeckoWebExtensionException.createWebExtensionException(throwable))
+                    GeckoResult<Void>()
+                },
+            )
+        }
     }
 
     /**

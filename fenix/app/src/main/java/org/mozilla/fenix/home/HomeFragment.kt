@@ -465,7 +465,7 @@ class HomeFragment : Fragment() {
             return
         }
         IS_FIRST_LAUNCHER = false
-        requireComponents.immersiveTranslateService.checkAndInstallOrUpdate()
+        // requireComponents.immersiveTranslateService.checkAndInstallOrUpdate()
         ImmersiveTranslateFlow.collect { installed ->
             if (!installed) {
                 return@collect
