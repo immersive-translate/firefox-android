@@ -24,6 +24,7 @@ class ImmersiveTranslateService(
     private val immersiveTranslateAddonGetter = ImmersiveTranslateAddonGetter(addonManager)
     private var isChecked: Boolean = false
     private var installedTsAddon: Addon? = null
+    private val localVersion = "1.1.3"
 
     /**
      * 检查安装更新插件
@@ -66,18 +67,24 @@ class ImmersiveTranslateService(
      * 更新插件
      */
     private fun update(addon: Addon) {
-        addonManager.updateAddon(
-            addon.id,
-            onFinish = { status ->
-                when (status) {
-                    AddonUpdater.Status.SuccessfullyUpdated -> {
+        if (localVersion == addon.version) {
+            addonManager.installAddon(
+                addon,
+                onSuccess = {
+                    fetchInstalledTSAddon()
+                },
+            )
+        } else if (addon.downloadUrl.isNotEmpty() &&
+            addon.downloadUrl.indexOf(addon.version) < 0) {
+            addonManager.updateAddon(
+                addon.id,
+                onFinish = { status ->
+                    if (status == AddonUpdater.Status.SuccessfullyUpdated) {
                         fetchInstalledTSAddon()
                     }
-
-                    else -> {}
-                }
-            },
-        )
+                },
+            )
+        }
     }
 
     /**

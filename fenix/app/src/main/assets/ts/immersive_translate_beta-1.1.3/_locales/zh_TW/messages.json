@@ -1,0 +1,80 @@
+{
+  "shortBrandName": {
+    "message": "沉浸式翻譯"
+  },
+  "brandName": {
+    "message": "雙語網頁翻譯測試版"
+  },
+  "brandDescription": {
+    "message": "僅供喜歡嘗鮮的用戶測試，可能含有不穩定的特性和錯誤"
+  },
+  "toggleTranslatePage": {
+    "message": "翻譯網頁/顯示原文"
+  },
+  "toggleTranslateTheWholePage": {
+    "message": "翻譯頁面全部區域/顯示原文"
+  },
+  "toggleTranslateToThePageEndImmediately": {
+    "message": "立即翻譯到頁面底部/顯示原文"
+  },
+  "toggleTranslateTheMainPage": {
+    "message": "翻譯頁面主要區域/顯示原文"
+  },
+  "shareToDraft": {
+    "message": "分享雙語頁面"
+  },
+  "openOptionsPage": {
+    "message": "開啟設定頁面"
+  },
+  "translateLocalPdfFile": {
+    "message": "翻譯本機 PDF 檔案"
+  },
+  "openEbookViewer": {
+    "message": "閱讀本機電子書"
+  },
+  "openEbookBuilder": {
+    "message": "製作雙語 EPUB 電子書"
+  },
+  "translateLocalHtmlFile": {
+    "message": "翻譯 HTML/txt 檔案"
+  },
+  "donateContext": {
+    "message": "了解贊助福利"
+  },
+  "translateLocalSubtitleFile": {
+    "message": "翻譯字幕檔案"
+  },
+  "openAboutPage": {
+    "message": "關於/問題回報"
+  },
+  "toggleMouseHoverTranslateDirectly": {
+    "message": "在頁面上臨時啟用或關閉滑鼠懸停直接翻譯"
+  },
+  "translateWithOpenAI": {
+    "message": "臨時使用 OpenAI 翻譯當前頁面"
+  },
+  "translateWithDeepL": {
+    "message": "臨時使用 DeepL 翻譯當前頁面"
+  },
+  "translateWithGoogle": {
+    "message": "臨時使用 Google 翻譯當前頁面"
+  },
+  "translateWithBing": {
+    "message": "臨時使用微軟翻譯當前頁面"
+  },
+  "translateWithGemini": {
+    "message": "臨時使用 Gemini 翻譯當前頁面"
+  },
+  "translateWithTransmart": {
+    "message": "臨時使用騰訊翻譯當前頁面"
+  },
+  "translateInputBox": {
+    "message": "翻譯當前輸入框內容"
+  },
+  "toggleOnlyTransation": {
+    "message": "翻譯頁面/顯示原文(僅譯文模式)"
+  },
+  "toggleTranslationMask": {
+    "message": "切換當前頁面譯文為模糊效果（學習模式）"
+  }
+}
