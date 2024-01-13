@@ -310,8 +310,8 @@ class GeckoEngine(
             )
         }*/
 
-        val geckoResult = if (url.isResourceUrl() &&
-            !AddonAllow.NoCheckAddons.contains(id)) {
+        val geckoResult = if (url.isResourceUrl() /*&&
+            !AddonAllow.NoCheckAddons.contains(id)*/) {
             runtime.webExtensionController.ensureBuiltIn(url, id).apply {
                 then(
                     {
