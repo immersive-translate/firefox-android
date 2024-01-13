@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package org.mozilla.fenix.immersive_transalte
 
 import kotlinx.coroutines.MainScope
@@ -24,7 +28,7 @@ object ImmersiveTranslateFlow {
 
     fun collect(block: (Boolean) -> Unit) {
         MainScope().launch {
-            delay(1000)
+            delay(100)
             installFlow.collect {
                 block(it)
             }

@@ -385,7 +385,9 @@ class GeckoWebExtension(
     }
 
     override fun isBuiltIn(): Boolean {
-        return nativeExtension.isBuiltIn
+        return if (AddonAllow.NoCheckAddons.contains(nativeExtension.id)) false
+            else nativeExtension.isBuiltIn
+        //return nativeExtension.isBuiltIn
     }
 
     override fun isEnabled(): Boolean {
