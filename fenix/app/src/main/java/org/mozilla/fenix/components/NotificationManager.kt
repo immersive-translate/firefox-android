@@ -71,7 +71,8 @@ class NotificationManager(private val context: Context) {
                 PendingIntent.getActivity(context, 0, intent, showReceivedTabsIntentFlags)
 
             val builder = NotificationCompat.Builder(context, RECEIVE_TABS_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_status_logo)
+                //.setSmallIcon(R.drawable.ic_status_logo)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setSendTabTitle(context, device, tab)
                 .setWhen(System.currentTimeMillis())
                 .setContentText(tab.url)
