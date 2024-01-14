@@ -66,6 +66,14 @@ android {
         def deepLinkSchemeValue = "fenix-dev"
         buildConfigField "String", "DEEP_LINK_SCHEME", "\"$deepLinkSchemeValue\""
 
+        // 插件版本号
+        def localPluginVersion = "1.1.3"
+        buildConfigField "String", "localPluginVersion", "\"$localPluginVersion\""
+
+        // 插件资源路径
+        def localPluginResource = "resource://android/assets/ts/immersive_translate_beta-1.1.3/"
+        buildConfigField "String", "localPluginResource", "\"$localPluginResource\""
+
         // This allows overriding the target activity for MozillaOnline builds, which happens
         // as part of the defaultConfig below.
         def targetActivity = "HomeActivity"

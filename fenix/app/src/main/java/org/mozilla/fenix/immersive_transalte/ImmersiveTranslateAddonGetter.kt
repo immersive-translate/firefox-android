@@ -69,7 +69,8 @@ class ImmersiveTranslateAddonGetter(
         val detailUrl = "https://addons.mozilla.org/zh-CN/android/addon/immersive-translate/"
 
         //val downloadUrl = "https://addons.mozilla.org/android/downloads/file/4214378/immersive_translate-0.12.13.xpi"
-        val downloadUrl = "resource://android/assets/ts/immersive_translate_beta-1.1.3/"
+        //val downloadUrl = "resource://android/assets/ts/immersive_translate_beta-1.1.3/"
+        val downloadUrl = ImmersivePluginConfig.localPluginResource
 
         //val downloadUrl = "resource://android/assets/ts/immersive_translate-0.12.13.xpi"
         val homepageUrl = "https://immersivetranslate.com/"
@@ -109,6 +110,7 @@ class ImmersiveTranslateAddonGetter(
             mapOf("en-us" to "沉浸式网页双语翻译扩展，支持PDF翻译，双语Epub电子书制作，Youtube/Netflix/Udemy 等平台双语字幕，支持Deepl/Google等多个翻译服务，免费使用。")
 
         val updatedAt = "2023-12-24T06:10:48Z"
-        val version = "1.1.3"
+        //val version = "1.1.3"
+        val version = ImmersivePluginConfig.localPluginVersion
     }
 }
