@@ -193,10 +193,11 @@ class SessionControlView(
                                     context.settings().shouldShowJumpBackInCFR
                                 )
                         ) {
-                            featureRecommended = HomeCFRPresenter(
+                            // 禁用 认识您的个性化主页 pop
+                            /*featureRecommended = HomeCFRPresenter(
                                 context = context,
                                 recyclerView = view,
-                            ).show()
+                            ).show()*/
                         }
 
                         if (!context.settings().shouldShowJumpBackInCFR &&
