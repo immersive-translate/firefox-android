@@ -1,10 +1,3 @@
-// Deno 环境
-// 获取命令行参数 默认第一个参数为 version
-const version = Deno.args[0];
-// 下载资源并解压到 ../fenix/app/src/main/assets/ts
-const downloadUrl = `https://addons.mozilla.org/firefox/downloads/file/4221309/immersive_translate_beta-${version}.xpi`;
-const downloadPath = `../fenix/app/src/main/assets/ts/immersive_translate_beta-${version}.xpi`;
-const unzipPath = `../fenix/app/src/main/assets/ts/immersive_translate_beta-${version}`;
 const configFile = "../fenix/app/immersive.properties";
 
 // 检查文件是否存在
@@ -31,10 +24,28 @@ async function removeIfExists(path, options = {}) {
   }
 }
 
+// 从 https://addons.mozilla.org/zh-CN/firefox/addon/immersive-translate-beta/ 这个页面中提取版本号 <dd class="Definition-dd AddonMoreInfo-version">1.1.5</dd>
+async function extractVersion() {
+  // 请求这个网页内容 
+  const res = await fetch("https://addons.mozilla.org/zh-CN/firefox/addon/immersive-translate-beta/");
+  const html = await res.text();
+
+  const reg = /<dd class="Definition-dd AddonMoreInfo-version">(.*?)<\/dd>/;
+  const match = html.match(reg);
+  if (match) {
+    return match[1];
+  }
+  return "";
+}
+
 // 主要逻辑
 async function main() {
   try {
-    // 删除 ../fenix/app/src/main/assets/ts/* 下所有内容
+    const version = await extractVersion();
+    const downloadUrl = `https://addons.mozilla.org/firefox/downloads/file/4221309/immersive_translate_beta-${version}.xpi`;
+    const downloadPath = `../fenix/app/src/main/assets/ts/immersive_translate_beta-${version}.xpi`;
+    const unzipPath = `../fenix/app/src/main/assets/ts/immersive_translate_beta-${version}`;
+
     const removeDir = "../fenix/app/src/main/assets/ts/";
     const removeDirExists = await checkFileExists(removeDir);
     if (removeDirExists) {
