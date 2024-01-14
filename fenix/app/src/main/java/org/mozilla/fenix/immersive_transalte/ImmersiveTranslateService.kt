@@ -24,7 +24,7 @@ class ImmersiveTranslateService(
     private val immersiveTranslateAddonGetter = ImmersiveTranslateAddonGetter(addonManager)
     private var isChecked: Boolean = false
     private var installedTsAddon: Addon? = null
-    private val localVersion = "1.1.3"
+    private val localVersion = ImmersiveTranslateAddonGetter.version
 
     /**
      * 检查安装更新插件
