@@ -101,3 +101,4 @@ DerivedData
 *.xcscmblueprint
 .build
 
+fenix/app/src/main/assets/ts/*

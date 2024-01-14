@@ -33,6 +33,12 @@ import static org.gradle.api.tasks.testing.TestResult.ResultType
 
 apply from: 'benchmark.gradle'
 
+def ImmersiveProperties = new Properties();
+if (project.rootProject.file("immersive.properties").exists()) {
+    project.rootProject.file("immersive.properties").withInputStream { ImmersiveProperties.load(it) }
+}
+def localPluginVersion = ImmersiveProperties.getProperty('extension', "1.1.5");
+
 android {
     project.maybeConfigForJetpackBenchmark(it)
     if (project.hasProperty("testBuildType")) {
@@ -77,12 +83,10 @@ android {
         def deepLinkSchemeValue = "fenix-dev"
         buildConfigField "String", "DEEP_LINK_SCHEME", "\"$deepLinkSchemeValue\""
 
-        // 插件版本号
-        def localPluginVersion = "1.1.3"
         buildConfigField "String", "localPluginVersion", "\"$localPluginVersion\""
 
         // 插件资源路径
-        def localPluginResource = "resource://android/assets/ts/immersive_translate_beta-1.1.3/"
+        def localPluginResource = "resource://android/assets/ts/immersive_translate_beta-$localPluginVersion/"
         buildConfigField "String", "localPluginResource", "\"$localPluginResource\""
 
         // This allows overriding the target activity for MozillaOnline builds, which happens
