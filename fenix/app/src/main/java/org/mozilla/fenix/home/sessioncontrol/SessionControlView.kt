@@ -201,8 +201,9 @@ class SessionControlView(
                     with(settings()) {
                         if (!featureRecommended && !showHomeOnboardingDialog) {
                             if (!showHomeOnboardingDialog && searchDialogFragment == null && showSyncCFR) {
-                                featureRecommended =
-                                    HomeCFRPresenter(context = context, recyclerView = view).show()
+                                // 禁用 认识您的个性化主页 pop
+                                /*featureRecommended =
+                                    HomeCFRPresenter(context = context, recyclerView = view).show()*/
                             }
 
                             if (showWallpaperOnboardingDialog(featureRecommended)) {
