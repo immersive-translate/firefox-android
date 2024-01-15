@@ -60,4 +60,6 @@ object Config {
             throw IllegalStateException("Unknown build type: ${BuildConfig.BUILD_TYPE}")
         }
     }
+
+    const val isForceEnablePullToRefresh = true
 }
