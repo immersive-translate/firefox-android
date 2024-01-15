@@ -884,7 +884,7 @@
     <string name="preference_gestures_swipe_toolbar_show_tabs">上滑工具栏显示打开的标签页</string>
 
     <!-- Library -->
-    <string name="library_translate">沉浸式翻译设置</string>
+    <string name="library_translate">沉浸式翻译面板</string>
     <!-- Option in Library to open Downloads page -->
     <string name="library_downloads">下载</string>
     <!-- Option in library to open Bookmarks page -->
