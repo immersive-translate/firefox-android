@@ -1065,7 +1065,7 @@
     <string name="preference_gestures_swipe_toolbar_switch_tabs_2">横向滑动地址栏切换标签页</string>
 
     <!-- Library -->
-    <string name="library_translate">沉浸式翻译面板</string>
+    <string name="library_translate">沉浸式翻译设置</string>
     <!-- Option in Library to open Downloads page -->
     <string name="library_downloads">下载</string>
     <!-- Option in library to open Bookmarks page -->
@@ -2015,7 +2015,7 @@
     <string name="about_crashes">崩溃信息</string>
     <!-- About page link text to open privacy notice link -->
     <string name="about_privacy_notice">Firefox 隐私声明</string>
-    <string name="about_privacy_notice_app">浸入式翻译 隐私声明</string>
+    <string name="about_privacy_notice_app">沉浸式翻译 隐私声明</string>
     <!-- About page link text to open know your rights link -->
     <string name="about_know_your_rights">了解您关于 Firefox 的权利</string>
     <!-- About page link text to open licensing information link -->

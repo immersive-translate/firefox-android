@@ -53,6 +53,7 @@ import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.navigateSafe
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
+import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.settings.deletebrowsingdata.deleteAndQuit
 import org.mozilla.fenix.utils.Settings
 
@@ -397,12 +398,13 @@ class DefaultBrowserToolbarMenuController(
             }
 
             is ToolbarMenu.Item.Translate -> {
-                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon() ?: return
-                val browserAction = activity.components.core.store.state.extensions
-                    .values.first { it.id == tsAddon.id }.browserAction
-                browserAction?.let {
-                    it.onClick()
-                }
+                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon()
+                val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: SupportUtils.APP_OPT_URL
+                activity.openToBrowserAndLoad(
+                    searchTermOrURL = tsSettingUrl,
+                    newTab = true,
+                    from = BrowserDirection.FromGlobal,
+                )
             }
         }
     }
