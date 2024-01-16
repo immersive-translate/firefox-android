@@ -107,6 +107,7 @@ import mozilla.components.support.ktx.kotlinx.coroutines.flow.ifAnyChanged
 import mozilla.components.support.locale.ActivityContextWrapper
 import mozilla.components.ui.widgets.withCenterAlignedButtons
 import org.mozilla.fenix.BuildConfig
+import org.mozilla.fenix.Config
 import org.mozilla.fenix.FeatureFlags
 import org.mozilla.fenix.GleanMetrics.MediaState
 import org.mozilla.fenix.GleanMetrics.PullToRefreshInBrowser
@@ -1085,9 +1086,14 @@ abstract class BaseBrowserFragment :
 
     @VisibleForTesting
     internal fun shouldPullToRefreshBeEnabled(inFullScreen: Boolean): Boolean {
-        return FeatureFlags.pullToRefreshEnabled &&
-            requireContext().settings().isPullToRefreshEnabledInBrowser &&
-            !inFullScreen
+        return if (!Config.isForceEnablePullToRefresh) {
+            FeatureFlags.pullToRefreshEnabled &&
+                    requireContext().settings().isPullToRefreshEnabledInBrowser &&
+                    !inFullScreen
+        } else {
+            FeatureFlags.pullToRefreshEnabled &&
+                    requireContext().settings().isPullToRefreshEnabledInBrowser
+        }
     }
 
     @VisibleForTesting
