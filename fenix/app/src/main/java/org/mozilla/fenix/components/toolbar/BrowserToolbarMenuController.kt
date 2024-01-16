@@ -30,6 +30,7 @@ import mozilla.components.feature.top.sites.TopSite
 import mozilla.components.service.glean.private.NoExtras
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.ui.widgets.withCenterAlignedButtons
+import org.mozilla.fenix.BrowserDirection
 import org.mozilla.fenix.GleanMetrics.AppMenu
 import org.mozilla.fenix.GleanMetrics.Collections
 import org.mozilla.fenix.GleanMetrics.Events
@@ -50,6 +51,7 @@ import org.mozilla.fenix.ext.getRootView
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.navigateSafe
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
+import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.settings.deletebrowsingdata.deleteAndQuit
 import org.mozilla.fenix.utils.Settings
 
@@ -408,19 +410,19 @@ class DefaultBrowserToolbarMenuController(
             }
 
             is ToolbarMenu.Item.Translate -> {
-                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon() ?: return
-                /*val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: return
+                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon()
+                val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: SupportUtils.APP_OPT_URL
                 activity.openToBrowserAndLoad(
                     searchTermOrURL = tsSettingUrl,
-                    newTab = false,
+                    newTab = true,
                     from = BrowserDirection.FromGlobal,
-                )*/
+                )
 
-                val browserAction = activity.components.core.store.state.extensions
+                /*val browserAction = activity.components.core.store.state.extensions
                         .values.first { it.id == tsAddon.id }.browserAction
                 browserAction?.let {
                     it.onClick()
-                }
+                }*/
 
                 /*val addon = activity.components.immersiveTranslateService.getInstalledTSAddon()
                 val settingUrl = addon?.installedState?.optionsPageUrl ?: return

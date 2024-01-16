@@ -58,8 +58,9 @@ class ImmersiveTranslateAddonGetter(
     }
 
     companion object {
-        const val id = "{5efceaa7-f3a2-4e59-a54b-85319448e306}"
+        //const val id = "{5efceaa7-f3a2-4e59-a54b-85319448e306}"
         //const val id = "{5efceaa7-f3a2-4e59-a54b-85319448e305}"
+        const val id = ImmersivePluginConfig.localPluginId
         val author = Addon.Author(
             "Immersive Translate",
             "https://addons.mozilla.org/zh-CN/android/user/17891955/",

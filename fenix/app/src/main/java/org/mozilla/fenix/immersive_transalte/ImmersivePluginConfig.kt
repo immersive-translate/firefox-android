@@ -13,6 +13,7 @@ import org.mozilla.fenix.BuildConfig
 class ImmersivePluginConfig {
 
     companion object {
+        const val localPluginId = "{5efceaa7-f3a2-4e59-a54b-85319448e306}"
         const val localPluginVersion = BuildConfig.localPluginVersion
         const val localPluginResource = BuildConfig.localPluginResource
     }
