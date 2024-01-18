@@ -931,11 +931,13 @@ class HomeFragment : Fragment() {
             if (!installed) {
                 return@collect
             }
-            (activity as HomeActivity).openToBrowserAndLoad(
+            val homeActivity = activity as HomeActivity
+            homeActivity.openToBrowser(from = BrowserDirection.FromHome)
+            /*homeActivity.openToBrowserAndLoad(
                 searchTermOrURL = SupportUtils.APP_WELCOME_URL,
-                newTab = true,
+                newTab = false,
                 from = BrowserDirection.FromHome,
-            )
+            )*/
         }
     }
 
