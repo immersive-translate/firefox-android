@@ -175,6 +175,7 @@ private fun DescriptionText(
             fontSize = fontSize ?: 16.sp,
             textAlign = TextAlign.Center,
             style = FirefoxTheme.typography.body2,
+            lineHeight = 26.sp,
         )
     }
 }
