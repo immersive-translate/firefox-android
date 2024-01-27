@@ -45,6 +45,7 @@ object SupportUtils {
     const val APP_EUAL = "https://immersivetranslate.com/docs/EULA/"
     const val APP_WELCOME_URL = "https://onboarding.immersivetranslate.com/mobile/"
     const val APP_OPT_URL = "https://dash.immersivetranslate.com/"
+    const val APP_AGREEMENT_URL = "https://immersivetranslate.com/docs/TERMS/"
 
     enum class SumoTopic(internal val topicStr: String) {
         HELP("faq-android"),

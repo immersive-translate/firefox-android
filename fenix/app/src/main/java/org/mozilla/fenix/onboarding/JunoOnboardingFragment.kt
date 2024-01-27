@@ -107,6 +107,7 @@ class JunoOnboardingFragment : Fragment() {
         JunoOnboardingScreen(
             pagesToDisplay = pagesToDisplay,
             onMakeFirefoxDefaultClick = {
+                requireComponents.settings.isShownOnBoarding = false
                 activity?.openSetDefaultBrowserOption(useCustomTab = true)
                 telemetryRecorder.onSetToDefaultClick(
                     sequenceId = pagesToDisplay.telemetrySequenceId(),
@@ -114,6 +115,7 @@ class JunoOnboardingFragment : Fragment() {
                 )
             },
             onSkipDefaultClick = {
+                requireComponents.settings.isShownOnBoarding = false
                 telemetryRecorder.onSkipSetToDefaultClick(
                     pagesToDisplay.telemetrySequenceId(),
                     pagesToDisplay.sequencePosition(OnboardingPageUiData.Type.DEFAULT_BROWSER),
