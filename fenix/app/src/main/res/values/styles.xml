@@ -733,4 +733,9 @@
         <item name="elevation">0dp</item>
         <item name="cornerSize">2dp</item>
     </style>
+
+    <style name="popup_window_anim">
+        <item name="android:windowEnterAnimation">@anim/popup_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_out</item>
+    </style>
 </resources>
