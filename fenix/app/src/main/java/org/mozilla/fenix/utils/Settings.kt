@@ -452,6 +452,16 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = false,
     )
 
+    var isAgreePrivacy: Boolean by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_is_agree_privacy_splash_screen_shown),
+        default = false
+    )
+
+    var isShownOnBoarding: Boolean by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_is_onboarding_shown),
+        default = false
+    )
+
     var nimbusLastFetchTime: Long by longPreference(
         appContext.getPreferenceKey(R.string.pref_key_nimbus_last_fetch),
         default = 0L,

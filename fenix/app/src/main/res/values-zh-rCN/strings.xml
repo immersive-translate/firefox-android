@@ -2741,4 +2741,16 @@
     <string name="debug_drawer_tab_tools_tab_creation_tool_button_text_inactive">添加到休眠标签页</string>
     <!-- The button text to add tabs to the private tab group in the tab creation tool. -->
     <string name="debug_drawer_tab_tools_tab_creation_tool_button_text_private">添加到隐私标签页</string>
+
+    <string name="privacy_remind_dialog_title">温馨提示</string>
+    <string name="privacy_remind_dialog_us">《用户协议》</string>
+    <string name="privacy_remind_dialog_itp">《沉浸式翻译浏览器隐私政策》</string>
+    <string name="privacy_remind_dialog_content">欢迎使用沉浸式翻译。在使用沉浸式翻译前，请认真阅读%1$s和%2$s。根据《常见类型移动互联网应用程序必要个人信息范围规定》，沉浸式翻译的主要功能为网址浏览、搜索、文件处理、文件管理等，扩展功能包括沉浸式翻译账号等。同意基本功能隐私政策仅代表同意使用网址浏览、搜索、文件处理、文件管理等主要功能时收集、处理相关必要信息，沉浸式翻译账号等拓展功能收集个人信息将在您使用具体功能时单独征求您的同意。</string>
+    <string name="privacy_remind_dialog_disagree">不同意</string>
+    <string name="privacy_remind_dialog_agree">同意并继续</string>
+
+    <string name="quit_app_dialog_title">温馨提示</string>
+    <string name="quit_app_dialog_content">本产品需要同意相关协议后才能使用哦</string>
+    <string name="quit_app_dialog_btn_quit">退出应用</string>
+    <string name="quit_app_dialog_btn_known">我知道了</string>
 </resources>

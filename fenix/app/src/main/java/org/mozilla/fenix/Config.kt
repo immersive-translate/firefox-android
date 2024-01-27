@@ -62,4 +62,6 @@ object Config {
     }
 
     const val isForceEnablePullToRefresh = true
+
+    const val isInstallSplashScreen = true
 }
