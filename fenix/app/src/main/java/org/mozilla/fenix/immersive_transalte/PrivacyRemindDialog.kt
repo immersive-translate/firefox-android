@@ -5,7 +5,6 @@
 package org.mozilla.fenix.immersive_transalte
 
 import android.app.Activity
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.SpannableString
 import android.text.Spanned
@@ -17,6 +16,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.PopupWindow
+import androidx.core.view.WindowCompat
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.DialogPrivacyRemindLayoutBinding
 import org.mozilla.fenix.settings.SupportUtils
@@ -58,18 +58,22 @@ class PrivacyRemindDialog(
         }
     }
 
+    private val activity = context
     private var binding: DialogPrivacyRemindLayoutBinding
 
     init {
         animationStyle = R.style.popup_window_anim
         binding = DialogPrivacyRemindLayoutBinding.inflate(LayoutInflater.from(context))
         contentView = binding.root
-        width = context.resources.displayMetrics.widthPixels
-        height = context.resources.displayMetrics.heightPixels
-        isFocusable = true
+
+        val displaySize = DeviceUtil.getDeviceRealSize(context)
+        width = displaySize.width
+        height = displaySize.height
+
+        isFocusable = false
         isOutsideTouchable = false
+        isClippingEnabled = false
         setBackgroundDrawable(ColorDrawable(0x6F000000))
-        // isClippingEnabled = true
 
         val contentUS = context.getString(R.string.privacy_remind_dialog_us)
         val contentITP = context.getString(R.string.privacy_remind_dialog_itp)
@@ -77,7 +81,7 @@ class PrivacyRemindDialog(
         contentText = String.format(contentText, contentUS, contentITP)
 
         val contentSpan = SpannableString(contentText)
-        val textColor = ForegroundColorSpan(Color.parseColor("#FF1052FF"))
+        val textColor = ForegroundColorSpan(0xFF1052FF.toInt())
 
         // 隐私政策
         var startSpan = contentSpan.indexOf(contentITP)
@@ -124,5 +128,13 @@ class PrivacyRemindDialog(
 
     fun show(parent: View) {
         showAtLocation(parent, Gravity.BOTTOM, 0, 0)
+        setStatusBarTheme(false)
+    }
+
+    private fun setStatusBarTheme(isLight: Boolean) {
+        WindowCompat.getInsetsController(
+            activity.window,
+            activity.window.decorView
+        ).isAppearanceLightStatusBars = isLight
     }
 }
