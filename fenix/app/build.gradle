@@ -533,6 +533,14 @@ dependencies {
     implementation platform(ComponentsDependencies.androidx_compose_bom)
     androidTestImplementation platform(ComponentsDependencies.androidx_compose_bom)
 
+    implementation 'com.adjust.sdk:adjust-android:4.33.5'
+    implementation 'com.android.installreferrer:installreferrer:2.2'
+    // Add the following if you are using the Adjust SDK inside web views on your app
+    // implementation 'com.adjust.sdk:adjust-android-webbridge:4.33.5'
+    implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
+    implementation 'com.google.android.gms:play-services-appset:16.0.2'
+
+
     implementation project(':browser-engine-gecko')
 
     implementation ComponentsDependencies.kotlin_coroutines
