@@ -120,6 +120,7 @@ import org.mozilla.fenix.home.intent.OpenSpecificTabIntentProcessor
 import org.mozilla.fenix.home.intent.ReEngagementIntentProcessor
 import org.mozilla.fenix.home.intent.SpeechProcessingIntentProcessor
 import org.mozilla.fenix.home.intent.StartSearchIntentProcessor
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.PrivacyRemindDialog
 import org.mozilla.fenix.immersive_transalte.QuitAppDialog
 import org.mozilla.fenix.immersive_transalte.WebDialog
@@ -505,6 +506,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                     directions = JunoOnboardingFragmentDirections.actionHome(),
                 )*/
                 navigateToHome(navHost.navController)
+                // adjust track init
+                ImmersiveTracker.initTrack(application)
             },
             onDisagree = {
                 isAgreePrivacy = false
@@ -823,6 +826,9 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     }
 
     final override fun onBackPressed() {
+        if (!isAgreePrivacy) {
+            return
+        }
         supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.forEach {
             if (it is UserInteractionHandler && it.onBackPressed()) {
                 return
