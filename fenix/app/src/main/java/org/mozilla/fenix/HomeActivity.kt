@@ -831,7 +831,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     }
 
     final override fun onBackPressed() {
-        if (!isAgreePrivacy) {
+        if (!components.settings.isAgreePrivacy) {
             return
         }
         supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.forEach {
