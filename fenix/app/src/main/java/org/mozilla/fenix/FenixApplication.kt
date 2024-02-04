@@ -67,6 +67,7 @@ import mozilla.components.support.rusterrors.initializeRustErrors
 import mozilla.components.support.rusthttp.RustHttpConfig
 import mozilla.components.support.rustlog.RustLog
 import mozilla.components.support.utils.BrowsersCache
+import mozilla.components.support.utils.ext.getPackageInfoCompat
 import mozilla.components.support.utils.logElapsedTime
 import mozilla.components.support.webextensions.WebExtensionSupport
 import mozilla.telemetry.glean.Glean
@@ -316,6 +317,11 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
         components.analytics.metricsStorage.tryRegisterAsUsageRecorder(this)
 
         downloadWallpapers()
+
+        // override UA
+        val ver = packageManager.getPackageInfoCompat(packageName, 0).versionName
+        val ua = components.core.engine.settings.userAgentString + " ImtFxAndroid/${ver}"
+        components.core.engine.settings.userAgentString = ua
     }
 
     @OptIn(DelicateCoroutinesApi::class) // GlobalScope usage
