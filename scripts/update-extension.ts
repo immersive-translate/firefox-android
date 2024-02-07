@@ -1,4 +1,4 @@
-const configFile = "../fenix/app/immersive.properties";
+const configFile = "./fenix/app/immersive.properties";
 
 // 检查文件是否存在
 async function checkFileExists(file) {
@@ -43,10 +43,10 @@ async function main() {
   try {
     const version = await extractVersion();
     const downloadUrl = `https://addons.mozilla.org/firefox/downloads/file/4221309/immersive_translate_beta-${version}.xpi`;
-    const downloadPath = `../fenix/app/src/main/assets/ts/immersive_translate_beta-${version}.xpi`;
-    const unzipPath = `../fenix/app/src/main/assets/ts/immersive_translate_beta-${version}`;
+    const downloadPath = `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}.xpi`;
+    const unzipPath = `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}`;
 
-    const removeDir = "../fenix/app/src/main/assets/ts/";
+    const removeDir = "./fenix/app/src/main/assets/ts/";
     const removeDirExists = await checkFileExists(removeDir);
     if (removeDirExists) {
       const removeDirFiles = await Deno.readDir(removeDir);
