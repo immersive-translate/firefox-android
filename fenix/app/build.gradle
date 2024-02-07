@@ -34,10 +34,10 @@ import static org.gradle.api.tasks.testing.TestResult.ResultType
 apply from: 'benchmark.gradle'
 
 def ImmersiveProperties = new Properties();
-if (project.rootProject.file("immersive.properties").exists()) {
-    project.rootProject.file("immersive.properties").withInputStream { ImmersiveProperties.load(it) }
+if (project.rootProject.file("./app/immersive.properties").exists()) {
+    project.rootProject.file("./app/immersive.properties").withInputStream { ImmersiveProperties.load(it) }
 }
-def localPluginVersion = ImmersiveProperties.getProperty('extension', "1.1.5");
+def localPluginVersion = ImmersiveProperties.getProperty('extension');
 
 android {
     project.maybeConfigForJetpackBenchmark(it)
