@@ -30,19 +30,19 @@ async function extractVersion() {
   const res = await fetch("https://addons.mozilla.org/zh-CN/firefox/addon/immersive-translate-beta/");
   const html = await res.text();
 
-  const reg = /<dd class="Definition-dd AddonMoreInfo-version">(.*?)<\/dd>/;
-  const match = html.match(reg);
-  if (match) {
-    return match[1];
+  const regVersion = /<dd class="Definition-dd AddonMoreInfo-version">(.*?)<\/dd>/;
+  const regDownloadLink = /<a class="InstallButtonWrapper-download-link" href="(.*?)"/;
+  return {
+    downloadLink: html.match(regDownloadLink)?.[1],
+    version: html.match(regVersion)?.[1]
   }
-  return "";
 }
 
 // 主要逻辑
 async function main() {
   try {
-    const version = await extractVersion();
-    const downloadUrl = `https://addons.mozilla.org/firefox/downloads/file/4221309/immersive_translate_beta-${version}.xpi`;
+    const { version, downloadLink } = await extractVersion();
+    const downloadUrl = downloadLink;
     const downloadPath = `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}.xpi`;
     const unzipPath = `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}`;
 
