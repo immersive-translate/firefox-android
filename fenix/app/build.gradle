@@ -38,8 +38,8 @@ if (project.rootProject.file("./app/immersive.properties").exists()) {
     project.rootProject.file("./app/immersive.properties").withInputStream { ImmersiveProperties.load(it) }
 }
 def localPluginVersion = ImmersiveProperties.getProperty('extension');
-
 def localPluginChannel = ImmersiveProperties.getProperty('channel');
+def appVersion = ImmersiveProperties.getProperty('appVersion');
 
 android {
     project.maybeConfigForJetpackBenchmark(it)
@@ -55,7 +55,7 @@ android {
         compileSdk config.compileSdkVersion
         targetSdkVersion config.targetSdkVersion
         versionCode 1
-        versionName "1.0.0"
+        versionName appVersion
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
