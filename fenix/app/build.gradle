@@ -172,6 +172,12 @@ android {
                     "sharedUserId": "com.immersivetranslate.browser.sharedID",
                     "deepLinkScheme": deepLinkSchemeValue,
             ])
+            signingConfig {
+                storeFile file(System.getenv('IMMERSIVE_KEYSTORE_FILE'))
+                keyAlias System.getenv('IMMERSIVE_KEYSTORE_ALIAS')
+                storePassword System.getenv('IMMERSIVE_KEYSTORE_PASSWORD')
+                keyPassword System.getenv('IMMERSIVE_KEYSTORE_PASSWORD')
+            }
         }
         benchmark releaseTemplate >> {
             initWith buildTypes.nightly
