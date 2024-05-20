@@ -1,4 +1,4 @@
-const configFile = "./fenix/app/immersive.properties";
+import { updateProperties } from "./util.ts";
 
 // 检查文件是否存在
 async function checkFileExists(file) {
@@ -26,16 +26,20 @@ async function removeIfExists(path, options = {}) {
 
 // 从 https://addons.mozilla.org/zh-CN/firefox/addon/immersive-translate-beta/ 这个页面中提取版本号 <dd class="Definition-dd AddonMoreInfo-version">1.1.5</dd>
 async function extractVersion() {
-  // 请求这个网页内容 
-  const res = await fetch("https://addons.mozilla.org/zh-CN/firefox/addon/immersive-translate-beta/");
+  // 请求这个网页内容
+  const res = await fetch(
+    "https://addons.mozilla.org/zh-CN/firefox/addon/immersive-translate-beta/",
+  );
   const html = await res.text();
 
-  const regVersion = /<dd class="Definition-dd AddonMoreInfo-version">(.*?)<\/dd>/;
-  const regDownloadLink = /<a class="InstallButtonWrapper-download-link" href="(.*?)"/;
+  const regVersion =
+    /<dd class="Definition-dd AddonMoreInfo-version">(.*?)<\/dd>/;
+  const regDownloadLink =
+    /<a class="InstallButtonWrapper-download-link" href="(.*?)"/;
   return {
     downloadLink: html.match(regDownloadLink)?.[1],
-    version: html.match(regVersion)?.[1]
-  }
+    version: html.match(regVersion)?.[1],
+  };
 }
 
 // 主要逻辑
@@ -43,8 +47,10 @@ async function main() {
   try {
     const { version, downloadLink } = await extractVersion();
     const downloadUrl = downloadLink;
-    const downloadPath = `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}.xpi`;
-    const unzipPath = `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}`;
+    const downloadPath =
+      `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}.xpi`;
+    const unzipPath =
+      `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}`;
 
     const removeDir = "./fenix/app/src/main/assets/ts/";
     const removeDirExists = await checkFileExists(removeDir);
@@ -54,7 +60,6 @@ async function main() {
         await removeIfExists(`${removeDir}${file.name}`, { recursive: true });
       }
     }
-
 
     await Deno.mkdir(unzipPath, { recursive: true });
     const downloadResponse = await fetch(downloadUrl);
@@ -69,7 +74,7 @@ async function main() {
     await unzip.status();
     unzip.close();
 
-    await Deno.writeTextFile(configFile, `extension=${version}`);
+    await updateProperties("extension", version);
   } catch (error) {
     console.error(`Error: ${error.message}`);
   }
