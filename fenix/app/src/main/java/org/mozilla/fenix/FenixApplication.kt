@@ -100,6 +100,7 @@ import org.mozilla.fenix.ext.isCustomEngine
 import org.mozilla.fenix.ext.isKnownSearchDomain
 import org.mozilla.fenix.ext.setCustomEndpointIfAvailable
 import org.mozilla.fenix.ext.settings
+import org.mozilla.fenix.immersive_transalte.ImmersivePluginConfig
 import org.mozilla.fenix.lifecycle.StoreLifecycleObserver
 import org.mozilla.fenix.lifecycle.VisibilityLifecycleObserver
 import org.mozilla.fenix.nimbus.FxNimbus
@@ -320,7 +321,8 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
         // override UA
         val ver = packageManager.getPackageInfoCompat(packageName, 0).versionName
-        val ua = components.core.engine.settings.userAgentString + " ImtFxAndroid_${ImmersivePluginConfig.localPluginChannel}/${ver}"
+        val ua = components.core.engine.settings.userAgentString + " ImtFxAndroid/$ver/${ImmersivePluginConfig.localPluginChannel}"
+
         components.core.engine.settings.userAgentString = ua
     }
 
