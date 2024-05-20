@@ -943,3 +943,11 @@ def getSupportedLocales() {
     def foundLocalesString = foundLocales.toString().replaceAll(',}', '}')
     return foundLocalesString
 }
+
+android.applicationVariants.configureEach { variant ->
+    variant.outputs.configureEach { output->
+        def abi = output.getFilter(FilterConfiguration.FilterType.ABI.name())
+        def apkName = "${localPluginChannel}-${variant.name}-${appVersion}-${abi}"
+        outputFileName = "./${appVersion}/" + apkName + ".apk"
+    }
+}
