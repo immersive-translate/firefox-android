@@ -3,7 +3,7 @@ import { getProperties, saveProperties } from "./util.ts";
 
 const channels = ["google", "mainlandStore", "official"];
 async function main() {
-  await updateExtension();
+  // await updateExtension();
   const meta = await getProperties() as any;
 
   await removeFilesWithRegex("./app/apks",new RegExp(meta.appVersion));
@@ -11,8 +11,9 @@ async function main() {
     meta.channel = channel;
     await saveProperties(meta);
 
+    const assembleArgs = channel == "google" ? "bundleRelease" : "assembleRelease";
     const process = Deno.run({
-      cmd: ["./gradlew assembleRelease -b ./app/build.gradle"],
+      cmd: ["./gradlew.bat", assembleArgs, "-b", "./app/build.gradle"],
     });
     await process.status(); // 等待进程完成
     process.close(); // 关闭进程资源

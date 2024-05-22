@@ -49,6 +49,15 @@ android {
         testBuildType project.property("testBuildType")
     }
 
+    signingConfigs {
+        release {
+            storeFile file(System.getenv('IMMERSIVE_KEYSTORE_FILE'))
+            keyAlias System.getenv('IMMERSIVE_KEYSTORE_ALIAS')
+            storePassword System.getenv('IMMERSIVE_KEYSTORE_PASSWORD')
+            keyPassword System.getenv('IMMERSIVE_KEYSTORE_PASSWORD')
+        }
+    }
+
     defaultConfig {
         applicationId "com.immersivetranslate"
         minSdkVersion config.minSdkVersion
@@ -189,6 +198,7 @@ android {
                     "sharedUserId": "com.immersivetranslate.browser.sharedID",
                     "deepLinkScheme": deepLinkSchemeValue,
             ])
+            signingConfig signingConfigs.release
         }
         benchmark releaseTemplate >> {
             initWith buildTypes.nightly
@@ -945,9 +955,13 @@ def getSupportedLocales() {
 }
 
 android.applicationVariants.configureEach { variant ->
+    if (variant.buildType.name != 'release') return;
+
     variant.outputs.configureEach { output->
         def abi = output.getFilter(FilterConfiguration.FilterType.ABI.name())
+
+        if(abi != "arm64-v8a") return;
         def apkName = "${localPluginChannel}-${variant.name}-${appVersion}-${abi}"
-        outputFileName = "./${appVersion}/" + apkName + ".apk"
+        outputFileName = "../../../../../apks/" + apkName + ".apk"
     }
 }
