@@ -48,11 +48,11 @@ export default async function main() {
     const { version, downloadLink } = await extractVersion();
     const downloadUrl = downloadLink;
     const downloadPath =
-      `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}.xpi`;
+      `./app/src/main/assets/ts/immersive_translate_beta-${version}.xpi`;
     const unzipPath =
-      `./fenix/app/src/main/assets/ts/immersive_translate_beta-${version}`;
+      `./app/src/main/assets/ts/immersive_translate_beta-${version}`;
 
-    const removeDir = "./fenix/app/src/main/assets/ts/";
+    const removeDir = "./app/src/main/assets/ts/";
     const removeDirExists = await checkFileExists(removeDir);
     if (removeDirExists) {
       const removeDirFiles = await Deno.readDir(removeDir);
