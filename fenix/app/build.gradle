@@ -933,7 +933,8 @@ android.applicationVariants.configureEach { variant ->
 
         if(abi != "arm64-v8a") return;
         def apkName = "${localPluginChannel}-${variant.name}-${appVersion}-${abi}"
-        outputFileName = "../../../../../apks/" + apkName + ".apk"
+        def suffixName = localPluginChannel == "google" ?".aab":".apk"
+        outputFileName = "../../../../../apks/" + apkName + suffixName
     }
 }
 
