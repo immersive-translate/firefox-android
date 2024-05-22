@@ -43,7 +43,7 @@ async function extractVersion() {
 }
 
 // 主要逻辑
-async function main() {
+export default async function main() {
   try {
     const { version, downloadLink } = await extractVersion();
     const downloadUrl = downloadLink;
@@ -81,4 +81,4 @@ async function main() {
 }
 
 // 执行主要逻辑
-main();
+// main();
