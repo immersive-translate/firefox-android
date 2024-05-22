@@ -1,4 +1,4 @@
-const configFilePath = "./fenix/app/immersive.properties";
+const configFilePath = "./app/immersive.properties";
 
 export async function getProperties() {
   const decoder = new TextDecoder("utf-8");
