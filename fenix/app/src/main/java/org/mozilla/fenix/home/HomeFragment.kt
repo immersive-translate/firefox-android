@@ -13,6 +13,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,6 +94,7 @@ import mozilla.components.lib.state.ext.consumeFrom
 import mozilla.components.lib.state.ext.observeAsState
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.support.utils.BrowsersCache
+import mozilla.components.support.ktx.android.content.appVersionName
 import mozilla.components.ui.colors.PhotonColors
 import mozilla.components.ui.tabcounter.TabCounterMenu
 import mozilla.telemetry.glean.private.NoExtras
@@ -162,6 +164,7 @@ import org.mozilla.fenix.home.toolbar.SearchSelectorBinding
 import org.mozilla.fenix.home.toolbar.SearchSelectorMenuBinding
 import org.mozilla.fenix.home.topsites.DefaultTopSitesView
 import org.mozilla.fenix.home.ui.Homepage
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.ImmersiveTranslateFlow
 import org.mozilla.fenix.messaging.DefaultMessageController
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
@@ -931,13 +934,22 @@ class HomeFragment : Fragment() {
             if (!installed) {
                 return@collect
             }
+            var welcomeUrl = SupportUtils.APP_WELCOME_URL + "?app_v=" + requireContext().appVersionName
+            requireComponents.immersiveTranslateService.getInstalledTSAddon()?.let {
+                welcomeUrl += "&v=${it.version}"
+            }
+            ImmersiveTracker.getAdjustAttribution()?.let {
+                welcomeUrl += "&utm_campaign=${it.campaign}"
+                welcomeUrl += "&utm_source=${it.adgroup}"
+                welcomeUrl += "&utm_medium=${it.creative}"
+            }
             val homeActivity = activity as HomeActivity
-            homeActivity.openToBrowser(from = BrowserDirection.FromHome)
-            /*homeActivity.openToBrowserAndLoad(
-                searchTermOrURL = SupportUtils.APP_WELCOME_URL,
-                newTab = false,
+            // homeActivity.openToBrowser(from = BrowserDirection.FromHome)
+            homeActivity.openToBrowserAndLoad(
+                searchTermOrURL = welcomeUrl,
+                newTab = true,
                 from = BrowserDirection.FromHome,
-            )*/
+            )
         }
     }
 
