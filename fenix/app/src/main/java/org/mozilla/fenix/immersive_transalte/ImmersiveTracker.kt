@@ -9,6 +9,7 @@ import android.app.Application
 import android.app.Application.ActivityLifecycleCallbacks
 import android.os.Bundle
 import com.adjust.sdk.Adjust
+import com.adjust.sdk.AdjustAttribution
 import com.adjust.sdk.AdjustConfig
 import com.adjust.sdk.AdjustEvent
 import com.adjust.sdk.LogLevel
@@ -26,6 +27,7 @@ import org.mozilla.fenix.Config
 object ImmersiveTracker {
     private const val appToken = "yrf6oviwfshs"
     private var isInit = false
+    private var adjustAttribution: AdjustAttribution? = null
 
     fun initTrack(ctx: Application) {
         @OptIn(DelicateCoroutinesApi::class)
@@ -37,9 +39,10 @@ object ImmersiveTracker {
     private fun init(ctx: Application) {
         val isRelease = Config.channel.isRelease
         val environment = if (isRelease) AdjustConfig.ENVIRONMENT_PRODUCTION else AdjustConfig.ENVIRONMENT_SANDBOX
-        val logLevel = if (isRelease) LogLevel.WARN  else LogLevel.VERBOSE
+        val logLevel = if (isRelease) LogLevel.WARN else LogLevel.VERBOSE
         val config = AdjustConfig(ctx, appToken, environment)
         config.setLogLevel(logLevel)
+        config.setOnAttributionChangedListener { p0 -> adjustAttribution = p0 }
         Adjust.onCreate(config)
         ctx.registerActivityLifecycleCallbacks(
             object : ActivityLifecycleCallbacks {
@@ -65,7 +68,7 @@ object ImmersiveTracker {
 
                 override fun onActivityDestroyed(activity: Activity) {
                 }
-            }
+            },
         )
         isInit = true
     }
@@ -77,4 +80,7 @@ object ImmersiveTracker {
         }
     }
 
+    fun getAdjustAttribution(): AdjustAttribution? {
+        return adjustAttribution
+    }
 }
