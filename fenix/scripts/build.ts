@@ -1,4 +1,3 @@
-import updateExtension from "./update-extension.ts";
 import { getProperties, saveProperties } from "./util.ts";
 
 const channels = ["google", "mainlandStore", "official"];
