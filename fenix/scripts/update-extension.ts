@@ -81,4 +81,4 @@ export default async function main() {
 }
 
 // 执行主要逻辑
-// main();
+main();
