@@ -310,7 +310,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
         // override UA
         val ver = packageManager.getPackageInfoCompat(packageName, 0).versionName
-        val ua = components.core.engine.settings.userAgentString + " ImtFxAndroid/$ver/${ImmersivePluginConfig.localPluginChannel}"
+        val ua = components.core.engine.settings.userAgentString + " FxAndroid/121.0 ImtFxAndroid/$ver/${ImmersivePluginConfig.localPluginChannel}"
 
         components.core.engine.settings.userAgentString = ua
     }
