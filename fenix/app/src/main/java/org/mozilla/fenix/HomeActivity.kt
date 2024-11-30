@@ -466,6 +466,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
     private fun maybeShowSplashScreen() {
         if (components.settings.isAgreePrivacy) {
+            ImmersiveTracker.initTrack(application)
             if (components.settings.isFirstSplashScreenShown) {
                 return
             } else {
