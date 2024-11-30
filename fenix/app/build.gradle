@@ -91,7 +91,7 @@ android {
         // This should be the base URL used to call the AMO API.
         buildConfigField "String", "AMO_SERVER_URL", "\"https://services.addons.mozilla.org\""
 
-        def deepLinkSchemeValue = "fenix-dev"
+        def deepLinkSchemeValue = "immersivetranslate"
         buildConfigField "String", "DEEP_LINK_SCHEME", "\"$deepLinkSchemeValue\""
 
         buildConfigField "String", "localPluginVersion", "\"$localPluginVersion\""
@@ -159,7 +159,7 @@ android {
         nightly releaseTemplate >> {
             applicationIdSuffix ".browser.nightly"
             buildConfigField "boolean", "USE_RELEASE_VERSIONING", "true"
-            def deepLinkSchemeValue = "fenix-nightly"
+            def deepLinkSchemeValue = "immersivetranslate"
             buildConfigField "String", "DEEP_LINK_SCHEME", "\"$deepLinkSchemeValue\""
             manifestPlaceholders.putAll([
                     "deepLinkScheme": deepLinkSchemeValue
@@ -168,7 +168,7 @@ android {
         beta releaseTemplate >> {
             buildConfigField "boolean", "USE_RELEASE_VERSIONING", "true"
             applicationIdSuffix ".browser.beta"
-            def deepLinkSchemeValue = "fenix-beta"
+            def deepLinkSchemeValue = "immersivetranslate"
             buildConfigField "String", "DEEP_LINK_SCHEME", "\"$deepLinkSchemeValue\""
             manifestPlaceholders.putAll([
                     // This release type is meant to replace Firefox (Beta channel) and therefore needs to inherit
@@ -185,7 +185,7 @@ android {
         release releaseTemplate >> {
             buildConfigField "boolean", "USE_RELEASE_VERSIONING", "true"
             applicationIdSuffix ".browser"
-            def deepLinkSchemeValue = "fenix"
+            def deepLinkSchemeValue = "immersivetranslate"
             buildConfigField "String", "DEEP_LINK_SCHEME", "\"$deepLinkSchemeValue\""
             manifestPlaceholders.putAll([
                     // This release type is meant to replace Firefox (Release channel) and therefore needs to inherit
