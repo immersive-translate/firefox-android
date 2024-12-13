@@ -2454,4 +2454,20 @@
     <string name="quit_app_dialog_content">本产品需要同意相关协议后才能使用哦</string>
     <string name="quit_app_dialog_btn_quit">退出应用</string>
     <string name="quit_app_dialog_btn_known">我知道了</string>
+
+    <string name="onboarding_lan_title">将沉浸式翻译设置为默认浏览器</string>
+    <string name="onboarding_lan_subtitle">任何外文网页默认用沉浸式翻译浏览器打开并自动翻译；搜索结果自动翻译为母语。</string>
+    <string name="onboarding_lan_set_title">您的母语：</string>
+    <string name="onboarding_lan_set_default_browser">设置为默认浏览器</string>
+    <string name="onboarding_lan_skip">稍后设置</string>
+
+    <string name="onboarding_second_title">无障碍阅读外语内容：</string>
+    <string name="onboarding_second_content_web">网页</string>
+    <string name="onboarding_second_content_video">视频</string>
+    <string name="onboarding_second_content_doc">文档</string>
+    <string name="onboarding_second_subtitle">全部一键翻译，\n阅读再无障碍！🎉</string>
+    <string name="onboarding_second_known_btn">我知道了🫡</string>
+
+    <string name="onboarding_third_dest">消除语言障碍\n看见更大的世界</string>
+    <string name="onboarding_third_finish_btn">开启无语言障碍的世界！</string>
 </resources>

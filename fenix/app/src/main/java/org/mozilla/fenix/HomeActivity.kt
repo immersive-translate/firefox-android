@@ -133,7 +133,6 @@ import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.messaging.FenixNimbusMessagingController
 import org.mozilla.fenix.messaging.MessageNotificationWorker
 import org.mozilla.fenix.nimbus.FxNimbus
-import org.mozilla.fenix.onboarding.JunoOnboardingFragmentDirections
 import org.mozilla.fenix.onboarding.ReEngagementNotificationWorker
 import org.mozilla.fenix.onboarding.ensureMarketingChannelExists
 import org.mozilla.fenix.perf.MarkersActivityLifecycleCallbacks
@@ -302,13 +301,13 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         }
 
         if (settings().shouldShowJunoOnboarding(
-                // components.fenixOnboarding.userHasBeenOnboarded()
-                hasUserBeenOnboarded = !components.settings.isShownOnBoarding,
+                hasUserBeenOnboarded = components.fenixOnboarding.userHasBeenOnboarded(),
+                //hasUserBeenOnboarded = !components.settings.isShownOnBoarding,
                 isLauncherIntent = intent.toSafeIntent().isLauncherIntent,
             )
         ) {
             // Unless activity is recreated due to config change, navigate to onboarding
-            if (savedInstanceState == null) {
+            if (savedInstanceState == null && components.settings.isAgreePrivacy) {
                 navHost.navController.navigate(NavGraphDirections.actionGlobalJunoOnboarding())
             }
         } else {
@@ -512,17 +511,13 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                     delay(300)
                     splashScreenViewProvider?.remove()
                 }
-                components.settings.isShownOnBoarding = true
                 components.settings.isAgreePrivacy = true
                 components.settings.isFirstSplashScreenShown = true
                 isAgreePrivacy = true
-                // 回到主界面
-                navHost.navController.nav(
-                    id = R.id.junoOnboardingFragment,
-                    directions = JunoOnboardingFragmentDirections.actionHome(),
-                )
                 // adjust track init
                 ImmersiveTracker.initTrack(application)
+                // onbarding page
+                navHost.navController.navigate(NavGraphDirections.actionGlobalJunoOnboarding())
             },
             onDisagree = {
                 isAgreePrivacy = false

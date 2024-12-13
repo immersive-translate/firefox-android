@@ -12,37 +12,25 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
-import mozilla.components.service.nimbus.evalJexlSafe
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import mozilla.components.support.base.ext.areNotificationsEnabledSafe
-import org.intellij.lang.annotations.Language
 import org.mozilla.fenix.R
-import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
-import org.mozilla.fenix.ext.components
+import org.mozilla.fenix.databinding.FragmentOnboardingPagesBinding
 import org.mozilla.fenix.ext.hideToolbar
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.ext.requireComponents
-import org.mozilla.fenix.nimbus.FxNimbus
-import org.mozilla.fenix.onboarding.view.JunoOnboardingScreen
-import org.mozilla.fenix.onboarding.view.OnboardingPageUiData
-import org.mozilla.fenix.onboarding.view.sequencePosition
-import org.mozilla.fenix.onboarding.view.telemetrySequenceId
-import org.mozilla.fenix.onboarding.view.toPageUiData
-import org.mozilla.fenix.settings.SupportUtils
-import org.mozilla.fenix.theme.FirefoxTheme
+import org.mozilla.fenix.onboarding.imts.LanguagePageView
+import org.mozilla.fenix.onboarding.imts.SecondPageView
+import org.mozilla.fenix.onboarding.imts.ThirdPageView
+import org.mozilla.fenix.onboarding.imts.ViewPageAdapter
 import org.mozilla.gecko.search.SearchWidgetProvider
 
 /**
@@ -50,16 +38,14 @@ import org.mozilla.gecko.search.SearchWidgetProvider
  */
 class JunoOnboardingFragment : Fragment() {
 
-    /*private val pagesToDisplay by lazy {
-        pagesToDisplay(
-            canShowNotificationPage(requireContext()),
-            canShowAddWidgetCard(),
-        )
-    }*/
-    private lateinit var pagesToDisplay: List<OnboardingPageUiData>
+    //private lateinit var pagesToDisplay: List<OnboardingPageUiData>
+
+    private lateinit var binding: FragmentOnboardingPagesBinding
 
     private val telemetryRecorder by lazy { JunoOnboardingTelemetryRecorder() }
     private val pinAppWidgetReceiver = WidgetPinnedReceiver()
+
+    private lateinit var viewpagerAdapter: ViewPageAdapter
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +58,7 @@ class JunoOnboardingFragment : Fragment() {
             .registerReceiver(pinAppWidgetReceiver, filter)
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    /*@RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -83,6 +69,79 @@ class JunoOnboardingFragment : Fragment() {
                 ScreenContent()
             }
         }
+    }*/
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentOnboardingPagesBinding.inflate(inflater)
+        initView()
+        return binding.root
+    }
+
+    private fun initView() {
+        val context = requireContext()
+        val languagePageView = LanguagePageView(context)
+        val secondPageView = SecondPageView(context)
+        val thirdPageView = ThirdPageView(context)
+
+        languagePageView.setCallback(
+            object : LanguagePageView.Callback {
+                override fun onSelectLang() {
+                }
+
+                override fun onSetDefaultBrowser() {
+                    activity?.openSetDefaultBrowserOption(useCustomTab = true)
+                    binding.viewpager.setCurrentItem(1, true)
+                }
+
+                override fun onSkip() {
+                    binding.viewpager.setCurrentItem(1, true)
+                }
+            },
+        )
+
+        secondPageView.setCallback(
+            object : SecondPageView.Callback {
+                override fun onNextClick() {
+                    binding.viewpager.setCurrentItem(2, true)
+                }
+            },
+        )
+
+        thirdPageView.setCallback(
+            object : ThirdPageView.Callback {
+                override fun onFinish() {
+                    requireComponents.fenixOnboarding.finish()
+                    findNavController().nav(
+                        id = R.id.junoOnboardingFragment,
+                        directions = JunoOnboardingFragmentDirections.actionHome(),
+                    )
+                }
+            },
+        )
+
+        viewpagerAdapter = ViewPageAdapter(mutableListOf(
+            languagePageView, secondPageView, thirdPageView))
+        binding.viewpager.adapter = viewpagerAdapter
+        binding.viewpager.addOnPageChangeListener(
+            object : OnPageChangeListener {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int,
+                ) {
+
+                }
+                override fun onPageSelected(position: Int) {
+                    binding.pageIndicator.setIndicatorIndex(position)
+                }
+                override fun onPageScrollStateChanged(state: Int) {
+                }
+            },
+        )
     }
 
     override fun onResume() {
@@ -98,7 +157,7 @@ class JunoOnboardingFragment : Fragment() {
         LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(pinAppWidgetReceiver)
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    /*@RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @Composable
     @Suppress("LongMethod")
     private fun ScreenContent() {
@@ -193,7 +252,7 @@ class JunoOnboardingFragment : Fragment() {
                 )
             },
         )
-    }
+    }*/
 
     private fun showAddSearchWidgetDialog() {
         // Requesting to pin app widget is only available for Android 8.0 and above
@@ -228,22 +287,7 @@ class JunoOnboardingFragment : Fragment() {
 
     private fun isNotATablet() = !resources.getBoolean(R.bool.tablet)
 
-    /*private fun pagesToDisplay(
-        showNotificationPage: Boolean,
-        showAddWidgetPage: Boolean,
-    ): List<OnboardingPageUiData> {
-        val junoOnboardingFeature = FxNimbus.features.junoOnboarding.value()
-        val jexlConditions = junoOnboardingFeature.conditions
-        val jexlHelper = requireContext().components.analytics.messagingStorage.helper
-
-        return FxNimbus.features.junoOnboarding.value().cards.values.toPageUiData(
-            showNotificationPage,
-            showAddWidgetPage,
-            jexlConditions,
-        ) { condition -> jexlHelper.evalJexlSafe(condition) }
-    }*/
-
-    @Suppress("DEPRECATION")
+    /*@Suppress("DEPRECATION")
     @Composable
     private fun pagesToDisplay(): List<OnboardingPageUiData> {
         val local = requireContext().resources.configuration.locale
@@ -265,6 +309,6 @@ class JunoOnboardingFragment : Fragment() {
 
     fun isChinese(language: String) : Boolean {
         return language.endsWith("zh")
-    }
+    }*/
 
 }
