@@ -2914,4 +2914,20 @@
     <string name="quit_app_dialog_content">This product needs to agree to the relevant agreement before it can be used.</string>
     <string name="quit_app_dialog_btn_quit">Quit APP</string>
     <string name="quit_app_dialog_btn_known">I see</string>
+
+    <string name="onboarding_lan_title">Set Immersive Translate as your default browser</string>
+    <string name="onboarding_lan_subtitle">Any foreign language webpage is opened by default with the immersive translation browser and automatically translated; search results are automatically translated into the native language.</string>
+    <string name="onboarding_lan_set_title">Your native language:</string>
+    <string name="onboarding_lan_set_default_browser">Set as default browser</string>
+    <string name="onboarding_lan_skip">Set up later</string>
+
+    <string name="onboarding_second_title">Accessible reading of foreign language content:</string>
+    <string name="onboarding_second_content_web">Web page</string>
+    <string name="onboarding_second_content_video">Video</string>
+    <string name="onboarding_second_content_doc">Document</string>
+    <string name="onboarding_second_subtitle">All translated with one click, \nmaking reading hassle-free!🎉</string>
+    <string name="onboarding_second_known_btn">I see🫡</string>
+
+    <string name="onboarding_third_dest">Eliminate language barriers\nSee a bigger world</string>
+    <string name="onboarding_third_finish_btn">Open up a world without language barriers!</string>
 </resources>

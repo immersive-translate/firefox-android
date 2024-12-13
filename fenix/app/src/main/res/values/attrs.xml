@@ -123,4 +123,12 @@
         <attr format="string" name="preferenceKey"/>
         <attr format="boolean" name="preferenceKeyDefaultValue"/>
     </declare-styleable>
+
+    <declare-styleable name="PageIndicatorView">
+        <attr name="pageCount" format="integer"/>
+        <attr name="primaryColor" format="color"/>
+        <attr name="selectedColor" format="color"/>
+        <attr name="indicatorWidth" format="dimension"/>
+        <attr name="indicatorSpace" format="dimension"/>
+    </declare-styleable>
 </resources>

@@ -467,8 +467,8 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = false
     )
 
-    var isShownOnBoarding: Boolean by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_is_onboarding_shown),
+    var isShownWebOnBoarding: Boolean by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_is_web_onboarding_shown),
         default = false
     )
 

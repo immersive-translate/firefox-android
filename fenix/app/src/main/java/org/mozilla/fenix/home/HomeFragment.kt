@@ -546,7 +546,7 @@ class HomeFragment : Fragment() {
 
         FxNimbus.features.homescreen.recordExposure()
 
-        autoCheckImmersive()
+        handleImmersiveWebOnboarding()
 
         // DO NOT MOVE ANYTHING BELOW THIS addMarker CALL!
         requireComponents.core.engine.profiler?.addMarker(
@@ -924,33 +924,46 @@ class HomeFragment : Fragment() {
     /**
      * auto check immersive translate addon
      */
-    private fun autoCheckImmersive() {
+    private fun handleImmersiveWebOnboarding() {
         if (!IS_FIRST_LAUNCHER) {
             return
         }
         IS_FIRST_LAUNCHER = false
         // requireComponents.immersiveTranslateService.checkAndInstallOrUpdate()
-        ImmersiveTranslateFlow.collect { installed ->
-            if (!installed) {
-                return@collect
-            }
-            var welcomeUrl = SupportUtils.APP_WELCOME_URL + "?app_v=" + requireContext().appVersionName
-            requireComponents.immersiveTranslateService.getInstalledTSAddon()?.let {
-                welcomeUrl += "&v=${it.version}"
-            }
-            ImmersiveTracker.getAdjustAttribution()?.let {
-                welcomeUrl += "&utm_campaign=${it.campaign}"
-                welcomeUrl += "&utm_source=${it.adgroup}"
-                welcomeUrl += "&utm_medium=${it.creative}"
-            }
-            val homeActivity = activity as HomeActivity
-            // homeActivity.openToBrowser(from = BrowserDirection.FromHome)
-            homeActivity.openToBrowserAndLoad(
-                searchTermOrURL = welcomeUrl,
-                newTab = true,
-                from = BrowserDirection.FromHome,
-            )
+        if (requireComponents.settings.isShownWebOnBoarding) {
+            return
         }
+        val addon = requireComponents.immersiveTranslateService.getInstalledTSAddon()
+        if (addon != null) {
+            openOnboardingWebpage()
+        } else {
+            ImmersiveTranslateFlow.collect { installed ->
+                if (!installed) {
+                    return@collect
+                }
+                openOnboardingWebpage()
+            }
+        }
+    }
+
+    private fun openOnboardingWebpage() {
+        requireComponents.settings.isShownWebOnBoarding = true
+        var welcomeUrl = SupportUtils.APP_WELCOME_URL + "?app_v=" + requireContext().appVersionName
+        requireComponents.immersiveTranslateService.getInstalledTSAddon()?.let {
+            welcomeUrl += "&v=${it.version}"
+        }
+        ImmersiveTracker.getAdjustAttribution()?.let {
+            welcomeUrl += "&utm_campaign=${it.campaign}"
+            welcomeUrl += "&utm_source=${it.adgroup}"
+            welcomeUrl += "&utm_medium=${it.creative}"
+        }
+        val homeActivity = activity as HomeActivity
+        // homeActivity.openToBrowser(from = BrowserDirection.FromHome)
+        homeActivity.openToBrowserAndLoad(
+            searchTermOrURL = welcomeUrl,
+            newTab = true,
+            from = BrowserDirection.FromHome,
+        )
     }
 
     /**
