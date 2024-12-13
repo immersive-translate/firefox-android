@@ -313,13 +313,13 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         }
 
         if (settings().shouldShowOnboarding(
-                //hasUserBeenOnboarded = components.fenixOnboarding.userHasBeenOnboarded(),
-                hasUserBeenOnboarded = !components.settings.isShownOnBoarding,
+                hasUserBeenOnboarded = components.fenixOnboarding.userHasBeenOnboarded(),
+                //hasUserBeenOnboarded = !components.settings.isShownOnBoarding,
                 isLauncherIntent = intent.toSafeIntent().isLauncherIntent,
             )
         ) {
             // Unless activity is recreated due to config change, navigate to onboarding
-            if (savedInstanceState == null) {
+            if (savedInstanceState == null && components.settings.isAgreePrivacy) {
                 navHost.navController.navigate(NavGraphDirections.actionGlobalOnboarding())
             }
         } else {
@@ -497,7 +497,6 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                     delay(300)
                     splashScreenViewProvider?.remove()
                 }
-                components.settings.isShownOnBoarding = true
                 components.settings.isAgreePrivacy = true
                 components.settings.isFirstSplashScreenShown = true
                 isAgreePrivacy = true
@@ -506,7 +505,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                     id = R.id.onboardingFragment,
                     directions = JunoOnboardingFragmentDirections.actionHome(),
                 )*/
-                navigateToHome(navHost.navController)
+                // onboarding page
+                navHost.navController.navigate(NavGraphDirections.actionGlobalOnboarding())
                 // adjust track init
                 ImmersiveTracker.initTrack(application)
             },
