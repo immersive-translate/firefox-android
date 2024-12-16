@@ -72,7 +72,7 @@ class SearchUseCases(
             flags: EngineSession.LoadUrlFlags = EngineSession.LoadUrlFlags.none(),
             additionalHeaders: Map<String, String>? = null,
         ) {
-            val searchUrl = searchEngine?.let {
+            var searchUrl = searchEngine?.let {
                 searchEngine.buildSearchUrl(searchTerms)
             } ?: store.state.search.selectedOrDefaultSearchEngine?.buildSearchUrl(searchTerms)
 
@@ -81,10 +81,20 @@ class SearchUseCases(
                 return
             }
 
+            additionalHeaders?.let {
+                additionalHeaders["lang"]?.let { lang ->
+                    if (searchUrl!!.contains("?")) {
+                        searchUrl = "$searchUrl&imt_set_targetLanguage=${lang}"
+                    } else {
+                        searchUrl = "$searchUrl?imt_set_targetLanguage=${lang}"
+                    }
+                }
+            }
+
             val id = if (sessionId == null) {
                 // If no `sessionId` was passed in then create a new tab
                 tabsUseCases.addTab(
-                    url = searchUrl,
+                    url = searchUrl!!,
                     flags = flags,
                     isSearch = true,
                     searchEngineName = searchEngine?.name,
@@ -98,7 +108,7 @@ class SearchUseCases(
                     store.dispatch(
                         EngineAction.LoadUrlAction(
                             tabId = existingTab.id,
-                            url = searchUrl,
+                            url = searchUrl!!,
                             flags = flags,
                             additionalHeaders = additionalHeaders,
                         ),
@@ -107,7 +117,7 @@ class SearchUseCases(
                 } else {
                     // If the tab with the provided id was not found then create a new tab
                     tabsUseCases.addTab(
-                        url = searchUrl,
+                        url = searchUrl!!,
                         isSearch = true,
                         searchEngineName = searchEngine?.name,
                         flags = flags,
@@ -161,7 +171,7 @@ class SearchUseCases(
             flags: EngineSession.LoadUrlFlags = EngineSession.LoadUrlFlags.none(),
             additionalHeaders: Map<String, String>? = null,
         ) {
-            val searchUrl = searchEngine?.let {
+            var searchUrl = searchEngine?.let {
                 searchEngine.buildSearchUrl(searchTerms)
             } ?: store.state.search.selectedOrDefaultSearchEngine?.buildSearchUrl(searchTerms)
 
@@ -170,8 +180,18 @@ class SearchUseCases(
                 return
             }
 
+            additionalHeaders?.let {
+                additionalHeaders["lang"]?.let { lang ->
+                    if (searchUrl!!.contains("?")) {
+                        searchUrl = "$searchUrl&imt_set_targetLanguage=${lang}"
+                    } else {
+                        searchUrl = "$searchUrl?imt_set_targetLanguage=${lang}"
+                    }
+                }
+            }
+
             val id = tabsUseCases.addTab(
-                url = searchUrl,
+                url = searchUrl!!,
                 parentId = parentSessionId,
                 flags = flags,
                 source = source,

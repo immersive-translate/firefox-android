@@ -24,6 +24,7 @@ import mozilla.components.concept.engine.CancellableOperation
 import mozilla.components.concept.engine.webextension.DisabledFlags
 import mozilla.components.concept.engine.webextension.EnableSource
 import mozilla.components.concept.engine.webextension.InstallationMethod
+import mozilla.components.concept.engine.webextension.MessageHandler
 import mozilla.components.concept.engine.webextension.WebExtension
 import mozilla.components.concept.engine.webextension.WebExtensionRuntime
 import mozilla.components.concept.engine.webextension.isBlockListed
@@ -434,6 +435,21 @@ class AddonManager(
         }
 
         runtime.updateWebExtension(extension, onSuccess, onError)
+    }
+
+    /**
+     * 注册插件处理器
+     */
+    fun registerAddonMessageHandler(
+        id: String,
+        handlerName: String,
+        messageHandler: MessageHandler,
+    ) {
+        val extension = installedExtensions[id]
+        if (extension == null || extension.isUnsupported()) {
+            return
+        }
+        extension.registerBackgroundMessageHandler(handlerName, messageHandler)
     }
 
     private fun addPendingAddonAction() = CompletableDeferred<Unit>().also {

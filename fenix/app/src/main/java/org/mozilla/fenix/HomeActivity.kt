@@ -1224,21 +1224,38 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         // In situations where we want to perform a search but have no search engine (e.g. the user
         // has removed all of them, or we couldn't load any) we will pass searchTermOrURL to Gecko
         // and let it try to load whatever was entered.
+
+        val defaultLanguage = components.settings.defaultTsLanguage
+
         if ((!forceSearch && searchTermOrURL.isUrl()) || engine == null) {
+            var inputUrl = searchTermOrURL.toNormalizedUrl()
+            if (defaultLanguage.isNotEmpty()) {
+                if (inputUrl.contains("?")) {
+                    inputUrl = "$inputUrl&imt_set_targetLanguage=${defaultLanguage}"
+                } else {
+                    inputUrl = "$inputUrl?imt_set_targetLanguage=${defaultLanguage}"
+                }
+            }
             if (newTab) {
                 components.useCases.tabsUseCases.addTab(
-                    url = searchTermOrURL.toNormalizedUrl(),
+                    url = inputUrl,
                     flags = flags,
                     private = private,
                     historyMetadata = historyMetadata,
                 )
             } else {
                 components.useCases.sessionUseCases.loadUrl(
-                    url = searchTermOrURL.toNormalizedUrl(),
+                    url = inputUrl,
                     flags = flags,
                 )
             }
         } else {
+            val headers = if (additionalHeaders != null) additionalHeaders as HashMap else HashMap()
+
+            if (defaultLanguage.isNotEmpty()) {
+                headers["lang"] = defaultLanguage
+            }
+
             if (newTab) {
                 val searchUseCase = if (mode.isPrivate) {
                     components.useCases.searchUseCases.newPrivateTabSearch
@@ -1251,14 +1268,14 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                     selected = true,
                     searchEngine = engine,
                     flags = flags,
-                    additionalHeaders = additionalHeaders,
+                    additionalHeaders = headers,
                 )
             } else {
                 components.useCases.searchUseCases.defaultSearch.invoke(
                     searchTerms = searchTermOrURL,
                     searchEngine = engine,
                     flags = flags,
-                    additionalHeaders = additionalHeaders,
+                    additionalHeaders = headers,
                 )
             }
         }
