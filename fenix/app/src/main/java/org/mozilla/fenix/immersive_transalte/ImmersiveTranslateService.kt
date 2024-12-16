@@ -9,9 +9,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import mozilla.components.concept.engine.EngineSession
+import mozilla.components.concept.engine.webextension.MessageHandler
+import mozilla.components.concept.engine.webextension.Port
 import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.addons.AddonManager
 import mozilla.components.feature.addons.update.AddonUpdater
+import org.json.JSONObject
 
 
 /**
@@ -99,5 +103,30 @@ class ImmersiveTranslateService(
 
     fun getInstalledTSAddon(): Addon? {
         return installedTsAddon
+    }
+
+    fun registerMessageHandler(id: String) {
+        addonManager.registerAddonMessageHandler(id, "imt_connector",
+            object : MessageHandler {
+                override fun onPortConnected(port: Port) {
+                    val message = JSONObject()
+                    message.put("type", "sayHello")
+                    val data = JSONObject()
+                    message.put("data", data)
+                    port.postMessage(message)
+                }
+
+                override fun onMessage(message: Any, source: EngineSession?): Any? {
+                    return super.onMessage(message, source)
+                }
+
+                override fun onPortMessage(message: Any, port: Port) {
+                    super.onPortMessage(message, port)
+                }
+
+                override fun onPortDisconnected(port: Port) {
+                    super.onPortDisconnected(port)
+                }
+            })
     }
 }

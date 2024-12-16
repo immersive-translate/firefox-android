@@ -449,7 +449,7 @@ class HomeFragment : Fragment() {
 
         FxNimbus.features.homescreen.recordExposure()
 
-        handleImmersiveWebOnboarding()
+        // handleImmersiveWebOnboarding()
 
         // DO NOT MOVE ANYTHING BELOW THIS addMarker CALL!
         requireComponents.core.engine.profiler?.addMarker(
