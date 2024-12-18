@@ -22,6 +22,7 @@ import org.mozilla.fenix.ext.shouldShowRecentSyncedTabs
 import org.mozilla.fenix.ext.shouldShowRecentTabs
 import org.mozilla.fenix.home.recentbookmarks.RecentBookmark
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem
+import org.mozilla.fenix.home.toplinks.TopLink
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.onboarding.HomeCFRPresenter
 import org.mozilla.fenix.utils.Settings
@@ -33,6 +34,7 @@ import org.mozilla.fenix.utils.Settings
 internal fun normalModeAdapterItems(
     settings: Settings,
     topSites: List<TopSite>,
+    topLinks: List<TopLink>,
     collections: List<TabCollection>,
     expandedCollections: Set<Long>,
     recentBookmarks: List<RecentBookmark>,
@@ -54,12 +56,18 @@ internal fun normalModeAdapterItems(
         items.add(AdapterItem.NimbusMessageCard(it))
     }
 
+    // top links
+    topLinks.size
+    items.add(AdapterItem.TopLinks)
+
+    // top sites
     if (settings.showTopSitesFeature && topSites.isNotEmpty()) {
-        if (settings.enableComposeTopSites) {
+        /*if (settings.enableComposeTopSites) {
             items.add(AdapterItem.TopSites)
         } else {
             items.add(AdapterItem.TopSitePager(topSites))
-        }
+        }*/
+        topSites.size
     }
 
     if (showRecentTab) {
@@ -134,6 +142,7 @@ private fun AppState.toAdapterList(settings: Settings): List<AdapterItem> = when
     BrowsingMode.Normal -> normalModeAdapterItems(
         settings,
         topSites,
+        topLinks,
         collections,
         expandedCollections,
         recentBookmarks,

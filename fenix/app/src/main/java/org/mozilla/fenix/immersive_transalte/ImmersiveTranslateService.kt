@@ -58,6 +58,7 @@ class ImmersiveTranslateService(
         addonManager.installAddon(
             addon,
             onSuccess = {
+                // callRegisterMessageHandler(addon.id)
                 fetchInstalledTSAddon()
                 ImmersiveTranslateFlow.emit(true)
             },
@@ -71,6 +72,7 @@ class ImmersiveTranslateService(
      * 更新插件
      */
     private fun update(addon: Addon) {
+        // callRegisterMessageHandler(addon.id)
         if (localVersion == addon.version) {
             addonManager.installAddon(
                 addon,
@@ -96,7 +98,6 @@ class ImmersiveTranslateService(
      */
     private fun fetchInstalledTSAddon() {
         CoroutineScope(Dispatchers.IO).launch {
-            delay(500)
             installedTsAddon = immersiveTranslateAddonGetter.getInstalledImmersiveAddon()
         }
     }
@@ -105,7 +106,13 @@ class ImmersiveTranslateService(
         return installedTsAddon
     }
 
-    fun registerMessageHandler(id: String) {
+    private fun callRegisterMessageHandler(id: String) {
+        MainScope().launch(Dispatchers.Main) {
+            registerMessageHandler(id)
+        }
+    }
+
+    private fun registerMessageHandler(id: String) {
         addonManager.registerAddonMessageHandler(id, "imt_connector",
             object : MessageHandler {
                 override fun onPortConnected(port: Port) {

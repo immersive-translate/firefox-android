@@ -35,12 +35,18 @@ import org.mozilla.fenix.home.sessioncontrol.viewholders.CustomizeHomeButtonView
 import org.mozilla.fenix.home.sessioncontrol.viewholders.NoCollectionsMessageViewHolder
 import org.mozilla.fenix.home.sessioncontrol.viewholders.PrivateBrowsingDescriptionViewHolder
 import org.mozilla.fenix.home.sessioncontrol.viewholders.onboarding.MessageCardViewHolder
+import org.mozilla.fenix.home.toplinks.TopLinksViewHolder
 import org.mozilla.fenix.home.topsites.TopSitePagerViewHolder
 import org.mozilla.fenix.home.topsites.TopSitesViewHolder
 import mozilla.components.feature.tab.collections.Tab as ComponentTab
 
 sealed class AdapterItem(@LayoutRes val viewType: Int) {
     object TopPlaceholderItem : AdapterItem(TopPlaceholderViewHolder.LAYOUT_ID)
+
+    /**
+     * Top links
+     */
+    object TopLinks : AdapterItem(TopLinksViewHolder.LAYOUT_ID)
 
     /**
      * Top sites.
@@ -281,6 +287,11 @@ class SessionControlAdapter(
                 interactor = interactor,
             )
             TopSitesViewHolder.LAYOUT_ID -> return TopSitesViewHolder(
+                composeView = ComposeView(parent.context),
+                viewLifecycleOwner = viewLifecycleOwner,
+                interactor = interactor,
+            )
+            TopLinksViewHolder.LAYOUT_ID -> return TopLinksViewHolder(
                 composeView = ComposeView(parent.context),
                 viewLifecycleOwner = viewLifecycleOwner,
                 interactor = interactor,

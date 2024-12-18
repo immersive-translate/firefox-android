@@ -2470,4 +2470,11 @@
 
     <string name="onboarding_third_dest">消除语言障碍\n看见更大的世界</string>
     <string name="onboarding_third_finish_btn">开启无语言障碍的世界！</string>
+
+    <string name="home_top_link_ts_web">网页翻译</string>
+    <string name="home_top_link_ts_video">视频翻译</string>
+    <string name="home_top_link_ts_doc">文档翻译</string>
+    <string name="home_top_link_ts_comics">漫画翻译</string>
+    <string name="home_top_link_ts_more">更多工具</string>
+    <string name="home_top_link_ts_more_content">敬请\n期待</string>
 </resources>
