@@ -123,6 +123,7 @@ import org.mozilla.fenix.home.intent.StartSearchIntentProcessor
 import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.PrivacyRemindDialog
 import org.mozilla.fenix.immersive_transalte.QuitAppDialog
+import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
 import org.mozilla.fenix.immersive_transalte.WebDialog
 import org.mozilla.fenix.library.bookmarks.BookmarkFragmentDirections
 import org.mozilla.fenix.library.bookmarks.DesktopFolders
@@ -1108,13 +1109,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
         if ((!forceSearch && searchTermOrURL.isUrl()) || engine == null) {
             var inputUrl = searchTermOrURL.toNormalizedUrl()
-            if (defaultLanguage.isNotEmpty()) {
-                if (inputUrl.contains("?")) {
-                    inputUrl = "$inputUrl&imt_set_targetLanguage=${defaultLanguage}"
-                } else {
-                    inputUrl = "$inputUrl?imt_set_targetLanguage=${defaultLanguage}"
-                }
-            }
+            inputUrl = UrlLanguageFormater.handleUrl(components, inputUrl)
             val tabId = if (newTab) {
                 components.useCases.tabsUseCases.addTab(
                     url = inputUrl,

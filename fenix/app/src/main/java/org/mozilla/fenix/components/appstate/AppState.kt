@@ -22,6 +22,7 @@ import org.mozilla.fenix.home.recentbookmarks.RecentBookmark
 import org.mozilla.fenix.home.recentsyncedtabs.RecentSyncedTabState
 import org.mozilla.fenix.home.recenttabs.RecentTab
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem
+import org.mozilla.fenix.home.toplinks.TopLink
 import org.mozilla.fenix.library.history.PendingDeletionHistory
 import org.mozilla.fenix.messaging.MessagingState
 import org.mozilla.fenix.search.SearchDialogFragment
@@ -72,6 +73,7 @@ data class AppState(
     val mode: BrowsingMode = BrowsingMode.Normal,
     val selectedTabId: String? = null,
     val topSites: List<TopSite> = emptyList(),
+    val topLinks: List<TopLink> = emptyList(),
     val showCollectionPlaceholder: Boolean = false,
     val recentTabs: List<RecentTab> = emptyList(),
     val recentSyncedTabState: RecentSyncedTabState = RecentSyncedTabState.None,
