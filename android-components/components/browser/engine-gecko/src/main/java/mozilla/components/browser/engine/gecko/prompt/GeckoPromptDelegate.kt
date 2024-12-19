@@ -46,6 +46,7 @@ import org.mozilla.geckoview.GeckoSession.PromptDelegate.DateTimePrompt.Type.WEE
 import org.mozilla.geckoview.GeckoSession.PromptDelegate.IdentityCredential.AccountSelectorPrompt
 import org.mozilla.geckoview.GeckoSession.PromptDelegate.IdentityCredential.PrivacyPolicyPrompt
 import org.mozilla.geckoview.GeckoSession.PromptDelegate.IdentityCredential.ProviderSelectorPrompt
+import org.mozilla.geckoview.GeckoSession.PromptDelegate.PromptInstanceDelegate
 import org.mozilla.geckoview.GeckoSession.PromptDelegate.PromptResponse
 import java.io.File
 import java.io.FileOutputStream
@@ -413,15 +414,33 @@ internal class GeckoPromptDelegate(private val geckoEngineSession: GeckoEngineSe
         return geckoResult
     }
 
+    interface OnAlertInterceptor {
+        fun onIntercept(session: GeckoSession, alertMessage : String): Boolean
+    }
+
+    private var onAlertInterceptor: OnAlertInterceptor? = null
+
+    fun setOnAlertInterceptor(onAlertInterceptor: OnAlertInterceptor) {
+        this.onAlertInterceptor = onAlertInterceptor;
+    }
+
     override fun onAlertPrompt(
         session: GeckoSession,
         prompt: PromptDelegate.AlertPrompt,
     ): GeckoResult<PromptResponse> {
+
         val geckoResult = GeckoResult<PromptResponse>()
+        val message = prompt.message ?: ""
+
+        if (onAlertInterceptor != null &&
+            onAlertInterceptor!!.onIntercept(session, message)) {
+            prompt.dismissSafely(geckoResult)
+            return geckoResult
+        }
+
         val onDismiss: () -> Unit = { prompt.dismissSafely(geckoResult) }
         val onConfirm: (Boolean) -> Unit = { _ -> onDismiss() }
         val title = prompt.title ?: ""
-        val message = prompt.message ?: ""
 
         geckoEngineSession.notifyObservers {
             onPromptRequest(

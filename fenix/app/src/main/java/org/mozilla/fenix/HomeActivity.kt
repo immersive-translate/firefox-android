@@ -121,6 +121,7 @@ import org.mozilla.fenix.home.intent.ReEngagementIntentProcessor
 import org.mozilla.fenix.home.intent.SpeechProcessingIntentProcessor
 import org.mozilla.fenix.home.intent.StartSearchIntentProcessor
 import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
+import org.mozilla.fenix.immersive_transalte.JsBridge
 import org.mozilla.fenix.immersive_transalte.PrivacyRemindDialog
 import org.mozilla.fenix.immersive_transalte.QuitAppDialog
 import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
@@ -428,6 +429,14 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         StartupTimeline.onActivityCreateEndHome(this) // DO NOT MOVE ANYTHING BELOW HERE.
 
         autoCheckImmersive()
+        initJavaScriptBridge()
+    }
+
+    /**
+     * init javascript bridge
+     */
+    private fun initJavaScriptBridge() {
+        JsBridge.init(this)
     }
 
     /**

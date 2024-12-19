@@ -54,7 +54,7 @@ private const val TOP_SITES_PER_ROW = 4
 private const val TOP_SITES_ITEM_SIZE = 95
 private const val TOP_SITES_ROW_WIDTH = TOP_SITES_PER_ROW * TOP_SITES_ITEM_SIZE
 private const val TOP_SITES_FAVICON_CARD_SIZE = 60
-private const val TOP_SITES_FAVICON_SIZE = 60
+private const val TOP_SITES_FAVICON_SIZE = 50
 
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
@@ -179,7 +179,7 @@ private fun TopSiteItem(
                             testTagsAsResourceId = true
                         }
                         .testTag(TopSitesTestTag.topSiteTitle)
-                        .padding(start = 2.dp, end = 2.dp),
+                        .padding(start = 2.dp, end = 2.dp, top = 2.dp),
                     text = stringResource(topLink.title),
                     color = if (!topLink.isMore) FirefoxTheme.colors.textPrimary
                     else Color(0xFF999999),
@@ -198,10 +198,11 @@ private fun TopSiteItem(
 private fun TopSiteFaviconCard(
     topLink: TopLink,
 ) {
+
     Card(
-        modifier = Modifier.size(TOP_SITES_FAVICON_CARD_SIZE.dp),
-        shape = RoundedCornerShape((TOP_SITES_FAVICON_CARD_SIZE / 2).dp),
-        elevation = 6.dp,
+        modifier = Modifier.size(TOP_SITES_FAVICON_SIZE.dp),
+        shape = RoundedCornerShape((TOP_SITES_FAVICON_SIZE / 2).dp),
+        elevation = 1.dp,
     ) {
         Box(contentAlignment = Alignment.Center) {
             Surface(
@@ -217,6 +218,7 @@ private fun TopSiteFaviconCard(
             }
         }
     }
+
 }
 
 @Suppress("LongParameterList", "LongMethod")
@@ -226,9 +228,9 @@ private fun TopSiteMoreCard(
     topLink: TopLink,
 ) {
     Card(
-        modifier = Modifier.size(TOP_SITES_FAVICON_CARD_SIZE .dp),
-        shape = RoundedCornerShape((TOP_SITES_FAVICON_CARD_SIZE / 2).dp),
-        elevation = 6.dp,
+        modifier = Modifier.size(TOP_SITES_FAVICON_SIZE .dp),
+        shape = RoundedCornerShape((TOP_SITES_FAVICON_SIZE / 2).dp),
+        elevation = 1.dp,
         backgroundColor = Color(0xFFF4F4F4),
     ) {
         Box(contentAlignment = Alignment.Center) {
@@ -238,7 +240,7 @@ private fun TopSiteMoreCard(
                     .testTag(TopSitesTestTag.topSiteTitle),
                 textAlign = TextAlign.Center,
                 text = stringResource(topLink.content),
-                fontSize = 13.sp,
+                fontSize = 12.sp,
                 color = Color(0xFFCCCCCC),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2,
