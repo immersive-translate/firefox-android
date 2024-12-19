@@ -71,6 +71,8 @@ dependencies {
     implementation ComponentsDependencies.androidx_data_store_preferences
     implementation ComponentsDependencies.androidx_lifecycle_livedata
 
+    api 'com.google.code.gson:gson:2.10.1'
+
     testImplementation ComponentsDependencies.androidx_test_core
     testImplementation ComponentsDependencies.androidx_test_junit
     testImplementation ComponentsDependencies.testing_robolectric

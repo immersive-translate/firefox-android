@@ -143,4 +143,6 @@
     boolean isLimitAdTrackingEnabled();
 }
 -keep public class com.android.installreferrer.**{ *; }
+-keep class mozilla.components.jsbridge.** { *; }
+
 
