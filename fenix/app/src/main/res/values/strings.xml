@@ -2307,7 +2307,7 @@
     <string name="quit_app_dialog_btn_known">I see</string>
 
     <string name="onboarding_lan_title">Set Immersive Translate as your default browser</string>
-    <string name="onboarding_lan_subtitle">Any foreign language webpage is opened by default with the immersive translation browser and automatically translated; search results are automatically translated into the native language.</string>
+    <string name="onboarding_lan_subtitle">Any foreign language webpage is opened by default with the immersive translation browser and automatically translated; \nSearch results are automatically translated into the native language.</string>
     <string name="onboarding_lan_set_title">Your native language:</string>
     <string name="onboarding_lan_set_default_browser">Set as default browser</string>
     <string name="onboarding_lan_skip">Set up later</string>

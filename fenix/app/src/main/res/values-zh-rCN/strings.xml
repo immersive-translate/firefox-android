@@ -2456,10 +2456,10 @@
     <string name="quit_app_dialog_btn_known">我知道了</string>
 
     <string name="onboarding_lan_title">将沉浸式翻译设置为默认浏览器</string>
-    <string name="onboarding_lan_subtitle">任何外文网页默认用沉浸式翻译浏览器打开并自动翻译；搜索结果自动翻译为母语。</string>
+    <string name="onboarding_lan_subtitle">任何外文网页默认用沉浸式翻译浏览器打开并自动翻译；\n搜索结果自动翻译为母语。</string>
     <string name="onboarding_lan_set_title">您的母语：</string>
-    <string name="onboarding_lan_set_default_browser">设置为默认浏览器</string>
-    <string name="onboarding_lan_skip">稍后设置</string>
+    <string name="onboarding_lan_set_default_browser">设为默认浏览器</string>
+    <string name="onboarding_lan_skip">稍后再设置</string>
 
     <string name="onboarding_second_title">无障碍阅读外语内容：</string>
     <string name="onboarding_second_content_web">网页</string>

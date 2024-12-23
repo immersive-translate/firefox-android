@@ -42,8 +42,8 @@ class PageIndicatorView : LinearLayout {
 
         val ta = context.theme.obtainStyledAttributes(attrs, R.styleable.PageIndicatorView, 0, 0)
         pageCount = ta.getInt(R.styleable.PageIndicatorView_pageCount, 0)
-        primaryColor = ta.getColor(R.styleable.PageIndicatorView_primaryColor, 0)
-        selectedColor = ta.getColor(R.styleable.PageIndicatorView_selectedColor, 0)
+        primaryColor = ta.getResourceId(R.styleable.PageIndicatorView_primaryColor, 0)
+        selectedColor = ta.getResourceId(R.styleable.PageIndicatorView_selectedColor, 0)
         indicatorWidth = ta.getDimensionPixelSize(R.styleable.PageIndicatorView_indicatorWidth, 0)
         indicatorSpace = ta.getDimensionPixelSize(R.styleable.PageIndicatorView_indicatorSpace, 0)
         ta.recycle()
@@ -56,15 +56,7 @@ class PageIndicatorView : LinearLayout {
             addView(childView, layoutParams)
             childViews.add(childView)
 
-            childView.setBackgroundColor(if (i <= indicatorIndex) selectedColor else primaryColor)
-            /*childView.outlineProvider = object : ViewOutlineProvider() {
-                override fun getOutline(view: View, outline: Outline) {
-                    outline.setRoundRect(
-                        view.left, view.top, view.right, view.bottom, view.height / 2F,
-                    )
-                }
-            }
-            childView.clipToOutline = true*/
+            childView.setBackgroundResource(if (i <= indicatorIndex) selectedColor else primaryColor)
         }
         invalidate()
     }
@@ -79,7 +71,7 @@ class PageIndicatorView : LinearLayout {
 
         indicatorIndex = index
         for (i in 0 until childViews.size) {
-            childViews[i].setBackgroundColor(
+            childViews[i].setBackgroundResource(
                 if (i <= indicatorIndex) selectedColor else primaryColor
             )
         }

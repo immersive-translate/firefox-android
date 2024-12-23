@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/onboarding_second_title"
         android:textColor="#FF111111"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,8 +39,8 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="76dp"
-                android:layout_height="76dp"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@mipmap/img_onboarding_second_page_web" />
 
@@ -64,8 +64,8 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="76dp"
-                android:layout_height="76dp"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@mipmap/img_onboarding_second_page_video" />
 
@@ -89,8 +89,8 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="76dp"
-                android:layout_height="76dp"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@mipmap/img_onboarding_second_page_doc" />
 
@@ -114,9 +114,10 @@
         android:layout_marginTop="56dp"
         android:gravity="center"
         android:text="@string/onboarding_second_subtitle"
+        android:lineSpacingMultiplier="1.2"
         android:textAlignment="center"
         android:textColor="#FF111111"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

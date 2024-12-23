@@ -15,7 +15,7 @@ object TopLinkProvider {
                 id = index++,
                 iconId = R.mipmap.img_onboarding_second_page_web,
                 title = R.string.home_top_link_ts_web,
-                url = "https://test-browser.immersivetranslate.com/web",
+                url = "https://browser.immersivetranslate.com/web",
             ),
         )
         add(
@@ -23,7 +23,7 @@ object TopLinkProvider {
                 id = index++,
                 iconId = R.mipmap.img_onboarding_second_page_video,
                 title = R.string.home_top_link_ts_video,
-                url = "https://test-browser.immersivetranslate.com/video",
+                url = "https://browser.immersivetranslate.com/video",
             ),
         )
         add(
@@ -37,15 +37,15 @@ object TopLinkProvider {
         )
         add(
             TopLink(
-                id = index++,
+                id = index,
                 iconId = R.mipmap.img_ts_comics,
                 title = R.string.home_top_link_ts_comics,
-                url = "https://test-browser.immersivetranslate.com/manga",
+                url = "https://browser.immersivetranslate.com/manga",
             ),
         )
 
         /*more*/
-        add(
+        /*add(
             TopLink(
                 id = index,
                 iconId = 0,
@@ -53,7 +53,7 @@ object TopLinkProvider {
                 content = R.string.home_top_link_ts_more_content,
                 isMore = true,
             ),
-        )
+        )*/
 
     }
 }
