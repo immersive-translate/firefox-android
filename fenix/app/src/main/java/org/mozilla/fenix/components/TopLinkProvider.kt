@@ -15,7 +15,7 @@ object TopLinkProvider {
                 id = index++,
                 iconId = R.mipmap.img_onboarding_second_page_web,
                 title = R.string.home_top_link_ts_web,
-                url = "http://www.baidu.com?word=1",
+                url = "https://browser.immersivetranslate.com/web",
             ),
         )
         add(
@@ -23,7 +23,7 @@ object TopLinkProvider {
                 id = index++,
                 iconId = R.mipmap.img_onboarding_second_page_video,
                 title = R.string.home_top_link_ts_video,
-                url = "http://www.baidu.com?word=1",
+                url = "https://browser.immersivetranslate.com/video",
             ),
         )
         add(
@@ -31,20 +31,21 @@ object TopLinkProvider {
                 id = index++,
                 iconId = R.mipmap.img_onboarding_second_page_doc,
                 title = R.string.home_top_link_ts_doc,
-                url = "http://www.baidu.com?word=1",
+                //url = "https://test-browser.immersivetranslate.com/novel",
+                url = "https://app.immersivetranslate.com/"
             ),
         )
         add(
             TopLink(
-                id = index++,
+                id = index,
                 iconId = R.mipmap.img_ts_comics,
                 title = R.string.home_top_link_ts_comics,
-                url = "http://www.baidu.com?word=1",
+                url = "https://browser.immersivetranslate.com/manga",
             ),
         )
 
         /*more*/
-        add(
+        /*add(
             TopLink(
                 id = index,
                 iconId = 0,
@@ -52,7 +53,7 @@ object TopLinkProvider {
                 content = R.string.home_top_link_ts_more_content,
                 isMore = true,
             ),
-        )
+        )*/
 
     }
 }

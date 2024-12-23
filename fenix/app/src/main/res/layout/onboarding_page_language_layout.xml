@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/onboarding_lan_title"
         android:textColor="#FF111111"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/onboarding_lan_subtitle"
         android:textColor="#FF222222"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -38,12 +38,12 @@
         android:layout_marginTop="40dp"
         android:text="@string/onboarding_lan_set_title"
         android:textColor="#FF666666"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/ll_lang"
         android:layout_width="match_parent"
         android:layout_height="54dp"
@@ -57,25 +57,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_set_lan_title">
 
-        <TextView
-            android:id="@+id/tv_select_lang"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+        <EditText
+            android:id="@+id/et_select_lang"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:ellipsize="end"
             android:maxLines="1"
-            android:paddingEnd="8dp"
             android:singleLine="true"
             android:textColor="#FF222222"
-            android:textSize="16sp"
-            tools:ignore="RtlSymmetry" />
+            android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/img_arr_down" />
+            android:id="@+id/iv_lang"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@mipmap/img_arr_down"
+            android:layout_gravity="end|center_vertical"/>
 
-    </LinearLayout>
+    </FrameLayout>
+
+    <org.mozilla.fenix.onboarding.imts.LanguageSelectView
+        android:id="@+id/languageSelectorView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_set_default_browser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_lang" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_set_default_browser"
@@ -92,7 +103,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeWidth="0dp" />
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_skip"

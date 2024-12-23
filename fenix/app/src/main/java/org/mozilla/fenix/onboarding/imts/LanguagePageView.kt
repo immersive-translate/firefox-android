@@ -4,12 +4,18 @@
 
 package org.mozilla.fenix.onboarding.imts
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.text.Editable
 import android.text.Html
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -17,12 +23,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import org.mozilla.fenix.R
-import org.mozilla.fenix.databinding.LanguageListLayoutBinding
 import org.mozilla.fenix.databinding.OnboardingPageLanguageLayoutBinding
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.immersive_transalte.LanguageJson
 import java.util.Locale
 
+
+@SuppressLint("ClickableViewAccessibility")
 class LanguagePageView : FrameLayout {
     private lateinit var binding: OnboardingPageLanguageLayoutBinding
     private var callback: Callback? = null
@@ -39,10 +46,8 @@ class LanguagePageView : FrameLayout {
         init(context)
     }
 
-    //private lateinit var selectLocal: Locale
     private lateinit var langCode: String
     private lateinit var langName: String
-    private var languagePopWindow: LanguagePopWindow? = null
 
     @Suppress("DEPRECATION")
     private fun init(context: Context) {
@@ -59,36 +64,83 @@ class LanguagePageView : FrameLayout {
 
         /*val selectLocal = Locale.getDefault()
         binding.tvSelectLang.text = selectLocal.displayName*/
-        initDefaultLang()
 
-        binding.llLang.setOnClickListener {
-            callback?.onSelectLang()
-            if (languagePopWindow == null) {
-                languagePopWindow = LanguagePopWindow(
-                    context,
-                    LanguageListLayoutBinding.inflate(LayoutInflater.from(context))
-                )
-                languagePopWindow?.setOnItemClickListener(object : LanguagePopWindow.OnItemClickListener{
-                    override fun onItemClick(o: JSONObject) {
-                        try {
-                            langCode = o.getString("code")
-                            langName = o.getString("language")
-                            binding.tvSelectLang.text = langName
-                            saveDefaultLanguage()
-                        } finally {
-                        }
+        initDefaultLang()
+        binding.etSelectLang.setOnFocusChangeListener(
+            object : OnFocusChangeListener {
+                override fun onFocusChange(v: View?, hasFocus: Boolean) {
+                    if (hasFocus) {
+                        // callback?.onSelectLang()
+                        binding.ivLang.setImageResource(R.mipmap.img_search)
+                        binding.etSelectLang.hint = binding.etSelectLang.text
+                        binding.etSelectLang.setText("")
+                        binding.languageSelectorView.show()
+                    } else {
+                        binding.ivLang.setImageResource(R.mipmap.img_arr_down)
+                        binding.languageSelectorView.dismiss()
+                        binding.etSelectLang.setText(binding.etSelectLang.hint)
                     }
-                })
+                }
+            },
+        )
+
+        binding.etSelectLang.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-            languagePopWindow?.show(binding.llLang)
-        }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                s?.let {
+                    binding.languageSelectorView.onSearch(it.toString().lowercase())
+                }
+            }
+        })
+
+        binding.languageSelectorView.setOnItemClickListener(
+            object : LanguageSelectView.OnItemClickListener {
+                override fun onItemClick(o: JSONObject) {
+                    dismissLangPopWin()
+                    try {
+                        binding.languageSelectorView.dismiss()
+                        langCode = o.getString("code")
+                        langName = o.getString("language")
+                        binding.etSelectLang.hint = langName
+                        binding.etSelectLang.setText(langName)
+                        saveDefaultLanguage()
+                    } finally {
+                    }
+                }
+            },
+        )
+
+        binding.root.setOnTouchListener(
+            object : OnTouchListener {
+                override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                    if (event?.action == MotionEvent.ACTION_DOWN) {
+                        dismissLangPopWin()
+                    }
+                    return false
+                }
+            },
+        )
 
         binding.btnSetDefaultBrowser.setOnClickListener {
+            dismissLangPopWin()
             callback?.onSetDefaultBrowser()
         }
         binding.btnSkip.setOnClickListener {
+            dismissLangPopWin()
             callback?.onSkip()
         }
+    }
+
+    private fun dismissLangPopWin() {
+        binding.etSelectLang.clearFocus()
+        // 清理键盘
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.hideSoftInputFromWindow(binding.etSelectLang.windowToken, 0)
     }
 
     /**
@@ -103,14 +155,16 @@ class LanguagePageView : FrameLayout {
                 try {
                     langCode = jsonObject.getString("code")
                     langName = jsonObject.getString("language")
-                    binding.tvSelectLang.text = langName
+                    binding.etSelectLang.hint = langName
+                    binding.etSelectLang.setText(langName)
                     saveDefaultLanguage()
                     return@launch
                 } finally {
                 }
             }
             val selectLocal = Locale.getDefault()
-            binding.tvSelectLang.text = selectLocal.displayName
+            binding.etSelectLang.hint = selectLocal.displayName
+            binding.etSelectLang.setText(selectLocal.displayName)
             langCode = selectLocal.country
             langName = selectLocal.displayName
             saveDefaultLanguage()

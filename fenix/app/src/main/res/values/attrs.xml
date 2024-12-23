@@ -126,8 +126,8 @@
 
     <declare-styleable name="PageIndicatorView">
         <attr name="pageCount" format="integer"/>
-        <attr name="primaryColor" format="color"/>
-        <attr name="selectedColor" format="color"/>
+        <attr name="primaryColor" format="reference"/>
+        <attr name="selectedColor" format="reference"/>
         <attr name="indicatorWidth" format="dimension"/>
         <attr name="indicatorSpace" format="dimension"/>
     </declare-styleable>

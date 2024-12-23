@@ -16,8 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:pageCount="3"
-        app:primaryColor="#FFE6E6E6"
-        app:selectedColor="#FF222222" />
+        app:primaryColor="@drawable/onboarding_indicator_primary_bg"
+        app:selectedColor="@drawable/onboarding_indicator_selected_bg" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
