@@ -159,6 +159,9 @@ class OnboardingFragment : Fragment() {
                 }
                 override fun onPageSelected(position: Int) {
                     binding.pageIndicator.setIndicatorIndex(position)
+                    binding.pageIndicator.visibility =
+                        if (position != viewpagerAdapter.count - 1) View.VISIBLE
+                        else View.INVISIBLE
                 }
                 override fun onPageScrollStateChanged(state: Int) {
                 }
