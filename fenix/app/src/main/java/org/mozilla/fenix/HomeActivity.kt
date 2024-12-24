@@ -1203,7 +1203,10 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                 handleRequestDesktopMode(tabId)
             }
         } else {
-            val headers = if (additionalHeaders != null) additionalHeaders as HashMap else HashMap()
+            val headers = HashMap<String, String>()
+            additionalHeaders?.let {
+                headers.putAll(it)
+            }
 
             if (defaultLanguage.isNotEmpty()) {
                 headers["lang"] = defaultLanguage
