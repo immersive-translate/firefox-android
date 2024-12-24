@@ -2937,4 +2937,8 @@
     <string name="home_top_link_ts_comics">Comic\ntranslation</string>
     <string name="home_top_link_ts_more">More\ntools</string>
     <string name="home_top_link_ts_more_content">Stay\nTuned</string>
+
+    <string name="facebook_app_id">534301805718885</string>
+    <string name="facebook_client_token">12f64b0848e953d71f94f6dca577fb36</string>
+
 </resources>

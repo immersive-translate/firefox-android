@@ -144,5 +144,7 @@
 }
 -keep public class com.android.installreferrer.**{ *; }
 -keep class mozilla.components.jsbridge.** { *; }
+-keep class com.facebook.** {*;}
+
 
 
