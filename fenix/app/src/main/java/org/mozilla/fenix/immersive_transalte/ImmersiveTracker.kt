@@ -13,6 +13,9 @@ import com.adjust.sdk.AdjustAttribution
 import com.adjust.sdk.AdjustConfig
 import com.adjust.sdk.AdjustEvent
 import com.adjust.sdk.LogLevel
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -32,17 +35,31 @@ object ImmersiveTracker {
     fun initTrack(ctx: Application) {
         @OptIn(DelicateCoroutinesApi::class)
         GlobalScope.launch(Dispatchers.IO) {
-            init(ctx)
+            initAdjust(ctx)
+            initFB(ctx)
         }
     }
 
-    private fun init(ctx: Application) {
+    private fun initFB(ctx: Application) {
+        FacebookSdk.setAutoInitEnabled(true)
+        FacebookSdk.setAdvertiserIDCollectionEnabled(true)
+        FacebookSdk.setAutoLogAppEventsEnabled(true)
+
+        /*FacebookSdk.setIsDebugEnabled(true)
+        FacebookSdk.addLoggingBehavior(LoggingBehavior.APP_EVENTS)*/
+
+        val logger = AppEventsLogger.newLogger(ctx)
+        logger.logEvent(AppEventsConstants.EVENT_NAME_ACTIVATED_APP)
+        logger.flush()
+    }
+
+    private fun initAdjust(ctx: Application) {
         val isRelease = Config.channel.isRelease
         val environment = if (isRelease) AdjustConfig.ENVIRONMENT_PRODUCTION else AdjustConfig.ENVIRONMENT_SANDBOX
         val logLevel = if (isRelease) LogLevel.WARN else LogLevel.VERBOSE
         val config = AdjustConfig(ctx, appToken, environment)
         config.setLogLevel(logLevel)
-        config.setOnAttributionChangedListener { p0 -> adjustAttribution = p0 }
+        config.setOnAttributionChangedListener { p0 -> adjustAttribution = p0; }
         Adjust.onCreate(config)
         ctx.registerActivityLifecycleCallbacks(
             object : ActivityLifecycleCallbacks {
