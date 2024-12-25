@@ -51,10 +51,10 @@ import kotlin.math.ceil
 
 private const val TOP_SITES_PER_PAGE = 8
 private const val TOP_SITES_PER_ROW = 4
-private const val TOP_SITES_ITEM_SIZE = 95
+private const val TOP_SITES_ITEM_SIZE = 84
 private const val TOP_SITES_ROW_WIDTH = TOP_SITES_PER_ROW * TOP_SITES_ITEM_SIZE
-private const val TOP_SITES_FAVICON_CARD_SIZE = 60
-private const val TOP_SITES_FAVICON_SIZE = 60
+private const val TOP_SITES_FAVICON_CARD_SIZE = 50
+private const val TOP_SITES_FAVICON_SIZE = 50
 
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
@@ -98,8 +98,9 @@ fun TopLinks(
 
                     for (items in topSitesWindows) {
                         Row(modifier = Modifier.defaultMinSize(minWidth = TOP_SITES_ROW_WIDTH.dp)) {
-                            items.forEachIndexed { _, topLink ->
+                            items.forEachIndexed { position, topLink ->
                                 TopSiteItem(
+                                    position = position,
                                     topLink = topLink,
                                     onTopSiteClick = { item -> onTopLinkClick(item) },
                                 )
@@ -128,6 +129,7 @@ fun TopLinks(
 @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun TopSiteItem(
+    position: Int,
     topLink: TopLink,
     onTopSiteClick: (TopLink) -> Unit,
 ) {
@@ -139,6 +141,9 @@ private fun TopSiteItem(
             }
             .testTag(TopSitesTestTag.topSiteItemRoot),
     ) {
+        val startPadding = if (position % TOP_SITES_PER_ROW == 0) 0 else 2
+        val endPadding = if ((position + 1) % TOP_SITES_PER_ROW == 0) 0 else 2
+
         Column(
             modifier = Modifier
                 .combinedClickable(
@@ -146,6 +151,7 @@ private fun TopSiteItem(
                     indication = null,
                     onClick = { onTopSiteClick(topLink) },
                 )
+                .padding(start = startPadding.dp, end = endPadding.dp)
                 .width(TOP_SITES_ITEM_SIZE.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -182,11 +188,12 @@ private fun TopSiteItem(
                         .padding(start = 2.dp, end = 2.dp),
                     text = stringResource(topLink.title),
                     color = if (!topLink.isMore) FirefoxTheme.colors.textPrimary
-                    else Color(0xFF999999),
-                    fontSize = 14.sp,
+                            else Color(0xFF999999),
+                    fontSize = 12.sp,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2,
                     style = FirefoxTheme.typography.caption,
+                    textAlign = TextAlign.Center
                 )
             }
         }
@@ -201,7 +208,7 @@ private fun TopSiteFaviconCard(
     Card(
         modifier = Modifier.size(TOP_SITES_FAVICON_CARD_SIZE.dp),
         shape = RoundedCornerShape((TOP_SITES_FAVICON_CARD_SIZE / 2).dp),
-        elevation = 6.dp,
+        elevation = 1.dp,
     ) {
         Box(contentAlignment = Alignment.Center) {
             Surface(
@@ -228,7 +235,7 @@ private fun TopSiteMoreCard(
     Card(
         modifier = Modifier.size(TOP_SITES_FAVICON_CARD_SIZE .dp),
         shape = RoundedCornerShape((TOP_SITES_FAVICON_CARD_SIZE / 2).dp),
-        elevation = 6.dp,
+        elevation = 1.dp,
         backgroundColor = Color(0xFFF4F4F4),
     ) {
         Box(contentAlignment = Alignment.Center) {
