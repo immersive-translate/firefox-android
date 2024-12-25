@@ -28,7 +28,8 @@
         android:lineSpacingMultiplier="1.2"
         android:textAlignment="center"
         android:textColor="#FF111111"
-        android:textSize="32sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_logo" />

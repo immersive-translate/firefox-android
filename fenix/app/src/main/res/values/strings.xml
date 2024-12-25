@@ -2584,12 +2584,12 @@
     <string name="onboarding_second_known_btn">I see🫡</string>
 
     <string name="onboarding_third_dest">Eliminate language barriers\nSee a bigger world</string>
-    <string name="onboarding_third_finish_btn">Open up a world without language barriers!</string>
+    <string name="onboarding_third_finish_btn">Break language barriers!</string>
 
-    <string name="home_top_link_ts_web">Web translation</string>
-    <string name="home_top_link_ts_video">Video translation</string>
-    <string name="home_top_link_ts_doc">Doc translation</string>
-    <string name="home_top_link_ts_comics">Comic translation</string>
-    <string name="home_top_link_ts_more">More tools</string>
+    <string name="home_top_link_ts_web">Web\ntranslation</string>
+    <string name="home_top_link_ts_video">Video\ntranslation</string>
+    <string name="home_top_link_ts_doc">Doc\ntranslation</string>
+    <string name="home_top_link_ts_comics">Comic\ntranslation</string>
+    <string name="home_top_link_ts_more">More\ntools</string>
     <string name="home_top_link_ts_more_content">Stay\nTuned</string>
 </resources>
