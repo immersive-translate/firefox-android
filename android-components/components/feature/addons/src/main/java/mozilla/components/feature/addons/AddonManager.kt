@@ -152,6 +152,31 @@ class AddonManager(
     }
 
     /**
+     * add by xupx
+     */
+    fun installAddon(
+        id: String,
+        url: String,
+        installationMethod: InstallationMethod? = null,
+        onSuccess: ((Addon) -> Unit) = { },
+        onError: ((Throwable) -> Unit) = { _ -> },
+    ): CancellableOperation {
+        val pendingAction = addPendingAddonAction()
+        return runtime.installWebExtension(
+            id = id,
+            url = url,
+            installationMethod = installationMethod,
+            onSuccess = { ext ->
+                onAddonInstalled(ext, pendingAction, onSuccess)
+            },
+            onError = { throwable ->
+                completePendingAddonAction(pendingAction)
+                onError(throwable)
+            },
+        )
+    }
+
+    /**
      * Uninstalls the provided [Addon].
      *
      * @param addon the addon to uninstall.

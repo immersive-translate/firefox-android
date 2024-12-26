@@ -57,6 +57,17 @@ interface WebExtensionRuntime {
         return CancellableOperation.Noop()
     }
 
+    fun installWebExtension(
+        id: String,
+        url: String,
+        installationMethod: InstallationMethod? = null,
+        onSuccess: ((WebExtension) -> Unit) = { },
+        onError: ((Throwable) -> Unit) = { _ -> },
+    ): CancellableOperation {
+        onError(UnsupportedOperationException("Web extension support is not available in this engine"))
+        return CancellableOperation.Noop()
+    }
+
     /**
      * Updates the provided [extension] if a new version is available.
      *

@@ -51,6 +51,7 @@ class ImmersiveTranslateService(
      */
     private fun install(addon: Addon) {
         addonManager.installAddon(
+            addon.id,
             addon.downloadUrl, null,
             onSuccess = {
                 fetchInstalledTSAddon()
