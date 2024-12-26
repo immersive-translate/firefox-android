@@ -400,6 +400,13 @@ open class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.Quit)
     }
 
+    private val immersiveTranslate = BrowserMenuImageText(
+        label = context.getString(R.string.library_translate),
+        imageResource = R.drawable.ic_wordmark_logo,
+    ) {
+        onItemTapped.invoke(ToolbarMenu.Item.Translate)
+    }
+
     /*private fun syncMenuItem(): BrowserMenuItem {
         return BrowserMenuSignIn(primaryTextColor()) {
             onItemTapped.invoke(
@@ -415,6 +422,7 @@ open class DefaultToolbarMenu(
                 if (shouldUseBottomToolbar || !shouldShowMenuToolbar) null else menuToolbar,
                 newTabItem,
                 BrowserMenuDivider(),
+                immersiveTranslate,
                 bookmarksItem,
                 historyItem,
                 downloadsItem,

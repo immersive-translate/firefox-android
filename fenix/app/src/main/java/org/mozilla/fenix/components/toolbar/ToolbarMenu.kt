@@ -22,7 +22,6 @@ interface ToolbarMenu {
         /**
          * Opens the translations flow.
          */
-        object Translate : Item()
         object Share : Item()
         data class Back(val viewHistory: Boolean) : Item()
         data class Forward(val viewHistory: Boolean) : Item()
@@ -50,6 +49,7 @@ interface ToolbarMenu {
         object History : Item()
         object Downloads : Item()
         object NewTab : Item()
+        object Translate: Item()
     }
 
     val menuBuilder: BrowserMenuBuilder
