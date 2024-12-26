@@ -43,7 +43,8 @@ class ImmersiveTranslateAddonGetter(
     private fun generateImmersiveAddon(): Addon {
         return Addon(
             id, author, downloadUrl, version,
-            permissions, translatableName, translatableDescription,
+            permissions, emptyList(), emptyList(),
+            translatableName, translatableDescription,
             translatableSummary, iconUrl, homepageUrl, rating,
             createdAt, updatedAt, null, null,
             defaultLocale, ratingUrl, detailUrl,
