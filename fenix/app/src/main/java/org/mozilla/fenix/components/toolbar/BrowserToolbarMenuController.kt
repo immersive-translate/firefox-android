@@ -31,6 +31,7 @@ import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.support.utils.ManufacturerCodes
 import mozilla.components.ui.widgets.withCenterAlignedButtons
 import mozilla.telemetry.glean.private.NoExtras
+import org.mozilla.fenix.BrowserDirection
 import org.mozilla.fenix.GleanMetrics.AppMenu
 import org.mozilla.fenix.GleanMetrics.Collections
 import org.mozilla.fenix.GleanMetrics.Events
@@ -396,10 +397,13 @@ class DefaultBrowserToolbarMenuController(
             }
 
             ToolbarMenu.Item.Translate -> {
-                Translations.action.record(Translations.ActionExtra("main_flow_browser"))
-                val directions =
-                    BrowserFragmentDirections.actionBrowserFragmentToTranslationsDialogFragment()
-                navController.navigateSafe(R.id.browserFragment, directions)
+                val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon()
+                val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: return
+                activity.openToBrowserAndLoad(
+                    searchTermOrURL = tsSettingUrl,
+                    newTab = false,
+                    from = BrowserDirection.FromGlobal,
+                )
             }
         }
     }
@@ -478,12 +482,9 @@ class DefaultBrowserToolbarMenuController(
                 Events.browserMenuAction.record(Events.BrowserMenuActionExtra("set_default_browser"))
             is ToolbarMenu.Item.RemoveFromTopSites ->
                 Events.browserMenuAction.record(Events.BrowserMenuActionExtra("remove_from_top_sites"))
-
-            ToolbarMenu.Item.Translate -> Events.browserMenuAction.record(
-                Events.BrowserMenuActionExtra(
-                    "translate",
-                ),
-            )
+            is ToolbarMenu.Item.Translate -> {
+                // noting to do
+            }
         }
     }
 
