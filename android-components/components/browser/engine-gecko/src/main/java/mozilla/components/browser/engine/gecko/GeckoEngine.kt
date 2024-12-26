@@ -289,6 +289,68 @@ class GeckoEngine(
     }
 
     /**
+     * add by xupx
+     */
+    override fun installWebExtension(
+        id: String,
+        url: String,
+        installationMethod: InstallationMethod?,
+        onSuccess: ((WebExtension) -> Unit),
+        onError: ((Throwable) -> Unit),
+    ): CancellableOperation {
+
+        /*val geckoResult = runtime.webExtensionController.install(
+            url,
+            installationMethod?.toGeckoInstallationMethod(),
+        ).apply {
+            then(
+                {
+                    onExtensionInstalled(it!!, onSuccess)
+                    GeckoResult<Void>()
+                },
+                { throwable ->
+                    onError(GeckoWebExtensionException.createWebExtensionException(throwable))
+                    GeckoResult<Void>()
+                },
+            )
+        }*/
+
+        val geckoResult = if (url.isResourceUrl() &&
+            !AddonAllow.NoCheckAddons.contains(id)) {
+            runtime.webExtensionController.ensureBuiltIn(url, id).apply {
+                then(
+                    {
+                        onExtensionInstalled(it!!, onSuccess)
+                        GeckoResult<Void>()
+                    },
+                    { throwable ->
+                        onError(GeckoWebExtensionException.createWebExtensionException(throwable))
+                        GeckoResult<Void>()
+                    },
+                )
+            }
+        } else {
+            runtime.webExtensionController.install(
+                url,
+                installationMethod?.toGeckoInstallationMethod(),
+            ).apply {
+                then(
+                    {
+                        onExtensionInstalled(it!!, onSuccess)
+                        GeckoResult<Void>()
+                    },
+                    { throwable ->
+                        onError(GeckoWebExtensionException.createWebExtensionException(throwable))
+                        GeckoResult<Void>()
+                    },
+                )
+            }
+        }
+
+        return geckoResult.asCancellableOperation()
+    }
+
+    /**
      * See [Engine.uninstallWebExtension].
      */
     override fun uninstallWebExtension(
