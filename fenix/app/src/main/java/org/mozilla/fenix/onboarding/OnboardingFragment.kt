@@ -133,9 +133,11 @@ class OnboardingFragment : Fragment() {
         OnboardingScreen(
             pagesToDisplay = pagesToDisplay,
             onMakeFirefoxDefaultClick = {
+                requireComponents.settings.isShownOnBoarding = false
                 promptToSetAsDefaultBrowser()
             },
             onSkipDefaultClick = {
+                requireComponents.settings.isShownOnBoarding = false
                 telemetryRecorder.onSkipSetToDefaultClick(
                     pagesToDisplay.telemetrySequenceId(),
                     pagesToDisplay.sequencePosition(OnboardingPageUiData.Type.DEFAULT_BROWSER),
