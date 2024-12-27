@@ -31,6 +31,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.splashscreen.SplashScreenViewProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -119,6 +120,10 @@ import org.mozilla.fenix.home.intent.OpenSpecificTabIntentProcessor
 import org.mozilla.fenix.home.intent.ReEngagementIntentProcessor
 import org.mozilla.fenix.home.intent.SpeechProcessingIntentProcessor
 import org.mozilla.fenix.home.intent.StartSearchIntentProcessor
+import org.mozilla.fenix.immersive_transalte.PrivacyRemindDialog
+import org.mozilla.fenix.immersive_transalte.QuitAppDialog
+import org.mozilla.fenix.immersive_transalte.WebDialog
+import org.mozilla.fenix.library.bookmarks.BookmarkFragmentDirections
 import org.mozilla.fenix.library.bookmarks.DesktopFolders
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.messaging.MessageNotificationWorker
@@ -141,6 +146,7 @@ import org.mozilla.fenix.theme.ThemeManager
 import org.mozilla.fenix.utils.Settings
 import java.lang.ref.WeakReference
 import java.util.Locale
+import kotlin.collections.set
 
 /**
  * The main activity of the application. The application is primarily a single Activity (this one)
@@ -306,7 +312,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         }
 
         if (settings().shouldShowOnboarding(
-                hasUserBeenOnboarded = components.fenixOnboarding.userHasBeenOnboarded(),
+                //hasUserBeenOnboarded = components.fenixOnboarding.userHasBeenOnboarded(),
+                hasUserBeenOnboarded = !components.settings.isShownOnBoarding,
                 isLauncherIntent = intent.toSafeIntent().isLauncherIntent,
             )
         ) {
@@ -439,25 +446,28 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         components.immersiveTranslateService.checkAndInstallOrUpdate()
     }
 
+    private var isAgreePrivacy = false
+    private var splashScreenViewProvider: SplashScreenViewProvider? = null
+
     private fun maybeShowSplashScreen() {
-        if (components.settings.isFirstSplashScreenShown) {
-            return
-        } else {
-            components.settings.isFirstSplashScreenShown = true
-            // Splash screen compat fails to draw icons on earlier versions.
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+        if (components.settings.isAgreePrivacy) {
+            if (components.settings.isFirstSplashScreenShown) {
                 return
+            } else {
+                components.settings.isFirstSplashScreenShown = true
+                // Splash screen compat fails to draw icons on earlier versions.
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+                    return
+                }
             }
         }
 
-        if (FxNimbus.features.splashScreen.value().enabled) {
+        if (FxNimbus.features.splashScreen.value().enabled || Config.isInstallSplashScreen) {
             val splashScreen = installSplashScreen()
-            var maxDurationReached = false
-            val delay = FxNimbus.features.splashScreen.value().maximumDurationMs.toLong()
+
             splashScreen.setKeepOnScreenCondition {
                 val dataFetched = components.settings.nimbusExperimentsFetched
-
-                val keepOnScreen = !maxDurationReached && !dataFetched
+                val keepOnScreen = isAgreePrivacy && !dataFetched
                 if (!keepOnScreen) {
                     SplashScreen.firstLaunchExtended.record(
                         SplashScreen.FirstLaunchExtendedExtra(dataFetched = dataFetched),
@@ -465,11 +475,66 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                 }
                 keepOnScreen
             }
+
+            splashScreen.setOnExitAnimationListener {
+                splashScreenViewProvider = it
+            }
+
             MainScope().launch {
-                delay(timeMillis = delay)
-                maxDurationReached = true
+                delay(timeMillis = 100)
+                showPrivacyRemind(findViewById(android.R.id.content))
             }
         }
+    }
+
+    private fun showPrivacyRemind(view: View) {
+        PrivacyRemindDialog(
+            this,
+            onAgree = {
+                MainScope().launch {
+                    delay(300)
+                    splashScreenViewProvider?.remove()
+                }
+                components.settings.isShownOnBoarding = true
+                components.settings.isAgreePrivacy = true
+                components.settings.isFirstSplashScreenShown = true
+                isAgreePrivacy = true
+                // 回到主界面
+                /*navHost.navController.nav(
+                    id = R.id.onboardingFragment,
+                    directions = JunoOnboardingFragmentDirections.actionHome(),
+                )*/
+                navigateToHome(navHost.navController)
+            },
+            onDisagree = {
+                isAgreePrivacy = false
+                showQuitRemind(view)
+            },
+            onShowWeb = {
+                showWebRemind(it, view)
+            },
+        ).show(view)
+    }
+
+    private fun showQuitRemind(view: View) {
+        QuitAppDialog(this,
+            onQuitApp = {
+                finish()
+            },
+            onKnown = {
+                showPrivacyRemind(view)
+            }
+        ).show(view)
+    }
+
+    private fun showWebRemind(url: String, view: View) {
+        WebDialog(
+            this,
+            url = url,
+            onKnown = {
+                showPrivacyRemind(view)
+            }
+        ).show(view)
     }
 
     private fun checkAndExitPiP() {
