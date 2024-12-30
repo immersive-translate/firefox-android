@@ -60,10 +60,7 @@ internal fun normalModeAdapterItems(
     topLinks.size
     items.add(AdapterItem.TopLinks)
 
-    // top sites
     if (settings.showTopSitesFeature && topSites.isNotEmpty()) {
-        shouldShowCustomizeHome = true
-        if (settings.enableComposeTopSites) {
         /*if (settings.enableComposeTopSites) {
             items.add(AdapterItem.TopSites)
         } else {
@@ -199,9 +196,9 @@ class SessionControlView(
 
                     if (!featureRecommended && !context.settings().showHomeOnboardingDialog) {
                         if (!context.settings().showHomeOnboardingDialog && (
-                                context.settings().showSyncCFR ||
-                                    context.settings().shouldShowJumpBackInCFR
-                                )
+                                    context.settings().showSyncCFR ||
+                                            context.settings().shouldShowJumpBackInCFR
+                                    )
                         ) {
                             // 禁用 认识您的个性化主页 pop
                             /*featureRecommended = HomeCFRPresenter(
