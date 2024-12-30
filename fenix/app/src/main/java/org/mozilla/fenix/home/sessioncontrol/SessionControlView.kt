@@ -63,10 +63,7 @@ internal fun normalModeAdapterItems(
     topLinks.size
     items.add(AdapterItem.TopLinks)
 
-    // top sites
     if (settings.showTopSitesFeature && topSites.isNotEmpty()) {
-        shouldShowCustomizeHome = true
-        if (settings.enableComposeTopSites) {
         /*if (settings.enableComposeTopSites) {
             items.add(AdapterItem.TopSites)
         } else {
