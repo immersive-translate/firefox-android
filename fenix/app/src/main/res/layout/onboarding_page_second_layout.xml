@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/onboarding_second_title"
-        android:textColor="#FF111111"
+        android:textColor="@color/fx_mobile_text_color_primary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/onboarding_second_content_web"
-                android:textColor="#FF111111"
+                android:textColor="@color/fx_mobile_text_color_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/onboarding_second_content_video"
-                android:textColor="#FF111111"
+                android:textColor="@color/fx_mobile_text_color_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/onboarding_second_content_doc"
-                android:textColor="#FF111111"
+                android:textColor="@color/fx_mobile_text_color_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -116,7 +116,7 @@
         android:text="@string/onboarding_second_subtitle"
         android:lineSpacingMultiplier="1.2"
         android:textAlignment="center"
-        android:textColor="#FF111111"
+        android:textColor="@color/fx_mobile_text_color_primary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +128,7 @@
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:backgroundTint="#FF111111"
+        android:backgroundTint="@color/fx_mobile_action_color_third"
         android:text="@string/onboarding_second_known_btn"
         android:textAlignment="center"
         android:textColor="#FFFFFFFF"
