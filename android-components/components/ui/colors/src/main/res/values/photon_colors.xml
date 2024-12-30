@@ -190,6 +190,7 @@
 	<color name="photonDarkGrey90A60">#9915141a</color>
 	<color name="photonDarkGrey90A95">#f215141a</color>
 	<color name="photonDarkGrey90A96">#f515141a</color>
+	<color name="photonDarkGrey11111">#ff111111</color>
 
 	<!-- Violet -->
 	<color name="photonViolet05">#ffE7DFFF</color>
