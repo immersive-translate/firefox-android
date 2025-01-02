@@ -1,0 +1,93 @@
+name: release package
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      # 拉取代码
+      - uses: actions/checkout@v3
+        with:
+          project: fenix
+
+      # deno
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.0.0
+
+      # 更新插件
+      - run: cd fenix && make update
+
+      # 设置Java运行环境
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v3
+      - run:  cd fenix && ./gradlew assembleRelease -P RELEASE_TYPE=apk -P GIT_ACTION=true
+      - run:  cd fenix && ./gradlew bundleRelease -P RELEASE_TYPE=aab -P GIT_ACTION=true
+
+      # 签名 official apk
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK official
+        id: sign_app_official
+        with:
+          releaseDirectory: fenix/app/build/outputs/apk/official/release
+          signingKeyBase64: ${{ secrets.ANDROID_APP_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_APP_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_APP_KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_APP_KEY_PASSWORD }}
+        # 还能设置build-tools version，29.0.3好像不支持了
+        env:
+          # override default build-tools version (29.0.3) -- optional
+          BUILD_TOOLS_VERSION: "35.0.0"
+
+      # 签名 mainlandStore apk
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app APK mainlandStore
+        id: sign_app_mainlandStore
+        with:
+          releaseDirectory: fenix/app/build/outputs/apk/mainlandStore/release
+          signingKeyBase64: ${{ secrets.ANDROID_APP_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_APP_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_APP_KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_APP_KEY_PASSWORD }}
+        # 还能设置build-tools version，29.0.3好像不支持了
+        env:
+          # override default build-tools version (29.0.3) -- optional
+          BUILD_TOOLS_VERSION: "35.0.0"
+
+      # 签名 google aab
+      - uses: r0adkll/sign-android-release@v1
+        name: Sign app google bundle
+        id: sign_app_google_bundle
+        with:
+          releaseDirectory: fenix/app/build/outputs/bundle/googleRelease
+          signingKeyBase64: ${{ secrets.ANDROID_APP_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_APP_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_APP_KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_APP_KEY_PASSWORD }}
+        # 还能设置build-tools version，29.0.3好像不支持了
+        env:
+          # override default build-tools version (29.0.3) -- optional
+          BUILD_TOOLS_VERSION: "35.0.0"
+
+
+      - run: mv ${{steps.sign_app_official.outputs.signedReleaseFile}} .
+      - run: mv ${{steps.sign_app_mainlandStore.outputs.signedReleaseFile}} .
+      - run: mv ${{steps.sign_app_google_bundle.outputs.signedReleaseFile}} .
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "*.apk, *.aab"
+          token: ${{ github.token }}
+          generateReleaseNotes: true
+
