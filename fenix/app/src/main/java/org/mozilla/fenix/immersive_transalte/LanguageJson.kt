@@ -22,7 +22,8 @@ object LanguageJson {
     private const val NATIVE =
         "[{\"code\":\"af\",\"language\":\"Afrikaans\"},{\"code\":\"am\",\"language\":\"አማርኛ\"},{\"code\":\"ar\",\"language\":\"العربية\"},{\"code\":\"az\",\"language\":\"Azərbaycanca\"},{\"code\":\"be\",\"language\":\"Беларуская\"},{\"code\":\"bg\",\"language\":\"Български\"},{\"code\":\"tn\",\"language\":\"Setswana\"},{\"code\":\"bn\",\"language\":\"বাংলা\"},{\"code\":\"bs\",\"language\":\"Bosanski\"},{\"code\":\"bo\",\"language\":\"བོད་ཡིག\"},{\"code\":\"ca\",\"language\":\"Català\"},{\"code\":\"ceb\",\"language\":\"Binisaya\"},{\"code\":\"co\",\"language\":\"Corsu\"},{\"code\":\"cs\",\"language\":\"Čeština\"},{\"code\":\"cy\",\"language\":\"Cymraeg\"},{\"code\":\"da\",\"language\":\"Dansk\"},{\"code\":\"de\",\"language\":\"Deutsch\"},{\"code\":\"el\",\"language\":\"Ελληνικά\"},{\"code\":\"en\",\"language\":\"English\"},{\"code\":\"eo\",\"language\":\"Esperanto\"},{\"code\":\"es\",\"language\":\"Español\"},{\"code\":\"et\",\"language\":\"Eesti\"},{\"code\":\"eu\",\"language\":\"Euskara\"},{\"code\":\"sa\",\"language\":\"संस्कृतम्\"},{\"code\":\"fa\",\"language\":\"فارسی\"},{\"code\":\"fi\",\"language\":\"Suomi\"},{\"code\":\"fil\",\"language\":\"Filipino\"},{\"code\":\"fj\",\"language\":\"Na Vosa Vakaviti\"},{\"code\":\"fr\",\"language\":\"Français\"},{\"code\":\"fy\",\"language\":\"Frysk\"},{\"code\":\"ga\",\"language\":\"Gaeilge\"},{\"code\":\"gd\",\"language\":\"Gàidhlig\"},{\"code\":\"gl\",\"language\":\"Galego\"},{\"code\":\"gu\",\"language\":\"ગુજરાતી\"},{\"code\":\"ha\",\"language\":\"Hausa\"},{\"code\":\"haw\",\"language\":\"ʻŌlelo Hawaiʻi\"},{\"code\":\"he\",\"language\":\"עברית\"},{\"code\":\"hi\",\"language\":\"हिन्दी\"},{\"code\":\"hmn\",\"language\":\"Hmoob\"},{\"code\":\"hr\",\"language\":\"Hrvatski\"},{\"code\":\"ht\",\"language\":\"Kreyòl Ayisyen\"},{\"code\":\"hu\",\"language\":\"Magyar\"},{\"code\":\"hy\",\"language\":\"Հայերեն\"},{\"code\":\"id\",\"language\":\"Bahasa Indonesia\"},{\"code\":\"ig\",\"language\":\"Asụsụ Igbo\"},{\"code\":\"is\",\"language\":\"Íslenska\"},{\"code\":\"it\",\"language\":\"Italiano\"},{\"code\":\"ja\",\"language\":\"日本語\"},{\"code\":\"jw\",\"language\":\"Basa Jawa\"},{\"code\":\"ka\",\"language\":\"ქართული\"},{\"code\":\"kk\",\"language\":\"Қазақ Тілі\"},{\"code\":\"km\",\"language\":\"ភាសាខ្មែរ\"},{\"code\":\"kn\",\"language\":\"ಕನ್ನಡ\"},{\"code\":\"ko\",\"language\":\"한국어\"},{\"code\":\"ku\",\"language\":\"Kurdî\"},{\"code\":\"ky\",\"language\":\"Кыргызча\"},{\"code\":\"la\",\"language\":\"Latina\"},{\"code\":\"lb\",\"language\":\"Lëtzebuergesch\"},{\"code\":\"lo\",\"language\":\"ລາວ\"},{\"code\":\"lt\",\"language\":\"Lietuvių\"},{\"code\":\"lv\",\"language\":\"Latviešu\"},{\"code\":\"mg\",\"language\":\"Malagasy\"},{\"code\":\"mi\",\"language\":\"Māori\"},{\"code\":\"mk\",\"language\":\"Македонски\"},{\"code\":\"ml\",\"language\":\"മലയാളം\"},{\"code\":\"mn\",\"language\":\"Монгол\"},{\"code\":\"mr\",\"language\":\"मराठी\"},{\"code\":\"ms\",\"language\":\"Bahasa Melayu\"},{\"code\":\"mt\",\"language\":\"Malti\"},{\"code\":\"mww\",\"language\":\"Hmong Daw\"},{\"code\":\"my\",\"language\":\"မြန်မာစာ\"},{\"code\":\"ne\",\"language\":\"नेपाली\"},{\"code\":\"nl\",\"language\":\"Nederlands\"},{\"code\":\"no\",\"language\":\"Norsk\"},{\"code\":\"ny\",\"language\":\"Chichewa\"},{\"code\":\"otq\",\"language\":\"Hñähñu\"},{\"code\":\"pa\",\"language\":\"ਪੰਜਾਬੀ\"},{\"code\":\"pl\",\"language\":\"Polski\"},{\"code\":\"ps\",\"language\":\"پښتو\"},{\"code\":\"pt\",\"language\":\"Português\"},{\"code\":\"pt-br\",\"language\":\"Português (Brasil)\"},{\"code\":\"pt-BR\",\"language\":\"Português (Brasil)\"},{\"code\":\"pt-PT\",\"language\":\"Português (Portugal)\"},{\"code\":\"ro\",\"language\":\"Română\"},{\"code\":\"ru\",\"language\":\"Русский\"},{\"code\":\"sd\",\"language\":\"سنڌي\"},{\"code\":\"si\",\"language\":\"සිංහල\"},{\"code\":\"sk\",\"language\":\"Slovenčina\"},{\"code\":\"sl\",\"language\":\"Slovenščina\"},{\"code\":\"sm\",\"language\":\"Gagana Samoa\"},{\"code\":\"sn\",\"language\":\"ChiShona\"},{\"code\":\"so\",\"language\":\"Soomaali\"},{\"code\":\"sq\",\"language\":\"Shqip\"},{\"code\":\"sr\",\"language\":\"Српски\"},{\"code\":\"sr-Cyrl\",\"language\":\"Српски (Ћирилица)\"},{\"code\":\"sr-Latn\",\"language\":\"Srpski (Latinica)\"},{\"code\":\"st\",\"language\":\"Sesotho\"},{\"code\":\"su\",\"language\":\"Basa Sunda\"},{\"code\":\"sv\",\"language\":\"Svenska\"},{\"code\":\"sw\",\"language\":\"Kiswahili\"},{\"code\":\"ta\",\"language\":\"தமிழ்\"},{\"code\":\"te\",\"language\":\"తెలుగు\"},{\"code\":\"tg\",\"language\":\"Тоҷикӣ\"},{\"code\":\"th\",\"language\":\"ไทย\"},{\"code\":\"tlh\",\"language\":\"tlhIngan Hol\"},{\"code\":\"tlh-Qaak\",\"language\":\"tlhIngan Hol (pIqaD)\"},{\"code\":\"to\",\"language\":\"lea fakatonga\"},{\"code\":\"tr\",\"language\":\"Türkçe\"},{\"code\":\"ty\",\"language\":\"Reo Tahiti\"},{\"code\":\"ug\",\"language\":\"ئۇيغۇرچە\"},{\"code\":\"uk\",\"language\":\"Українська\"},{\"code\":\"ur\",\"language\":\"اردو\"},{\"code\":\"uz\",\"language\":\"Oʻzbek\"},{\"code\":\"vi\",\"language\":\"Tiếng Việt\"},{\"code\":\"wyw\",\"language\":\"文言文\"},{\"code\":\"xh\",\"language\":\"isiXhosa\"},{\"code\":\"yi\",\"language\":\"ייִדיש\"},{\"code\":\"yo\",\"language\":\"Èdè Yorùbá\"},{\"code\":\"yua\",\"language\":\"Màaya T'àan\"},{\"code\":\"yue\",\"language\":\"粵語\"},{\"code\":\"zh-CN\",\"language\":\"简体中文\"},{\"code\":\"zh-TW\",\"language\":\"繁體中文\"},{\"code\":\"zh-HK\",\"language\":\"繁體中文\"},{\"code\":\"zh-CN-NE\",\"language\":\"東北官話\"},{\"code\":\"zu\",\"language\":\"isiZulu\"},{\"code\":\"ur-roman\",\"language\":\"Roman Urdu\"}]"
 
-    private const val HM_FT_ZH = "繁體中文"
+    private const val SCRIPT_HANT = "Hant" // 繁体
+    private const val SCRIPT_HANS = "Hans" // 简体
 
     /**
      * get lang list
@@ -30,12 +31,15 @@ object LanguageJson {
     suspend fun getLanguages(): JSONArray {
         val locale = Locale.getDefault()
         val localeLang = "${locale.language}-${locale.country}"
-        val displayScript = locale.displayScript
-        val json = if (TextUtils.equals(localeLang, "zh-TW")) {
+        val script = locale.script
+
+        val json = if (SCRIPT_HANS == script) {
+            ZH_CN
+        } else if (TextUtils.equals(localeLang, "zh-TW")) {
             ZH_TW
         } else if (TextUtils.equals(localeLang, "zh-HK")) {
             ZH_TW
-        } else if (HM_FT_ZH == displayScript) {
+        } else if (SCRIPT_HANT == script) {
             ZH_TW
         } else if (TextUtils.equals(locale.language, "zh")) {
             ZH_CN
@@ -53,8 +57,11 @@ object LanguageJson {
             var localName = "${locale.language}-${locale.country}"
             var region = "......"
 
-            if (HM_FT_ZH == locale.displayScript) {
-                region = "zh-HK"
+            if (locale.script == SCRIPT_HANS) {
+                region = "zh-CN"
+                localName = region
+            } else if (locale.script == SCRIPT_HANT) {
+                region = if (locale.country.equals("TW")) "zh-TW" else "zh-HK"
                 localName = region
             }
 
