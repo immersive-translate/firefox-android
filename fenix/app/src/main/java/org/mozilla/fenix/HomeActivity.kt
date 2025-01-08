@@ -34,6 +34,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.splashscreen.SplashScreenViewProvider
 import androidx.core.view.doOnAttach
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -133,6 +134,7 @@ import org.mozilla.fenix.home.intent.OpenSpecificTabIntentProcessor
 import org.mozilla.fenix.home.intent.ReEngagementIntentProcessor
 import org.mozilla.fenix.home.intent.SpeechProcessingIntentProcessor
 import org.mozilla.fenix.home.intent.StartSearchIntentProcessor
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.PrivacyRemindDialog
 import org.mozilla.fenix.immersive_transalte.QuitAppDialog
 import org.mozilla.fenix.immersive_transalte.WebDialog
@@ -581,6 +583,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                     directions = JunoOnboardingFragmentDirections.actionHome(),
                 )*/
                 navigateToHome(navHost.navController)
+                // adjust track init
+                ImmersiveTracker.initTrack(application)
             },
             onDisagree = {
                 isAgreePrivacy = false
@@ -920,6 +924,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         }.toTypedArray()
     }
 
+
+
     @Deprecated("Deprecated in Java")
     // https://github.com/mozilla-mobile/fenix/issues/19919
     final override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -1131,7 +1137,9 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         )
 
         navigationToolbar.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            if (components.settings.isAgreePrivacy) {
+                onBackPressedDispatcher.onBackPressed()
+            }
         }
     }
 
