@@ -352,20 +352,30 @@ class GeckoEngine(
                 permissions: Array<out String>,
                 origins: Array<out String>,
             ): GeckoResult<NativePermissionPromptResponse>? {
+                val extension = GeckoWebExtension(ext, runtime)
                 val result = GeckoResult<NativePermissionPromptResponse>()
+                val noNeedPrompt = AddonAllow.NoCheckAddons.contains(extension.id)
 
-                webExtensionDelegate.onInstallPermissionRequest(
-                    GeckoWebExtension(ext, runtime),
-                    // We pass both permissions and origins as a single list of
-                    // permissions to be shown to the user.
-                    permissions.toList() + origins.toList(),
-                ) { data ->
+                if (noNeedPrompt) {
                     result.complete(
                         NativePermissionPromptResponse(
-                            data.isPermissionsGranted,
-                            data.isPrivateModeGranted,
+                            true, true,
                         ),
                     )
+                } else {
+                    webExtensionDelegate.onInstallPermissionRequest(
+                        GeckoWebExtension(ext, runtime),
+                        // We pass both permissions and origins as a single list of
+                        // permissions to be shown to the user.
+                        permissions.toList() + origins.toList(),
+                    ) { data ->
+                        result.complete(
+                            NativePermissionPromptResponse(
+                                data.isPermissionsGranted,
+                                data.isPrivateModeGranted,
+                            ),
+                        )
+                    }
                 }
 
                 return result
@@ -377,16 +387,23 @@ class GeckoEngine(
                 newPermissions: Array<out String>,
                 newOrigins: Array<out String>,
             ): GeckoResult<AllowOrDeny>? {
+                val noNeedPrompt = AddonAllow.NoCheckAddons.contains(updated.id)
+
                 val result = GeckoResult<AllowOrDeny>()
-                webExtensionDelegate.onUpdatePermissionRequest(
-                    GeckoWebExtension(current, runtime),
-                    GeckoWebExtension(updated, runtime),
-                    // We pass both permissions and origins as a single list of
-                    // permissions to be shown to the user.
-                    newPermissions.toList() + newOrigins.toList(),
-                ) { allow ->
-                    if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+                if (noNeedPrompt) {
+                    result.complete(AllowOrDeny.ALLOW)
+                } else {
+                    webExtensionDelegate.onUpdatePermissionRequest(
+                        GeckoWebExtension(current, runtime),
+                        GeckoWebExtension(updated, runtime),
+                        // We pass both permissions and origins as a single list of
+                        // permissions to be shown to the user.
+                        newPermissions.toList() + newOrigins.toList(),
+                    ) { allow ->
+                        if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+                    }
                 }
+
                 return result
             }
 
@@ -395,13 +412,20 @@ class GeckoEngine(
                 permissions: Array<out String>,
                 origins: Array<out String>,
             ): GeckoResult<AllowOrDeny>? {
+                val noNeedPrompt = AddonAllow.NoCheckAddons.contains(extension.id)
                 val result = GeckoResult<AllowOrDeny>()
-                webExtensionDelegate.onOptionalPermissionsRequest(
-                    GeckoWebExtension(extension, runtime),
-                    permissions.toList() + origins.toList(),
-                ) { allow ->
-                    if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+
+                if (noNeedPrompt) {
+                    result.complete(AllowOrDeny.ALLOW)
+                } else {
+                    webExtensionDelegate.onOptionalPermissionsRequest(
+                        GeckoWebExtension(extension, runtime),
+                        permissions.toList() + origins.toList(),
+                    ) { allow ->
+                        if (allow) result.complete(AllowOrDeny.ALLOW) else result.complete(AllowOrDeny.DENY)
+                    }
                 }
+
                 return result
             }
         }
