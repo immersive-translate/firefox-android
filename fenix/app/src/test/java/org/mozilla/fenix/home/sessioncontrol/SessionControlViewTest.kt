@@ -17,6 +17,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.mozilla.fenix.home.bookmarks.Bookmark
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem.RecentHistoryGroup
+import org.mozilla.fenix.home.toplinks.TopLink
 import org.mozilla.fenix.utils.Settings
 
 class SessionControlViewTest {
@@ -25,6 +26,7 @@ class SessionControlViewTest {
     fun `GIVEN recent Bookmarks WHEN normalModeAdapterItems is called THEN add a customize home button`() {
         val settings: Settings = mockk()
         val topSites = emptyList<TopSite>()
+        val topLinks = emptyList<TopLink>()
         val collections = emptyList<TabCollection>()
         val expandedCollections = emptySet<Long>()
         val bookmarks = listOf(Bookmark())
@@ -40,6 +42,7 @@ class SessionControlViewTest {
         val results = normalModeAdapterItems(
             settings,
             topSites,
+            topLinks,
             collections,
             expandedCollections,
             bookmarks,
@@ -61,6 +64,7 @@ class SessionControlViewTest {
     fun `GIVEN a nimbusMessageCard WHEN normalModeAdapterItems is called THEN add a NimbusMessageCard`() {
         val settings: Settings = mockk()
         val topSites = emptyList<TopSite>()
+        val topLinks = emptyList<TopLink>()
         val collections = emptyList<TabCollection>()
         val expandedCollections = emptySet<Long>()
         val bookmarks = listOf(Bookmark())
@@ -77,6 +81,7 @@ class SessionControlViewTest {
         val results = normalModeAdapterItems(
             settings,
             topSites,
+            topLinks,
             collections,
             expandedCollections,
             bookmarks,
@@ -95,6 +100,7 @@ class SessionControlViewTest {
     fun `GIVEN recent tabs WHEN normalModeAdapterItems is called THEN add a customize home button`() {
         val settings: Settings = mockk()
         val topSites = emptyList<TopSite>()
+        val topLinks = emptyList<TopLink>()
         val collections = emptyList<TabCollection>()
         val expandedCollections = emptySet<Long>()
         val bookmarks = listOf<Bookmark>()
@@ -110,6 +116,7 @@ class SessionControlViewTest {
         val results = normalModeAdapterItems(
             settings,
             topSites,
+            topLinks,
             collections,
             expandedCollections,
             bookmarks,
@@ -131,6 +138,7 @@ class SessionControlViewTest {
     fun `GIVEN history metadata WHEN normalModeAdapterItems is called THEN add a customize home button`() {
         val settings: Settings = mockk()
         val topSites = emptyList<TopSite>()
+        val topLinks = emptyList<TopLink>()
         val collections = emptyList<TabCollection>()
         val expandedCollections = emptySet<Long>()
         val bookmarks = listOf<Bookmark>()
@@ -146,6 +154,7 @@ class SessionControlViewTest {
         val results = normalModeAdapterItems(
             settings,
             topSites,
+            topLinks,
             collections,
             expandedCollections,
             bookmarks,
@@ -167,6 +176,7 @@ class SessionControlViewTest {
     fun `GIVEN pocket articles WHEN normalModeAdapterItems is called THEN add a customize home button`() {
         val settings: Settings = mockk()
         val topSites = emptyList<TopSite>()
+        val topLinks = emptyList<TopLink>()
         val collections = emptyList<TabCollection>()
         val expandedCollections = emptySet<Long>()
         val bookmarks = listOf<Bookmark>()
@@ -183,6 +193,7 @@ class SessionControlViewTest {
         val results = normalModeAdapterItems(
             settings,
             topSites,
+            topLinks,
             collections,
             expandedCollections,
             bookmarks,
@@ -205,6 +216,7 @@ class SessionControlViewTest {
         val results2 = normalModeAdapterItems(
             settings,
             topSites,
+            topLinks,
             collections,
             expandedCollections,
             bookmarks,
@@ -225,6 +237,7 @@ class SessionControlViewTest {
     fun `GIVEN pocket articles and content recommendations are enabled WHEN normalModeAdapterItems is called THEN do not show pocket topic categories and footer`() {
         val settings: Settings = mockk()
         val topSites = emptyList<TopSite>()
+        val topLinks = emptyList<TopLink>()
         val collections = emptyList<TabCollection>()
         val expandedCollections = emptySet<Long>()
         val bookmarks = listOf<Bookmark>()
@@ -279,6 +292,7 @@ class SessionControlViewTest {
         val results = normalModeAdapterItems(
             settings,
             topSites,
+            topLinks,
             collections,
             expandedCollections,
             bookmarks,
@@ -300,6 +314,7 @@ class SessionControlViewTest {
             every { id } returns 123L
         }
         val topSites = listOf<TopSite>(mockk())
+        val topLinks = emptyList<TopLink>()
         val collections = listOf(collection)
         val expandedCollections = emptySet<Long>()
         val bookmarks = listOf<Bookmark>(mockk())
@@ -316,6 +331,7 @@ class SessionControlViewTest {
         val results = normalModeAdapterItems(
             settings,
             topSites,
+            topLinks,
             collections,
             expandedCollections,
             bookmarks,

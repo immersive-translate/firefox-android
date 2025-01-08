@@ -5,6 +5,7 @@
 package org.mozilla.fenix.browser
 
 import android.content.Context
+import android.net.Uri
 import android.os.StrictMode
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.support.utils.ext.isLandscape
 import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.GleanMetrics.AddressToolbar
+import mozilla.components.support.ktx.kotlin.isUrl
 import org.mozilla.fenix.GleanMetrics.ReaderMode
 import org.mozilla.fenix.GleanMetrics.Shopping
 import org.mozilla.fenix.HomeActivity
@@ -56,6 +58,7 @@ import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.runIfFragmentIsAttached
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.home.HomeFragment
+import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.settings.quicksettings.protections.cookiebanners.getCookieBannerUIMode
 import org.mozilla.fenix.shopping.DefaultShoppingExperienceFeature
@@ -90,6 +93,10 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
     @Suppress("LongMethod")
     override fun initializeUI(view: View, tab: SessionState) {
         super.initializeUI(view, tab)
+
+        // default language
+        tab.content.url = UrlLanguageFormater.handleUrl(
+            requireComponents, tab.content.url)
 
         val context = requireContext()
         val components = context.components

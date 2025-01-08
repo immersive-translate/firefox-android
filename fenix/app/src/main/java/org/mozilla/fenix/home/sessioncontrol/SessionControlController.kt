@@ -6,6 +6,7 @@ package org.mozilla.fenix.home.sessioncontrol
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.widget.EditText
 import androidx.annotation.VisibleForTesting
@@ -54,12 +55,15 @@ import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppState
+import org.mozilla.fenix.components.components
 import org.mozilla.fenix.components.metrics.MetricsUtils
 import org.mozilla.fenix.components.toolbar.navbar.shouldAddNavigationBar
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.home.HomeFragment
 import org.mozilla.fenix.home.HomeFragmentDirections
+import org.mozilla.fenix.home.toplinks.TopLink
+import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
 import org.mozilla.fenix.messaging.MessageController
 import org.mozilla.fenix.onboarding.WallpaperOnboardingDialogFragment.Companion.THUMBNAILS_SELECTION_COUNT
 import org.mozilla.fenix.settings.SupportUtils
@@ -123,6 +127,11 @@ interface SessionControlController {
      * @see [CollectionInteractor.onRenameCollectionTapped]
      */
     fun handleRenameCollectionTapped(collection: TabCollection)
+
+    /**
+     * @see [TopSiteInteractor.onSelectTopLink]
+     */
+    fun handleSelectTopLink(topLink: TopLink, position: Int)
 
     /**
      * @see [TopSiteInteractor.onSelectTopSite]
@@ -399,6 +408,29 @@ class DefaultSessionControlController(
             selectedTabCollectionId = collection.id,
         )
         Collections.renameButton.record(NoExtras())
+    }
+
+    override fun handleSelectTopLink(topLink: TopLink, position: Int) {
+        if (topLink.url.isNullOrEmpty()) {
+            return
+        }
+
+        val url = UrlLanguageFormater.handleUrl(activity.components, topLink.url)
+        val existingTabForUrl = store.state.tabs.firstOrNull { url == it.content.url }
+
+        if (existingTabForUrl == null) {
+            TopSites.openInNewTab.record(NoExtras())
+
+            addTabUseCase.invoke(
+                url = appendSearchAttributionToUrlIfNeeded(url),
+                selectTab = true,
+                startLoading = true,
+            )
+        } else {
+            selectTabUseCase.invoke(existingTabForUrl.id)
+        }
+
+        navController.navigate(R.id.browserFragment)
     }
 
     override fun handleSelectTopSite(topSite: TopSite, position: Int) {

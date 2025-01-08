@@ -25,6 +25,8 @@ import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem.RecentHistoryGrou
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem.RecentHistoryHighlight
 import org.mozilla.fenix.home.recentvisits.controller.RecentVisitsController
 import org.mozilla.fenix.home.toolbar.ToolbarController
+import org.mozilla.fenix.home.toolbar.ToolbarInteractor
+import org.mozilla.fenix.home.toplinks.TopLink
 import org.mozilla.fenix.search.toolbar.SearchSelectorController
 import org.mozilla.fenix.search.toolbar.SearchSelectorMenu
 import org.mozilla.fenix.wallpapers.WallpaperState
@@ -130,6 +132,19 @@ interface CustomizeHomeIteractor {
 }
 
 /**
+ * Interface for top link related actions in the [SessionControlInteractor].
+ */
+interface TopLinkInteractor {
+    /**
+     * Selects the given top site. Called when a user clicks on a top site.
+     *
+     * @param topLink The top site that was selected.
+     * @param position The position of the top site.
+     */
+    fun onSelectTopLink(topLink: TopLink, position: Int)
+}
+
+/**
  * Interface for top site related actions in the [SessionControlInteractor].
  */
 interface TopSiteInteractor {
@@ -227,7 +242,7 @@ class SessionControlInteractor(
     private val privateBrowsingController: PrivateBrowsingController,
     private val searchSelectorController: SearchSelectorController,
     private val toolbarController: ToolbarController,
-) : HomepageInteractor {
+) : HomepageInteractor, TopLinkInteractor {
 
     override fun onCollectionAddTabTapped(collection: TabCollection) {
         controller.handleCollectionAddTabTapped(collection)
@@ -421,5 +436,9 @@ class SessionControlInteractor(
 
     override fun onMenuItemTapped(item: SearchSelectorMenu.Item) {
         searchSelectorController.handleMenuItemTapped(item)
+    }
+
+    override fun onSelectTopLink(topLink: TopLink, position: Int) {
+        controller.handleSelectTopLink(topLink, position)
     }
 }

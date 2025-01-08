@@ -69,7 +69,7 @@ import mozilla.components.concept.engine.window.WindowRequest
  * @property isProductUrl Indicates if the [url] is a supported product page.
  */
 data class ContentState(
-    val url: String,
+    var url: String,
     val private: Boolean = false,
     val title: String = "",
     val progress: Int = 0,

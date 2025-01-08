@@ -438,7 +438,7 @@ class AddonManager(
     }
 
     /**
-     * 注册插件处理器
+     * 注册插件消息处理器
      */
     fun registerAddonMessageHandler(
         id: String,
