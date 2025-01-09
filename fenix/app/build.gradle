@@ -38,7 +38,6 @@ if (project.rootProject.file("./app/immersive.properties").exists()) {
     project.rootProject.file("./app/immersive.properties").withInputStream { ImmersiveProperties.load(it) }
 }
 def localPluginVersion = ImmersiveProperties.getProperty('extension');
-def localPluginChannel = ImmersiveProperties.getProperty('channel');
 def appVersion = ImmersiveProperties.getProperty('appVersion');
 
 def releaseType = project.hasProperty("RELEASE_TYPE") ? RELEASE_TYPE : ""
@@ -69,7 +68,7 @@ android {
         compileSdk config.compileSdkVersion
         targetSdkVersion config.targetSdkVersion
         versionCode 1
-        versionName appVersion
+        versionName "${appVersion}"
         flavorDimensions "versionCode"
         archivesBaseName = "${appVersion}"
         vectorDrawables.useSupportLibrary = true
@@ -107,9 +106,6 @@ android {
         def localPluginResource = "resource://android/assets/ts/immersive_translate_beta-$localPluginVersion/"
         buildConfigField "String", "localPluginResource", "\"$localPluginResource\""
 
-        // 插件渠道
-        buildConfigField "String", "localPluginChannel", "\"$localPluginChannel\""
-
         // This allows overriding the target activity for MozillaOnline builds, which happens
         // as part of the defaultConfig below.
         def targetActivity = "HomeActivity"
@@ -145,6 +141,7 @@ android {
         } else {
             buildConfigField "String", "VCS_HASH", "\"${Config.vcsHash}\""
         }*/
+        buildConfigField "String", "VCS_HASH", "\"${Config.vcsHash}\""
 
         if (gradle.hasProperty("localProperties.autosignReleaseWithDebugKey")) {
             signingConfig signingConfigs.debug
@@ -152,6 +149,10 @@ android {
 
         if (gradle.hasProperty("localProperties.debuggable")) {
             debuggable true
+        }
+
+        if(!isGitActionRelease) {
+            signingConfig signingConfigs.release
         }
     }
 
@@ -205,10 +206,6 @@ android {
                     "sharedUserId": "com.immersivetranslate.browser.sharedID",
                     "deepLinkScheme": deepLinkSchemeValue,
             ])
-
-            if(!isGitActionRelease) {
-                signingConfig signingConfigs.release
-            }
         }
         benchmark releaseTemplate >> {
             initWith buildTypes.nightly
@@ -253,17 +250,21 @@ android {
         }*/
         if (releaseType == "apk") {
             mainlandStore {
+                buildConfigField "String", "localPluginChannel", "\"mainlandStore\""
                 //dimension "product"
             }
             official {
+                buildConfigField "String", "localPluginChannel", "\"official\""
                 //dimension "product"
             }
         } else if (releaseType == "aab"){
             google {
+                buildConfigField "String", "localPluginChannel", "\"google\""
                 //dimension "product"
             }
         } else {
             local {
+                buildConfigField "String", "localPluginChannel", "\"local\""
                 //dimension "product"
             }
         }
@@ -376,10 +377,10 @@ android.applicationVariants.configureEach { variant ->
         // same version code. Therefore we need to have different version codes for our ARM and x86
         // builds.
 
-        def versionName = variant.buildType.name == 'nightly' ?
+        /*def versionName = variant.buildType.name == 'nightly' ?
                 "${Config.nightlyVersionName(project)}" :
                 "${Config.releaseVersionName(project)}"
-        println("versionName override: $versionName")
+        println("versionName override: $versionName")*/
 
         variant.outputs.each { output ->
             def isMozillaOnline = project.hasProperty("mozillaOnline") || gradle.hasProperty("localProperties.mozillaOnline")
@@ -393,9 +394,9 @@ android.applicationVariants.configureEach { variant ->
 
             println("versionCode for $abi = $versionCodeOverride, isMozillaOnline = $isMozillaOnline")
 
-            if (versionName != null) {
+            /*if (versionName != null) {
                 output.versionNameOverride = versionName
-            }
+            }*/
             output.versionCodeOverride = versionCodeOverride
         }
     } else if (gradle.hasProperty("localProperties.branchBuild.fenix.version")) {

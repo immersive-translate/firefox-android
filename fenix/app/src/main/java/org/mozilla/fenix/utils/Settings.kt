@@ -2110,8 +2110,10 @@ class Settings(private val appContext: Context) : PreferencesHolder {
      */
     var navigationToolbarEnabled by lazyFeatureFlagPreference(
         key = appContext.getPreferenceKey(R.string.pref_key_toolbar_show_navigation_toolbar),
-        default = { FxNimbus.features.navigationToolbar.value().enabled },
-        featureFlag = FeatureFlags.navigationToolbarEnabled,
+        /*default = { FxNimbus.features.navigationToolbar.value().enabled },
+        featureFlag = FeatureFlags.navigationToolbarEnabled,*/
+        default = { true },
+        featureFlag = true,
     )
 
     /**
