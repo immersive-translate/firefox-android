@@ -54,7 +54,8 @@ import org.mozilla.fenix.theme.FirefoxTheme
 import kotlin.math.max
 
 private val ICON_SIZE = 24.dp
-private const val MAX_WIDTH_TAB_ROW_PERCENT = 0.5f
+//private const val MAX_WIDTH_TAB_ROW_PERCENT = 0.5f
+private const val MAX_WIDTH_TAB_ROW_PERCENT = 0.4f
 private const val BOTTOM_SHEET_HANDLE_WIDTH_PERCENT = 0.1f
 private const val TAB_COUNT_SHOW_CFR = 6
 
@@ -255,7 +256,7 @@ private fun TabPageBanner(
                     unselectedContentColor = inactiveColor,
                 )
 
-                Tab(
+                /*Tab(
                     selected = selectedPage == Page.SyncedTabs,
                     onClick = { onTabPageIndicatorClicked(Page.SyncedTabs) },
                     modifier = Modifier
@@ -269,7 +270,7 @@ private fun TabPageBanner(
                     },
                     selectedContentColor = selectedColor,
                     unselectedContentColor = inactiveColor,
-                )
+                )*/
             }
 
             Spacer(modifier = Modifier.weight(1.0f))

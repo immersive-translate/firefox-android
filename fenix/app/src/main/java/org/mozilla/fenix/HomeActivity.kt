@@ -569,7 +569,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
                 splashScreenViewProvider = it
             }
 
-            MainScope().launch {
+            MainScope().launch(Main) {
                 delay(timeMillis = 100)
                 showPrivacyRemind(findViewById(android.R.id.content))
             }
@@ -580,7 +580,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         PrivacyRemindDialog(
             this,
             onAgree = {
-                MainScope().launch {
+                MainScope().launch(Main) {
                     delay(300)
                     splashScreenViewProvider?.remove()
                 }
