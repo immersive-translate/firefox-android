@@ -62,6 +62,8 @@ class PrivacyRemindDialog(
     private var binding: DialogPrivacyRemindLayoutBinding
 
     init {
+        setBackgroundDrawable(ColorDrawable(0x6F000000))
+        setStatusBarTheme(false)
         animationStyle = R.style.popup_window_anim
         binding = DialogPrivacyRemindLayoutBinding.inflate(LayoutInflater.from(context))
         contentView = binding.root
@@ -73,7 +75,6 @@ class PrivacyRemindDialog(
         isFocusable = false
         isOutsideTouchable = false
         isClippingEnabled = false
-        setBackgroundDrawable(ColorDrawable(0x6F000000))
 
         val contentUS = context.getString(R.string.privacy_remind_dialog_us)
         val contentITP = context.getString(R.string.privacy_remind_dialog_itp)
@@ -128,7 +129,6 @@ class PrivacyRemindDialog(
 
     fun show(parent: View) {
         showAtLocation(parent, Gravity.BOTTOM, 0, 0)
-        setStatusBarTheme(false)
     }
 
     private fun setStatusBarTheme(isLight: Boolean) {

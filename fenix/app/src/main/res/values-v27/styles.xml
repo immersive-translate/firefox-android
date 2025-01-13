@@ -28,7 +28,7 @@
     </style>
 
     <style name="SplashScreen" parent="SplashScreenThemeBase">
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/animated_splash_screen_logo</item>
         <!-- Splash screen is animated to maximum 12 seconds -->
         <item name="windowSplashScreenAnimationDuration">12000</item>
         <item name="android:windowLayoutInDisplayCutoutMode">default</item>

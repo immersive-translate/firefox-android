@@ -551,7 +551,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
             }
         }
 
-        if (FxNimbus.features.splashScreen.value().enabled || Config.isInstallSplashScreen) {
+        if (FxNimbus.features.splashScreen.value().enabled || !isAgreePrivacy) {
             val splashScreen = installSplashScreen()
 
             splashScreen.setKeepOnScreenCondition {
@@ -567,13 +567,13 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
             splashScreen.setOnExitAnimationListener {
                 splashScreenViewProvider = it
-            }
-
-            MainScope().launch(Main) {
-                delay(timeMillis = 100)
-                showPrivacyRemind(findViewById(android.R.id.content))
+                MainScope().launch(Main) {
+                    delay(timeMillis = 100)
+                    showPrivacyRemind(findViewById(android.R.id.content))
+                }
             }
         }
+
     }
 
     private fun showPrivacyRemind(view: View) {
