@@ -567,13 +567,14 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
             splashScreen.setOnExitAnimationListener {
                 splashScreenViewProvider = it
-                MainScope().launch(Main) {
-                    delay(timeMillis = 100)
-                    showPrivacyRemind(findViewById(android.R.id.content))
-                }
             }
         }
 
+        // 还是移动到外面，否则在部分手机上无法出发，比如：鸿蒙系统
+        MainScope().launch(Main) {
+            delay(timeMillis = 300)
+            showPrivacyRemind(findViewById(android.R.id.content))
+        }
     }
 
     private fun showPrivacyRemind(view: View) {
