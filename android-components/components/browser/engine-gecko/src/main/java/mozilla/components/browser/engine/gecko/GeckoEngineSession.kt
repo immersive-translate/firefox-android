@@ -172,6 +172,41 @@ class GeckoEngineSession(
     @VisibleForTesting
     internal var initialLoadRequest: LoadRequest? = null
 
+    private fun initLoadMode(enable: Boolean): String? {
+        val currentMode = geckoSession.settings.userAgentMode
+        val currentViewPortMode = geckoSession.settings.viewportMode
+        var overrideUrl: String? = null
+
+        val newMode = if (enable) {
+            GeckoSessionSettings.USER_AGENT_MODE_DESKTOP
+        } else {
+            GeckoSessionSettings.USER_AGENT_MODE_MOBILE
+        }
+
+        val newViewportMode = if (enable) {
+            overrideUrl = currentUrl?.let { checkForMobileSite(it) }
+            GeckoSessionSettings.VIEWPORT_MODE_DESKTOP
+        } else {
+            GeckoSessionSettings.VIEWPORT_MODE_MOBILE
+        }
+
+        if (newMode != currentMode || newViewportMode != currentViewPortMode) {
+            geckoSession.settings.userAgentMode = newMode
+            if (PCSiteWhiteConfig.isChangeViewPort) {
+                geckoSession.settings.viewportMode = newViewportMode
+            }
+            if (enable) {
+                geckoSession.settings.userAgentOverride = PCSiteWhiteConfig.overrideUserAgentString
+            } else {
+                defaultSettings?.userAgentString?.let {
+                    geckoSession.settings.userAgentOverride = it
+                }
+            }
+        }
+
+        return overrideUrl
+    }
+
     /**
      * See [EngineSession.loadUrl]
      */
@@ -189,16 +224,26 @@ class GeckoEngineSession(
             return
         }
 
+        // load pc site
+        var requestUrl: String = url
+        var replaceFlags: LoadUrlFlags = flags
+        if (PCSiteWhiteConfig.isPCSite(requestUrl)) {
+            requestUrl = initLoadMode(true) ?: url
+            replaceFlags = LoadUrlFlags.select(LoadUrlFlags.LOAD_FLAGS_REPLACE_HISTORY)
+        } else {
+            initLoadMode(false)
+        }
+
         if (initialLoad) {
-            initialLoadRequest = LoadRequest(url, parent, flags, additionalHeaders)
+            initialLoadRequest = LoadRequest(requestUrl, parent, replaceFlags, additionalHeaders)
         }
 
         val loader = GeckoSession.Loader()
-            .uri(url)
-            .flags(flags.getGeckoFlags())
+            .uri(requestUrl)
+            .flags(replaceFlags.getGeckoFlags())
 
         if (additionalHeaders != null) {
-            val headerFilter = if (flags.contains(ALLOW_ADDITIONAL_HEADERS)) {
+            val headerFilter = if (replaceFlags.contains(ALLOW_ADDITIONAL_HEADERS)) {
                 GeckoSession.HEADER_FILTER_UNRESTRICTED_UNSAFE
             } else {
                 GeckoSession.HEADER_FILTER_CORS_SAFELISTED
@@ -330,6 +375,22 @@ class GeckoEngineSession(
      * See [EngineSession.reload]
      */
     override fun reload(flags: LoadUrlFlags) {
+
+        // pc site
+        /*if (initialLoadRequest == null) {
+            currentUrl?.let {
+                //var replaceFlags: LoadUrlFlags = flags
+                if (PCSiteWhiteConfig.isPCSite(it)) {
+                    //replaceFlags = LoadUrlFlags.select(LoadUrlFlags.LOAD_FLAGS_REPLACE_HISTORY)
+                    initLoadMode(true)
+                    geckoSession.settings.userAgentOverride = PCSiteWhiteConfig.overrideUserAgentString
+                } else {
+                    defaultSettings?.userAgentString?.let { geckoSession.settings.userAgentOverride = it }
+                    initLoadMode(false)
+                }
+            }
+        }*/
+
         initialLoadRequest?.let {
             // We have a pending initial load request, which means we never
             // successfully loaded a page. Calling reload now would just reload
@@ -1186,6 +1247,19 @@ class GeckoEngineSession(
                 initialLoad = true
             }
 
+            request.uri.let {
+                if (it.startsWith("http://") ||
+                    it.startsWith("https://")
+                ) {
+                    if (PCSiteWhiteConfig.isPCSite(it)) {
+                        //replaceFlags = LoadUrlFlags.select(LoadUrlFlags.LOAD_FLAGS_REPLACE_HISTORY)
+                        initLoadMode(true)
+                    } else {
+                        initLoadMode(false)
+                    }
+                }
+            }
+
             return when {
                 maybeInterceptRequest(request, false) != null ->
                     GeckoResult.deny()
@@ -1353,6 +1427,15 @@ class GeckoEngineSession(
             // Ignore initial load of about:blank (see https://github.com/mozilla-mobile/android-components/issues/403)
             if (initialLoad && url == ABOUT_BLANK) {
                 return
+            }
+
+            pageLoadingUrl?.let {
+                if (PCSiteWhiteConfig.isPCSite(it)) {
+                    //replaceFlags = LoadUrlFlags.select(LoadUrlFlags.LOAD_FLAGS_REPLACE_HISTORY)
+                    initLoadMode(true)
+                } else {
+                    initLoadMode(false)
+                }
             }
 
             notifyObservers {

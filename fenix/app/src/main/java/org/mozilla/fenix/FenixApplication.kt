@@ -29,6 +29,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import mozilla.appservices.Megazord
 import mozilla.appservices.autofill.AutofillApiException
+import mozilla.components.browser.engine.gecko.PCSiteWhiteConfig
 import mozilla.components.browser.state.action.SystemAction
 import mozilla.components.browser.state.selector.selectedTab
 import mozilla.components.browser.state.state.searchEngines
@@ -321,9 +322,15 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
         // override UA
         val ver = packageManager.getPackageInfoCompat(packageName, 0).versionName
-        val ua = components.core.engine.settings.userAgentString + " FxAndroid/121.0 ImtFxAndroid/$ver/${ImmersivePluginConfig.localPluginChannel}"
+        val ua = components.core.engine.settings.userAgentString + " FxAndroid/134.0 ImtFxAndroid/$ver/${ImmersivePluginConfig.localPluginChannel}"
 
         components.core.engine.settings.userAgentString = ua
+
+        // pc site
+        val pcUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0"
+        PCSiteWhiteConfig.overrideUserAgentString = pcUA
+        PCSiteWhiteConfig.addPCSite("xiaohongshu.com")
+        // PCSiteWhiteConfig.isChangeViewPort = true
     }
 
     @OptIn(DelicateCoroutinesApi::class) // GlobalScope usage
