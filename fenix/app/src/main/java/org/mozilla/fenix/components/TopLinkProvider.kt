@@ -37,10 +37,18 @@ object TopLinkProvider {
         )
         add(
             TopLink(
-                id = index,
+                id = index++,
                 iconId = R.mipmap.img_ts_comics,
                 title = R.string.home_top_link_ts_comics,
                 url = "https://browser.immersivetranslate.com/manga",
+            ),
+        )
+        add(
+            TopLink(
+                id = index,
+                iconId = R.mipmap.img_ts_rednote,
+                title = R.string.home_top_link_ts_rednote,
+                url = "https://browser.immersivetranslate.com/xiaohongshu",
             ),
         )
 

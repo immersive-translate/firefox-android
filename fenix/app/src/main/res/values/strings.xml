@@ -2925,6 +2925,8 @@
     <string name="onboarding_second_content_web">Web page</string>
     <string name="onboarding_second_content_video">Video</string>
     <string name="onboarding_second_content_doc">Document</string>
+    <string name="onboarding_second_content_cart">Cartoon</string>
+    <string name="onboarding_second_content_rn">Rednote</string>
     <string name="onboarding_second_subtitle">All translated with one click, \nmaking reading hassle-free!🎉</string>
     <string name="onboarding_second_known_btn">I see🫡</string>
 
@@ -2935,6 +2937,7 @@
     <string name="home_top_link_ts_video">Video\ntranslation</string>
     <string name="home_top_link_ts_doc">Doc\ntranslation</string>
     <string name="home_top_link_ts_comics">Comic\ntranslation</string>
+    <string name="home_top_link_ts_rednote">Rednote\ntranslation</string>
     <string name="home_top_link_ts_more">More\ntools</string>
     <string name="home_top_link_ts_more_content">Stay\nTuned</string>
 

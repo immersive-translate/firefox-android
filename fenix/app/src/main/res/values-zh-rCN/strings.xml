@@ -3098,6 +3098,8 @@
     <string name="onboarding_second_content_web">网页</string>
     <string name="onboarding_second_content_video">视频</string>
     <string name="onboarding_second_content_doc">文档</string>
+    <string name="onboarding_second_content_cart">漫画</string>
+    <string name="onboarding_second_content_rn">小红书</string>
     <string name="onboarding_second_subtitle">全部一键翻译，\n阅读再无障碍！🎉</string>
     <string name="onboarding_second_known_btn">我知道了🫡</string>
 
@@ -3108,6 +3110,7 @@
     <string name="home_top_link_ts_video">视频翻译</string>
     <string name="home_top_link_ts_doc">文档翻译</string>
     <string name="home_top_link_ts_comics">漫画翻译</string>
+    <string name="home_top_link_ts_rednote">小红书翻译</string>
     <string name="home_top_link_ts_more">更多工具</string>
     <string name="home_top_link_ts_more_content">敬请\n期待</string>
 </resources>

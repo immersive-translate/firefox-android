@@ -151,8 +151,8 @@ private fun TopSiteItem(
                     indication = null,
                     onClick = { onTopSiteClick(topLink) },
                 )
-                .padding(start = startPadding.dp, end = endPadding.dp)
-                .width(TOP_SITES_ITEM_SIZE.dp),
+                .width(TOP_SITES_ITEM_SIZE.dp)
+                .padding(start = startPadding.dp, end = endPadding.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(modifier = Modifier.height(4.dp))

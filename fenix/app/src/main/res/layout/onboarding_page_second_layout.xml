@@ -22,7 +22,7 @@
         android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:baselineAligned="false"
         android:gravity="center"
         android:orientation="horizontal"
@@ -39,8 +39,8 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@mipmap/img_onboarding_second_page_web" />
 
@@ -64,8 +64,8 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@mipmap/img_onboarding_second_page_video" />
 
@@ -89,8 +89,8 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
                 android:scaleType="fitCenter"
                 app:srcCompat="@mipmap/img_onboarding_second_page_doc" />
 
@@ -107,21 +107,87 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_content_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="47dp"
+        android:paddingEnd="47dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_content">
+
+        <!-- 漫画 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/img_onboarding_second_page_mh" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/onboarding_second_content_cart"
+                android:textColor="@color/fx_mobile_text_color_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- 小红书 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/img_onboarding_second_page_rednote" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/onboarding_second_content_rn"
+                android:textColor="@color/fx_mobile_text_color_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tv_set_lan_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="76dp"
         android:gravity="center"
-        android:text="@string/onboarding_second_subtitle"
         android:lineSpacingMultiplier="1.2"
+        android:text="@string/onboarding_second_subtitle"
         android:textAlignment="center"
         android:textColor="@color/fx_mobile_text_color_primary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_content" />
+        app:layout_constraintTop_toBottomOf="@id/ll_content_two" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_i_see"
