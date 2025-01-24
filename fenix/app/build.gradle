@@ -141,7 +141,7 @@ android {
         } else {
             buildConfigField "String", "VCS_HASH", "\"${Config.vcsHash}\""
         }*/
-        buildConfigField "String", "VCS_HASH", "\"${Config.vcsHash}\""
+        //buildConfigField "String", "VCS_HASH", "\"${Config.vcsHash}\""
 
         if (gradle.hasProperty("localProperties.autosignReleaseWithDebugKey")) {
             signingConfig signingConfigs.debug
@@ -624,6 +624,11 @@ dependencies {
     implementation 'com.facebook.android:facebook-common:17.0.1'
     implementation 'com.facebook.android:facebook-core:17.0.1'
 
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //implementation 'com.stripe:stripe-android:20.53.0'
+    //implementation 'com.stripe:stripe-android:21.3.1'
 
     implementation project(':browser-engine-gecko')
 

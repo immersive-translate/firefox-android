@@ -12,6 +12,7 @@ import mozilla.components.jsbridge.JSBridgeInstance
 import mozilla.components.jsbridge.JSBridgeInstance.OnJavaScriptCallback
 import mozilla.components.jsbridge.OnBridgeCallback
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
+import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.geckoview.GeckoSession
 
 
@@ -58,10 +59,21 @@ object JsBridge {
                     callback?.onCallBack(getResult(true))
                 }
 
+                "syncLoginData" -> {
+                    handleLogin(context, jsonObject)
+                }
+
                 else -> {}
             }
         }
 
+    }
+
+    /**
+     * 用户登录
+     */
+    private fun handleLogin(context: Activity, jsonObject: JsonObject) {
+        UserManager.saveUser(context, jsonObject.toString())
     }
 
     /**

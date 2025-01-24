@@ -552,6 +552,13 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
+            android:id="@+id/action_settingsFragment_to_buyVipFragment"
+            app:destination="@id/account_upgrade_graph"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
             android:id="@+id/action_settingsFragment_to_searchEngineFragment"
             app:destination="@id/search_engine_graph"
             app:enterAnim="@anim/slide_in_right"
@@ -1245,6 +1252,17 @@
                 android:name="addon"
                 app:argType="mozilla.components.feature.addons.Addon" />
         </fragment>
+    </navigation>
+
+    <navigation
+        android:id="@+id/account_upgrade_graph"
+        app:startDestination="@id/buyVipFragment">
+
+        <fragment
+            android:id="@+id/buyVipFragment"
+            android:name="org.mozilla.fenix.immersive_transalte.user.BuyVipFragment"
+            android:label="@string/preferences_account_update"/>
+
     </navigation>
 
     <navigation

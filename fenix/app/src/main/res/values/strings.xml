@@ -594,6 +594,7 @@
     <string name="preferences_category_engines_in_search_menu">Engines visible on the search menu</string>
     <!-- Preference for settings related to changing the default search engine -->
     <string name="preferences_default_search_engine">Default search engine</string>
+    <string name="preferences_account_update">Upgrade</string>
     <!-- Preference for settings related to Search -->
     <string name="preferences_search">Search</string>
     <!-- Preference for settings related to Search engines -->
@@ -2944,4 +2945,38 @@
     <string name="facebook_app_id">534301805718885</string>
     <string name="facebook_client_token">12f64b0848e953d71f94f6dca577fb36</string>
 
+
+    <!--会员支付相关-->
+    <string name="buy_vip_unit_month">/Moon</string>
+    <string name="buy_vip_unit_year">/Year</string>
+    <string name="buy_vip_year_title">Annual Pro Membership</string>
+    <string name="buy_vip_year_save_money">🔥Save</string>
+    <string name="buy_vip_year_renewal">Renews at %1$s/year after trial</string>
+    <string name="buy_vip_year_remind_2">Cancel anytime during the trial</string>
+    <string name="buy_vip_year_discount">Limited time offer</string>
+
+    <string name="buy_vip_month_title">Monthly Pro Membership</string>
+
+    <string name="buy_vip_ts_service_title">Pro AI Translation Services</string>
+    <string name="buy_vip_ts_deepL">DeepL translate</string>
+    <string name="buy_vip_ts_openAI">OpenAI translate</string>
+    <string name="buy_vip_ts_claude">Claude translate</string>
+    <string name="buy_vip_is_gemini">Gemini translate</string>
+
+    <string name="buy_vip_adv_title">Pro exclusive advanced features</string>
+    <string name="buy_vip_adv_pdf_pro">PDF Pro</string>
+    <string name="buy_vip_adv_comic">Comic translation</string>
+    <string name="buy_vip_adv_subtitle">Youtube Subtitles Export</string>
+    <string name="buy_vip_adv_sync">Cloud Sync Settings</string>
+    <string name="buy_vip_adv_email">Priority email support</string>
+
+    <string name="buy_vip_year_save_percent">Continuous annual subscription (save %1$s)</string>
+    <string name="buy_vip_year_month">Continuous monthly subscription</string>
+    <string name="buy_vip_year_try_trial">Free trial for %1$s days</string>
+    <string name="buy_vip_btn_buy">Subscribe now</string>
+
+    <string name="buy_vip_tip_01">The free plan requires custom API tokens, which are expensive, complicated to set up, and come with strict rate limits. After upgrading to Pro, you can instantly access Immersive Translate is built-in services including DeepL, OpenAI, Claude, and Gemini - no configuration needed, works right out of the box, with a generous monthly allowance of up to 20 million tokens.</string>
+    <string name="buy_vip_tip_02">Includes 500 pages of AI-driven PDF document translation per month, supporting complex formula recognition, table recognition, and scanned document</string>
+    <string name="buy_vip_tip_03">Monthly includes 1000 AI-driven comic translations</string>
+    <string name="buy_vip_tip_04">If you encounter any problems, please contact the customer support team\nsupport@immersivetranslate.com</string>
 </resources>
