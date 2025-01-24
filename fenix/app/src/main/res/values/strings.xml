@@ -2979,4 +2979,7 @@
     <string name="buy_vip_tip_02">Includes 500 pages of AI-driven PDF document translation per month, supporting complex formula recognition, table recognition, and scanned document</string>
     <string name="buy_vip_tip_03">Monthly includes 1000 AI-driven comic translations</string>
     <string name="buy_vip_tip_04">If you encounter any problems, please contact the customer support team\nsupport@immersivetranslate.com</string>
+
+    <string name="buy_vip_toast_sub_mon">You have subscribed to monthly membership</string>
+    <string name="buy_vip_toast_sub_year">You have subscribed to annual membership</string>
 </resources>

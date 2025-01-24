@@ -3198,4 +3198,7 @@
     <string name="buy_vip_tip_02">每月包含 500 頁 AI 驅動的 PDF 文件翻譯，支援複雜的公式識別，表格識別和掃描版文檔</string>
     <string name="buy_vip_tip_03">每月包含 1000 張 AI 驅動的漫畫翻譯</string>
     <string name="buy_vip_tip_04">如您遇到問題，請聯絡客戶支援團隊\nsupport@immersivetranslate.com</string>
+
+    <string name="buy_vip_toast_sub_mon">您已經訂閱月度會員</string>
+    <string name="buy_vip_toast_sub_year">您已經訂閱年度會員</string>
 </resources>

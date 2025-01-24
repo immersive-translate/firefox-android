@@ -7,13 +7,13 @@ package org.mozilla.fenix.immersive_transalte.bean;
 import java.io.Serializable;
 
 public class UserBean implements Serializable {
-    //private String subscription;
+    private Subscription subscription;
     private int totalTrialMathPixQuota;
     private int trialMathPixUsedCount;
     private int weChatPackageMathPixQuota;
     private int weChatPackageMathPixQuotaUsedCount;
     private boolean hasPhone;
-    //private myPhone;
+    // private myPhone;
     private String weChatNickName;
     private String weChatAvatarUrl;
     private String userName;
@@ -30,6 +30,14 @@ public class UserBean implements Serializable {
     private boolean isDeleted;
     private int dataVersion;
     private long id;
+
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
 
     public int getTotalTrialMathPixQuota() {
         return totalTrialMathPixQuota;
@@ -197,5 +205,171 @@ public class UserBean implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    /**
+     * 是否是月度会员
+     */
+    public boolean isSubMonthVip() {
+        return subscription != null
+                && "monthly".equals(subscription.subscriptionType)
+                && "active".equals(subscription.subscriptionStatus);
+    }
+
+    /**
+     * 是否是年度会员
+     */
+    public boolean isSubYearVip() {
+        return subscription != null
+                && "yearly".equals(subscription.subscriptionType)
+                && "active".equals(subscription.subscriptionStatus)
+                && !subscription.isTrial;
+    }
+
+    /**
+     * 是否是年度会员
+     */
+    public boolean isSubYearVipTry() {
+        return subscription != null
+                && "yearly".equals(subscription.subscriptionType)
+                && subscription.isTrial;
+    }
+
+    public static class Subscription {
+        private String subscriptionType; // monthly
+        private String subscriptionStatus; // active
+        private String cancelAtPeriodEnd;
+        private String subscriptionFrom;
+        private String subscriptionTo;
+        private String subscriptionId;
+        private String checkoutSessionId;
+        private boolean isTrial;
+        private long id;
+        private String amountPaid;
+        private String currency;
+        private String planAmountPaid;
+        private String planCurrency;
+        private String priceId;
+        private int subscriptionDay;
+
+        public String getSubscriptionType() {
+            return subscriptionType;
+        }
+
+        public void setSubscriptionType(String subscriptionType) {
+            this.subscriptionType = subscriptionType;
+        }
+
+        public String getSubscriptionStatus() {
+            return subscriptionStatus;
+        }
+
+        public void setSubscriptionStatus(String subscriptionStatus) {
+            this.subscriptionStatus = subscriptionStatus;
+        }
+
+        public String getCancelAtPeriodEnd() {
+            return cancelAtPeriodEnd;
+        }
+
+        public void setCancelAtPeriodEnd(String cancelAtPeriodEnd) {
+            this.cancelAtPeriodEnd = cancelAtPeriodEnd;
+        }
+
+        public String getSubscriptionFrom() {
+            return subscriptionFrom;
+        }
+
+        public void setSubscriptionFrom(String subscriptionFrom) {
+            this.subscriptionFrom = subscriptionFrom;
+        }
+
+        public String getSubscriptionTo() {
+            return subscriptionTo;
+        }
+
+        public void setSubscriptionTo(String subscriptionTo) {
+            this.subscriptionTo = subscriptionTo;
+        }
+
+        public String getSubscriptionId() {
+            return subscriptionId;
+        }
+
+        public void setSubscriptionId(String subscriptionId) {
+            this.subscriptionId = subscriptionId;
+        }
+
+        public String getCheckoutSessionId() {
+            return checkoutSessionId;
+        }
+
+        public void setCheckoutSessionId(String checkoutSessionId) {
+            this.checkoutSessionId = checkoutSessionId;
+        }
+
+        public boolean isTrial() {
+            return isTrial;
+        }
+
+        public void setTrial(boolean trial) {
+            isTrial = trial;
+        }
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getAmountPaid() {
+            return amountPaid;
+        }
+
+        public void setAmountPaid(String amountPaid) {
+            this.amountPaid = amountPaid;
+        }
+
+        public String getCurrency() {
+            return currency;
+        }
+
+        public void setCurrency(String currency) {
+            this.currency = currency;
+        }
+
+        public String getPlanAmountPaid() {
+            return planAmountPaid;
+        }
+
+        public void setPlanAmountPaid(String planAmountPaid) {
+            this.planAmountPaid = planAmountPaid;
+        }
+
+        public String getPlanCurrency() {
+            return planCurrency;
+        }
+
+        public void setPlanCurrency(String planCurrency) {
+            this.planCurrency = planCurrency;
+        }
+
+        public String getPriceId() {
+            return priceId;
+        }
+
+        public void setPriceId(String priceId) {
+            this.priceId = priceId;
+        }
+
+        public int getSubscriptionDay() {
+            return subscriptionDay;
+        }
+
+        public void setSubscriptionDay(int subscriptionDay) {
+            this.subscriptionDay = subscriptionDay;
+        }
     }
 }

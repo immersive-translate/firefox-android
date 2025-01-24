@@ -3149,4 +3149,7 @@
     <string name="buy_vip_tip_03">每月包含 1000 张 AI 驱动的漫画翻译</string>
     <string name="buy_vip_tip_04">如您遇到问题，请联系客户支持团队\nsupport@immersivetranslate.com</string>
 
+    <string name="buy_vip_toast_sub_mon">您已经订阅月度会员</string>
+    <string name="buy_vip_toast_sub_year">您已经订阅年度会员</string>
+
 </resources>

@@ -7,6 +7,7 @@ package org.mozilla.fenix.immersive_transalte.user
 import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,9 +24,11 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.FragmentBuyVipLayoutBinding
 import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.immersive_transalte.base.widget.ProcessDialog
+import org.mozilla.fenix.immersive_transalte.bean.UserBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
 import org.mozilla.fenix.immersive_transalte.net.service.MemberService
 import org.mozilla.fenix.immersive_transalte.utils.PixelUtil
+import org.mozilla.fenix.immersive_transalte.utils.ToastUtil
 import kotlin.math.ceil
 
 
@@ -34,6 +37,8 @@ class BuyVipFragment : Fragment() {
     private lateinit var binding: FragmentBuyVipLayoutBinding
 
     private var payType = 0 // 0 年卡，月卡
+
+    private var userInfo: UserBean? = null
     private var productInfo: VipProductBean? = null
     private var trailList: List<String>? = null
 
@@ -60,7 +65,7 @@ class BuyVipFragment : Fragment() {
             changePayType(1)
         }
         binding.llBuyVip.setOnClickListener {
-            createOrder()
+            createOrderClick()
         }
 
         binding.ivPopService.setOnClickListener {
@@ -146,12 +151,15 @@ class BuyVipFragment : Fragment() {
      */
     private fun loadData() {
         MainScope().launch(Dispatchers.Main) {
+            val userInfoDeferred = async { MemberService.getUserInfo() }
             val productDeferred = async { MemberService.getProducts() }
             val trailDeferred = async { MemberService.queryTrail() }
 
+            val userInfoResult = userInfoDeferred.await()
             val productResult = productDeferred.await()
             val trailResult = trailDeferred.await()
 
+            userInfo = userInfoResult.data?.data
             productInfo = productResult.data
             trailList = trailResult.data?.data
             if (trailList == null) {
@@ -198,7 +206,7 @@ class BuyVipFragment : Fragment() {
 
         refreshBuyButton()
 
-        if (year != null && month != null) {
+        if (year != null && month != null && userInfo != null) {
             binding.llContent.visibility = View.VISIBLE
         } else {
             binding.llContent.visibility = View.GONE
@@ -206,8 +214,96 @@ class BuyVipFragment : Fragment() {
         binding.progress.visibility = View.GONE
     }
 
+    private fun createCheckOrder(): Boolean {
+        if (userInfo != null && userInfo!!.isSubYearVip) {
+            ToastUtil.toast(
+                requireContext(),
+                R.string.buy_vip_toast_sub_year,
+                true,
+                Gravity.CENTER,
+            )
+            return true
+        }
+        if (payType == 1) {
+            if (userInfo != null && userInfo!!.isSubMonthVip) {
+                ToastUtil.toast(
+                    requireContext(),
+                    R.string.buy_vip_toast_sub_mon,
+                    true,
+                    Gravity.CENTER,
+                )
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun createOrderClick() {
+        if (createCheckOrder()) {
+            return
+        }
+        if (payType == 0) { // 年度会员
+            val priceId = productInfo?.entities?.year?.priceId
+            val isSubMonthVip = userInfo?.isSubMonthVip ?: false
+            val isSubTrial = userInfo?.isSubYearVipTry ?: false
+            if (isSubMonthVip) {
+                // 升级
+                ToastUtil.toast(requireContext(), "升级逻辑", true, Gravity.CENTER)
+            } else if (isSubTrial) {
+                // 结束使用
+                ToastUtil.toast(requireContext(), "结束试用逻辑", true, Gravity.CENTER)
+            } else {
+                // 试用逻辑
+                priceId?.let {
+                    createOrder(it, true)
+                }
+            }
+            return
+        }
+        if (payType == 1) { // 月度会员
+            val priceId = productInfo?.entities?.month?.priceId
+            priceId?.let {
+                createOrder(it, false)
+            }
+            return
+        }
+    }
+
     private var isHandle = false
+    private fun createOrder(priceId: String, isEnableTrial: Boolean) {
+        if (isHandle) {
+            return
+        }
+        showProcessDialog()
+        isHandle = true
+        MainScope().launch(Dispatchers.Main) {
+            isHandle = false
+            binding.root.postDelayed({ hideProcessDialog() }, 500)
+            val orderBean = MemberService.createOrder(
+                priceId, isEnableTrial,
+                "http://stripe_pay/success",
+                "http://stripe_pay/failed",
+            )
+            orderBean.data?.data?.redirect?.let {
+                BuyVipPopWindow(
+                    requireActivity(), it,
+                    onPaySuccess = {
+                        (requireActivity() as HomeActivity).openToBrowserAndLoad(
+                            Constant.paySuccess, true, BrowserDirection.FromGlobal,
+                        )
+                    },
+                    onPayFailed = {
+                    },
+                ).show(binding.root)
+            }
+        }
+    }
+
+    /*private var isHandle = false
     private fun createOrder() {
+        if (createCheckOrder()) {
+            return
+        }
         if (isHandle) {
             return
         }
@@ -220,12 +316,7 @@ class BuyVipFragment : Fragment() {
         isHandle = true
         MainScope().launch(Dispatchers.Main) {
             isHandle = false
-            binding.root.postDelayed(
-                {
-                    hideProcessDialog()
-                },
-                500,
-            )
+            binding.root.postDelayed({ hideProcessDialog() }, 500)
 
             val isEnableTrial =
                 if (payType == 0)
@@ -243,7 +334,7 @@ class BuyVipFragment : Fragment() {
                     requireActivity(), it,
                     onPaySuccess = {
                         (requireActivity() as HomeActivity).openToBrowserAndLoad(
-                           Constant.paySuccess, true, BrowserDirection.FromGlobal
+                            Constant.paySuccess, true, BrowserDirection.FromGlobal,
                         )
                     },
                     onPayFailed = {
@@ -251,8 +342,7 @@ class BuyVipFragment : Fragment() {
                 ).show(binding.root)
             }
         }
-
-    }
+    }*/
 
     private var processDialog: ProcessDialog? = null
     private fun showProcessDialog() {
