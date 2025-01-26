@@ -2982,4 +2982,23 @@
 
     <string name="buy_vip_toast_sub_mon">You have subscribed to monthly membership</string>
     <string name="buy_vip_toast_sub_year">You have subscribed to annual membership</string>
+
+    <string name="buy_vip_btn_text_cur">Current Plan</string>
+    <string name="buy_vip_btn_text_upgrade">Upgrade</string>
+
+    <string name="vip_year_btn_text">You have signed up for annual membership</string>
+    <string name="vip_year_btn_try_upgrade">Upgrade to official member</string>
+
+    <!--月费升级年费-->
+    <string name="vip_upgrade_title">Upgrade to Annual Pro Membership</string>
+    <string name="vip_upgrade_desc">The annual plan saves %1$s per year compared to the monthly plan</string>
+    <string name="vip_upgrade_detail">Upgrading now will automatically deduct %1$s immediately (the unused time of the current package has been deducted in proportion)</string>
+    <string name="vip_upgrade_end_time">New expiration date is %1$s</string>
+    <string name="vip_upgrade_cancel">Cancel</string>
+    <string name="vip_upgrade_btn_text">Upgrade now</string>
+
+    <!--成为正式会员-->
+    <string name="vip_trial_upgrade_title">Upgrade to official member</string>
+    <string name="vip_trial_upgrade_detail">Now it will be automatically deducted %1$s immediately (limit reset within the package)</string>
+
 </resources>

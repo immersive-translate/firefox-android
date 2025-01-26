@@ -7,6 +7,7 @@ package org.mozilla.fenix.immersive_transalte.net.api
 import com.google.gson.JsonObject
 import org.mozilla.fenix.immersive_transalte.bean.OrderBean
 import org.mozilla.fenix.immersive_transalte.bean.ResultData
+import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.bean.UserBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
 import retrofit2.Call
@@ -46,4 +47,18 @@ internal interface MemberApi {
         @HeaderMap headers: MutableMap<String, Any?>,
         @QueryMap params: MutableMap<String, Any?>,
     ): Call<ResultData<UserBean>>
+
+    @POST("/v1/user-subscription/upcoming")
+    fun upcoming(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @QueryMap params: MutableMap<String, Any?>,
+    ) :Call<ResultData<VipUpgradeBean>>
+
+
+    @POST("v1/user-subscription/one-click-upgrade")
+    fun vipUpgrade(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @QueryMap params: MutableMap<String, Any?>
+    ): Call<ResultData<JsonObject>>
+
 }

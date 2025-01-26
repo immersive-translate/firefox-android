@@ -7,12 +7,12 @@ package org.mozilla.fenix.immersive_transalte.user
 import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.annotation.StringRes
+import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -28,7 +28,6 @@ import org.mozilla.fenix.immersive_transalte.bean.UserBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
 import org.mozilla.fenix.immersive_transalte.net.service.MemberService
 import org.mozilla.fenix.immersive_transalte.utils.PixelUtil
-import org.mozilla.fenix.immersive_transalte.utils.ToastUtil
 import kotlin.math.ceil
 
 
@@ -126,6 +125,44 @@ class BuyVipFragment : Fragment() {
     }
 
     private fun refreshBuyButton() {
+        binding.llBuyVip.setBackgroundResource(R.mipmap.img_buy_vip_bg)
+        binding.btnBuy.setTextColor("#FFFFC736".toColorInt())
+        binding.ivBuyHot.visibility = View.VISIBLE
+
+        // 已经订购了会员
+        userInfo?.let {
+            // 年度会员
+            if (it.isSubYearVip) {
+                binding.btnBuy.text = resources.getString(R.string.vip_year_btn_text)
+                binding.llBuyVip.setBackgroundResource(R.drawable.buy_vip_btn_buy_disable_bg)
+                binding.ivBuyHot.visibility = View.GONE
+                binding.btnBuy.setTextColor(0xFF999999.toInt())
+                return
+            }
+
+            // 年费试用
+            if (it.isSubYearVipTry) {
+                binding.btnBuy.text = resources.getString(R.string.vip_year_btn_try_upgrade)
+                return
+            }
+
+            // 月度会员
+            if (it.isSubMonthVip) {
+                if (payType == 0) {
+                    binding.btnBuy.text = resources.getString(R.string.buy_vip_btn_text_upgrade)
+                    binding.btnBuy.visibility = View.VISIBLE
+                } else {
+                    binding.btnBuy.text = resources.getString(R.string.buy_vip_btn_text_cur)
+                    binding.llBuyVip.setBackgroundResource(R.drawable.buy_vip_btn_buy_disable_bg)
+                    binding.ivBuyHot.visibility = View.GONE
+                    binding.btnBuy.setTextColor(0xFF999999.toInt())
+                }
+                return
+            }
+
+
+        }
+
         if (payType == 0) {
             productInfo?.entities?.year?.let {
                 binding.btnBuy.text =
@@ -136,9 +173,6 @@ class BuyVipFragment : Fragment() {
                         )
                     else resources.getString(R.string.buy_vip_btn_buy)
             }
-            /*val isEnableTrial =
-                productInfo?.entities?.year?.isEnableTrial ?: false && trailList!!.isEmpty()
-            binding.ivBuyHot.visibility = if (isEnableTrial) View.VISIBLE else View.GONE*/
             binding.ivBuyHot.visibility = View.VISIBLE
         } else {
             binding.btnBuy.text = resources.getString(R.string.buy_vip_btn_buy)
@@ -216,22 +250,10 @@ class BuyVipFragment : Fragment() {
 
     private fun createCheckOrder(): Boolean {
         if (userInfo != null && userInfo!!.isSubYearVip) {
-            ToastUtil.toast(
-                requireContext(),
-                R.string.buy_vip_toast_sub_year,
-                true,
-                Gravity.CENTER,
-            )
             return true
         }
         if (payType == 1) {
             if (userInfo != null && userInfo!!.isSubMonthVip) {
-                ToastUtil.toast(
-                    requireContext(),
-                    R.string.buy_vip_toast_sub_mon,
-                    true,
-                    Gravity.CENTER,
-                )
                 return true
             }
         }
@@ -242,16 +264,21 @@ class BuyVipFragment : Fragment() {
         if (createCheckOrder()) {
             return
         }
+
+        // 试用升级到正式
+        val isSubTrial = userInfo?.isSubYearVipTry ?: false
+        if (isSubTrial) {
+            trialVipUpgrade();
+            return
+        }
+
         if (payType == 0) { // 年度会员
             val priceId = productInfo?.entities?.year?.priceId
             val isSubMonthVip = userInfo?.isSubMonthVip ?: false
-            val isSubTrial = userInfo?.isSubYearVipTry ?: false
+
             if (isSubMonthVip) {
-                // 升级
-                ToastUtil.toast(requireContext(), "升级逻辑", true, Gravity.CENTER)
-            } else if (isSubTrial) {
-                // 结束使用
-                ToastUtil.toast(requireContext(), "结束试用逻辑", true, Gravity.CENTER)
+                // 升级到包年
+                monthVipUpgrade()
             } else {
                 // 试用逻辑
                 priceId?.let {
@@ -260,12 +287,72 @@ class BuyVipFragment : Fragment() {
             }
             return
         }
+
         if (payType == 1) { // 月度会员
             val priceId = productInfo?.entities?.month?.priceId
             priceId?.let {
                 createOrder(it, false)
             }
             return
+        }
+    }
+
+    private var isUpdating = false
+
+    private fun trialVipUpgrade() {
+        if (isUpdating) {
+            return
+        }
+        val priceId = productInfo?.entities?.year?.priceId
+        if (priceId.isNullOrEmpty()) {
+            return
+        }
+        showProcessDialog()
+        isUpdating = true;
+        MainScope().launch(Dispatchers.Main) {
+            isUpdating = false
+            val upcomming =  MemberService.orderUpcomming(priceId).data?.data
+            val currency = upcomming?.currency
+            val product = currency?.let {
+                MemberService.getUpgradeProducts(currency).data
+            }
+            hideProcessDialog()
+            product?.let {
+                TrialUpgradeDialog(requireContext(), it, upcomming, {
+                    (requireActivity() as HomeActivity).openToBrowserAndLoad(
+                        Constant.paySuccess, true, BrowserDirection.FromGlobal,
+                    )
+                }).show()
+            }
+        }
+    }
+
+
+    private fun monthVipUpgrade() {
+        if (isUpdating) {
+            return
+        }
+        val priceId = productInfo?.entities?.year?.priceId
+        if (priceId.isNullOrEmpty()) {
+            return
+        }
+        showProcessDialog()
+        isUpdating = true;
+        MainScope().launch(Dispatchers.Main) {
+            isUpdating = false
+            val upcomming =  MemberService.orderUpcomming(priceId).data?.data
+            val currency = upcomming?.currency
+            val product = currency?.let {
+                MemberService.getUpgradeProducts(currency).data
+            }
+            hideProcessDialog()
+            product?.let {
+                MonthUpgradeDialog(requireContext(), it, upcomming, {
+                    (requireActivity() as HomeActivity).openToBrowserAndLoad(
+                        Constant.paySuccess, true, BrowserDirection.FromGlobal,
+                    )
+                }).show()
+            }
         }
     }
 
@@ -298,51 +385,6 @@ class BuyVipFragment : Fragment() {
             }
         }
     }
-
-    /*private var isHandle = false
-    private fun createOrder() {
-        if (createCheckOrder()) {
-            return
-        }
-        if (isHandle) {
-            return
-        }
-        val priceId = if (payType == 0) productInfo?.entities?.year?.priceId else
-            productInfo?.entities?.month?.priceId
-        if (priceId.isNullOrEmpty()) {
-            return
-        }
-        showProcessDialog()
-        isHandle = true
-        MainScope().launch(Dispatchers.Main) {
-            isHandle = false
-            binding.root.postDelayed({ hideProcessDialog() }, 500)
-
-            val isEnableTrial =
-                if (payType == 0)
-                    productInfo?.entities?.year?.isEnableTrial ?: false && trailList!!.isEmpty()
-                else false
-
-            val orderBean = MemberService.createOrder(
-                priceId, isEnableTrial,
-                "http://stripe_pay/success",
-                "http://stripe_pay/failed",
-            )
-
-            orderBean.data?.data?.redirect?.let {
-                BuyVipPopWindow(
-                    requireActivity(), it,
-                    onPaySuccess = {
-                        (requireActivity() as HomeActivity).openToBrowserAndLoad(
-                            Constant.paySuccess, true, BrowserDirection.FromGlobal,
-                        )
-                    },
-                    onPayFailed = {
-                    },
-                ).show(binding.root)
-            }
-        }
-    }*/
 
     private var processDialog: ProcessDialog? = null
     private fun showProcessDialog() {

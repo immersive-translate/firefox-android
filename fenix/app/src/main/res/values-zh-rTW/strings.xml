@@ -3201,4 +3201,23 @@
 
     <string name="buy_vip_toast_sub_mon">您已經訂閱月度會員</string>
     <string name="buy_vip_toast_sub_year">您已經訂閱年度會員</string>
+
+    <string name="buy_vip_btn_text_cur">目前套餐</string>
+    <string name="buy_vip_btn_text_upgrade">升級</string>
+
+    <string name="vip_year_btn_text">您已經開通年費會員</string>
+    <string name="vip_year_btn_try_upgrade">升級為正式會員</string>
+
+    <!--月费升级年费-->
+    <string name="vip_upgrade_title">升級為年費Pro會員</string>
+    <string name="vip_upgrade_desc">年度套餐每年會比月度套餐節省 %1$s</string>
+    <string name="vip_upgrade_detail">現在升級將會立即自動扣款 %1$s (已按比例扣除目前套餐未使用的時間)</string>
+    <string name="vip_upgrade_end_time">新的到期日為 %1$s</string>
+    <string name="vip_upgrade_cancel">取消</string>
+    <string name="vip_upgrade_btn_text">立刻升級</string>
+
+    <!--成为正式会员-->
+    <string name="vip_trial_upgrade_title">升级为正式会员</string>
+    <string name="vip_trial_upgrade_detail">現在成為將立即自動扣款 %1$s (套餐內額度重置)</string>
+
 </resources>

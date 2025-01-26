@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.immersive_transalte.net.service
 
+import com.google.gson.JsonObject
 import org.mozilla.fenix.FenixApplication
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.immersive_transalte.Constant
@@ -12,6 +13,7 @@ import org.mozilla.fenix.immersive_transalte.base.http.HttpClient
 import org.mozilla.fenix.immersive_transalte.base.http.Response
 import org.mozilla.fenix.immersive_transalte.bean.OrderBean
 import org.mozilla.fenix.immersive_transalte.bean.ResultData
+import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.bean.UserBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
 import org.mozilla.fenix.immersive_transalte.net.api.MemberApi
@@ -72,4 +74,38 @@ object MemberService : BaseService() {
         )
     }
 
+    /**
+     * 会员 升级
+     */
+    suspend fun orderUpcomming(
+        priceId: String,
+    ): Response<ResultData<VipUpgradeBean>> {
+        val params = getCommonQueryParams()
+        params["priceId"] = priceId
+        return executeHttpAndCallback(
+            memberApi?.upcoming(getHeadersMap(), params),
+        )
+    }
+
+    /**
+     * 商品接口
+     */
+    suspend fun getUpgradeProducts(currency: String): Response<VipProductBean> {
+        val params = getCommonQueryParams()
+        params["group"] = "year_discount_7_year_trial_3"
+        params["currency"] = currency
+        val url = "${Constant.workerBaseUrl}/goods"
+        return executeHttpAndCallback(memberApi?.getProducts(url, params))
+    }
+
+    /**
+     * 月费升级到年费
+     */
+    suspend fun vipUpgrade(
+        priceId: String,
+    ): Response<ResultData<JsonObject>> {
+        val params = getCommonQueryParams()
+        params["priceId"] = priceId
+        return executeHttpAndCallback(memberApi?.vipUpgrade(getHeadersMap(), params))
+    }
 }
