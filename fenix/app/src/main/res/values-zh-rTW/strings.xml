@@ -636,6 +636,7 @@
     <string name="preferences_category_engines_in_search_menu">要在搜尋選單中顯示的搜尋引擎</string>
     <!-- Preference for settings related to changing the default search engine -->
     <string name="preferences_default_search_engine">預設搜尋引擎</string>
+    <string name="preferences_account_update">升級</string>
     <!-- Preference for settings related to Search -->
     <string name="preferences_search">搜尋</string>
     <!-- Preference for settings related to Search engines -->
@@ -3163,4 +3164,60 @@
     <string name="home_top_link_ts_rednote">小紅書翻譯</string>
     <string name="home_top_link_ts_more">更多工具</string>
     <string name="home_top_link_ts_more_content">敬請\n期待</string>
+
+    <!--会员支付相关-->
+    <string name="buy_vip_unit_month">/月</string>
+    <string name="buy_vip_unit_year">/年</string>
+    <string name="buy_vip_year_title">年費Pro會員</string>
+    <string name="buy_vip_year_save_money">🔥節省</string>
+    <string name="buy_vip_year_renewal">試用期後以 %1$s/年自動續費</string>
+    <string name="buy_vip_year_remind_2">試用期間取消訂閱不扣款</string>
+    <string name="buy_vip_year_discount">限時特惠</string>
+
+    <string name="buy_vip_month_title">月費Pro會員</string>
+
+    <string name="buy_vip_ts_service_title">Pro專屬全球頂尖AI翻譯服務</string>
+    <string name="buy_vip_ts_deepL">DeepL 翻譯</string>
+    <string name="buy_vip_ts_openAI">OpenAI 翻譯</string>
+    <string name="buy_vip_ts_claude">Claude 翻譯</string>
+    <string name="buy_vip_is_gemini">Gemini 翻譯</string>
+
+    <string name="buy_vip_adv_title">Pro專屬進階功能</string>
+    <string name="buy_vip_adv_pdf_pro">PDF Pro</string>
+    <string name="buy_vip_adv_comic">漫畫翻譯</string>
+    <string name="buy_vip_adv_subtitle">Youtube 雙語字幕下載</string>
+    <string name="buy_vip_adv_sync">多設備同步配置</string>
+    <string name="buy_vip_adv_email">優先的電子郵件支持</string>
+
+    <string name="buy_vip_year_save_percent">連續包年（節省%1$s）</string>
+    <string name="buy_vip_year_month">連續包月</string>
+    <string name="buy_vip_year_try_trial">免費試用%1$s天</string>
+    <string name="buy_vip_btn_buy">立即訂閱</string>
+
+    <string name="buy_vip_tip_01">免費套餐需要自訂 API Token，價格較貴，配置繁瑣且有嚴格的速率限制。升級 Pro 會員後可直接使用沉浸式翻譯提供的 DeepL，OpenAI，Claude，Gemini 翻譯服務，無需任何配置，開箱即用，每月更可享受高達 2000 萬 token 的翻譯額度。</string>
+    <string name="buy_vip_tip_02">每月包含 500 頁 AI 驅動的 PDF 文件翻譯，支援複雜的公式識別，表格識別和掃描版文檔</string>
+    <string name="buy_vip_tip_03">每月包含 1000 張 AI 驅動的漫畫翻譯</string>
+    <string name="buy_vip_tip_04">如您遇到問題，請聯絡客戶支援團隊\nsupport@immersivetranslate.com</string>
+
+    <string name="buy_vip_toast_sub_mon">您已經訂閱月度會員</string>
+    <string name="buy_vip_toast_sub_year">您已經訂閱年度會員</string>
+
+    <string name="buy_vip_btn_text_cur">目前套餐</string>
+    <string name="buy_vip_btn_text_upgrade">升級</string>
+
+    <string name="vip_year_btn_try_upgrade">升級為正式會員</string>
+
+    <!--月费升级年费-->
+    <string name="vip_upgrade_title">升級為年費Pro會員</string>
+    <string name="vip_upgrade_desc">年度套餐每年會比月度套餐節省 %1$s</string>
+    <string name="vip_upgrade_detail">現在升級將會立即自動扣款 %1$s (已按比例扣除目前套餐未使用的時間)</string>
+    <string name="vip_upgrade_end_time">新的到期日為 %1$s</string>
+    <string name="vip_upgrade_cancel">取消</string>
+    <string name="vip_upgrade_btn_text">立刻升級</string>
+
+    <!--成为正式会员-->
+    <string name="vip_trial_upgrade_title">升级为正式会员</string>
+    <string name="vip_trial_upgrade_detail">現在成為將立即自動扣款 %1$s (套餐內額度重置)</string>
+    <string name="vip_downgrade">目前暫不支援降級</string>
+
 </resources>

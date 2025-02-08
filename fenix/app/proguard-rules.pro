@@ -146,5 +146,7 @@
 -keep class mozilla.components.jsbridge.** { *; }
 -keep class com.facebook.** {*;}
 
+-keep class org.mozilla.fenix.immersive_transalte.base.http.Response { *; }
+-keep class org.mozilla.fenix.immersive_transalte.bean.** { *; }
 
 

@@ -22,9 +22,13 @@ object UrlLanguageFormater {
         var webUrl = url
         val key = "imt_set_targetLanguage"
         var uri = Uri.parse(webUrl)
-        if (uri.getQueryParameter("key").isNullOrEmpty()) {
-            uri = uri.buildUpon().appendQueryParameter(key, lang).build()
-            webUrl = uri.toString()
+
+        try {
+            if (uri.getQueryParameter("key").isNullOrEmpty()) {
+                uri = uri.buildUpon().appendQueryParameter(key, lang).build()
+                webUrl = uri.toString()
+            }
+        } finally {
         }
 
         return webUrl

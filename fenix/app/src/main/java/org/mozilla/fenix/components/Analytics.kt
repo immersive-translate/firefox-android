@@ -115,7 +115,7 @@ class Analytics(
             shouldPrompt = CrashReporter.Prompt.ALWAYS,
             promptConfiguration = CrashReporter.PromptConfiguration(
                 appName = context.getString(R.string.app_name),
-                organizationName = "Mozilla",
+                organizationName = context.getString(R.string.app_name),
             ),
             enabled = true,
             nonFatalCrashIntent = pendingIntent,

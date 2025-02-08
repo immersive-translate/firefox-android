@@ -34,10 +34,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mozilla.components.browser.state.state.selectedOrDefaultSearchEngine
-import mozilla.components.concept.sync.AccountObserver
-import mozilla.components.concept.sync.AuthType
-import mozilla.components.concept.sync.OAuthAccount
-import mozilla.components.concept.sync.Profile
 import mozilla.components.feature.addons.ui.AddonFilePicker
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.support.ktx.android.view.showKeyboard
@@ -53,7 +49,6 @@ import org.mozilla.fenix.GleanMetrics.TrackingProtection
 import org.mozilla.fenix.GleanMetrics.Translations
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
-import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
 import org.mozilla.fenix.databinding.AmoCollectionOverrideDialogBinding
 import org.mozilla.fenix.ext.application
 import org.mozilla.fenix.ext.components
@@ -63,9 +58,9 @@ import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.ext.showToolbar
+import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.perf.ProfilerViewModel
-import org.mozilla.fenix.settings.account.AccountUiView
 import org.mozilla.fenix.snackbar.FenixSnackbarDelegate
 import org.mozilla.fenix.snackbar.SnackbarBinding
 import org.mozilla.fenix.utils.Settings
@@ -170,6 +165,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getPreferenceKey(R.string.pref_key_translation),
         )?.isVisible = FxNimbus.features.translations.value().globalSettingsEnabled &&
             requireContext().components.core.store.state.translationEngine.isEngineSupported == true
+
+        // 登录用户，展示 升级 按钮
+        val upgradePreference =
+            requirePreference<Preference>(R.string.pref_key_account_update)
+        // upgradePreference.isVisible = UserManager.isLogin(requireContext())
+        upgradePreference.isVisible = true
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -310,6 +311,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }*/
 
             /* General preferences */
+            resources.getString(R.string.pref_key_account_update) -> {
+                SettingsFragmentDirections.actionSettingsFragmentToBuyVipFragment()
+            }
+
             resources.getString(R.string.pref_key_search_settings) -> {
                 SettingsFragmentDirections.actionSettingsFragmentToSearchEngineFragment()
             }

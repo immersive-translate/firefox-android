@@ -65,6 +65,7 @@ internal object AppStoreReducer {
         is AppAction.ModeChange -> state.copy(mode = action.mode)
         is AppAction.OrientationChange -> state.copy(orientation = action.orientation)
         is AppAction.TopSitesChange -> state.copy(topSites = action.topSites)
+        is AppAction.TopLinksChange -> state.copy(topLinks = action.topLinks)
         is AppAction.RemoveCollectionsPlaceholder -> {
             state.copy(showCollectionPlaceholder = false)
         }

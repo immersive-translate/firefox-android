@@ -1393,7 +1393,7 @@ class GeckoEngineSession(
     private fun createProgressDelegate() = object : GeckoSession.ProgressDelegate {
         override fun onProgressChange(session: GeckoSession, progress: Int) {
             notifyObservers { onProgress(progress) }
-            if (progress == 100) {
+            if (progress >= 50) {
                 JSBridgeInstance.getInstance().injectJsBridge(session)
             }
         }

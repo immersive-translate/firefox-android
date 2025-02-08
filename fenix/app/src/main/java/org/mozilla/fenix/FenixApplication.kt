@@ -5,6 +5,7 @@
 package org.mozilla.fenix
 
 import android.app.ActivityManager
+import android.app.Application
 import android.content.Context
 import android.net.Uri
 import android.os.Build
@@ -136,6 +137,10 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
         recordOnInit() // DO NOT MOVE ANYTHING ABOVE HERE: the timing of this measurement is critical.
     }
 
+    companion object {
+        lateinit var application: Application
+    }
+
     private val logger = Logger("FenixApplication")
 
     internal val isDeviceRamAboveThreshold by lazy {
@@ -149,7 +154,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
     override fun onCreate() {
         super.onCreate()
-
+        application = this
         if (shouldShowPrivacyNotice()) {
             // For Mozilla Online build: Delay initialization on first run until privacy notice
             // is accepted by the user.
