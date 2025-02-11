@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.immersive_transalte.net.service
 
-import com.google.gson.JsonObject
 import org.mozilla.fenix.FenixApplication
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.immersive_transalte.Constant
@@ -14,16 +13,12 @@ import org.mozilla.fenix.immersive_transalte.base.http.Response
 import org.mozilla.fenix.immersive_transalte.bean.OrderBean
 import org.mozilla.fenix.immersive_transalte.bean.ResultData
 import org.mozilla.fenix.immersive_transalte.bean.UpgradeBean
-import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.bean.UserBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
+import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.net.api.MemberApi
 
 object MemberService : BaseService() {
-
-    init {
-        HttpClient.baseApiUrl = Constant.apiBaseUrl
-    }
 
     private val memberApi: MemberApi? by lazy { HttpClient.retrofit?.create(MemberApi::class.java) }
 

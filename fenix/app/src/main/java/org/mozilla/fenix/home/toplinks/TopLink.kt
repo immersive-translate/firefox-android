@@ -9,9 +9,15 @@ import androidx.annotation.StringRes
 
 data class TopLink(
     val id: Long?,
-    @DrawableRes val iconId: Int,
-    @StringRes val title: Int,
+    @DrawableRes val iconId: Int = 0,
+    @StringRes val title: Int = 0,
     @StringRes val content: Int = 0,
-    val url: String? = null,
+
+    val iconUrl: String = "",
+    val linkUrl: String = "",
+    val title_zh: String = "",
+    val title_tr: String = "",
+    val title_en: String = "",
+
     val isMore: Boolean = false
 )

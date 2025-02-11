@@ -5,7 +5,6 @@
 package org.mozilla.fenix.home.toplinks
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -32,9 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
@@ -43,9 +40,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.mozilla.fenix.R
+import org.mozilla.fenix.compose.Favicon
 import org.mozilla.fenix.compose.PagerIndicator
 import org.mozilla.fenix.compose.annotation.LightDarkPreview
 import org.mozilla.fenix.home.topsites.TopSitesTestTag
+import org.mozilla.fenix.immersive_transalte.utils.AppLangUtil
 import org.mozilla.fenix.theme.FirefoxTheme
 import kotlin.math.ceil
 
@@ -159,11 +158,11 @@ private fun TopSiteItem(
 
             if (!topLink.isMore) {
                 TopSiteFaviconCard(
-                    topLink = topLink
+                    topLink = topLink,
                 )
             } else {
                 TopSiteMoreCard(
-                    topLink = topLink
+                    topLink = topLink,
                 )
             }
 
@@ -186,19 +185,31 @@ private fun TopSiteItem(
                         }
                         .testTag(TopSitesTestTag.topSiteTitle)
                         .padding(start = 2.dp, end = 2.dp),
-                    text = stringResource(topLink.title),
+                    text = getTopLinkTitle(topLink), /*stringResource(topLink.title)*/
                     color = if (!topLink.isMore) FirefoxTheme.colors.textPrimary
-                            else Color(0xFF999999),
+                    else Color(0xFF999999),
                     fontSize = 12.sp,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2,
                     style = FirefoxTheme.typography.caption,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
             }
         }
 
     }
+}
+
+/**
+ * 判断语言
+ */
+private fun getTopLinkTitle(topLink: TopLink): String {
+    if (AppLangUtil.isChineseSimplified()) {
+        return topLink.title_zh
+    } else if (AppLangUtil.isChineseTraditional()) {
+        return topLink.title_tr
+    }
+    return topLink.title_en
 }
 
 @Composable
@@ -215,12 +226,14 @@ private fun TopSiteFaviconCard(
                 modifier = Modifier.size(TOP_SITES_FAVICON_SIZE.dp),
                 //shape = RoundedCornerShape(4.dp),
             ) {
-                Image(
+                /*Image(
                     painter = painterResource(topLink.iconId),
                     contentDescription = null,
                     modifier = Modifier.size(TOP_SITES_FAVICON_SIZE.dp),
                     contentScale = ContentScale.Crop,
-                )
+                )*/
+                val imgUrl = topLink.iconUrl
+                Favicon(url = imgUrl, size = TOP_SITES_FAVICON_SIZE.dp, imageUrl = imgUrl)
             }
         }
     }
@@ -233,7 +246,7 @@ private fun TopSiteMoreCard(
     topLink: TopLink,
 ) {
     Card(
-        modifier = Modifier.size(TOP_SITES_FAVICON_CARD_SIZE .dp),
+        modifier = Modifier.size(TOP_SITES_FAVICON_CARD_SIZE.dp),
         shape = RoundedCornerShape((TOP_SITES_FAVICON_CARD_SIZE / 2).dp),
         elevation = 1.dp,
         backgroundColor = Color(0xFFF4F4F4),
@@ -268,7 +281,7 @@ private fun TopSitesPreview() {
                                 id = index.toLong(),
                                 iconId = R.drawable.ic_baidu,
                                 title = R.string.app_name,
-                                url = "mozilla.com",
+                                linkUrl = "mozilla.com",
                                 isMore = false,
                             ),
                         )
@@ -280,8 +293,8 @@ private fun TopSitesPreview() {
                             iconId = R.drawable.ic_baidu,
                             title = R.string.app_name,
                             content = R.string.home_top_link_ts_more_content,
-                            url = "mozilla.com",
-                            isMore =  true
+                            linkUrl = "mozilla.com",
+                            isMore = true,
                         ),
                     )
                 },

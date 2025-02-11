@@ -90,6 +90,7 @@ import org.mozilla.fenix.GleanMetrics.ShoppingSettings
 import org.mozilla.fenix.GleanMetrics.TopSites
 import org.mozilla.fenix.components.Components
 import org.mozilla.fenix.components.Core
+import org.mozilla.fenix.components.TopLinkProvider
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.metrics.MetricServiceType
 import org.mozilla.fenix.components.metrics.MozillaProductDetector
@@ -194,6 +195,8 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
         GlobalScope.launch(IO) {
             PerfStartup.applicationOnCreate.accumulateSamples(listOf(durationMillis))
         }
+
+        TopLinkProvider.fetchTopLinks(this)
     }
 
     @OptIn(DelicateCoroutinesApi::class) // GlobalScope usage

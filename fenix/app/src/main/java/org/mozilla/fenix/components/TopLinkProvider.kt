@@ -4,12 +4,18 @@
 
 package org.mozilla.fenix.components
 
-import org.mozilla.fenix.R
+import android.content.Context
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import org.mozilla.fenix.components.appstate.AppAction
+import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.home.toplinks.TopLink
+import org.mozilla.fenix.immersive_transalte.net.service.HomePageService
 
 object TopLinkProvider {
-    val topLinks = mutableListOf<TopLink>().apply {
-        var index = 0L
+    var topLinks = mutableListOf<TopLink>().apply {
+        /*var index = 0L
         add(
             TopLink(
                 id = index++,
@@ -31,8 +37,8 @@ object TopLinkProvider {
                 id = index++,
                 iconId = R.mipmap.img_onboarding_second_page_doc,
                 title = R.string.home_top_link_ts_doc,
-                //url = "https://test-browser.immersivetranslate.com/novel",
-                url = "https://app.immersivetranslate.com/"
+                //url = "https://browser.immersivetranslate.com/novel",
+                url = "https://app.immersivetranslate.com/",
             ),
         )
         add(
@@ -50,7 +56,7 @@ object TopLinkProvider {
                 title = R.string.home_top_link_ts_rednote,
                 url = "https://browser.immersivetranslate.com/xiaohongshu",
             ),
-        )
+        )*/
 
         /*more*/
         /*add(
@@ -64,4 +70,31 @@ object TopLinkProvider {
         )*/
 
     }
+
+    fun fetchTopLinks(context: Context) {
+        MainScope().launch(Dispatchers.IO) {
+            val topLinkData = HomePageService.fetchHomeTopLinks().data?.data
+            topLinkData?.topLinks?.let {
+                val tls = mutableListOf<TopLink>()
+                it.forEach { topLink ->
+                    val tl = TopLink(
+                        id = topLink.id,
+                        iconUrl = topLink.iconUrl,
+                        linkUrl = topLink.linkUrl,
+                        title_zh = topLink.title_zh,
+                        title_en = topLink.title_en,
+                        title_tr = topLink.title_tr,
+                    )
+                    tls.add(tl)
+                }
+
+                context.components.appStore.dispatch(
+                    AppAction.TopLinksChange(tls),
+                )
+
+                topLinks = tls
+            }
+        }
+    }
+
 }

@@ -411,11 +411,11 @@ class DefaultSessionControlController(
     }
 
     override fun handleSelectTopLink(topLink: TopLink, position: Int) {
-        if (topLink.url.isNullOrEmpty()) {
+        if (TextUtils.isEmpty(topLink.linkUrl)) {
             return
         }
 
-        val url = UrlLanguageFormater.handleUrl(activity.components, topLink.url)
+        val url = UrlLanguageFormater.handleUrl(activity.components, topLink.linkUrl)
         val existingTabForUrl = store.state.tabs.firstOrNull { url == it.content.url }
 
         if (existingTabForUrl == null) {

@@ -5,6 +5,7 @@
 package org.mozilla.fenix.immersive_transalte.base.http
 
 import org.mozilla.fenix.FenixApplication
+import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.immersive_transalte.base.http.httpcallbak.OnHttpListener
 import org.mozilla.fenix.immersive_transalte.user.UserManager
 import retrofit2.Call
@@ -15,6 +16,12 @@ import kotlin.coroutines.suspendCoroutine
 
 
 open class BaseService {
+
+    companion object {
+        init {
+            HttpClient.baseApiUrl = Constant.apiBaseUrl
+        }
+    }
 
     private val appVersion: String? by lazy {
         val cxt = FenixApplication.application
