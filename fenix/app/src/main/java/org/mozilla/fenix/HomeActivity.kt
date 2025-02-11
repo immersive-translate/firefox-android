@@ -1323,6 +1323,10 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     }
 
     internal fun navigateToBuyVip() {
+        if (navHost.navController.currentDestination ==
+            NavGraphDirections.actionGlobalBuyVipFragment()) {
+            return
+        }
         navHost.navController.navigate(NavGraphDirections.actionGlobalBuyVipFragment())
     }
 

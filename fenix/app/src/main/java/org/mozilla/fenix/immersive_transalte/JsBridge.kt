@@ -64,10 +64,22 @@ object JsBridge {
                     handleLogin(context, jsonObject)
                 }
 
+                "gotoUpgrade" -> {
+                    handleGotoUpgrade(context)
+                }
+
                 else -> {}
             }
         }
 
+    }
+
+
+    /**
+     * 去购买页面
+     */
+    private fun handleGotoUpgrade(context: Activity) {
+        (context as HomeActivity).navigateToBuyVip()
     }
 
     /**
@@ -75,10 +87,6 @@ object JsBridge {
      */
     private fun handleLogin(context: Activity, jsonObject: JsonObject) {
         UserManager.saveUser(context, jsonObject.toString())
-        if (UserManager.isLogin(context) && UserManager.isPayPending()) {
-            UserManager.setPayPending(false)
-            (context as HomeActivity).navigateToBuyVip()
-        }
     }
 
     /**

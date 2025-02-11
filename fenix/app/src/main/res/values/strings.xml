@@ -1010,6 +1010,7 @@
 
     <!-- Library -->
     <string name="library_translate">Immersive Translate Setting</string>
+    <string name="library_upgrade">Upgrade</string>
     <!-- Option in Library to open Downloads page -->
     <string name="library_downloads">Downloads</string>
     <!-- Option in library to open Bookmarks page -->

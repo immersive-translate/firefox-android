@@ -411,9 +411,16 @@ open class DefaultToolbarMenu(
 
     private val immersiveTranslate = BrowserMenuImageText(
         label = context.getString(R.string.library_translate),
-        imageResource = R.drawable.ic_wordmark_logo,
+        imageResource = R.drawable.ic_menu_imm_translate,
     ) {
-        onItemTapped.invoke(ToolbarMenu.Item.Translate)
+        onItemTapped.invoke(ToolbarMenu.Item.IMM_Translate)
+    }
+
+    private val gotoBuyVip = BrowserMenuImageText(
+        label = context.getString(R.string.library_upgrade),
+        imageResource = R.drawable.ic_menu_user_upgrade,
+    ) {
+        onItemTapped.invoke(ToolbarMenu.Item.Upgrade)
     }
 
     /*private fun syncMenuItem(): BrowserMenuItem {
@@ -431,13 +438,14 @@ open class DefaultToolbarMenu(
                 if (shouldUseBottomToolbar || !shouldShowMenuToolbar) null else menuToolbar,
                 newTabItem,
                 BrowserMenuDivider(),
-                immersiveTranslate,
                 bookmarksItem,
                 historyItem,
                 downloadsItem,
                 passwordsItem,
                 extensionsItem,
                 //syncMenuItem(),
+                immersiveTranslate,
+                gotoBuyVip,
                 BrowserMenuDivider(),
                 findInPageItem,
                 translationsItem.apply { visible = ::shouldShowTranslations },
@@ -451,7 +459,7 @@ open class DefaultToolbarMenu(
                 addAppToHomeScreenItem.apply { visible = ::canAddAppToHomescreen },
                 if (shouldShowTopSites) addRemoveTopSitesItem else null,
                 //saveToCollectionItem,
-                if (FxNimbus.features.print.value().browserPrintEnabled) printPageItem else null,
+                //if (FxNimbus.features.print.value().browserPrintEnabled) printPageItem else null,
                 BrowserMenuDivider(),
                 settingsItem,
                 if (shouldDeleteDataOnQuit) deleteDataOnQuit else null,

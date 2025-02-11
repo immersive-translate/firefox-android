@@ -12,24 +12,11 @@ object UserManager {
 
     @JvmStatic
     private val SP_KEY = "sp_data"
+
     @JvmStatic
     private val USER_INFO_KEY = "user_info"
 
     private val gson = Gson()
-
-    private var payPendingTime = 0L
-    private var payPending = false
-
-    fun setPayPending(pending: Boolean) {
-        this.payPending = pending
-        if (pending) {
-            this.payPendingTime = System.currentTimeMillis()
-        }
-    }
-
-    fun isPayPending(): Boolean {
-        return payPending && (System.currentTimeMillis() - payPendingTime) / 1000 < 60 * 10
-    }
 
     fun saveUser(context: Context, json: String) {
         val sp = context.getSharedPreferences(SP_KEY, Context.MODE_PRIVATE)

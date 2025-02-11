@@ -398,6 +398,10 @@ class DefaultBrowserToolbarMenuController(
             }
 
             is ToolbarMenu.Item.Translate -> {
+
+            }
+
+            is ToolbarMenu.Item.IMM_Translate -> {
                 val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon()
                 val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: SupportUtils.APP_OPT_URL
                 activity.openToBrowserAndLoad(
@@ -405,6 +409,10 @@ class DefaultBrowserToolbarMenuController(
                     newTab = true,
                     from = BrowserDirection.FromGlobal,
                 )
+            }
+
+            is ToolbarMenu.Item.Upgrade -> {
+                activity.navigateToBuyVip()
             }
         }
     }
@@ -484,6 +492,12 @@ class DefaultBrowserToolbarMenuController(
             is ToolbarMenu.Item.RemoveFromTopSites ->
                 Events.browserMenuAction.record(Events.BrowserMenuActionExtra("remove_from_top_sites"))
             is ToolbarMenu.Item.Translate -> {
+
+            }
+            is ToolbarMenu.Item.IMM_Translate -> {
+                // noting to do
+            }
+            is ToolbarMenu.Item.Upgrade -> {
                 // noting to do
             }
         }

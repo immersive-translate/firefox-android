@@ -45,6 +45,7 @@ class HomeMenu(
 ) {
     sealed class Item {
         object Translate: Item()
+        object Upgrade: Item()
         object Bookmarks : Item()
         object History : Item()
         object Downloads : Item()
@@ -115,9 +116,16 @@ class HomeMenu(
 
         val translateItem = BrowserMenuImageText(
             context.getString(R.string.library_translate),
-            R.drawable.ic_wordmark_logo,
+            R.drawable.ic_menu_imm_translate,
         ) {
             onItemTapped.invoke(Item.Translate)
+        }
+
+        val gotoBuyVip = BrowserMenuImageText(
+            context.getString(R.string.library_upgrade),
+            R.drawable.ic_menu_user_upgrade,
+        ) {
+            onItemTapped.invoke(Item.Upgrade)
         }
 
         val bookmarksItem = BrowserMenuImageText(
@@ -224,7 +232,6 @@ class HomeMenu(
         //val syncSignInMenuItem = if (accountAuthItem == null) syncSignInMenuItem() else null
 
         val menuItems = listOfNotNull(
-            translateItem,
             bookmarksItem,
             historyItem,
             downloadsItem,
@@ -234,10 +241,12 @@ class HomeMenu(
             //accountAuthItem,
             if (Config.channel.isMozillaOnline) manageAccountAndDevicesItem else null,
             BrowserMenuDivider(),
-            BrowserMenuDivider(),
             whatsNewItem,
             helpItem,
             customizeHomeItem,
+            BrowserMenuDivider(),
+            translateItem,
+            gotoBuyVip,
             settingsItem,
             if (settings.shouldDeleteBrowsingDataOnQuit) quitItem else null,
         ).also { items ->

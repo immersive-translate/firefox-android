@@ -135,6 +135,10 @@ class HomeMenuView(
                 }*/
             }
 
+            HomeMenu.Item.Upgrade -> {
+                homeActivity.navigateToBuyVip()
+            }
+
             HomeMenu.Item.Settings -> {
                 HomeMenuMetrics.settingsItemClicked.record(NoExtras())
 

@@ -167,10 +167,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             requireContext().components.core.store.state.translationEngine.isEngineSupported == true
 
         // 登录用户，展示 升级 按钮
-        val upgradePreference =
-            requirePreference<Preference>(R.string.pref_key_account_update)
+        //val upgradePreference =
+        //    requirePreference<Preference>(R.string.pref_key_account_update)
         // upgradePreference.isVisible = UserManager.isLogin(requireContext())
-        upgradePreference.isVisible = true
+        //upgradePreference.isVisible = true
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

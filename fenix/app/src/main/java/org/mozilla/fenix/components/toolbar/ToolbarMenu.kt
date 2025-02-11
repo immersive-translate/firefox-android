@@ -55,6 +55,8 @@ interface ToolbarMenu {
         object Downloads : Item()
         object NewTab : Item()
         object Translate: Item()
+        object IMM_Translate: Item()
+        object Upgrade: Item()
     }
 
     val menuBuilder: BrowserMenuBuilder

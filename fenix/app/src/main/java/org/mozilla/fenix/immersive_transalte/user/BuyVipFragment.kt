@@ -87,7 +87,6 @@ class BuyVipFragment : Fragment() {
             showTips(it, R.string.buy_vip_tip_04)
         }
 
-        UserManager.setPayPending(false)
         refreshPayType()
         // 加载数据
         loadData()
@@ -206,6 +205,7 @@ class BuyVipFragment : Fragment() {
     }
 
     private var tryTimes = 0
+
     /**
      * 加载商品数据
      */
@@ -284,10 +284,9 @@ class BuyVipFragment : Fragment() {
 
     private fun gotoUserLogin() {
         (requireActivity() as HomeActivity).openToBrowserAndLoad(
-            Constant.loginPage, true,
+            "${Constant.loginPage}?app_action=gotoUpgrade", true,
             BrowserDirection.FromGlobal,
         )
-        UserManager.setPayPending(true)
     }
 
     private fun createCheckOrder(): Boolean {
@@ -353,7 +352,7 @@ class BuyVipFragment : Fragment() {
         isUpdating = true
         scope.launch(Dispatchers.Main) {
             isUpdating = false
-            val upcomming =  MemberService.orderUpcomming(priceId).data?.data
+            val upcomming = MemberService.orderUpcomming(priceId).data?.data
             val currency = upcomming?.currency
             val product = currency?.let {
                 MemberService.getUpgradeProducts(currency).data
@@ -361,13 +360,16 @@ class BuyVipFragment : Fragment() {
             hideProcessDialog()
             delay(100)
             product?.let {
-                TrialUpgradeDialog(requireContext(), it, upcomming, {
-                    (requireActivity() as HomeActivity).openToBrowserAndLoad(
-                        searchTermOrURL = Constant.paySuccess,
-                        newTab = true,
-                        from =  BrowserDirection.FromGlobal
-                    )
-                }).show()
+                TrialUpgradeDialog(
+                    requireContext(), it, upcomming,
+                    {
+                        (requireActivity() as HomeActivity).openToBrowserAndLoad(
+                            searchTermOrURL = Constant.paySuccess,
+                            newTab = true,
+                            from = BrowserDirection.FromGlobal,
+                        )
+                    },
+                ).show()
             }
         }
     }
@@ -385,7 +387,7 @@ class BuyVipFragment : Fragment() {
         isUpdating = true;
         scope.launch(Dispatchers.Main) {
             isUpdating = false
-            val upcomming =  MemberService.orderUpcomming(priceId).data?.data
+            val upcomming = MemberService.orderUpcomming(priceId).data?.data
             val currency = upcomming?.currency
             val product = currency?.let {
                 MemberService.getUpgradeProducts(currency).data
@@ -393,11 +395,14 @@ class BuyVipFragment : Fragment() {
             hideProcessDialog()
             delay(100)
             product?.let {
-                MonthUpgradeDialog(requireContext(), it, upcomming, {
-                    (requireActivity() as HomeActivity).openToBrowserAndLoad(
-                        Constant.paySuccess, true, BrowserDirection.FromGlobal,
-                    )
-                }).show()
+                MonthUpgradeDialog(
+                    requireContext(), it, upcomming,
+                    {
+                        (requireActivity() as HomeActivity).openToBrowserAndLoad(
+                            Constant.paySuccess, true, BrowserDirection.FromGlobal,
+                        )
+                    },
+                ).show()
             }
         }
     }

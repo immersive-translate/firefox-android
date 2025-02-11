@@ -1067,6 +1067,7 @@
 
     <!-- Library -->
     <string name="library_translate">沉浸式翻译设置</string>
+    <string name="library_upgrade">升级</string>
     <!-- Option in Library to open Downloads page -->
     <string name="library_downloads">下载</string>
     <!-- Option in library to open Bookmarks page -->
@@ -3118,13 +3119,13 @@
     <!--会员支付相关-->
     <string name="buy_vip_unit_month">/月</string>
     <string name="buy_vip_unit_year">/年</string>
-    <string name="buy_vip_year_title">年费Pro会员</string>
+    <string name="buy_vip_year_title">年度会员</string>
     <string name="buy_vip_year_save_money">🔥节省</string>
     <string name="buy_vip_year_renewal">试用期后按 %1$s/年自动续费</string>
     <string name="buy_vip_year_remind_2">试用期间取消订阅不扣款</string>
     <string name="buy_vip_year_discount">限时特惠</string>
 
-    <string name="buy_vip_month_title">月费Pro会员</string>
+    <string name="buy_vip_month_title">月度会员</string>
 
     <string name="buy_vip_ts_service_title">Pro专属全球顶尖AI翻译服务</string>
     <string name="buy_vip_ts_deepL">DeepL 翻译</string>
