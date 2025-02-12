@@ -3221,4 +3221,6 @@
     <string name="vip_trial_upgrade_detail">現在成為將立即自動扣款 %1$s (套餐內額度重置)</string>
     <string name="vip_downgrade">目前暫不支援降級</string>
 
+    <!--slogin-->
+    <string name="app_slogin_text">看見更大的世界</string>
 </resources>

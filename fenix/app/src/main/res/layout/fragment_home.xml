@@ -35,7 +35,7 @@
             app:layout_scrollFlags="scroll">
 
             <!-- This is a toggle button for accessibility reasons -->
-            <ToggleButton
+            <!--<ToggleButton
                 android:id="@+id/privateBrowsingButton"
                 android:layout_width="@dimen/glyph_button_height"
                 android:layout_height="@dimen/glyph_button_height"
@@ -48,18 +48,18 @@
                 android:textOn=""
                 android:drawableTop="@drawable/mozac_ic_private_mode_circle_fill_48"
                 app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier=".167"/>
+                app:layout_collapseParallaxMultiplier=".167"/>-->
             <!-- This value needs to be 1.67 * the wordmark parallax value as its 24dp vs 40 -->
 
             <LinearLayout
                 android:id="@+id/wordmark"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:clickable="false"
                 android:focusable="false"
+                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 app:layout_collapseMode="parallax"
                 android:contentDescription="@string/app_name"
@@ -69,7 +69,7 @@
                     android:id="@+id/wordmarkLogo"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginEnd="10.dp"
+                    android:layout_marginEnd="12dp"
                     android:adjustViewBounds="true"
                     app:srcCompat="?fenixWordmarkLogo"
                     android:contentDescription="@null"
@@ -89,9 +89,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/wordmark_text"
+                    android:text="@string/app_slogin_text"
                     android:textColor="?fenixWordmarkColor"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -182,6 +182,21 @@
                 android:text="@string/search_hint"
                 android:textColor="?attr/textPrimary"
                 android:textSize="15sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <ToggleButton
+                android:id="@+id/privateBrowsingButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/mozac_ic_private_mode_circle_fill_48"
+                android:contentDescription="@string/content_description_private_browsing"
+                android:textOff=""
+                android:textOn="" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.Barrier

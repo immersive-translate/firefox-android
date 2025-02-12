@@ -3002,4 +3002,6 @@
     <string name="vip_trial_upgrade_detail">Now it will be automatically deducted %1$s immediately (limit reset within the package)</string>
     <string name="vip_downgrade">Downgrading is not supported</string>
 
+    <!--slogin-->
+    <string name="app_slogin_text">See the bigger world</string>
 </resources>
