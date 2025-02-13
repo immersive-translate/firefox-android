@@ -3223,4 +3223,6 @@
 
     <!--slogin-->
     <string name="app_slogin_text">看見更大的世界</string>
+    <string name="app_toplogin_login">立即登入</string>
+    <string name="app_toplogin_desc">享受最佳體驗</string>
 </resources>

@@ -104,6 +104,7 @@ import org.mozilla.fenix.ext.isKnownSearchDomain
 import org.mozilla.fenix.ext.setCustomEndpointIfAvailable
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.immersive_transalte.ImmersivePluginConfig
+import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.fenix.lifecycle.StoreLifecycleObserver
 import org.mozilla.fenix.lifecycle.VisibilityLifecycleObserver
 import org.mozilla.fenix.nimbus.FxNimbus
@@ -196,7 +197,9 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
             PerfStartup.applicationOnCreate.accumulateSamples(listOf(durationMillis))
         }
 
+        // 初始化一些是数据
         TopLinkProvider.fetchTopLinks(this)
+        UserManager.refreshUser()
     }
 
     @OptIn(DelicateCoroutinesApi::class) // GlobalScope usage

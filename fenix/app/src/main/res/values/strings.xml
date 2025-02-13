@@ -3004,4 +3004,6 @@
 
     <!--slogin-->
     <string name="app_slogin_text">See the bigger world</string>
+    <string name="app_toplogin_login">Login now</string>
+    <string name="app_toplogin_desc">Enjoy the best experience</string>
 </resources>

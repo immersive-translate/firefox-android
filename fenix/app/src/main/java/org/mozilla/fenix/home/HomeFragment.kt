@@ -1472,6 +1472,8 @@ class HomeFragment : Fragment() {
         components.useCases.sessionUseCases.updateLastAccess()
 
         evaluateMessagesForMicrosurvey(components)
+
+        sessionControlView?.refresh()
     }
 
     private fun evaluateMessagesForMicrosurvey(components: Components) =

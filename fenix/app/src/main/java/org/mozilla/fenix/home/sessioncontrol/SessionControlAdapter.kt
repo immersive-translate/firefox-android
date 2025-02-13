@@ -36,6 +36,7 @@ import org.mozilla.fenix.home.sessioncontrol.viewholders.NoCollectionsMessageVie
 import org.mozilla.fenix.home.sessioncontrol.viewholders.PrivateBrowsingDescriptionViewHolder
 import org.mozilla.fenix.home.sessioncontrol.viewholders.onboarding.MessageCardViewHolder
 import org.mozilla.fenix.home.toplinks.TopLinksViewHolder
+import org.mozilla.fenix.home.toplogin.TopLoginViewHolder
 import org.mozilla.fenix.home.topsites.TopSitePagerViewHolder
 import org.mozilla.fenix.home.topsites.TopSitesViewHolder
 import mozilla.components.feature.tab.collections.Tab as ComponentTab
@@ -52,6 +53,11 @@ sealed class AdapterItem(@LayoutRes val viewType: Int) {
      * Top sites.
      */
     object TopSites : AdapterItem(TopSitesViewHolder.LAYOUT_ID)
+
+    /**
+     * Top Login
+     */
+    object TopLogin: AdapterItem(TopLoginViewHolder.LAYOUT_ID)
 
     /**
      * Contains a set of [Pair]s where [Pair.first] is the index of the changed [TopSite] and
@@ -298,6 +304,11 @@ class SessionControlAdapter(
                 interactor = interactor,
             )
             TopLinksViewHolder.LAYOUT_ID -> return TopLinksViewHolder(
+                composeView = ComposeView(parent.context),
+                viewLifecycleOwner = viewLifecycleOwner,
+                interactor = interactor,
+            )
+            TopLoginViewHolder.LAYOUT_ID -> return TopLoginViewHolder(
                 composeView = ComposeView(parent.context),
                 viewLifecycleOwner = viewLifecycleOwner,
                 interactor = interactor,

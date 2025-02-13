@@ -63,6 +63,7 @@ import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.home.HomeFragment
 import org.mozilla.fenix.home.HomeFragmentDirections
 import org.mozilla.fenix.home.toplinks.TopLink
+import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
 import org.mozilla.fenix.messaging.MessageController
 import org.mozilla.fenix.onboarding.WallpaperOnboardingDialogFragment.Companion.THUMBNAILS_SELECTION_COUNT
@@ -137,6 +138,8 @@ interface SessionControlController {
      * @see [TopSiteInteractor.onSelectTopSite]
      */
     fun handleSelectTopSite(topSite: TopSite, position: Int)
+
+    fun handleGotoLogin()
 
     /**
      * @see [TopSiteInteractor.onSettingsClicked]
@@ -421,6 +424,22 @@ class DefaultSessionControlController(
         if (existingTabForUrl == null) {
             TopSites.openInNewTab.record(NoExtras())
 
+            addTabUseCase.invoke(
+                url = appendSearchAttributionToUrlIfNeeded(url),
+                selectTab = true,
+                startLoading = true,
+            )
+        } else {
+            selectTabUseCase.invoke(existingTabForUrl.id)
+        }
+
+        navController.navigate(R.id.browserFragment)
+    }
+
+    override fun handleGotoLogin() {
+        val url = Constant.loginPage
+        val existingTabForUrl = store.state.tabs.firstOrNull { url == it.content.url }
+        if (existingTabForUrl == null) {
             addTabUseCase.invoke(
                 url = appendSearchAttributionToUrlIfNeeded(url),
                 selectTab = true,

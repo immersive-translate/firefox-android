@@ -7,6 +7,11 @@ package org.mozilla.fenix.immersive_transalte.user
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import org.mozilla.fenix.FenixApplication
+import org.mozilla.fenix.immersive_transalte.net.service.MemberService
 
 object UserManager {
 
@@ -65,4 +70,17 @@ object UserManager {
         }
         return ""
     }
+
+    /**
+     * 刷新用户数据
+     */
+    fun refreshUser() {
+        MainScope().launch(Dispatchers.IO) {
+            val userInfo = MemberService.getUserInfo().data?.data
+            if (userInfo == null) {
+                clearUser(FenixApplication.application)
+            }
+        }
+    }
+
 }

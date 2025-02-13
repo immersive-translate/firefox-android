@@ -9,12 +9,10 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.net.http.SslError
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.webkit.SslErrorHandler
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.PopupWindow
@@ -39,7 +37,7 @@ class BuyVipPopWindow(
     userInfo: UserBean,
     onPaySuccess: () -> Unit,
     onPayFailed: () -> Unit,
-    onNeedReload: () -> Unit
+    onNeedReload: () -> Unit,
 ) : PopupWindow(context) {
 
     private val scope = MainScope()
@@ -100,15 +98,6 @@ class BuyVipPopWindow(
                     }
                 }
                 return false
-            }
-
-            @SuppressLint("WebViewClientOnReceivedSslError")
-            override fun onReceivedSslError(
-                view: WebView?,
-                handler: SslErrorHandler?,
-                error: SslError?,
-            ) {
-                handler?.proceed()
             }
         }
 

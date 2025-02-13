@@ -72,6 +72,9 @@ internal fun normalModeAdapterItems(
         topSites.size
     }
 
+    // top login
+    items.add(AdapterItem.TopLogin)
+
     if (showRecentTab) {
         shouldShowCustomizeHome = true
         items.add(AdapterItem.RecentTabsHeader)
@@ -238,6 +241,14 @@ class SessionControlView(
         if (shouldReportMetrics) interactor.reportSessionMetrics(state)
 
         sessionControlAdapter.submitList(state.toAdapterList(view.context.settings()))
+    }
+
+    fun refresh() {
+        // 刷新登录状态
+        val loginPoi = sessionControlAdapter.currentList.indexOf(AdapterItem.TopLogin)
+        if (loginPoi >= 0) {
+            sessionControlAdapter.notifyItemChanged(loginPoi)
+        }
     }
 }
 
