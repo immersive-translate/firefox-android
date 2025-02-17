@@ -190,6 +190,10 @@ class OnboardingFragment : Fragment() {
 
                 override fun onGotoBuy() {
                     requireComponents.fenixOnboarding.finish()
+                    findNavController().nav(
+                        id = R.id.onboardingFragment,
+                        directions = OnboardingFragmentDirections.actionHome(),
+                    )
                 }
             },
         )

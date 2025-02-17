@@ -9,36 +9,66 @@ import android.content.Intent
 import android.net.Uri
 import com.google.gson.JsonObject
 import mozilla.components.jsbridge.JSBridgeInstance
-import mozilla.components.jsbridge.JSBridgeInstance.OnJavaScriptCallback
 import mozilla.components.jsbridge.OnBridgeCallback
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.geckoview.GeckoSession
 
+interface OnPageCallback {
+    fun onPageTranslateStateChange(
+        session: GeckoSession,
+        pageTranslated: Boolean,
+    )
+}
 
 object JsBridge {
+    private val pageStateCallbacks = ArrayList<OnPageCallback>()
 
     /**
      * init javascript bridge
      */
     fun init(context: Activity) {
         JSBridgeInstance.getInstance().init(context)
-        JSBridgeInstance.getInstance().setOnJavaScriptCallback(
-            object : OnJavaScriptCallback {
-                override fun onJsCall(
-                    geckoSession: GeckoSession,
-                    jsonObject: JsonObject,
-                    callback: OnBridgeCallback?,
-                ) {
-                    handleJsCall(context, jsonObject, callback)
-                }
-            },
-        )
+        JSBridgeInstance.getInstance().setOnJavaScriptCallback {
+                geckoSession,
+                jsonObject,
+                callback,
+            ->
+            handleJsCall(
+                context,
+                geckoSession,
+                jsonObject,
+                callback,
+            )
+        }
+    }
+
+    /**
+     * 调用 javascript
+     */
+    fun callHandler(
+        session: GeckoSession,
+        name: String?,
+        jsonObject: JsonObject,
+        callback: OnBridgeCallback,
+    ) {
+        JSBridgeInstance.getInstance().callHandler(session, name, jsonObject, callback)
+    }
+
+    fun addPageStateCallback(onPageCallback: OnPageCallback) {
+        if (!pageStateCallbacks.contains(onPageCallback)) {
+            pageStateCallbacks.add(onPageCallback)
+        }
+    }
+
+    fun removePageStateCallback(onPageCallback: OnPageCallback) {
+        pageStateCallbacks.remove(onPageCallback)
     }
 
     private fun handleJsCall(
         context: Activity,
+        session: GeckoSession,
         jsonObject: JsonObject,
         callback: OnBridgeCallback?,
     ) {
@@ -62,10 +92,17 @@ object JsBridge {
 
                 "syncLoginData" -> {
                     handleLogin(context, jsonObject)
+                    callback?.onCallBack(getResult(true))
                 }
 
                 "gotoUpgrade" -> {
                     handleGotoUpgrade(context)
+                    callback?.onCallBack(getResult(true))
+                }
+
+                "updateTranslateState" -> {
+                    updateTranslateState(session, jsonObject)
+                    callback?.onCallBack(getResult(true))
                 }
 
                 else -> {}
@@ -74,6 +111,18 @@ object JsBridge {
 
     }
 
+    /**
+     * 页面翻译状态回调
+     */
+    private fun updateTranslateState(session: GeckoSession, jsonObject: JsonObject) {
+        try {
+            val pageTranslated = jsonObject.get("pageTranslated").asBoolean
+            pageStateCallbacks.forEach {
+                it.onPageTranslateStateChange(session, pageTranslated)
+            }
+        } finally {
+        }
+    }
 
     /**
      * 去购买页面

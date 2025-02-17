@@ -306,7 +306,12 @@ class BuyVipFragment : Fragment() {
         binding.progress.visibility = View.GONE
     }
 
+    private var isCallGotoBuy = false
     private fun gotoUserLogin() {
+        callback?.let {
+            isCallGotoBuy = true
+            it.onGotoBuy()
+        }
         (requireActivity() as HomeActivity).openToBrowserAndLoad(
             "${Constant.loginPage}?app_action=gotoUpgrade", true,
             BrowserDirection.FromGlobal,
@@ -466,7 +471,9 @@ class BuyVipFragment : Fragment() {
 
     override fun onDestroy() {
         scope.cancel()
-        callback?.onGotoBuy()
+        if (!isCallGotoBuy) {
+            callback?.onGotoBuy()
+        }
         super.onDestroy()
     }
 

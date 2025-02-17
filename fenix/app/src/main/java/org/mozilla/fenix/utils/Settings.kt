@@ -974,13 +974,13 @@ class Settings(private val appContext: Context) : PreferencesHolder {
     )
 
     val toolbarPosition: ToolbarPosition
-        get() = if (appContext.isTabStripEnabled()) {
+        get() = ToolbarPosition.TOP /*if (appContext.isTabStripEnabled()) {
             ToolbarPosition.TOP
         } else if (shouldUseBottomToolbar) {
             ToolbarPosition.BOTTOM
         } else {
             ToolbarPosition.TOP
-        }
+        }*/
 
     /**
      * Check each active accessibility service to see if it can perform gestures, if any can,
@@ -1589,6 +1589,15 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         appContext.getPreferenceKey(R.string.pref_key_should_show_home_onboarding_dialog),
         featureFlag = true,
         default = { mr2022Sections[Mr2022Section.HOME_ONBOARDING_DIALOG_EXISTING_USERS] == true },
+    )
+
+    /**
+     * 浏览器，翻译、面板 tip
+     */
+    var showBrowserMenuTips by lazyFeatureFlagPreference(
+        appContext.getPreferenceKey(R.string.pref_key_should_show_browser_menu_tip),
+        default = { true },
+        featureFlag = true
     )
 
     /**

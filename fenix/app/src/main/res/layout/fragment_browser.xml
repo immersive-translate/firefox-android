@@ -9,6 +9,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <FrameLayout
+        android:id="@+id/fl_tips_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/browserWindow"
         android:layout_width="match_parent"

@@ -207,6 +207,10 @@ class GeckoEngineSession(
         return overrideUrl
     }
 
+    override fun getGeckoSession(): GeckoSession {
+        return geckoSession
+    }
+
     /**
      * See [EngineSession.loadUrl]
      */
@@ -1418,6 +1422,7 @@ class GeckoEngineSession(
         }
 
         override fun onPageStart(session: GeckoSession, url: String) {
+            JSBridgeInstance.getInstance().injectJsBridge(session)
             // This log statement is temporary and parsed by FNPRMS for performance measurements. It can be
             // removed once FNPRMS is replaced: https://github.com/mozilla-mobile/android-components/issues/8662
             fnprmsLogger.info("handleMessage GeckoView:PageStart uri=") // uri intentionally blank

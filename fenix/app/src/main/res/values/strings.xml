@@ -3008,4 +3008,10 @@
     <string name="app_slogin_text">See the bigger world</string>
     <string name="app_toplogin_login">Login now</string>
     <string name="app_toplogin_desc">Enjoy the best experience</string>
+
+    <string name="browser_toolbar_imm_menu">Translate menu</string>
+    <string name="browser_toolbar_imm_trans">Translate</string>
+    <string name="browser_toolbar_pop_translate">Click here\nTranslate the current page now</string>
+    <string name="browser_toolbar_pop_menu">Click here\nOpen the translation function panel</string>
+    <string name="browser_toolbar_pop_btn">I see</string>
 </resources>

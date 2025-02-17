@@ -190,4 +190,6 @@
 
     <color name="fenix_wordmark_color">@color/photonLightGrey10</color>
     <color name="fenix_wordmark_color_private">@color/photonLightGrey10</color>
+
+    <color name="browser_menu_tint_color">#FFFFFFFF</color>
 </resources>

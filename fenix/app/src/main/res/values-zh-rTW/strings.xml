@@ -3227,4 +3227,10 @@
     <string name="app_slogin_text">看見更大的世界</string>
     <string name="app_toplogin_login">立即登入</string>
     <string name="app_toplogin_desc">享受最佳體驗</string>
+
+    <string name="browser_toolbar_imm_menu">翻译菜单</string>
+    <string name="browser_toolbar_imm_trans">翻译</string>
+    <string name="browser_toolbar_pop_translate">點這裡\n立即翻譯目前網頁</string>
+    <string name="browser_toolbar_pop_menu">點這裡\n開啟翻譯功能面板</string>
+    <string name="browser_toolbar_pop_btn">我知道了</string>
 </resources>

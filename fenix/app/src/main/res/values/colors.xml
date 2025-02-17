@@ -385,4 +385,6 @@
 
     <color name="fenix_wordmark_color">#FF222222</color>
     <color name="fenix_wordmark_color_private">#FFFFFFFF</color>
+
+    <color name="browser_menu_tint_color">#FF15141A</color>
 </resources>

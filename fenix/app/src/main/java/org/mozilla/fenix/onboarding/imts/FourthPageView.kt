@@ -3,9 +3,11 @@ package org.mozilla.fenix.onboarding.imts
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import org.mozilla.fenix.databinding.OnboardingPageFourthLayoutBinding
 
@@ -42,18 +44,37 @@ class FourthPageView : FrameLayout {
         }
     }
 
+    private var fragment: Fragment? = null
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         activity?.let {
             val fragmentTransaction = it.supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(
-                R.id.fl_vip_container,
-                BuyVipFragment.newInstance(false, object : BuyVipFragment.Callback{
+            fragment = BuyVipFragment.newInstance(
+                false,
+                object : BuyVipFragment.Callback {
                     override fun onGotoBuy() {
                         callback?.onGotoBuy()
                     }
-                }),
+                },
             )
+            fragmentTransaction.replace(R.id.fl_vip_container, fragment!!)
+            fragmentTransaction.commitAllowingStateLoss()
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        removeFragment()
+        super.onDetachedFromWindow()
+    }
+
+    private fun removeFragment() {
+        if (fragment == null) {
+            return
+        }
+        activity?.let {
+            val fragmentTransaction = it.supportFragmentManager.beginTransaction()
+            fragmentTransaction.remove(fragment!!)
             fragmentTransaction.commitAllowingStateLoss()
         }
     }

@@ -1,6 +1,34 @@
 //notation: js file can only use this kind of comments
 //since comments will cause error when use in webview.loadurl,
 //comments will be remove by java use regexp
+
+// 隐藏悬浮球
+function insertHiddenPagePopupMeta() {
+  try {
+    // 如果已存在相同的meta标签，直接返回
+    if (document.querySelector('meta[name="immersive-translate-show-page-popup"]')) {
+      return;
+    }
+    const meta = document.createElement('meta');
+    meta.name = "immersive-translate-show-page-popup";
+    meta.content = "no";
+    // 确保DOM已经准备好
+    if (document.head) {
+      document.head.appendChild(meta);
+    } else if (document.body) {
+      document.body.appendChild(meta);
+    } else {
+      // 如果DOM还没准备好，等待DOM加载完成
+      document.addEventListener('DOMContentLoaded', () => {
+        (document.head || document.body).appendChild(meta);
+      });
+    }
+  } catch (error) {
+    console.error('Failed to insert meta tag:', error);
+  }
+}
+// insertHiddenPagePopupMeta();
+
 (function() {
     if (window.WebViewJavascriptBridge && window.WebViewJavascriptBridge.inited) {
         return;
@@ -208,4 +236,117 @@
     document.dispatchEvent(readyEvent);
 
     WebViewJavascriptBridge.inited = true;
+
+})();
+
+(function() {
+    if (window.ImmTranslateBridge && window.ImmTranslateBridge.inited) {
+        return;
+    }
+    // 原生与插件交互，实现翻译以及菜单面板调用
+    const documentMessageTypeIdentifierForThirdPartyTell = "immersiveTranslateDocumentMessageThirdPartyTell";
+    const documentMessageTypeIdentifierForTellThirdParty = "immersiveTranslateDocumentMessageTellThirdParty";
+
+    const messageHandler = (event) => {
+          if (!event.detail) {
+            return;
+          }
+          const message = JSON.parse(event.detail);
+          if (message.type === "updatePageStatus") {
+            window.WebViewJavascriptBridge.doSend({
+                type: "updateTranslateState",
+                pageTranslated: message.payload == "Translated"
+            }, function(data) {});
+            // document.querySelector("#pageStatus").innerText = message.payload;
+          }
+    };
+
+    document.addEventListener(
+      documentMessageTypeIdentifierForTellThirdParty,
+      messageHandler,
+    );
+
+    function sendMessage(type, data) {
+      document.dispatchEvent(
+        new CustomEvent(documentMessageTypeIdentifierForThirdPartyTell, {
+          detail: JSON.stringify({
+            type: type,
+            data: data,
+          }),
+        }),
+      );
+    }
+
+    function sendAsyncMessage(type, data) {
+      return new Promise((resolve, reject) => {
+        const messageId = Math.random().toString(36).substr(2);
+        const messageHandler = (event) => {
+          if (!event.detail) {
+            return;
+          }
+          const message = JSON.parse(event.detail);
+          if (message.id === messageId) {
+            document.removeEventListener(
+              documentMessageTypeIdentifierForTellThirdParty,
+              messageHandler,
+            );
+            resolve(message.payload);
+          }
+        };
+        document.addEventListener(
+          documentMessageTypeIdentifierForTellThirdParty,
+          messageHandler,
+        );
+        document.dispatchEvent(
+          new CustomEvent(documentMessageTypeIdentifierForThirdPartyTell, {
+            detail: JSON.stringify({
+              type: type,
+              data: data,
+              id: messageId,
+            }),
+          }),
+        );
+      });
+    }
+
+    // 打开菜单
+    window.WebViewJavascriptBridge.registerHandler("openMenu", function(data, responseCallback) {
+        // openPopup
+        sendMessage("togglePopup", {
+            style : "right: unset; bottom: unset; left: 50%; top: 0; transform: translateX(-50%);",
+            isSheet: false,
+            overlayStyle: "background-color: transparent;"
+        });
+        responseCallback({
+            result: true
+        });
+    });
+
+    // 翻译页面
+    window.WebViewJavascriptBridge.registerHandler("translatePage", function(data, responseCallback) {
+        sendMessage("translatePage",{});
+        responseCallback({
+            result: true
+        });
+    });
+
+    // 恢复页面
+    window.WebViewJavascriptBridge.registerHandler("restorePage", function(data, responseCallback) {
+        sendMessage("restorePage",{});
+        responseCallback({
+            result: true
+        });
+    });
+
+    // 获取页面翻译状态
+    window.WebViewJavascriptBridge.registerHandler("getPageStatus", async function(data, responseCallback) {
+        const status = await sendAsyncMessage("getPageStatusAsync", {});
+        responseCallback({
+            result: true,
+            pageTranslated: status == "Translated"
+        });
+    });
+
+    ImmTranslateBridge = {};
+    ImmTranslateBridge.inited = true;
 })();

@@ -5,7 +5,8 @@
 package org.mozilla.fenix.browser
 
 import android.content.Context
-import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.os.StrictMode
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -35,12 +37,13 @@ import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.support.utils.ext.isLandscape
 import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.GleanMetrics.AddressToolbar
-import mozilla.components.support.ktx.kotlin.isUrl
 import org.mozilla.fenix.GleanMetrics.ReaderMode
 import org.mozilla.fenix.GleanMetrics.Shopping
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.tabstrip.isTabStripEnabled
+import org.mozilla.fenix.browser.tips.ImmTranslateTipsWindow
+import org.mozilla.fenix.browser.tips.ImmTranslateTipsWindow.Type
 import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.appstate.AppAction.ShoppingAction
 import org.mozilla.fenix.components.appstate.AppAction.SnackbarAction
@@ -58,6 +61,8 @@ import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.runIfFragmentIsAttached
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.home.HomeFragment
+import org.mozilla.fenix.immersive_transalte.JsBridge
+import org.mozilla.fenix.immersive_transalte.OnPageCallback
 import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.settings.quicksettings.protections.cookiebanners.getCookieBannerUIMode
@@ -66,12 +71,13 @@ import org.mozilla.fenix.shopping.ReviewQualityCheckFeature
 import org.mozilla.fenix.shortcut.PwaOnboardingObserver
 import org.mozilla.fenix.theme.AcornWindowSize
 import org.mozilla.fenix.theme.ThemeManager
+import org.mozilla.geckoview.GeckoSession
 
 /**
  * Fragment used for browsing the web within the main app.
  */
 @Suppress("TooManyFunctions", "LargeClass")
-class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
+class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCallback {
     private val windowFeature = ViewBoundFeatureWrapper<WindowFeature>()
     private val openInAppOnboardingObserver = ViewBoundFeatureWrapper<OpenInAppOnboardingObserver>()
     private val reviewQualityCheckFeature = ViewBoundFeatureWrapper<ReviewQualityCheckFeature>()
@@ -88,12 +94,20 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
     private var forwardAction: BrowserToolbar.TwoStateButton? = null
     private var backAction: BrowserToolbar.TwoStateButton? = null
     private var refreshAction: BrowserToolbar.TwoStateButton? = null
+    private var immTranslateAction: BrowserToolbar.TwoStateButton? = null
+    private var immMenuAction: BrowserToolbar.Button? = null
     private var isTablet: Boolean = false
+
+    override fun onDestroy() {
+        JsBridge.removePageStateCallback(this)
+        super.onDestroy()
+    }
 
     @Suppress("LongMethod")
     override fun initializeUI(view: View, tab: SessionState) {
         super.initializeUI(view, tab)
 
+        JsBridge.addPageStateCallback(this)
         // default language
         tab.content.url = UrlLanguageFormater.handleUrl(
             requireComponents, tab.content.url)
@@ -129,10 +143,12 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
 
         updateBrowserToolbarMenuVisibility()
 
-        initReaderMode(context, view)
-        initTranslationsAction(context, view)
+        //initReaderMode(context, view)
+        //initTranslationsAction(context, view)
         initReviewQualityCheck(context, view)
-        initSharePageAction(context)
+        //initSharePageAction(context)
+        initImmTranslateAction(context)
+        initImmTranslateMenuAction(context)
         initReloadAction(context)
 
         thumbnailsFeature.set(
@@ -165,6 +181,23 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
                 owner = this,
                 view = view,
             )
+        }
+    }
+
+    /**
+     * 更新页面 翻译状态
+     */
+    override fun onPageTranslateStateChange(
+        session: GeckoSession,
+        pageTranslated: Boolean,
+    ) {
+        val currentSession = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
+        if (currentSession == null || currentSession != session) {
+            return
+        }
+        if (pageTranslated != isPageTranslated) {
+            isPageTranslated = pageTranslated
+            browserToolbarView.view.invalidateActions()
         }
     }
 
@@ -239,6 +272,153 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
             owner = this,
             view = view,
         )
+    }
+
+    private var isPageTranslated = false
+    private var isPageLoading = false
+    private val handler = Handler(Looper.getMainLooper())
+
+    /**
+     * 翻译按钮
+     */
+    private fun initImmTranslateAction(context: Context) {
+        if (immTranslateAction != null) return
+
+        immTranslateAction =
+            BrowserToolbar.TwoStateButton(
+                primaryImage = AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.ic_imm_trans_home_24,
+                )!!,
+                primaryContentDescription = context.getString(R.string.browser_toolbar_imm_trans),
+                // primaryImageTintResource = ThemeManager.resolveAttribute(R.attr.textPrimary, context),
+                isInPrimaryState = {
+                    /*val isLoading = getSafeCurrentTab()?.content?.loading == true
+                    if (isLoading) {
+                        isPageTranslated = false
+                    } else {
+                        if (isPageLoading) {
+                            handler.postDelayed(::refreshTranslateState, 350)
+                            showTranslatePopTips()
+                        }
+                    }
+                    if (isPageLoading != isLoading) {
+                        isPageLoading = isLoading
+                    }*/
+
+                    val isLoading = getSafeCurrentTab()?.content?.loading == true
+                    if (!isLoading) {
+                        if (isPageLoading) {
+                            handler.postDelayed(::refreshTranslateState, 350)
+                            showTranslatePopTips()
+                        }
+                    }
+                    if (isPageLoading != isLoading) {
+                        isPageLoading = isLoading
+                    }
+
+                    !isPageTranslated
+                },
+                secondaryImage = AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.ic_imm_translated_home_24,
+                )!!,
+                secondaryContentDescription = context.getString(R.string.browser_toolbar_imm_trans),
+                disableInSecondaryState = false,
+                weight = { TRANSLATIONS_WEIGHT },
+                listener = {
+                    /*if (getSafeCurrentTab()?.content?.loading == true) {
+                        return@TwoStateButton
+                    }*/
+                    val session = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
+                    session?.let {
+                        val geckoSession = it as GeckoSession
+                        val jsonObject = JsonObject()
+                        val action = if (!isPageTranslated) "translatePage" else "restorePage"
+                        JsBridge.callHandler(geckoSession, action, jsonObject) { _ ->
+                            /*isPageTranslated = !isPageTranslated
+                            browserToolbarView.view.invalidateActions()*/
+                            refreshTranslateState()
+                        }
+                    }
+                },
+            )
+
+        immTranslateAction?.let {
+            browserToolbarView.view.addPageAction(it)
+        }
+    }
+
+    private fun showTranslatePopTips() {
+        if (isBrowserMenuTipShown) {
+            return
+        }
+        activity?.let { page ->
+            if (page.isDestroyed || !page.settings().showBrowserMenuTips) {
+                return
+            }
+            ImmTranslateTipsWindow(page, Type.Translate) {
+                if (page.isDestroyed) {
+                    return@ImmTranslateTipsWindow
+                }
+                ImmTranslateTipsWindow(page, Type.Menu) {
+                    isBrowserMenuTipShown = true
+                    page.settings().showBrowserMenuTips = false
+                }.show(binding.flTipsContainer, binding.swipeRefresh)
+            }.show(binding.flTipsContainer, binding.swipeRefresh)
+        }
+    }
+
+    /**
+     * 刷新翻译状态
+     */
+    private fun refreshTranslateState() {
+        val session = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
+        session?.let {
+            val geckoSession = it as GeckoSession
+            val jsonObject = JsonObject()
+            JsBridge.callHandler(geckoSession, "getPageStatus", jsonObject) { result ->
+                try {
+                    val pageStatus = result.get("pageTranslated").asBoolean
+                    if (pageStatus != isPageTranslated) {
+                        isPageTranslated = pageStatus
+                        browserToolbarView.view.invalidateActions()
+                    }
+                } finally {
+                }
+            }
+        }
+    }
+
+    /**
+     * 翻译菜单
+     */
+    private fun initImmTranslateMenuAction(context: Context) {
+        if (immMenuAction != null) return
+
+        immMenuAction = BrowserToolbar.Button(
+            imageDrawable = AppCompatResources.getDrawable(
+                context,
+                R.drawable.ic_imm_menu_home_24,
+            )!!,
+            contentDescription = context.getString(R.string.browser_toolbar_imm_menu),
+            iconTintColorResource = ThemeManager.resolveAttribute(R.attr.textPrimary, context),
+            listener = {
+                /*if (getSafeCurrentTab()?.content?.loading == true) {
+                    return@Button
+                }*/
+                val session = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
+                session?.let {
+                    val geckoSession = it as GeckoSession
+                    val jsonObject = JsonObject()
+                    JsBridge.callHandler(geckoSession, "openMenu", jsonObject) {}
+                }
+            },
+        )
+
+        immMenuAction?.let {
+            browserToolbarView.view.addPageAction(it)
+        }
     }
 
     private fun initReloadAction(context: Context) {
@@ -859,5 +1039,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
         const val SHARE_WEIGHT = 4
         const val RELOAD_WEIGHT = 5
         const val OPEN_IN_ACTION_WEIGHT = 6
+
+        var isBrowserMenuTipShown = false
     }
 }

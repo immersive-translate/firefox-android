@@ -1117,4 +1117,11 @@ abstract class EngineSession(
      * @param displayMode the display mode value for this session.
      */
     open fun setDisplayMode(displayMode: WebAppManifest.DisplayMode) = Unit
+
+    /**
+     * get gecko session
+     */
+    open fun getGeckoSession(): Any? {
+        return null
+    }
 }

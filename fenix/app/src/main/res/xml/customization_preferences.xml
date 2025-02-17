@@ -36,7 +36,8 @@
         android:layout="@layout/preference_cat_style"
         android:title="@string/preferences_toolbar_2"
         android:key="@string/pref_key_customization_category_toolbar"
-        app:iconSpaceReserved="false">
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false">
         <org.mozilla.fenix.settings.RadioButtonPreference
             android:key="@string/pref_key_toolbar_top"
             android:title="@string/preference_top_toolbar" />
