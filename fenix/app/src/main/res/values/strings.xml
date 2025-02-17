@@ -2922,6 +2922,7 @@
     <string name="onboarding_lan_set_title">Your native language:</string>
     <string name="onboarding_lan_set_default_browser">Set as default browser</string>
     <string name="onboarding_lan_skip">Set up later</string>
+    <string name="onboarding_lan_wait_setting">Not needed now</string>
 
     <string name="onboarding_second_title">Accessible reading of foreign language content:</string>
     <string name="onboarding_second_content_web">Web page</string>
@@ -2929,6 +2930,7 @@
     <string name="onboarding_second_content_doc">Document</string>
     <string name="onboarding_second_content_cart">Cartoon</string>
     <string name="onboarding_second_content_rn">Rednote</string>
+    <string name="onboarding_second_bilin_search">Multi-Lingual Search</string>
     <string name="onboarding_second_subtitle">All translated with one click, \nmaking reading hassle-free!🎉</string>
     <string name="onboarding_second_known_btn">I see🫡</string>
 

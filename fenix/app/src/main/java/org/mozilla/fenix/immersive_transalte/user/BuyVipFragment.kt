@@ -34,7 +34,18 @@ import org.mozilla.fenix.immersive_transalte.utils.PixelUtil
 import kotlin.math.ceil
 
 
+@Suppress("DEPRECATION")
 class BuyVipFragment : Fragment() {
+
+    companion object {
+        fun newInstance(isNeedTitle: Boolean, callback: Callback): BuyVipFragment {
+            val fragment = BuyVipFragment()
+            fragment.isNeedTitle = isNeedTitle
+            fragment.callback = callback
+            return fragment
+        }
+    }
+
     private lateinit var binding: FragmentBuyVipLayoutBinding
     private var scope = MainScope()
 
@@ -43,6 +54,7 @@ class BuyVipFragment : Fragment() {
     private var userInfo: UserBean? = null
     private var productInfo: VipProductBean? = null
     private var trailList: List<String>? = null
+    private var isNeedTitle = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,6 +99,16 @@ class BuyVipFragment : Fragment() {
             showTips(it, R.string.buy_vip_tip_04)
         }
 
+        if (!isNeedTitle) {
+            val paddingLR = PixelUtil.dp2px(context, 26)
+            binding.flVipYear.setBackgroundResource(R.drawable.buy_vip_top_bg)
+            binding.flVipMonth.setBackgroundResource(R.drawable.buy_vip_top_bg)
+            binding.flVipYear.setPadding(paddingLR, 0, paddingLR, 0)
+            binding.flVipMonth.setPadding(paddingLR, 0, paddingLR, 0)
+            (binding.llBuyVip.layoutParams as MarginLayoutParams).bottomMargin =
+                PixelUtil.dp2px(context, 10)
+        }
+
         refreshPayType()
         // 加载数据
         loadData()
@@ -94,7 +116,9 @@ class BuyVipFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        showToolbar(getString(R.string.buy_vip_btn_text_upgrade))
+        if (isNeedTitle) {
+            showToolbar(getString(R.string.buy_vip_btn_text_upgrade))
+        }
     }
 
     private fun showTips(view: View, @StringRes resId: Int) {
@@ -118,7 +142,7 @@ class BuyVipFragment : Fragment() {
             binding.llVipYearRemind.visibility = View.VISIBLE
             binding.btnVipYear.setTextColor(0xFFFFFFFF.toInt())
             binding.btnVipYear.setBackgroundResource(R.drawable.buy_vip_btn_selected_bg)
-            binding.btnVipMonth.setTextColor(0xFF333333.toInt())
+            binding.btnVipMonth.setTextColor(requireContext().resources.getColor(R.color.fx_mobile_text_color_primary))
             binding.btnVipMonth.setBackgroundResource(0)
             (binding.llProVipTitle.layoutParams as MarginLayoutParams).topMargin =
                 PixelUtil.dp2px(context, 24)
@@ -126,7 +150,7 @@ class BuyVipFragment : Fragment() {
             binding.flVipYear.visibility = View.GONE
             binding.flVipMonth.visibility = View.VISIBLE
             binding.llVipYearRemind.visibility = View.GONE
-            binding.btnVipYear.setTextColor(0xFF333333.toInt())
+            binding.btnVipYear.setTextColor(requireContext().resources.getColor(R.color.fx_mobile_text_color_primary))
             binding.btnVipYear.setBackgroundResource(0)
             binding.btnVipMonth.setTextColor(0xFFFFFFFF.toInt())
             binding.btnVipMonth.setBackgroundResource(R.drawable.buy_vip_btn_selected_bg)
@@ -138,7 +162,7 @@ class BuyVipFragment : Fragment() {
 
     private fun refreshBuyButton() {
         binding.llBuyVip.setBackgroundResource(R.mipmap.img_buy_vip_bg)
-        binding.btnBuy.setTextColor("#FFFFC736".toColorInt())
+        binding.btnBuy.setTextColor(0xFFFFC736.toInt())
         binding.ivBuyHot.visibility = View.VISIBLE
 
         userInfo?.let {
@@ -374,7 +398,6 @@ class BuyVipFragment : Fragment() {
         }
     }
 
-
     private fun monthVipUpgrade() {
         if (isUpdating) {
             return
@@ -443,6 +466,7 @@ class BuyVipFragment : Fragment() {
 
     override fun onDestroy() {
         scope.cancel()
+        callback?.onGotoBuy()
         super.onDestroy()
     }
 
@@ -458,4 +482,9 @@ class BuyVipFragment : Fragment() {
         }
     }
 
+    private var callback: Callback? = null
+
+    interface Callback {
+        fun onGotoBuy()
+    }
 }

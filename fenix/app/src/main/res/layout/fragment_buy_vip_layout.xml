@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/fl_tips_container"
@@ -27,7 +26,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone"
-        android:background="#FFFFFFFF"
         tools:ignore="UselessParent">
 
         <ScrollView
@@ -319,7 +317,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/buy_vip_ts_service_title"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -345,14 +343,15 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/img_buy_vip_yes_icon" />
+                        app:srcCompat="@mipmap/img_buy_vip_yes_icon"
+                        app:tint="@color/fx_mobile_text_color_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_ts_deepL"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -369,14 +368,15 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/img_buy_vip_yes_icon" />
+                        app:srcCompat="@mipmap/img_buy_vip_yes_icon"
+                        app:tint="@color/fx_mobile_text_color_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_ts_openAI"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -393,14 +393,15 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/img_buy_vip_yes_icon" />
+                        app:srcCompat="@mipmap/img_buy_vip_yes_icon"
+                        app:tint="@color/fx_mobile_text_color_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_ts_claude"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -417,14 +418,15 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/img_buy_vip_yes_icon" />
+                        app:srcCompat="@mipmap/img_buy_vip_yes_icon"
+                        app:tint="@color/fx_mobile_text_color_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_is_gemini"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -443,7 +445,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/buy_vip_adv_title"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -460,14 +462,15 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/img_buy_vip_yes_icon" />
+                        app:srcCompat="@mipmap/img_buy_vip_yes_icon"
+                        app:tint="@color/fx_mobile_text_color_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_pdf_pro"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -491,14 +494,15 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/img_buy_vip_yes_icon" />
+                        app:srcCompat="@mipmap/img_buy_vip_yes_icon"
+                        app:tint="@color/fx_mobile_text_color_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_comic"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -522,14 +526,15 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/img_buy_vip_yes_icon" />
+                        app:srcCompat="@mipmap/img_buy_vip_yes_icon"
+                        app:tint="@color/fx_mobile_text_color_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_subtitle"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -546,14 +551,15 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/img_buy_vip_yes_icon" />
+                        app:srcCompat="@mipmap/img_buy_vip_yes_icon"
+                        app:tint="@color/fx_mobile_text_color_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_sync"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -571,14 +577,15 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/img_buy_vip_yes_icon" />
+                        app:srcCompat="@mipmap/img_buy_vip_yes_icon"
+                        app:tint="@color/fx_mobile_text_color_primary"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_email"
-                        android:textColor="#FF333333"
+                        android:textColor="@color/fx_mobile_text_color_primary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -604,7 +611,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#FFEDF1F5" />
+                android:background="@color/fx_mobile_line_color" />
 
             <!--包年/包月切换按钮-->
             <LinearLayout
@@ -643,7 +650,7 @@
                     android:paddingEnd="4dp"
                     android:text="@string/buy_vip_year_month"
                     android:textAlignment="center"
-                    android:textColor="#FF333333"
+                    android:textColor="@color/fx_mobile_text_color_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 

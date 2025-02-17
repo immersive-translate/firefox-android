@@ -43,6 +43,7 @@ import org.mozilla.fenix.onboarding.imts.ThirdPageView
 import org.mozilla.fenix.onboarding.imts.ViewPageAdapter
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.nimbus.FxNimbus
+import org.mozilla.fenix.onboarding.imts.FourthPageView
 import org.mozilla.fenix.onboarding.store.OnboardingAddOnsAction
 import org.mozilla.fenix.onboarding.store.OnboardingAddOnsStore
 import org.mozilla.fenix.onboarding.store.OnboardingAddonStatus
@@ -138,6 +139,7 @@ class OnboardingFragment : Fragment() {
         val languagePageView = LanguagePageView(context)
         val secondPageView = SecondPageView(context)
         val thirdPageView = ThirdPageView(context)
+        val fourthPageView = FourthPageView(context, activity)
 
         languagePageView.setCallback(
             object : LanguagePageView.Callback {
@@ -166,21 +168,36 @@ class OnboardingFragment : Fragment() {
         thirdPageView.setCallback(
             object : ThirdPageView.Callback {
                 override fun onFinish() {
-                    requireComponents.fenixOnboarding.finish()
-                    /*findNavController().nav(
-                        id = R.id.junoOnboardingFragment,
-                        directions = JunoOnboardingFragmentDirections.actionHome(),
+                    /*requireComponents.fenixOnboarding.finish()
+                    findNavController().nav(
+                        id = R.id.onboardingFragment,
+                        directions = OnboardingFragmentDirections.actionHome(),
                     )*/
+                    binding.viewpager.setCurrentItem(3, true)
+                }
+            },
+        )
+
+        fourthPageView.setCallback(
+            object : FourthPageView.Callback {
+                override fun onNextClick() {
+                    requireComponents.fenixOnboarding.finish()
                     findNavController().nav(
                         id = R.id.onboardingFragment,
                         directions = OnboardingFragmentDirections.actionHome(),
                     )
                 }
+
+                override fun onGotoBuy() {
+                    requireComponents.fenixOnboarding.finish()
+                }
             },
         )
 
         viewpagerAdapter = ViewPageAdapter(mutableListOf(
-            languagePageView, secondPageView, thirdPageView))
+            languagePageView, secondPageView,
+            thirdPageView, fourthPageView))
+        binding.viewpager.offscreenPageLimit = viewpagerAdapter.count
         binding.viewpager.adapter = viewpagerAdapter
         binding.viewpager.addOnPageChangeListener(
             object : OnPageChangeListener {
@@ -193,9 +210,9 @@ class OnboardingFragment : Fragment() {
                 }
                 override fun onPageSelected(position: Int) {
                     binding.pageIndicator.setIndicatorIndex(position)
-                    binding.pageIndicator.visibility =
-                        if (position != viewpagerAdapter.count - 1) View.VISIBLE
-                        else View.INVISIBLE
+                    /*binding.pageIndicator.visibility =
+                        if (position != viewpagerAdapter.count - 1) View.GONE
+                        else View.INVISIBLE*/
                 }
                 override fun onPageScrollStateChanged(state: Int) {
                 }

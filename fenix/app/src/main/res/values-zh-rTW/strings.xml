@@ -2850,6 +2850,7 @@
     <string name="onboarding_lan_set_title">您的母語：</string>
     <string name="onboarding_lan_set_default_browser">設為預設瀏覽器</string>
     <string name="onboarding_lan_skip">稍後再設置</string>
+    <string name="onboarding_lan_wait_setting">現在不需要</string>
 
     <!-- Translations options dialog -->
     <!-- Title of the translation options dialog that allows a user to set their translation options for the site the user is currently on. -->
@@ -2876,6 +2877,7 @@
     <string name="onboarding_second_content_doc">文件</string>
     <string name="onboarding_second_content_cart">漫畫</string>
     <string name="onboarding_second_content_rn">小紅書</string>
+    <string name="onboarding_second_bilin_search">跨語言搜尋</string>
     <string name="onboarding_second_subtitle">全部一鍵翻譯，\n閱讀再無障礙！🎉</string>
     <string name="onboarding_second_known_btn">我知道了🫡</string>
 

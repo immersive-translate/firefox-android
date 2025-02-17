@@ -15,7 +15,7 @@
         app:indicatorWidth="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:pageCount="3"
+        app:pageCount="4"
         app:primaryColor="@drawable/onboarding_indicator_primary_bg"
         app:selectedColor="@drawable/onboarding_indicator_selected_bg" />
 

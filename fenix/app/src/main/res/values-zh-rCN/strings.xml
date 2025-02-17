@@ -3095,6 +3095,7 @@
     <string name="onboarding_lan_set_title">您的母语：</string>
     <string name="onboarding_lan_set_default_browser">设为默认浏览器</string>
     <string name="onboarding_lan_skip">稍后再设置</string>
+    <string name="onboarding_lan_wait_setting">现在不需要</string>
 
     <string name="onboarding_second_title">无障碍阅读外语内容：</string>
     <string name="onboarding_second_content_web">网页</string>
@@ -3102,6 +3103,7 @@
     <string name="onboarding_second_content_doc">文档</string>
     <string name="onboarding_second_content_cart">漫画</string>
     <string name="onboarding_second_content_rn">小红书</string>
+    <string name="onboarding_second_bilin_search">跨语言搜索</string>
     <string name="onboarding_second_subtitle">全部一键翻译，\n阅读再无障碍！🎉</string>
     <string name="onboarding_second_known_btn">我知道了🫡</string>
 
