@@ -55,7 +55,8 @@ object ImmersiveTracker {
 
     private fun initAdjust(ctx: Application) {
         val isRelease = Config.channel.isRelease
-        val environment = if (isRelease) AdjustConfig.ENVIRONMENT_PRODUCTION else AdjustConfig.ENVIRONMENT_SANDBOX
+        val environment =
+            if (isRelease) AdjustConfig.ENVIRONMENT_PRODUCTION else AdjustConfig.ENVIRONMENT_SANDBOX
         val logLevel = if (isRelease) LogLevel.WARN else LogLevel.VERBOSE
         val config = AdjustConfig(ctx, appToken, environment)
         config.setLogLevel(logLevel)
@@ -95,6 +96,29 @@ object ImmersiveTracker {
             val adjustEvent = AdjustEvent(trackMessage)
             Adjust.trackEvent(adjustEvent)
         }
+    }
+
+    /**
+     * 购买会员 track
+     */
+    fun trackPurchase(
+        money: Float,
+        currency: String,
+        vipType: Int,
+        userId: Long,
+    ) {
+        if (!isInit) {
+            return
+        }
+        /*var finalMoney = money
+        if (money > 0) {
+            finalMoney = ceil(money * 100) / 100
+        }*/
+        val event = AdjustEvent("purchase_android")
+        event.setRevenue(money.toDouble(), currency)
+        event.addPartnerParameter("pay_type", "$vipType")
+        event.addPartnerParameter("user_id", "$userId")
+        Adjust.trackEvent(event)
     }
 
     fun getAdjustAttribution(): AdjustAttribution? {

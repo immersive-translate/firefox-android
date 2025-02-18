@@ -72,6 +72,27 @@ object UserManager {
     }
 
     /**
+     * 获取用户id
+     */
+    fun getUID(context: Context): Long {
+        val sp = context.getSharedPreferences(SP_KEY, Context.MODE_PRIVATE)
+        val json = sp.getString(USER_INFO_KEY, "")
+        if (json.isNullOrEmpty()) {
+            return 0
+        }
+        try {
+            val userObject = gson.fromJson(json, JsonObject::class.java)
+            userObject?.let {
+                it.get("uid")?.let { uid ->
+                    return uid.asLong
+                }
+            }
+        } finally {
+        }
+        return 0
+    }
+
+    /**
      * 刷新用户数据
      */
     fun refreshUser() {

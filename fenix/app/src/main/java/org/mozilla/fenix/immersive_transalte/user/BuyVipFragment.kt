@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.annotation.StringRes
-import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -26,9 +25,11 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.FragmentBuyVipLayoutBinding
 import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.immersive_transalte.Constant
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.base.widget.ProcessDialog
 import org.mozilla.fenix.immersive_transalte.bean.UserBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
+import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.net.service.MemberService
 import org.mozilla.fenix.immersive_transalte.utils.PixelUtil
 import kotlin.math.ceil
@@ -397,6 +398,7 @@ class BuyVipFragment : Fragment() {
                             newTab = true,
                             from = BrowserDirection.FromGlobal,
                         )
+                        trackTrialUpgradeToYearVip(upcomming)
                     },
                 ).show()
             }
@@ -429,6 +431,7 @@ class BuyVipFragment : Fragment() {
                         (requireActivity() as HomeActivity).openToBrowserAndLoad(
                             Constant.paySuccess, true, BrowserDirection.FromGlobal,
                         )
+                        trackMonthUpgradeToYearVip(upcomming)
                     },
                 ).show()
             }
@@ -458,6 +461,7 @@ class BuyVipFragment : Fragment() {
                         (requireActivity() as HomeActivity).openToBrowserAndLoad(
                             Constant.paySuccess, true, BrowserDirection.FromGlobal,
                         )
+                        trackTrialOrMonthVip(isEnableTrial)
                     },
                     onPayFailed = {
                     },
@@ -467,6 +471,56 @@ class BuyVipFragment : Fragment() {
                 ).show(binding.root)
             }
         }
+    }
+
+    /**
+     * 月费升级到年费
+     */
+    private fun trackMonthUpgradeToYearVip(upgradeVip: VipUpgradeBean) {
+        val money = (upgradeVip.amount_remaining / 100)
+        val currency = upgradeVip.currency
+        val vipType = 4
+        trackPurchase(money, currency, vipType)
+    }
+
+    /**
+     * 试用升级到年费
+     */
+    private fun trackTrialUpgradeToYearVip(upgradeVip: VipUpgradeBean) {
+        val money = upgradeVip.amount_remaining / 100.0F
+        val currency = upgradeVip.currency
+        val vipType = 3
+        trackPurchase(money, currency, vipType)
+    }
+
+    /**
+     * 试用或者月费会员
+     */
+    private fun trackTrialOrMonthVip(isEnableTrial: Boolean) {
+        var money = 0F
+        var currency = ""
+        val vipType:Int
+        if (isEnableTrial) {
+            vipType = 1
+        } else {
+            vipType = 2
+            val year = productInfo?.entities?.year
+            year?.let { vip ->
+                money = (ceil(vip.unitAmount / 100 / 12 * 10) / 10F)
+                currency = vip.currencySymbol
+            }
+        }
+        trackPurchase(money, currency, vipType)
+    }
+
+    private fun trackPurchase(
+        money: Float,
+        currency: String,
+        vipType: Int,
+    ) {
+        var uid = 0L
+        userInfo?.let { uid = it.uid }
+        ImmersiveTracker.trackPurchase(money, currency, vipType, uid)
     }
 
     override fun onDestroy() {

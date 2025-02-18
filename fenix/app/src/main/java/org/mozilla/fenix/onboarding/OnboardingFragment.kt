@@ -25,6 +25,7 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import mozilla.components.support.base.ext.areNotificationsEnabledSafe
 import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.utils.BrowsersCache
+import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.FragmentOnboardingPagesBinding
 import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
@@ -181,19 +182,27 @@ class OnboardingFragment : Fragment() {
         fourthPageView.setCallback(
             object : FourthPageView.Callback {
                 override fun onNextClick() {
-                    requireComponents.fenixOnboarding.finish()
+                    /*requireComponents.fenixOnboarding.finish()
                     findNavController().nav(
                         id = R.id.onboardingFragment,
                         directions = OnboardingFragmentDirections.actionHome(),
-                    )
+                    )*/
+                    activity?.let {
+                        it.components.fenixOnboarding.finish()
+                        (it as HomeActivity).navigateToHome()
+                    }
                 }
 
                 override fun onGotoBuy() {
-                    requireComponents.fenixOnboarding.finish()
+                    /*requireComponents.fenixOnboarding.finish()
                     findNavController().nav(
                         id = R.id.onboardingFragment,
                         directions = OnboardingFragmentDirections.actionHome(),
-                    )
+                    )*/
+                    activity?.let {
+                        it.components.fenixOnboarding.finish()
+                        (it as HomeActivity).navigateToHome()
+                    }
                 }
             },
         )

@@ -110,7 +110,7 @@ class BuyVipPopWindow(
             return 1
         } else if (user.isSubMonthVip) {
             return 2
-        } else if (user.isSubYearVipTry) {
+        } else if (user.isSubYearVip) {
             return 3
         }
         return 0

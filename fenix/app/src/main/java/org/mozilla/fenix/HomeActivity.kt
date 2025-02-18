@@ -1330,6 +1330,10 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         navHost.navController.navigate(NavGraphDirections.actionGlobalBuyVipFragment())
     }
 
+    internal fun navigateToHome() {
+        navHost.navController.navigate(NavGraphDirections.actionGlobalHome())
+    }
+
     final override fun attachBaseContext(base: Context) {
         base.components.strictMode.resetAfter(StrictMode.allowThreadDiskReads()) {
             super.attachBaseContext(base)
