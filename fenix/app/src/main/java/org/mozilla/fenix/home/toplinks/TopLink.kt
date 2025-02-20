@@ -18,6 +18,7 @@ data class TopLink(
     val title_zh: String = "",
     val title_tr: String = "",
     val title_en: String = "",
+    val title_ko: String = "",
 
     val isMore: Boolean = false
 )

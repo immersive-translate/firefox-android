@@ -41,4 +41,18 @@ object AppLangUtil {
         return false
     }
 
+    /**
+     * 是否韩语
+     */
+    fun isKorean(): Boolean {
+        var locale = LocaleManager.getCurrentLocale(FenixApplication.application)
+        if (locale == null) {
+            locale = Locale.getDefault()
+        }
+        locale?.let {
+            return (Locale.KOREAN.language.equals(it.language))
+        }
+        return false
+    }
+
 }

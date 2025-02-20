@@ -312,8 +312,12 @@ function insertHiddenPagePopupMeta() {
     // 打开菜单
     window.WebViewJavascriptBridge.registerHandler("openMenu", function(data, responseCallback) {
         // openPopup
+        var menuStyle = "right: unset; bottom: unset; left: 50%; top: 0; transform: translateX(-50%);";
+        if(window.innerWidth > 450) {
+            menuStyle = "left: unset; top: 0; right: 20px; bottom: unset; transform: none;";
+        }
         sendMessage("togglePopup", {
-            style : "right: unset; bottom: unset; left: 50%; top: 0; transform: translateX(-50%);",
+            style : menuStyle,
             isSheet: false,
             overlayStyle: "background-color: transparent;"
         });

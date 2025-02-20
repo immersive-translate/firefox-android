@@ -1,17 +1,18 @@
-package org.mozilla.fenix.onboarding.imts
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+package org.mozilla.fenix.onboarding.imts
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import org.mozilla.fenix.databinding.OnboardingPageFourthLayoutBinding
-
 import org.mozilla.fenix.R
+import org.mozilla.fenix.databinding.OnboardingPageFourthLayoutBinding
 import org.mozilla.fenix.immersive_transalte.user.BuyVipFragment
 
 class FourthPageView : FrameLayout {

@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 import org.mozilla.fenix.BrowserDirection
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
+import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.databinding.FragmentBuyVipLayoutBinding
 import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.immersive_transalte.Constant
@@ -56,6 +57,8 @@ class BuyVipFragment : Fragment() {
     private var productInfo: VipProductBean? = null
     private var trailList: List<String>? = null
     private var isNeedTitle = true
+
+    private val browsingModeManager get() = (activity as HomeActivity).browsingModeManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -119,6 +122,11 @@ class BuyVipFragment : Fragment() {
         super.onResume()
         if (isNeedTitle) {
             showToolbar(getString(R.string.buy_vip_btn_text_upgrade))
+        }
+        if (browsingModeManager.mode == BrowsingMode.Private) {
+            binding.root.setBackgroundColor(0xFFFFFFFF.toInt())
+        } else {
+            binding.root.setBackgroundColor(0x0)
         }
     }
 
@@ -307,11 +315,9 @@ class BuyVipFragment : Fragment() {
         binding.progress.visibility = View.GONE
     }
 
-    private var isCallGotoBuy = false
     private fun gotoUserLogin() {
-        callback?.let {
-            isCallGotoBuy = true
-            it.onGotoBuy()
+        if (!isNeedTitle) {
+            callback?.onGotoBuy()
         }
         (requireActivity() as HomeActivity).openToBrowserAndLoad(
             "${Constant.loginPage}?app_action=gotoUpgrade", true,
@@ -525,9 +531,6 @@ class BuyVipFragment : Fragment() {
 
     override fun onDestroy() {
         scope.cancel()
-        if (!isCallGotoBuy) {
-            callback?.onGotoBuy()
-        }
         super.onDestroy()
     }
 

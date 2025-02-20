@@ -10,7 +10,6 @@ import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
-import android.os.StrictMode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,47 +17,25 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
-import mozilla.components.concept.engine.webextension.InstallationMethod
-import mozilla.components.service.nimbus.evalJexlSafe
-import mozilla.components.service.nimbus.messaging.use
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import mozilla.components.support.base.ext.areNotificationsEnabledSafe
 import mozilla.components.support.base.log.logger.Logger
 import mozilla.components.support.utils.BrowsersCache
-import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
-import org.mozilla.fenix.databinding.FragmentOnboardingPagesBinding
-import org.mozilla.fenix.components.accounts.FenixFxAEntryPoint
 import org.mozilla.fenix.components.lazyStore
-import org.mozilla.fenix.compose.LinkTextState
-import org.mozilla.fenix.ext.components
+import org.mozilla.fenix.databinding.FragmentOnboardingPagesBinding
 import org.mozilla.fenix.ext.hideToolbar
-import org.mozilla.fenix.ext.isDefaultBrowserPromptSupported
 import org.mozilla.fenix.ext.isLargeWindow
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.ext.requireComponents
+import org.mozilla.fenix.ext.settings
+import org.mozilla.fenix.onboarding.imts.FourthPageView
 import org.mozilla.fenix.onboarding.imts.LanguagePageView
 import org.mozilla.fenix.onboarding.imts.SecondPageView
 import org.mozilla.fenix.onboarding.imts.ThirdPageView
 import org.mozilla.fenix.onboarding.imts.ViewPageAdapter
-import org.mozilla.fenix.ext.settings
-import org.mozilla.fenix.nimbus.FxNimbus
-import org.mozilla.fenix.onboarding.imts.FourthPageView
-import org.mozilla.fenix.onboarding.store.OnboardingAddOnsAction
 import org.mozilla.fenix.onboarding.store.OnboardingAddOnsStore
-import org.mozilla.fenix.onboarding.store.OnboardingAddonStatus
-import org.mozilla.fenix.onboarding.view.Caption
-import org.mozilla.fenix.onboarding.view.OnboardingAddOn
-import org.mozilla.fenix.onboarding.view.OnboardingPageUiData
-import org.mozilla.fenix.onboarding.view.OnboardingScreen
-import org.mozilla.fenix.onboarding.view.sequencePosition
-import org.mozilla.fenix.onboarding.view.telemetrySequenceId
-import org.mozilla.fenix.onboarding.view.toPageUiData
-import org.mozilla.fenix.settings.SupportUtils
-import org.mozilla.fenix.theme.FirefoxTheme
-import org.mozilla.fenix.utils.canShowAddSearchWidgetPrompt
-import org.mozilla.fenix.utils.showAddSearchWidgetPrompt
 
 /**
  * Fragment displaying the onboarding flow.
@@ -182,27 +159,19 @@ class OnboardingFragment : Fragment() {
         fourthPageView.setCallback(
             object : FourthPageView.Callback {
                 override fun onNextClick() {
-                    /*requireComponents.fenixOnboarding.finish()
+                    requireComponents.fenixOnboarding.finish()
                     findNavController().nav(
                         id = R.id.onboardingFragment,
                         directions = OnboardingFragmentDirections.actionHome(),
-                    )*/
-                    activity?.let {
-                        it.components.fenixOnboarding.finish()
-                        (it as HomeActivity).navigateToHome()
-                    }
+                    )
                 }
 
                 override fun onGotoBuy() {
-                    /*requireComponents.fenixOnboarding.finish()
+                    requireComponents.fenixOnboarding.finish()
                     findNavController().nav(
                         id = R.id.onboardingFragment,
                         directions = OnboardingFragmentDirections.actionHome(),
-                    )*/
-                    activity?.let {
-                        it.components.fenixOnboarding.finish()
-                        (it as HomeActivity).navigateToHome()
-                    }
+                    )
                 }
             },
         )

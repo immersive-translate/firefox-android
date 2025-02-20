@@ -79,11 +79,9 @@ object TopLinkProvider {
                 it.forEach { topLink ->
                     val tl = TopLink(
                         id = topLink.id,
-                        iconUrl = topLink.iconUrl,
-                        linkUrl = topLink.linkUrl,
-                        title_zh = topLink.title_zh,
-                        title_en = topLink.title_en,
-                        title_tr = topLink.title_tr,
+                        iconUrl = topLink.iconUrl, linkUrl = topLink.linkUrl,
+                        title_zh = topLink.title_zh, title_en = topLink.title_en,
+                        title_tr = topLink.title_tr, title_ko = topLink.title_ko,
                     )
                     tls.add(tl)
                 }

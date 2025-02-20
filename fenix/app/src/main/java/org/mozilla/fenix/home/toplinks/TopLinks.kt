@@ -184,7 +184,7 @@ private fun TopSiteItem(
                             testTagsAsResourceId = true
                         }
                         .testTag(TopSitesTestTag.topSiteTitle)
-                        .padding(start = 2.dp, end = 2.dp),
+                        .padding(start = 1.dp, end = 1.dp),
                     text = getTopLinkTitle(topLink), /*stringResource(topLink.title)*/
                     color = if (!topLink.isMore) FirefoxTheme.colors.textPrimary
                     else Color(0xFF999999),
@@ -208,6 +208,8 @@ private fun getTopLinkTitle(topLink: TopLink): String {
         return topLink.title_zh
     } else if (AppLangUtil.isChineseTraditional()) {
         return topLink.title_tr
+    } else if (AppLangUtil.isKorean()) {
+        return topLink.title_ko
     }
     return topLink.title_en
 }

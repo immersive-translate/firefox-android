@@ -20,11 +20,12 @@ public class HomePageBean implements Serializable {
 
     public static class TopLinkBean implements Serializable {
         private long id;
-        private String iconUrl;
-        private String linkUrl;
-        private String title_zh;
-        private String title_tr;
-        private String title_en;
+        private String iconUrl = "";
+        private String linkUrl = "";
+        private String title_zh = "";
+        private String title_tr = "";
+        private String title_en = "";
+        private String title_ko = "";
 
         public long getId() {
             return id;
@@ -72,6 +73,14 @@ public class HomePageBean implements Serializable {
 
         public void setTitle_en(String title_en) {
             this.title_en = title_en;
+        }
+
+        public String getTitle_ko() {
+            return title_ko;
+        }
+
+        public void setTitle_ko(String title_ko) {
+            this.title_ko = title_ko;
         }
     }
 
