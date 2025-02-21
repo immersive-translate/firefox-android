@@ -801,7 +801,8 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     internal fun addTabletActions(context: Context) {
         addNavigationActions(context)
-
+        initImmTranslateAction(context)
+        initImmTranslateMenuAction(context)
         val enableTint = ThemeManager.resolveAttribute(R.attr.textPrimary, context)
         if (refreshAction == null) {
             refreshAction = BrowserToolbar.TwoStateButton(
@@ -859,6 +860,12 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         refreshAction?.let {
             browserToolbarView.view.removeNavigationAction(it)
         }
+        immTranslateAction?.let {
+            browserToolbarView.view.removeNavigationAction(it)
+        }
+        immMenuAction?.let {
+            browserToolbarView.view.removeNavigationAction(it)
+        }
     }
 
     override fun onStart() {
@@ -896,6 +903,8 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         forwardAction = null
         backAction = null
         refreshAction = null
+        immMenuAction = null
+        immTranslateAction = null
     }
 
     private fun updateHistoryMetadata() {
