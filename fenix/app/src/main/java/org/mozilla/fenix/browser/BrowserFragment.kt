@@ -201,6 +201,18 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         }
     }
 
+    private var curTabSessionId: String? = null
+
+    /**
+     * tab切换回调
+     */
+    override fun onTabSelectedChanged(selectedTab: TabSessionState) {
+        curTabSessionId = selectedTab.id
+        if (selectedTab.content.progress > 0) {
+            refreshTranslateState()
+        }
+    }
+
     private fun initSharePageAction(context: Context) {
         if (!context.settings().navigationToolbarEnabled || context.isTabStripEnabled()) {
             return

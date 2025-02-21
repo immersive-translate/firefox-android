@@ -1941,9 +1941,13 @@ abstract class BaseBrowserFragment :
         }
     }
 
+    protected open fun onTabSelectedChanged(selectedTab: TabSessionState) {
+    }
+
     private fun handleTabSelected(selectedTab: TabSessionState) {
         if (!this.isRemoving) {
             updateThemeForSession(selectedTab)
+            onTabSelectedChanged(selectedTab)
         }
 
         if (browserInitialized) {
