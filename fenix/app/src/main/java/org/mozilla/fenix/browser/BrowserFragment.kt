@@ -296,28 +296,24 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
     private fun initImmTranslateAction(context: Context) {
         if (immTranslateAction != null) return
 
+        val isPrivateMode = (activity as HomeActivity).browsingModeManager.mode.isPrivate
+        val primaryImage = AppCompatResources.getDrawable(
+            context,
+            if (!isPrivateMode) R.drawable.ic_imm_trans_home_24
+            else R.drawable.ic_imm_trans_private_home_24,
+        )
+        val secondaryImage = AppCompatResources.getDrawable(
+            context,
+            if (!isPrivateMode) R.drawable.ic_imm_translated_home_24
+            else R.drawable.ic_imm_translated_private_home_24,
+        )
+
         immTranslateAction =
             BrowserToolbar.TwoStateButton(
-                primaryImage = AppCompatResources.getDrawable(
-                    context,
-                    R.drawable.ic_imm_trans_home_24,
-                )!!,
+                primaryImage = primaryImage!!,
                 primaryContentDescription = context.getString(R.string.browser_toolbar_imm_trans),
                 // primaryImageTintResource = ThemeManager.resolveAttribute(R.attr.textPrimary, context),
                 isInPrimaryState = {
-                    /*val isLoading = getSafeCurrentTab()?.content?.loading == true
-                    if (isLoading) {
-                        isPageTranslated = false
-                    } else {
-                        if (isPageLoading) {
-                            handler.postDelayed(::refreshTranslateState, 350)
-                            showTranslatePopTips()
-                        }
-                    }
-                    if (isPageLoading != isLoading) {
-                        isPageLoading = isLoading
-                    }*/
-
                     val isLoading = getSafeCurrentTab()?.content?.loading == true
                     if (!isLoading) {
                         if (isPageLoading) {
@@ -331,10 +327,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
 
                     !isPageTranslated
                 },
-                secondaryImage = AppCompatResources.getDrawable(
-                    context,
-                    R.drawable.ic_imm_translated_home_24,
-                )!!,
+                secondaryImage = secondaryImage!!,
                 secondaryContentDescription = context.getString(R.string.browser_toolbar_imm_trans),
                 disableInSecondaryState = false,
                 weight = { TRANSLATIONS_WEIGHT },
@@ -385,12 +378,16 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
      * 刷新翻译状态
      */
     private fun refreshTranslateState() {
+        val callTabSessionId = getSafeCurrentTab()?.id
         val session = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
         session?.let {
             val geckoSession = it as GeckoSession
             val jsonObject = JsonObject()
             JsBridge.callHandler(geckoSession, "getPageStatus", jsonObject) { result ->
                 try {
+                    if (callTabSessionId != curTabSessionId) {
+                        return@callHandler
+                    }
                     val pageStatus = result.get("pageTranslated").asBoolean
                     if (pageStatus != isPageTranslated) {
                         isPageTranslated = pageStatus
