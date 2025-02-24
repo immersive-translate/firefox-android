@@ -7,7 +7,6 @@ package org.mozilla.fenix.immersive_transalte
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mozilla.components.concept.engine.EngineSession
 import mozilla.components.concept.engine.webextension.MessageHandler
@@ -16,6 +15,7 @@ import mozilla.components.feature.addons.Addon
 import mozilla.components.feature.addons.AddonManager
 import mozilla.components.feature.addons.update.AddonUpdater
 import org.json.JSONObject
+import kotlin.math.max
 
 
 /**
@@ -29,6 +29,7 @@ class ImmersiveTranslateService(
     private var isChecked: Boolean = false
     private var installedTsAddon: Addon? = null
     private val localVersion = ImmersiveTranslateAddonGetter.version
+    private val localResource = ImmersiveTranslateAddonGetter.downloadUrl
 
     /**
      * 检查安装更新插件
@@ -74,7 +75,7 @@ class ImmersiveTranslateService(
      */
     private fun update(addon: Addon) {
         // callRegisterMessageHandler(addon.id)
-        if (localVersion == addon.version) {
+        /*if (localVersion == addon.version) {
             addonManager.installAddon(
                 addon.id,
                 addon.downloadUrl, null,
@@ -92,24 +93,85 @@ class ImmersiveTranslateService(
                     }
                 },
             )
-        }
+        }*/
 
-        /*addonManager.updateAddon(
-            addon.id,
-            onFinish = { status ->
-                when (status) {
-                    AddonUpdater.Status.SuccessfullyUpdated -> {
+        val versionCompare = compareVersionNames(localVersion, addon.version)
+        if (versionCompare > 0) {
+            addonManager.uninstallAddon(
+                addon,
+                onSuccess = {
+                    addonManager.installAddon(
+                        addon.id,
+                        localResource, null,
+                        onSuccess = {
+                            fetchInstalledTSAddon()
+                        },
+                    )
+                },
+            )
+            /*addonManager.installAddon(
+                addon.id,
+                localResource, null,
+                onSuccess = {
+                    fetchInstalledTSAddon()
+                },
+            )*/
+        } else if (versionCompare == 0) {
+            val onlineVersion = try {
+                addon.downloadUrl.let {
+                    it.substring(
+                        it.lastIndexOf("-") + 1,
+                        it.lastIndexOf("."),
+                    )
+                }
+            } catch (_: Exception) {
+                addon.version
+            }
+            val compare = compareVersionNames(onlineVersion, addon.version)
+            if (compare > 0) {
+                addonManager.installAddon(
+                    addon.id,
+                    addon.downloadUrl, null,
+                    onSuccess = {
+                        fetchInstalledTSAddon()
+                    },
+                )
+            }
+        } else {
+            addonManager.updateAddon(
+                addon.id,
+                onFinish = { status ->
+                    if (status == AddonUpdater.Status.SuccessfullyUpdated) {
                         fetchInstalledTSAddon()
                     }
+                },
+            )
+        }
 
-                    else -> {}
-                }
-            },
-        )*/
+    }
+
+    @Suppress("SameParameterValue")
+    private fun compareVersionNames(version1: String, version2: String): Int {
+        try {
+            val parts1 = version1.split(".")
+            val parts2 = version2.split(".")
+            val length = max(parts1.size, parts2.size)
+            for (i in 0 until length) {
+                val part1 = if (i < parts1.size) parts1[i].toInt() else 0
+                val part2 = if (i < parts2.size) parts2[i].toInt() else 0
+                if (part1 > part2) return 1
+                if (part1 < part2) return -1
+            }
+            return 0
+        } catch (_: Exception) {
+        }
+        return -1
     }
 
     /**
-     * 获取已安装翻译插件
+     * 获取已安装翻译插件*
+     3.
+
      */
     private fun fetchInstalledTSAddon() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -128,7 +190,8 @@ class ImmersiveTranslateService(
     }
 
     private fun registerMessageHandler(id: String) {
-        addonManager.registerAddonMessageHandler(id, "imt_connector",
+        addonManager.registerAddonMessageHandler(
+            id, "imt_connector",
             object : MessageHandler {
                 override fun onPortConnected(port: Port) {
                     val message = JSONObject()
@@ -149,6 +212,7 @@ class ImmersiveTranslateService(
                 override fun onPortDisconnected(port: Port) {
                     super.onPortDisconnected(port)
                 }
-            })
+            },
+        )
     }
 }
