@@ -578,6 +578,9 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
     }
 
     private fun showPrivacyRemind(view: View) {
+        if (isDestroyed || isFinishing) {
+            return
+        }
         PrivacyRemindDialog(
             this,
             onAgree = {

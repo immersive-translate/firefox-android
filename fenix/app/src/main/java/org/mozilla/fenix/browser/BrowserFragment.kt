@@ -197,7 +197,9 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         }
         if (pageTranslated != isPageTranslated) {
             isPageTranslated = pageTranslated
-            browserToolbarView.view.invalidateActions()
+            if (!isDetached) {
+                browserToolbarView.view.invalidateActions()
+            }
         }
     }
 
@@ -359,11 +361,11 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
             return
         }
         activity?.let { page ->
-            if (page.isDestroyed || !page.settings().showBrowserMenuTips) {
+            if (page.isDestroyed || isDetached || !page.settings().showBrowserMenuTips) {
                 return
             }
             ImmTranslateTipsWindow(page, Type.Translate) {
-                if (page.isDestroyed) {
+                if (page.isDestroyed || isDetached) {
                     return@ImmTranslateTipsWindow
                 }
                 ImmTranslateTipsWindow(page, Type.Menu) {

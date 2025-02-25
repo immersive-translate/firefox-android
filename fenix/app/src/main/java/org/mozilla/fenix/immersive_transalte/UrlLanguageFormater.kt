@@ -28,10 +28,10 @@ object UrlLanguageFormater {
                 uri = uri.buildUpon().appendQueryParameter(key, lang).build()
                 webUrl = uri.toString()
             }
-        } finally {
+        } catch (_: Exception) {
         }
 
-        return webUrl
+        return webUrl ?: ""
     }
 
 }
