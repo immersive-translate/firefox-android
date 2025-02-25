@@ -53,6 +53,8 @@
     <uses-permission android:name="android.permission.CREDENTIAL_MANAGER_SET_ORIGIN" />
     <uses-permission android:name="android.permission.CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" tools:node="remove"/>
+
     <application
         android:name=".FenixApplication"
         android:allowBackup="false"
@@ -452,6 +454,7 @@
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="false" />
 
+        <receiver android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver" tools:node="remove"/>
     </application>
 
 </manifest>
