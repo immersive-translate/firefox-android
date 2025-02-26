@@ -506,14 +506,17 @@ class BuyVipFragment : Fragment() {
         var money = 0F
         var currency = ""
         val vipType:Int
+        val year = productInfo?.entities?.year
         if (isEnableTrial) {
             vipType = 1
+            year?.let { vip ->
+                currency = vip.currency
+            }
         } else {
             vipType = 2
-            val year = productInfo?.entities?.year
             year?.let { vip ->
                 money = (ceil(vip.unitAmount / 100 / 12 * 10) / 10F)
-                currency = vip.currencySymbol
+                currency = vip.currency
             }
         }
         trackPurchase(money, currency, vipType)

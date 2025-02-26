@@ -114,7 +114,7 @@ object ImmersiveTracker {
         if (money > 0) {
             finalMoney = ceil(money * 100) / 100
         }*/
-        val event = AdjustEvent("purchase_android")
+        val event = AdjustEvent("2y25ob")
         event.setRevenue(money.toDouble(), currency)
         event.addPartnerParameter("pay_type", "$vipType")
         event.addPartnerParameter("user_id", "$userId")
