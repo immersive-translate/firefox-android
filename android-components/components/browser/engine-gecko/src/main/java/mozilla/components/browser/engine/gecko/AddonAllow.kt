@@ -15,5 +15,7 @@ class AddonAllow {
             "{5efceaa7-f3a2-4e59-a54b-85319448e305}",
             "{5efceaa7-f3a2-4e59-a54b-85319448e306}" // beta
         )
+
+        val onboardingPage = "https://onboarding.immersivetranslate.com"
     }
 }

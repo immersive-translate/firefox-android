@@ -124,6 +124,11 @@ class GeckoEngine(
     }
     private val webExtensionTabHandler = object : TabHandler {
         override fun onNewTab(webExtension: WebExtension, engineSession: EngineSession, active: Boolean, url: String) {
+            if (AddonAllow.NoCheckAddons.contains(webExtension.id) &&
+                url.startsWith(AddonAllow.onboardingPage)
+            ) {
+                return
+            }
             webExtensionDelegate?.onNewTab(webExtension, engineSession, active, url)
         }
     }

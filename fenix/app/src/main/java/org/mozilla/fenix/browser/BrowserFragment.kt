@@ -356,10 +356,33 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         }
     }
 
+    private val whiteList = mutableListOf(
+        "https://immersivetranslate.com/accounts/login",
+        "https://test.immersivetranslate.com/accounts/login",
+        "https://immersive-translate.cloudflareaccess.com/cdn-cgi/access/login",
+    )
+
+    private fun checkWhiteList(url: String): Boolean {
+        whiteList.forEach { link ->
+            if (url.startsWith(link)) {
+                return true
+            }
+        }
+        return false
+    }
+
     private fun showTranslatePopTips() {
         if (isBrowserMenuTipShown) {
             return
         }
+
+        val url = getSafeCurrentTab()?.content?.url
+        url?.let {
+            if (checkWhiteList(it)) {
+                return
+            }
+        }
+
         activity?.let { page ->
             if (page.isDestroyed || isDetached || !page.settings().showBrowserMenuTips) {
                 return
