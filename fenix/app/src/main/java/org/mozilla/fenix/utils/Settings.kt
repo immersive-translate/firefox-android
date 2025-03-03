@@ -477,6 +477,11 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = ""
     )
 
+    var isSetDefaultLanguage: Boolean by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_is_set_default_lang),
+        default = false
+    )
+
     var nimbusLastFetchTime: Long by longPreference(
         appContext.getPreferenceKey(R.string.pref_key_nimbus_last_fetch),
         default = 0L,

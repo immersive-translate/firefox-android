@@ -318,8 +318,9 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                 isInPrimaryState = {
                     val isLoading = getSafeCurrentTab()?.content?.loading == true
                     if (!isLoading) {
+                        handler.removeCallbacksAndMessages(null)
+                        handler.postDelayed(::refreshTranslateState, 500)
                         if (isPageLoading) {
-                            handler.postDelayed(::refreshTranslateState, 350)
                             showTranslatePopTips()
                         }
                     }
@@ -387,13 +388,14 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
             if (page.isDestroyed || isDetached || !page.settings().showBrowserMenuTips) {
                 return
             }
+            val application = page.application
             ImmTranslateTipsWindow(page, Type.Translate) {
                 if (page.isDestroyed || isDetached) {
                     return@ImmTranslateTipsWindow
                 }
                 ImmTranslateTipsWindow(page, Type.Menu) {
                     isBrowserMenuTipShown = true
-                    page.settings().showBrowserMenuTips = false
+                    application.settings().showBrowserMenuTips = false
                 }.show(binding.flTipsContainer, binding.swipeRefresh)
             }.show(binding.flTipsContainer, binding.swipeRefresh)
         }
@@ -402,6 +404,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
     /**
      * 刷新翻译状态
      */
+    @Suppress("SENSELESS_COMPARISON")
     private fun refreshTranslateState() {
         val callTabSessionId = getSafeCurrentTab()?.id
         val session = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
@@ -416,7 +419,9 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                     val pageStatus = result.get("pageTranslated").asBoolean
                     if (pageStatus != isPageTranslated) {
                         isPageTranslated = pageStatus
-                        browserToolbarView.view.invalidateActions()
+                        if (browserToolbarView != null) {
+                            browserToolbarView.view.invalidateActions()
+                        }
                     }
                 } finally {
                 }
@@ -1048,7 +1053,56 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
             { true },
         )
 
-        return ContextMenuCandidate.defaultCandidates(
+        val candidates = ArrayList<ContextMenuCandidate>()
+
+        // image translate
+        candidates.add(
+            ContextMenuCandidate.createTranslateImageCandidate(
+                context,
+                action = { sessionState, hitResult ->
+                    val geckoSession =
+                        sessionState.engineState.engineSession?.getGeckoSession() as GeckoSession
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("imageUrl", hitResult.src)
+                    JsBridge.callHandler(geckoSession, "translateImage", jsonObject) {}
+                },
+            ),
+        )
+
+        // image restore
+        candidates.add(
+            ContextMenuCandidate.createRestoreImageCandidate(
+                context,
+                action = { sessionState, _, imageId, imageUrl ->
+                    val geckoSession =
+                        sessionState.engineState.engineSession?.getGeckoSession() as GeckoSession
+                    val jsonObject = JsonObject()
+                    imageId?.let {
+                        jsonObject.addProperty("imageId", it)
+                    }
+                    imageUrl?.let {
+                        jsonObject.addProperty("imageUrl", it)
+                    }
+                    JsBridge.callHandler(geckoSession, "restoreImage", jsonObject) { _ ->
+                    }
+                },
+            ),
+        )
+
+        candidates.addAll(
+            ContextMenuCandidate.defaultCandidates(
+                context,
+                context.components.useCases.tabsUseCases,
+                context.components.useCases.contextMenuUseCases,
+                view,
+                ContextMenuSnackbarDelegate(),
+            ) + ContextMenuCandidate.createOpenInExternalAppCandidate(
+                requireContext(),
+                contextMenuCandidateAppLinksUseCases,
+            )
+        )
+
+        /*return ContextMenuCandidate.defaultCandidates(
             context,
             context.components.useCases.tabsUseCases,
             context.components.useCases.contextMenuUseCases,
@@ -1057,7 +1111,9 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         ) + ContextMenuCandidate.createOpenInExternalAppCandidate(
             requireContext(),
             contextMenuCandidateAppLinksUseCases,
-        )
+        )*/
+
+        return candidates
     }
 
     /**

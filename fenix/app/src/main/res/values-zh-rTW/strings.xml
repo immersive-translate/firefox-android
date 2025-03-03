@@ -2878,7 +2878,8 @@
     <string name="onboarding_second_content_cart">漫畫</string>
     <string name="onboarding_second_content_rn">小紅書</string>
     <string name="onboarding_second_bilin_search">跨語言搜尋</string>
-    <string name="onboarding_second_subtitle">全部一鍵翻譯，\n閱讀再無障礙！🎉</string>
+    <string name="onboarding_second_img">圖片</string>
+    <string name="onboarding_second_subtitle">全部一鍵翻譯，閱讀再無障礙！🎉</string>
     <string name="onboarding_second_known_btn">我知道了🫡</string>
 
     <!-- Content description (not visible, for screen readers etc.) for closing the translations bottom sheet. -->

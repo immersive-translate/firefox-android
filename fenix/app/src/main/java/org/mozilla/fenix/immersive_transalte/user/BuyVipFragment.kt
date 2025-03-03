@@ -357,9 +357,13 @@ class BuyVipFragment : Fragment() {
                 // 升级到包年
                 monthVipUpgrade()
             } else {
-                // 试用逻辑
+                // 试用逻辑 | 直接年费逻辑
                 priceId?.let {
-                    createOrder(it, true)
+                    var isTrial = true;
+                    userInfo?.let { u ->
+                        isTrial = !u.isSubYearVipTryExpired
+                    }
+                    createOrder(it, isTrial, true)
                 }
             }
             return
@@ -368,7 +372,7 @@ class BuyVipFragment : Fragment() {
         if (payType == 1) { // 月度会员
             val priceId = productInfo?.entities?.month?.priceId
             priceId?.let {
-                createOrder(it, false)
+                createOrder(it, false, false)
             }
             return
         }
@@ -445,7 +449,7 @@ class BuyVipFragment : Fragment() {
     }
 
     private var isHandle = false
-    private fun createOrder(priceId: String, isEnableTrial: Boolean) {
+    private fun createOrder(priceId: String, isEnableTrial: Boolean, isYearVip: Boolean) {
         if (isHandle) {
             return
         }
@@ -467,7 +471,7 @@ class BuyVipFragment : Fragment() {
                         (requireActivity() as HomeActivity).openToBrowserAndLoad(
                             Constant.paySuccess, true, BrowserDirection.FromGlobal,
                         )
-                        trackTrialOrMonthVip(isEnableTrial)
+                        trackTrialOrMonthVip(isEnableTrial, isYearVip)
                     },
                     onPayFailed = {
                     },
@@ -502,13 +506,13 @@ class BuyVipFragment : Fragment() {
     /**
      * 试用或者月费会员
      */
-    private fun trackTrialOrMonthVip(isEnableTrial: Boolean) {
+    private fun trackTrialOrMonthVip(isEnableTrial: Boolean, isYearVip: Boolean) {
         var money = 0F
         var currency = ""
         val vipType:Int
         val year = productInfo?.entities?.year
-        if (isEnableTrial) {
-            vipType = 1
+        if (isYearVip) {
+            vipType = if (isEnableTrial) 1 else 5
             year?.let { vip ->
                 currency = vip.currency
             }
@@ -527,8 +531,7 @@ class BuyVipFragment : Fragment() {
         currency: String,
         vipType: Int,
     ) {
-        var uid = 0L
-        userInfo?.let { uid = it.uid }
+        val uid = userInfo?.uid ?: 0
         ImmersiveTracker.trackPurchase(money, currency, vipType, uid)
     }
 

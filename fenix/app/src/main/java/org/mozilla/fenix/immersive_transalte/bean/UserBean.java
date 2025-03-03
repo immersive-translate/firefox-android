@@ -227,11 +227,19 @@ public class UserBean implements Serializable {
     }
 
     /**
-     * 是否是年度会员
+     * 是否是试用年度会员
      */
     public boolean isSubYearVipTry() {
         return subscription != null
                 && "yearly".equals(subscription.subscriptionType)
+                && "active".equals(subscription.subscriptionStatus)
+                && subscription.isTrial;
+    }
+
+    public boolean isSubYearVipTryExpired() {
+        return subscription != null
+                && "yearly".equals(subscription.subscriptionType)
+                && !"active".equals(subscription.subscriptionStatus)
                 && subscription.isTrial;
     }
 

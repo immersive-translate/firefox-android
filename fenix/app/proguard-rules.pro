@@ -149,4 +149,8 @@
 -keep class org.mozilla.fenix.immersive_transalte.base.http.Response { *; }
 -keep class org.mozilla.fenix.immersive_transalte.bean.** { *; }
 
+-keep class org.tensorflow.** {*;}
+#-keep class cz.adaptech.** {*;}
+-keep class com.google.mlkit.** {*;}
+
 

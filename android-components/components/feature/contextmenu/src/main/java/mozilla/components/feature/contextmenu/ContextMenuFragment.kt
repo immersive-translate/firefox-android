@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
@@ -30,6 +31,7 @@ private const val KEY_SESSION_ID = "session_id"
 private const val KEY_IDS = "ids"
 private const val KEY_LABELS = "labels"
 private const val KEY_ADDITIONAL_NOTE = "additional_note"
+private const val KEY_ICON = "icon"
 
 /**
  * [DialogFragment] implementation to display the actual context menu dialog.
@@ -81,6 +83,8 @@ class ContextMenuFragment : DialogFragment() {
             setOnClickListener {
                 maxLines = EXPANDED_TITLE_MAX_LINES
             }
+
+            visibility = View.GONE
         }
     }
 
@@ -151,6 +155,15 @@ internal class ContextMenuAdapter(
     private val fragment: ContextMenuFragment,
     private val inflater: LayoutInflater,
 ) : RecyclerView.Adapter<ContextMenuViewHolder>() {
+
+    private val iconMap = HashMap<String, Int>().apply {
+        put("mozac.feature.contextmenu.save_image", R.drawable.ic_img_save)
+        put("mozac.feature.contextmenu.copy_image", R.drawable.ic_img_copy)
+        put("mozac.feature.contextmenu.share_image", R.drawable.ic_img_shared)
+        put("mozac.feature.contextmenu.translate_image", R.drawable.ic_img_translate)
+        put("mozac.feature.contextmenu.restore_image", R.drawable.ic_img_restore)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, position: Int) = ContextMenuViewHolder(
         inflater.inflate(R.layout.mozac_feature_contextmenu_item, parent, false),
     )
@@ -160,6 +173,12 @@ internal class ContextMenuAdapter(
     override fun onBindViewHolder(holder: ContextMenuViewHolder, position: Int) {
         val label = fragment.itemLabels[position]
         holder.labelView.text = label
+
+        val id = fragment.itemIds[position]
+        val iconId = iconMap[id]
+        iconId?.let {
+            holder.labelView.setCompoundDrawablesWithIntrinsicBounds(0, 0, it, 0)
+        }
 
         holder.itemView.setOnClickListener { fragment.onItemSelected(position) }
     }

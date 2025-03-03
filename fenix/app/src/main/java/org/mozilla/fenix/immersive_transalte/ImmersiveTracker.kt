@@ -114,7 +114,17 @@ object ImmersiveTracker {
         if (money > 0) {
             finalMoney = ceil(money * 100) / 100
         }*/
-        val event = AdjustEvent("2y25ob")
+
+        val token = when (vipType) {
+            1 -> "fj537o"       // purchase_trial_android               年费试用
+            2 -> "c85hj9"       // purchase_monthly_android             月费会员
+            3 -> "ovd2oe"       // purchase_trial_to_annual_android     试用升级到年费会员
+            4 -> "5ql8x0"       // purchase_monthly_to_annual_android   月费升级到年费会员
+            5 -> "7zkkgy"       // purchase_annual_android              年费会员
+            else -> "2y25ob"    // purchase_android                     老的购买事件
+        }
+
+        val event = AdjustEvent(token)
         event.setRevenue(money.toDouble(), currency)
         event.addPartnerParameter("pay_type", "$vipType")
         event.addPartnerParameter("user_id", "$userId")

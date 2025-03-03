@@ -41,6 +41,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.immersivetranslate.mltextdetect.detect.ImageTextDetectManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -140,7 +141,6 @@ import org.mozilla.fenix.immersive_transalte.PrivacyRemindDialog
 import org.mozilla.fenix.immersive_transalte.QuitAppDialog
 import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
 import org.mozilla.fenix.immersive_transalte.WebDialog
-import org.mozilla.fenix.library.bookmarks.BookmarkFragmentDirections
 import org.mozilla.fenix.library.bookmarks.DesktopFolders
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.messaging.MessageNotificationWorker
@@ -518,6 +518,11 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
         autoCheckImmersive()
         initJavaScriptBridge()
+        initImageDetect()
+    }
+
+    private fun initImageDetect() {
+        ImageTextDetectManager.init(applicationContext)
     }
 
     /**

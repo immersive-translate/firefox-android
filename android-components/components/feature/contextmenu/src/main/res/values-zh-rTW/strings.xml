@@ -23,7 +23,7 @@
     <string name="mozac_feature_contextmenu_copy_image_location">複製圖片網址</string>
 
     <!-- Text for context menu item to save / download the image. -->
-    <string name="mozac_feature_contextmenu_save_image">儲存圖片</string>
+    <string name="mozac_feature_contextmenu_save_image">儲存到相簿</string>
 
     <!-- Text for context menu item to copy the image to the clipboard. -->
     <string name="mozac_feature_contextmenu_copy_image">複製圖片</string>
@@ -59,4 +59,7 @@
     <string name="mozac_selection_context_menu_email">發送郵件</string>
     <!-- Action shown in a text selection context menu. This will prompt a new call from the selected text. -->
     <string name="mozac_selection_context_menu_call">撥號</string>
+
+    <string name="mozac_feature_contextmenu_translate_image">翻譯圖片</string>
+    <string name="mozac_feature_contextmenu_restore_image">顯示原圖</string>
 </resources>

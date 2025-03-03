@@ -8,6 +8,8 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import com.google.gson.JsonObject
+import com.immersivetranslate.mltextdetect.detect.ImageTextDetectManager
+import mozilla.components.feature.contextmenu.TranslateImageLinkHolder
 import mozilla.components.jsbridge.JSBridgeInstance
 import mozilla.components.jsbridge.OnBridgeCallback
 import org.mozilla.fenix.HomeActivity
@@ -105,10 +107,41 @@ object JsBridge {
                     callback?.onCallBack(getResult(true))
                 }
 
+                "imageTextRecognition" -> {
+                    handlerImageTextRecognition(jsonObject, callback)
+                }
+
                 else -> {}
             }
         }
 
+    }
+
+    /**
+     * 图片识别
+     */
+    private fun handlerImageTextRecognition(
+        jsonObject: JsonObject,
+        callback: OnBridgeCallback?,
+    ) {
+        callback?.let {
+            val imageId = jsonObject.get("imageId")?.asString
+            val imageData = jsonObject.get("imageData")?.asString
+            val imageUrl = jsonObject.get("imageUrl")?.asString
+
+            ImageTextDetectManager.postRequest(imageId, imageData) { success, response ->
+                it.onCallBack(response)
+                // save map imageId -> imageUrl
+                if (success) {
+                    imageId?.let { imgId ->
+                        imageUrl?.let { url ->
+                            TranslateImageLinkHolder.save(imgId, url)
+                        }
+                    }
+                }
+            }
+
+        }
     }
 
     /**

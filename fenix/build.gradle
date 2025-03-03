@@ -167,6 +167,8 @@ allprojects {
                 }
             }
         }
+
+        maven { url 'https://jitpack.io' }
     }
 
     tasks.withType(KotlinCompile).configureEach {

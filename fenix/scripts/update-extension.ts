@@ -74,6 +74,13 @@ export default async function main() {
     await unzip.status();
     unzip.close();
 
+    // 删除资源包
+    const deleteXpi = Deno.run({
+        cmd: ["rm", downloadPath],
+    });
+    await deleteXpi.status();
+    deleteXpi.close();
+
     await updateProperties("extension", version);
   } catch (error) {
     console.error(`Error: ${error.message}`);

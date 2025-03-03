@@ -111,7 +111,7 @@
         android:id="@+id/ll_content_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:baselineAligned="false"
         android:gravity="center"
         android:orientation="horizontal"
@@ -169,7 +169,7 @@
 
         </LinearLayout>
 
-        <!-- biLin搜索 -->
+        <!-- 图片搜索 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/img_ts_bilin" />
+                app:srcCompat="@mipmap/img_ts_image" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -189,7 +189,7 @@
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/onboarding_second_bilin_search"
+                android:text="@string/onboarding_second_img"
                 android:textColor="@color/fx_mobile_text_color_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -198,11 +198,43 @@
 
     </LinearLayout>
 
+    <!-- biLin搜索 -->
+    <LinearLayout
+        android:id="@+id/ll_content_bilin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_content_two">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@mipmap/img_ts_bilin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/onboarding_second_bilin_search"
+            android:textColor="@color/fx_mobile_text_color_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/tv_set_lan_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="36dp"
         android:gravity="center"
         android:lineSpacingMultiplier="1.2"
         android:text="@string/onboarding_second_subtitle"
@@ -212,7 +244,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_content_two" />
+        app:layout_constraintTop_toBottomOf="@id/ll_content_bilin" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_i_see"

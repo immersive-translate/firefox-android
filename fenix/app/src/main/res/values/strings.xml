@@ -2931,7 +2931,8 @@
     <string name="onboarding_second_content_cart">Cartoon</string>
     <string name="onboarding_second_content_rn">Rednote</string>
     <string name="onboarding_second_bilin_search">Multi-Lingual Search</string>
-    <string name="onboarding_second_subtitle">All translated with one click, \nmaking reading hassle-free!🎉</string>
+    <string name="onboarding_second_img">Picture</string>
+    <string name="onboarding_second_subtitle">All translated with one click, making reading hassle-free!🎉</string>
     <string name="onboarding_second_known_btn">I see🫡</string>
 
     <string name="onboarding_third_dest">Eliminate language barriers\nSee a bigger world</string>

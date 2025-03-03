@@ -10,6 +10,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.text.TextUtils
 import android.view.View
 import androidx.annotation.VisibleForTesting
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +20,7 @@ import mozilla.components.browser.state.state.content.ShareInternetResourceState
 import mozilla.components.concept.engine.HitResult
 import mozilla.components.feature.app.links.AppLinksUseCases
 import mozilla.components.feature.contextmenu.ContextMenuCandidate.Companion.MAX_TITLE_LENGTH
+import mozilla.components.feature.contextmenu.utils.ImageIdUtil
 import mozilla.components.feature.tabs.TabsUseCases
 import mozilla.components.support.base.log.Log
 import mozilla.components.support.ktx.android.content.addContact
@@ -76,24 +78,27 @@ data class ContextMenuCandidate(
             createCopyLinkCandidate(context, snackBarParentView, snackbarDelegate),
             createDownloadLinkCandidate(context, contextMenuUseCases),
             createShareLinkCandidate(context),
-            createShareImageCandidate(context, contextMenuUseCases),
             createOpenImageInNewTabCandidate(
                 context,
                 tabsUseCases,
                 snackBarParentView,
                 snackbarDelegate,
             ),
-            createCopyImageCandidate(
-                context,
-                contextMenuUseCases,
-            ),
+
             createSaveImageCandidate(context, contextMenuUseCases),
+            createCopyImageCandidate(context, contextMenuUseCases),
+            createShareImageCandidate(context, contextMenuUseCases),
+
             createSaveVideoAudioCandidate(context, contextMenuUseCases),
             createCopyImageLocationCandidate(context, snackBarParentView, snackbarDelegate),
             createAddContactCandidate(context),
             createShareEmailAddressCandidate(context),
             createCopyEmailAddressCandidate(context, snackBarParentView, snackbarDelegate),
         )
+
+        private fun filterImage(hitResult: HitResult): Boolean {
+            return !hitResult.isImage()
+        }
 
         /**
          * Context Menu item: "Open Link in New Tab".
@@ -117,6 +122,7 @@ data class ContextMenuCandidate(
             showFor = { tab, hitResult ->
                 tab.isUrlSchemeAllowed(hitResult.getLink()) &&
                     hitResult.isHttpLink() &&
+                    filterImage(hitResult) &&
                     !tab.content.private &&
                     additionalValidation(tab, hitResult)
             },
@@ -161,6 +167,7 @@ data class ContextMenuCandidate(
             showFor = { tab, hitResult ->
                 tab.isUrlSchemeAllowed(hitResult.getLink()) &&
                     hitResult.isHttpLink() &&
+                    filterImage(hitResult) &&
                     additionalValidation(tab, hitResult)
             },
             action = { parent, hitResult ->
@@ -201,6 +208,7 @@ data class ContextMenuCandidate(
             showFor = { tab, hitResult ->
                 tab.isUrlSchemeAllowed(hitResult.getLink()) &&
                     hitResult.canOpenInExternalApp(appLinksUseCases) &&
+                    filterImage(hitResult) &&
                     additionalValidation(tab, hitResult)
             },
             action = { _, hitResult ->
@@ -315,6 +323,7 @@ data class ContextMenuCandidate(
             showFor = { tab, hitResult ->
                 tab.isUrlSchemeAllowed(hitResult.getLink()) &&
                     hitResult.isImage() &&
+                    filterImage(hitResult) &&
                     additionalValidation(tab, hitResult)
             },
             action = { parent, hitResult ->
@@ -359,10 +368,20 @@ data class ContextMenuCandidate(
                     additionalValidation(tab, hitResult)
             },
             action = { tab, hitResult ->
+                val url = if (hitResult.isImage() && tab.isBase64(hitResult.src)) {
+                    val imageId = ImageIdUtil.getImageId(hitResult.src)
+                    if (!TextUtils.isEmpty(imageId)) {
+                        TranslateImageLinkHolder.get(imageId!!) ?: ""
+                    } else {
+                        ""
+                    }
+                } else {
+                    hitResult.src
+                }
                 contextMenuUseCases.injectDownload(
                     tab.id,
                     DownloadState(
-                        hitResult.src,
+                        url /*hitResult.src*/,
                         skipConfirmation = true,
                         private = tab.content.private,
                         referrerUrl = tab.content.url,
@@ -453,6 +472,7 @@ data class ContextMenuCandidate(
             label = context.getString(R.string.mozac_feature_contextmenu_download_link),
             showFor = { tab, hitResult ->
                 tab.isUrlSchemeAllowed(hitResult.getLink()) &&
+                    filterImage(hitResult) &&
                     hitResult.isLinkForOtherThanWebpage() &&
                     additionalValidation(tab, hitResult)
             },
@@ -484,6 +504,7 @@ data class ContextMenuCandidate(
             label = context.getString(R.string.mozac_feature_contextmenu_share_link),
             showFor = { tab, hitResult ->
                 tab.isUrlSchemeAllowed(hitResult.getLink()) &&
+                    filterImage(hitResult) &&
                     (hitResult.isUri() || hitResult.isImage() || hitResult.isVideoAudio()) &&
                     additionalValidation(tab, hitResult)
             },
@@ -509,6 +530,55 @@ data class ContextMenuCandidate(
                         tag = "createShareLinkCandidate",
                     )
                 }
+            },
+        )
+
+        /**
+         * image translate
+         */
+        fun createTranslateImageCandidate(
+            context: Context,
+            action: (SessionState, HitResult) -> Unit,
+        ) = ContextMenuCandidate(
+            id = "mozac.feature.contextmenu.translate_image",
+            label = context.getString(R.string.mozac_feature_contextmenu_translate_image),
+            showFor = { tab, hitResult ->
+                tab.isUrlSchemeAllowed(hitResult.getLink()) &&
+                    !ImageIdUtil.isProImage(hitResult.src) &&
+                    !tab.isBase64(hitResult.src) &&
+                    hitResult.isImage()
+            },
+            action = { tab, hitResult ->
+                action(tab, hitResult)
+            },
+        )
+
+        /**
+         * image restore
+         */
+        fun createRestoreImageCandidate(
+            context: Context,
+            action: (SessionState, HitResult, String?, String?) -> Unit,
+        ) = ContextMenuCandidate(
+            id = "mozac.feature.contextmenu.restore_image",
+            label = context.getString(R.string.mozac_feature_contextmenu_restore_image),
+            showFor = { _, hitResult ->
+                hitResult.isImage() &&
+                    (ImageIdUtil.hasImageId(hitResult.src) ||
+                        ImageIdUtil.isProImage(hitResult.src))
+            },
+            action = { tab, hitResult ->
+                var imageId: String? = null
+                var imageUrl: String? = null
+                if (hitResult.src.startsWith("https://")) {
+                    imageUrl = hitResult.src
+                } else {
+                    imageId = ImageIdUtil.getImageId(hitResult.src)
+                    imageId?.let {
+                        TranslateImageLinkHolder.remove(it)
+                    }
+                }
+                action(tab, hitResult, imageId, imageUrl)
             },
         )
 
@@ -563,6 +633,7 @@ data class ContextMenuCandidate(
             label = context.getString(R.string.mozac_feature_contextmenu_copy_link),
             showFor = { tab, hitResult ->
                 tab.isUrlSchemeAllowed(hitResult.getLink()) &&
+                    filterImage(hitResult) &&
                     (hitResult.isUri() || hitResult.isImage() || hitResult.isVideoAudio()) &&
                     additionalValidation(tab, hitResult)
             },
@@ -598,6 +669,7 @@ data class ContextMenuCandidate(
             showFor = { tab, hitResult ->
                 tab.isUrlSchemeAllowed(hitResult.getLink()) &&
                     hitResult.isImage() &&
+                    filterImage(hitResult) &&
                     additionalValidation(tab, hitResult)
             },
             action = { _, hitResult ->
@@ -698,4 +770,9 @@ internal fun SessionState.isUrlSchemeAllowed(url: String): Boolean {
             !engineSession.getBlockedSchemes().contains(urlScheme)
         }
     }
+}
+
+@VisibleForTesting
+internal fun SessionState.isBase64(url: String): Boolean {
+    return url.startsWith("data:image/")
 }

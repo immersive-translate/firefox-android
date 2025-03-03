@@ -11,13 +11,19 @@ import org.mozilla.fenix.components.Components
 object UrlLanguageFormater {
 
     fun handleUrl(components: Components, url: String?): String {
-        val lang = components.settings.defaultTsLanguage
         if (url.isNullOrEmpty()) {
             return ""
         }
+
+        val lang = components.settings.defaultTsLanguage
         if (lang.isEmpty() || !url.isUrl()) {
             return url
         }
+
+        if (components.settings.isSetDefaultLanguage) {
+            return url
+        }
+        components.settings.isSetDefaultLanguage = true
 
         var webUrl = url
         val key = "imt_set_targetLanguage"

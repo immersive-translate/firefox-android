@@ -3097,7 +3097,8 @@
     <string name="onboarding_second_content_cart">지세도</string>
     <string name="onboarding_second_content_rn">Rednote</string>
     <string name="onboarding_second_bilin_search">언어 간 검색</string>
-    <string name="onboarding_second_subtitle">한 번의 클릭으로 모두 번역되므로\n읽는 것이 번거롭지 않습니다!🎉</string>
+    <string name="onboarding_second_img">그림</string>
+    <string name="onboarding_second_subtitle">한 번의 클릭으로 모두 번역되므로 번거로움 없이 읽을 수 있습니다!🎉</string>
     <string name="onboarding_second_known_btn">알겠어요🫡</string>
 
     <string name="onboarding_third_dest">언어 장벽 제거\n더 큰 세상 보기</string>
