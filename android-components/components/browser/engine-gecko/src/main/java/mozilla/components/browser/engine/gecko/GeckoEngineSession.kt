@@ -1314,6 +1314,9 @@ class GeckoEngineSession(
             session: GeckoSession,
             uri: String,
         ): GeckoResult<GeckoSession> {
+            if (uri.startsWith(JSBridgeInstance.BRIDGE_SCHEME)) {
+                return GeckoResult.fromValue(null)
+            }
             val newEngineSession =
                 GeckoEngineSession(runtime, privateMode, defaultSettings, openGeckoSession = false)
             notifyObservers {

@@ -19,6 +19,7 @@ import java.util.Map;
 import mozilla.components.browser.engine.gecko.prompt.GeckoPromptDelegate;
 
 public class JSBridgeInstance {
+    public static final String BRIDGE_SCHEME = BridgeUtil.YY_OVERRIDE_SCHEMA;
     @SuppressLint("StaticFieldLeak")
     private static JSBridgeInstance instance;
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -72,7 +73,7 @@ public class JSBridgeInstance {
                     @Override
                     public boolean onIntercept(@NonNull GeckoSession session, @NonNull String alertMessage) {
                         boolean isIntercept = !TextUtils.isEmpty(alertMessage) &&
-                                alertMessage.startsWith(BridgeUtil.YY_OVERRIDE_SCHEMA);
+                                alertMessage.startsWith(BRIDGE_SCHEME);
                         if (isIntercept) {
                             handler.post(() -> intercept(session, alertMessage));
                         }

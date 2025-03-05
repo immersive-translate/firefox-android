@@ -6,6 +6,7 @@ package mozilla.components.browser.engine.gecko.prompt
 
 import android.content.Context
 import android.net.Uri
+import android.text.TextUtils
 import androidx.annotation.VisibleForTesting
 import mozilla.components.browser.engine.gecko.GeckoEngineSession
 import mozilla.components.browser.engine.gecko.ext.convertToChoices
@@ -46,7 +47,6 @@ import org.mozilla.geckoview.GeckoSession.PromptDelegate.DateTimePrompt.Type.WEE
 import org.mozilla.geckoview.GeckoSession.PromptDelegate.IdentityCredential.AccountSelectorPrompt
 import org.mozilla.geckoview.GeckoSession.PromptDelegate.IdentityCredential.PrivacyPolicyPrompt
 import org.mozilla.geckoview.GeckoSession.PromptDelegate.IdentityCredential.ProviderSelectorPrompt
-import org.mozilla.geckoview.GeckoSession.PromptDelegate.PromptInstanceDelegate
 import org.mozilla.geckoview.GeckoSession.PromptDelegate.PromptResponse
 import java.security.InvalidParameterException
 import java.text.SimpleDateFormat
@@ -424,12 +424,6 @@ internal class GeckoPromptDelegate(private val geckoEngineSession: GeckoEngineSe
         fun onIntercept(session: GeckoSession, alertMessage : String): Boolean
     }
 
-    private var onAlertInterceptor: OnAlertInterceptor? = null
-
-    fun setOnAlertInterceptor(onAlertInterceptor: OnAlertInterceptor) {
-        this.onAlertInterceptor = onAlertInterceptor;
-    }
-
     override fun onAlertPrompt(
         session: GeckoSession,
         prompt: PromptDelegate.AlertPrompt,
@@ -438,10 +432,11 @@ internal class GeckoPromptDelegate(private val geckoEngineSession: GeckoEngineSe
         val geckoResult = GeckoResult<PromptResponse>()
         val message = prompt.message ?: ""
 
-        if (onAlertInterceptor != null &&
-            onAlertInterceptor!!.onIntercept(session, message)) {
-            prompt.dismissSafely(geckoResult)
-            return geckoResult
+        onAlertInterceptor?.let {
+            if (TextUtils.isEmpty(message) || it.onIntercept(session, message)) {
+                prompt.dismissSafely(geckoResult)
+                return geckoResult
+            }
         }
 
         val onDismiss: () -> Unit = { prompt.dismissSafely(geckoResult) }
@@ -677,11 +672,27 @@ internal class GeckoPromptDelegate(private val geckoEngineSession: GeckoEngineSe
         return geckoResult
     }
 
+    private var onAlertInterceptor: OnAlertInterceptor? = null
+
+    fun setOnAlertInterceptor(onAlertInterceptor: OnAlertInterceptor) {
+        this.onAlertInterceptor = onAlertInterceptor;
+    }
+
     override fun onPopupPrompt(
         session: GeckoSession,
         prompt: PromptDelegate.PopupPrompt,
     ): GeckoResult<PromptResponse> {
         val geckoResult = GeckoResult<PromptResponse>()
+
+        onAlertInterceptor?.let {
+            val msg = prompt.targetUri ?: ""
+
+            if (TextUtils.isEmpty(msg) || it.onIntercept(session, msg)) {
+                geckoResult.complete(prompt.confirm(AllowOrDeny.DENY))
+                return geckoResult
+            }
+        }
+
         val onAllow: () -> Unit = {
             if (!prompt.isComplete) {
                 geckoResult.complete(prompt.confirm(AllowOrDeny.ALLOW))

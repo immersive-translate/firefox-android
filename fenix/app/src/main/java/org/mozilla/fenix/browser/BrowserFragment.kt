@@ -423,7 +423,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                             browserToolbarView.view.invalidateActions()
                         }
                     }
-                } finally {
+                } catch (_:Exception) {
                 }
             }
         }
