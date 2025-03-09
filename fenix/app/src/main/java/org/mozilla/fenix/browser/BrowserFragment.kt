@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,6 +35,7 @@ import mozilla.components.support.base.feature.UserInteractionHandler
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
 import mozilla.components.support.utils.ext.isLandscape
 import mozilla.telemetry.glean.private.NoExtras
+import org.json.JSONObject
 import org.mozilla.fenix.GleanMetrics.AddressToolbar
 import org.mozilla.fenix.GleanMetrics.ReaderMode
 import org.mozilla.fenix.GleanMetrics.Shopping
@@ -61,9 +61,10 @@ import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.runIfFragmentIsAttached
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.home.HomeFragment
-import org.mozilla.fenix.immersive_transalte.JsBridge
-import org.mozilla.fenix.immersive_transalte.OnPageCallback
 import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
+import org.mozilla.fenix.immersive_transalte.webmessage.JavaScriptMessageHandler
+import org.mozilla.fenix.immersive_transalte.webmessage.OnPageCallback
+import org.mozilla.fenix.immersive_transalte.webmessage.WebMessageBridge
 import org.mozilla.fenix.nimbus.FxNimbus
 import org.mozilla.fenix.settings.quicksettings.protections.cookiebanners.getCookieBannerUIMode
 import org.mozilla.fenix.shopping.DefaultShoppingExperienceFeature
@@ -71,7 +72,6 @@ import org.mozilla.fenix.shopping.ReviewQualityCheckFeature
 import org.mozilla.fenix.shortcut.PwaOnboardingObserver
 import org.mozilla.fenix.theme.AcornWindowSize
 import org.mozilla.fenix.theme.ThemeManager
-import org.mozilla.geckoview.GeckoSession
 
 /**
  * Fragment used for browsing the web within the main app.
@@ -99,7 +99,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
     private var isTablet: Boolean = false
 
     override fun onDestroy() {
-        JsBridge.removePageStateCallback(this)
+        JavaScriptMessageHandler.removePageStateCallback(this)
         super.onDestroy()
     }
 
@@ -107,7 +107,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
     override fun initializeUI(view: View, tab: SessionState) {
         super.initializeUI(view, tab)
 
-        JsBridge.addPageStateCallback(this)
+        JavaScriptMessageHandler.addPageStateCallback(this)
         // default language
         tab.content.url = UrlLanguageFormater.handleUrl(
             requireComponents, tab.content.url)
@@ -188,17 +188,20 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
      * 更新页面 翻译状态
      */
     override fun onPageTranslateStateChange(
-        session: GeckoSession,
+        sessionId: String?,
         pageTranslated: Boolean,
     ) {
-        val currentSession = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
-        if (currentSession == null || currentSession != session) {
+        val currentSessionId = getSafeCurrentTab()?.id
+        if (currentSessionId != sessionId) {
             return
         }
         if (pageTranslated != isPageTranslated) {
             isPageTranslated = pageTranslated
             if (!isDetached) {
-                browserToolbarView.view.invalidateActions()
+                try {
+                    browserToolbarView.view.invalidateActions()
+                } catch (_:Exception) {
+                }
             }
         }
     }
@@ -211,7 +214,11 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
     override fun onTabSelectedChanged(selectedTab: TabSessionState) {
         curTabSessionId = selectedTab.id
         if (selectedTab.content.progress > 0) {
-            refreshTranslateState()
+            // refreshTranslateState()
+            handler.removeCallbacksAndMessages(null)
+            handler.postDelayed({
+                refreshTranslateState()
+            }, 100)
         }
     }
 
@@ -319,7 +326,8 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                     val isLoading = getSafeCurrentTab()?.content?.loading == true
                     if (!isLoading) {
                         handler.removeCallbacksAndMessages(null)
-                        handler.postDelayed(::refreshTranslateState, 500)
+                        //handler.postDelayed(::refreshTranslateState, 500)
+                        handler.postDelayed(::refreshTranslateState, 1000)
                         if (isPageLoading) {
                             showTranslatePopTips()
                         }
@@ -327,7 +335,6 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                     if (isPageLoading != isLoading) {
                         isPageLoading = isLoading
                     }
-
                     !isPageTranslated
                 },
                 secondaryImage = secondaryImage!!,
@@ -338,15 +345,15 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                     /*if (getSafeCurrentTab()?.content?.loading == true) {
                         return@TwoStateButton
                     }*/
-                    val session = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
-                    session?.let {
-                        val geckoSession = it as GeckoSession
-                        val jsonObject = JsonObject()
+                    val sessionId = getSafeCurrentTab()?.id
+                    sessionId?.let {
+                        val jsonObject = JSONObject()
                         val action = if (!isPageTranslated) "translatePage" else "restorePage"
-                        JsBridge.callHandler(geckoSession, action, jsonObject) { _ ->
-                            /*isPageTranslated = !isPageTranslated
-                            browserToolbarView.view.invalidateActions()*/
-                            refreshTranslateState()
+                        WebMessageBridge.callHandler(it, action, jsonObject) {
+                            handler.removeCallbacksAndMessages(null)
+                            handler.postDelayed({
+                                refreshTranslateState()
+                            }, 100)
                         }
                     }
                 },
@@ -407,16 +414,14 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
     @Suppress("SENSELESS_COMPARISON")
     private fun refreshTranslateState() {
         val callTabSessionId = getSafeCurrentTab()?.id
-        val session = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
-        session?.let {
-            val geckoSession = it as GeckoSession
-            val jsonObject = JsonObject()
-            JsBridge.callHandler(geckoSession, "getPageStatus", jsonObject) { result ->
+        callTabSessionId?.let {
+            val jsonObject = JSONObject()
+            WebMessageBridge.callHandler(it, "getPageStatus", jsonObject) { result->
                 try {
-                    if (callTabSessionId != curTabSessionId) {
+                    if (it != curTabSessionId) {
                         return@callHandler
                     }
-                    val pageStatus = result.get("pageTranslated").asBoolean
+                    val pageStatus = result.data?.optBoolean("pageTranslated") ?: false
                     if (pageStatus != isPageTranslated) {
                         isPageTranslated = pageStatus
                         if (browserToolbarView != null) {
@@ -443,14 +448,10 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
             contentDescription = context.getString(R.string.browser_toolbar_imm_menu),
             iconTintColorResource = ThemeManager.resolveAttribute(R.attr.textPrimary, context),
             listener = {
-                /*if (getSafeCurrentTab()?.content?.loading == true) {
-                    return@Button
-                }*/
-                val session = getSafeCurrentTab()?.engineState?.engineSession?.getGeckoSession()
-                session?.let {
-                    val geckoSession = it as GeckoSession
-                    val jsonObject = JsonObject()
-                    JsBridge.callHandler(geckoSession, "openMenu", jsonObject) {}
+                val sessionId = getSafeCurrentTab()?.id
+                sessionId?.let {
+                    val jsonObject = JSONObject()
+                    WebMessageBridge.callHandler(it, "openMenu", jsonObject) {}
                 }
             },
         )
@@ -1060,11 +1061,10 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
             ContextMenuCandidate.createTranslateImageCandidate(
                 context,
                 action = { sessionState, hitResult ->
-                    val geckoSession =
-                        sessionState.engineState.engineSession?.getGeckoSession() as GeckoSession
-                    val jsonObject = JsonObject()
-                    jsonObject.addProperty("imageUrl", hitResult.src)
-                    JsBridge.callHandler(geckoSession, "translateImage", jsonObject) {}
+                    val jsonObject = JSONObject()
+                    jsonObject.put("imageUrl", hitResult.src)
+                    WebMessageBridge.callHandler(sessionState.id,
+                        "translateImage", jsonObject) {}
                 },
             ),
         )
@@ -1074,17 +1074,15 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
             ContextMenuCandidate.createRestoreImageCandidate(
                 context,
                 action = { sessionState, _, imageId, imageUrl ->
-                    val geckoSession =
-                        sessionState.engineState.engineSession?.getGeckoSession() as GeckoSession
-                    val jsonObject = JsonObject()
+                    val jsonObject = JSONObject()
                     imageId?.let {
-                        jsonObject.addProperty("imageId", it)
+                        jsonObject.put("imageId", it)
                     }
                     imageUrl?.let {
-                        jsonObject.addProperty("imageUrl", it)
+                        jsonObject.put("imageUrl", it)
                     }
-                    JsBridge.callHandler(geckoSession, "restoreImage", jsonObject) { _ ->
-                    }
+                    WebMessageBridge.callHandler(sessionState.id,
+                        "restoreImage", jsonObject) {}
                 },
             ),
         )

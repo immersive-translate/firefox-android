@@ -52,7 +52,6 @@ import mozilla.components.concept.fetch.Response
 import mozilla.components.concept.storage.PageVisit
 import mozilla.components.concept.storage.RedirectSource
 import mozilla.components.concept.storage.VisitType
-import mozilla.components.jsbridge.JSBridgeInstance
 import mozilla.components.support.base.Component
 import mozilla.components.support.base.facts.Action
 import mozilla.components.support.base.facts.Fact
@@ -1178,7 +1177,6 @@ class GeckoEngineSession(
      */
     override fun close() {
         super.close()
-        JSBridgeInstance.getInstance().close(geckoSession)
         job.cancel()
         geckoSession.close()
     }
@@ -1314,9 +1312,6 @@ class GeckoEngineSession(
             session: GeckoSession,
             uri: String,
         ): GeckoResult<GeckoSession> {
-            if (uri.startsWith(JSBridgeInstance.BRIDGE_SCHEME)) {
-                return GeckoResult.fromValue(null)
-            }
             val newEngineSession =
                 GeckoEngineSession(runtime, privateMode, defaultSettings, openGeckoSession = false)
             notifyObservers {
@@ -1400,9 +1395,6 @@ class GeckoEngineSession(
     private fun createProgressDelegate() = object : GeckoSession.ProgressDelegate {
         override fun onProgressChange(session: GeckoSession, progress: Int) {
             notifyObservers { onProgress(progress) }
-            if (progress >= 50) {
-                JSBridgeInstance.getInstance().injectJsBridge(session)
-            }
         }
 
         override fun onSecurityChange(

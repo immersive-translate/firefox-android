@@ -136,11 +136,12 @@ import org.mozilla.fenix.home.intent.ReEngagementIntentProcessor
 import org.mozilla.fenix.home.intent.SpeechProcessingIntentProcessor
 import org.mozilla.fenix.home.intent.StartSearchIntentProcessor
 import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
-import org.mozilla.fenix.immersive_transalte.JsBridge
 import org.mozilla.fenix.immersive_transalte.PrivacyRemindDialog
 import org.mozilla.fenix.immersive_transalte.QuitAppDialog
 import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
 import org.mozilla.fenix.immersive_transalte.WebDialog
+import org.mozilla.fenix.immersive_transalte.webmessage.JavaScriptMessageHandler
+import org.mozilla.fenix.immersive_transalte.webmessage.WebMessageBridge
 import org.mozilla.fenix.library.bookmarks.DesktopFolders
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.messaging.MessageNotificationWorker
@@ -529,7 +530,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
      * init javascript bridge
      */
     private fun initJavaScriptBridge() {
-        JsBridge.init(this)
+        WebMessageBridge.init(components.core.geckoRuntime.webExtensionController)
+        JavaScriptMessageHandler.register(this)
     }
 
     /**
