@@ -72,7 +72,7 @@ object TopLinkProvider {
     }
 
     fun fetchTopLinks(context: Context) {
-        MainScope().launch(Dispatchers.IO) {
+        MainScope().launch(Dispatchers.Main) {
             val topLinkData = HomePageService.fetchHomeTopLinks().data?.data
             topLinkData?.topLinks?.let {
                 val tls = mutableListOf<TopLink>()

@@ -111,6 +111,7 @@ class AppLinksInterceptor(
         val engineSupportsScheme = engineSupportedSchemes.contains(uriScheme)
         val isAllowedRedirect = (isRedirect && !isSubframeRequest)
         val tabSessionState = store?.state?.findTab(engineSession)
+        val isInWhiteList = AppLinksWhiteListHolder.contains(encodedUri)
 
         val doNotIntercept = when {
             uriScheme == null -> true
@@ -123,7 +124,7 @@ class AppLinksInterceptor(
                     isSameDomain(lastUri, uri)
                 ) && engineSupportsScheme -> true
             // If scheme not in safelist then follow user preference
-            (!interceptLinkClicks || !launchInApp()) && engineSupportsScheme -> true
+            (!interceptLinkClicks || isInWhiteList || !launchInApp()) && engineSupportsScheme -> true
             // Never go to an external app when scheme is in blocklist
             alwaysDeniedSchemes.contains(uriScheme) -> true
             else -> false
@@ -152,7 +153,7 @@ class AppLinksInterceptor(
 
         if (redirect.isRedirect()) {
             if (
-                launchFromInterceptor &&
+                launchFromInterceptor && !isInWhiteList &&
                 result is RequestInterceptor.InterceptionResponse.AppIntent
             ) {
                 handleIntent(tabSessionState, uri, redirect.appIntent, redirect.marketplaceIntent)

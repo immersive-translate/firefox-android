@@ -103,6 +103,7 @@ import org.mozilla.fenix.ext.isCustomEngine
 import org.mozilla.fenix.ext.isKnownSearchDomain
 import org.mozilla.fenix.ext.setCustomEndpointIfAvailable
 import org.mozilla.fenix.ext.settings
+import org.mozilla.fenix.immersive_transalte.AppConfigProvider
 import org.mozilla.fenix.immersive_transalte.ImmersivePluginConfig
 import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.fenix.lifecycle.StoreLifecycleObserver
@@ -199,6 +200,7 @@ open class FenixApplication : LocaleAwareApplication(), Provider {
 
         // 初始化一些是数据
         TopLinkProvider.fetchTopLinks(this)
+        AppConfigProvider.fetchAppConfig()
         UserManager.refreshUser()
     }
 

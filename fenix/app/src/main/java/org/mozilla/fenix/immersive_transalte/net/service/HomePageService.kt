@@ -7,6 +7,7 @@ package org.mozilla.fenix.immersive_transalte.net.service
 import org.mozilla.fenix.immersive_transalte.base.http.BaseService
 import org.mozilla.fenix.immersive_transalte.base.http.HttpClient
 import org.mozilla.fenix.immersive_transalte.base.http.Response
+import org.mozilla.fenix.immersive_transalte.bean.AppConfigBean
 import org.mozilla.fenix.immersive_transalte.bean.HomePageBean
 import org.mozilla.fenix.immersive_transalte.bean.ResultData
 import org.mozilla.fenix.immersive_transalte.net.api.HomePageApi
@@ -20,6 +21,14 @@ object HomePageService : BaseService() {
     suspend fun fetchHomeTopLinks(): Response<ResultData<HomePageBean>> {
         val params = getCommonQueryParams()
         return executeHttpAndCallback(homepageApi?.fetchTopLinks(params))
+    }
+
+    /**
+     * app config 接口
+     */
+    suspend fun fetchAppConfig(): Response<ResultData<AppConfigBean>> {
+        val params = getCommonQueryParams()
+        return executeHttpAndCallback(homepageApi?.fetchAppConfig(params))
     }
 
 }
