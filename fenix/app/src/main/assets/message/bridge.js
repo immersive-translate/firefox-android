@@ -263,6 +263,19 @@
         });
     });
 
+    // 执行javascript
+    WebViewJavascriptBridge.registerHandler("evalJavaScript", function(data, responseCallback) {
+        const responseData = {};
+        try {
+            responseData.result = true;
+            responseData.evalResult = window.eval(data.javascript);
+        } catch(e) {
+            responseData.result = false;
+            responseData.error = e.toString();
+        }
+        responseCallback(responseData);
+    });
+
     // 页面加载成功，自动同步页面翻译状态
     /*window.addEventListener("load", async function () {
         setTimeout(async function (){

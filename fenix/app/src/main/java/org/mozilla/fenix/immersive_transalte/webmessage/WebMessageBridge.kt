@@ -84,6 +84,19 @@ object WebMessageBridge {
         return UUID.randomUUID().toString()
     }
 
+    /**
+     * 执行javascript代码
+     */
+    fun callJavaScript(
+        sessionId: String?,
+        javascript: String,
+        responseCallback: ((response: WebMessage) -> Unit)?,
+    ) {
+        val requestData = JSONObject()
+        requestData.put("javascript", javascript)
+        callHandler(sessionId, "evalJavaScript", requestData, responseCallback)
+    }
+
     private val portDelegate = object : PortDelegate {
         override fun onPortMessage(
             message: Any,
