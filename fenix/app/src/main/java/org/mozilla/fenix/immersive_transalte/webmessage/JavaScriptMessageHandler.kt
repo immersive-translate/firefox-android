@@ -8,8 +8,10 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import com.immersivetranslate.mltextdetect.detect.ImageTextDetectManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import mozilla.components.feature.contextmenu.TranslateImageLinkHolder
 import org.json.JSONObject
 import org.mozilla.fenix.HomeActivity
@@ -47,7 +49,8 @@ object JavaScriptMessageHandler {
                     message: WebMessage,
                     callback: (response: JSONObject?) -> Unit,
                 ) {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.baidu.com"))
+                    val intent = Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://www.baidu.com"))
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     val res = context.packageManager.resolveActivity(intent, 0)
                     val packageName = res?.activityInfo?.packageName
@@ -174,8 +177,10 @@ object JavaScriptMessageHandler {
                     message: WebMessage,
                     callback: (response: JSONObject?) -> Unit,
                 ) {
-                    scope.launch {
-                        val response = postImageRequest(message)
+                    scope.launch(Dispatchers.Main) {
+                        val response = withContext(Dispatchers.IO) {
+                            postImageRequest(message)
+                        }
                         callback(response)
                     }
                 }
@@ -200,7 +205,7 @@ object JavaScriptMessageHandler {
                         }
                     }
                 }
-                continuation.resume(JSONObject(response.toString()))
+                continuation.resume(response)
             }
         }
     }
