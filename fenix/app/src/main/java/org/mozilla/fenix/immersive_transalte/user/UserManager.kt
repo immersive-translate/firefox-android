@@ -95,12 +95,13 @@ object UserManager {
     /**
      * 刷新用户数据
      */
-    fun refreshUser() {
+    fun refreshUser(callback: (() -> Unit)? = null) {
         MainScope().launch(Dispatchers.IO) {
             val userInfo = MemberService.getUserInfo().data?.data
             if (userInfo == null) {
                 clearUser(FenixApplication.application)
             }
+            callback?.invoke()
         }
     }
 
