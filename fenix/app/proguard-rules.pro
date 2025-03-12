@@ -153,4 +153,4 @@
 #-keep class cz.adaptech.** {*;}
 -keep class com.google.mlkit.** {*;}
 
-
+-keep class org.mozilla.fenix.immersive_transalte.webmessage.WebMessage { *; }

@@ -24,9 +24,8 @@ function findCurrentTab(callback) {
             curTab = tabs[0];
         } else {
             for(let tab of tabs) {
-                if(tab.active) {
+                if(tab.active && tab.width > 0) {
                     curTab = tab;
-                    break;
                 }
             }
         }

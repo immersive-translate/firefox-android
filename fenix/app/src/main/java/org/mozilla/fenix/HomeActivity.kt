@@ -517,8 +517,8 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
 
         StartupTimeline.onActivityCreateEndHome(this) // DO NOT MOVE ANYTHING BELOW HERE.
 
-        autoCheckImmersive()
         initJavaScriptBridge()
+        autoCheckImmersive()
         initImageDetect()
     }
 

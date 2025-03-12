@@ -3,11 +3,17 @@
 var curTab;
 var sessionId;
 const pageId = Math.random().toString(36).substr(2);
+window.wrappedJSObject.imt_pageId = cloneInto(pageId, window, {cloneFunctions: true});
 
 // 监听background消息
 browser.runtime.onMessage.addListener((nativeMessage, sender) => {
-    if(curTab.id != nativeMessage.tabId) {
+    /*if(curTab.id != nativeMessage.tabId) {
         return;
+    }*/
+    if(!curTab) {
+        curTab = {};
+        curTab.id = nativeMessage.tabId;
+        window.wrappedJSObject.imt_tab = cloneInto(curTab, window, {cloneFunctions: true});
     }
     if(nativeMessage["sessionId"]) {
         sessionId = nativeMessage["sessionId"];
