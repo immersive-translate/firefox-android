@@ -3072,43 +3072,43 @@
     <string name="beta_feature">BETA</string>
 
     <string name="privacy_remind_dialog_title">친절한 팁</string>
-    <string name="privacy_remind_dialog_us">"이용약관"</string>
-    <string name="privacy_remind_dialog_itp">"몰입형 번역 브라우저 개인정보 보호정책"</string>
-    <string name="privacy_remind_dialog_content">몰입형 번역에 오신 것을 환영합니다. 몰입형 번역을 사용하기 전에 %1$s 및 %2$s를 주의 깊게 읽어보세요. "모바일 인터넷 응용프로그램 공통 유형에 대한 필수 개인정보 범위에 관한 규정"에 따라 몰입형 번역의 주요 기능은 웹사이트 탐색, 검색, 파일 처리, 파일 관리 등입니다. 확장 기능에는 몰입형 번역 계정 등이 포함됩니다. 기본 기능 개인정보 보호정책에 동의한다는 것은 웹사이트 열람, 검색, 파일 처리, 파일 관리 등 주요 기능을 사용할 때 필요한 관련 정보의 수집 및 처리에 동의하는 것일 뿐입니다. 몰입형 번역 계정 등 확장 기능을 통해 개인정보를 수집하는 경우에는 특정 기능을 사용할 때 별도로 동의를 구합니다.</string>
-    <string name="privacy_remind_dialog_disagree">맞지 않다</string>
+    <string name="privacy_remind_dialog_us">[이용 약관]</string>
+    <string name="privacy_remind_dialog_itp">[몰입형 번역 브라우저 개인정보 보호정책]</string>
+    <string name="privacy_remind_dialog_content">몰입형 번역을 이용해주셔서 감사합니다. 사용을 시작하기 전에 %1$s 및 %2$s를 신중히 읽어주세요. 《일반 유형 모바일 인터넷 애플리케이션 필수 개인정보 범위 규정》에 따라, 몰입형 번역의 주요 기능은 웹사이트 탐색, 검색, 파일 처리, 파일 관리 등이며, 추가 기능으로 몰입형 번역 계정 등이 포함됩니다.기본 기능 개인정보 보호정책에 동의하는 것은 웹사이트 탐색, 검색, 파일 처리, 파일 관리 등 주요 기능을 사용할 때 필요한 정보만 수집 및 처리하는 것에 동의함을 의미합니다. 몰입형 번역 계정 등 추가 기능과 관련된 개인정보 수집은 해당 기능을 사용할 때 별도로 동의를 요청합니다.</string>
+    <string name="privacy_remind_dialog_disagree">동의하지 않음</string>
     <string name="privacy_remind_dialog_agree">동의하다</string>
 
     <string name="quit_app_dialog_title">친절한 팁</string>
-    <string name="quit_app_dialog_content">본 제품을 사용하려면 관련 계약에 동의해야 합니다.</string>
-    <string name="quit_app_dialog_btn_quit">애플리케이션 종료</string>
-    <string name="quit_app_dialog_btn_known">알겠어요</string>
+    <string name="quit_app_dialog_content">이 제품은 관련 약관에 동의해야만 사용할 수 있습니다.</string>
+    <string name="quit_app_dialog_btn_quit">앱 종료</string>
+    <string name="quit_app_dialog_btn_known">알겠습니다</string>
 
     <string name="onboarding_lan_title">몰입형 번역을 기본 브라우저로 설정</string>
-    <string name="onboarding_lan_subtitle">모든 외국어 웹페이지는 기본적으로 몰입형 번역 브라우저로 열리고 자동으로 번역됩니다.\n검색 결과는 자동으로 모국어로 번역됩니다.</string>
-    <string name="onboarding_lan_set_title">당신의 모국어:</string>
+    <string name="onboarding_lan_subtitle">외국어 웹페이지는 기본적으로 몰입형 번역 브라우저로 열리고 자동 번역됩니다; \n검색 결과는 자동으로 모국어로 번역됩니다.</string>
+    <string name="onboarding_lan_set_title">사용자의 모국어:</string>
     <string name="onboarding_lan_set_default_browser">기본 브라우저로 설정</string>
-    <string name="onboarding_lan_skip">나중에 설정</string>
+    <string name="onboarding_lan_skip">나중에 설정하기</string>
     <string name="onboarding_lan_wait_setting">지금은 필요하지 않음</string>
 
-    <string name="onboarding_second_title">외국어 콘텐츠 읽기 가능:</string>
+    <string name="onboarding_second_title">외국어 콘텐츠를 불편 없이 읽기:</string>
     <string name="onboarding_second_content_web">웹페이지</string>
     <string name="onboarding_second_content_video">동영상</string>
     <string name="onboarding_second_content_doc">문서</string>
     <string name="onboarding_second_content_cart">지세도</string>
-    <string name="onboarding_second_content_rn">Rednote</string>
+    <string name="onboarding_second_content_rn">샤오홍슈</string>
     <string name="onboarding_second_bilin_search">언어 간 검색</string>
     <string name="onboarding_second_img">그림</string>
-    <string name="onboarding_second_subtitle">한 번의 클릭으로 모두 번역되므로 번거로움 없이 읽을 수 있습니다!🎉</string>
+    <string name="onboarding_second_subtitle">한 번의 클릭으로 전체 번역, 이제 막힘 없이 읽으세요!!🎉</string>
     <string name="onboarding_second_known_btn">알겠어요🫡</string>
 
-    <string name="onboarding_third_dest">언어 장벽 제거\n더 큰 세상 보기</string>
-    <string name="onboarding_third_finish_btn">언어의 장벽 없는 세상을 열어보세요!</string>
+    <string name="onboarding_third_dest">언어의 장벽을 허물고 \n더 넓은 세상을 만나보세요</string>
+    <string name="onboarding_third_finish_btn">언어의 장벽이 없는 세상을 열어보세요!</string>
 
     <string name="home_top_link_ts_web">웹페이지 번역</string>
-    <string name="home_top_link_ts_video">비디오 번역</string>
+    <string name="home_top_link_ts_video">동영상 번역</string>
     <string name="home_top_link_ts_doc">문서 번역</string>
     <string name="home_top_link_ts_comics">만화 번역</string>
-    <string name="home_top_link_ts_rednote">Rednote 번역</string>
+    <string name="home_top_link_ts_rednote">샤오홍슈 번역</string>
     <string name="home_top_link_ts_more">더 많은 도구</string>
     <string name="home_top_link_ts_more_content">제발\n예상하다</string>
 
@@ -3119,27 +3119,27 @@
     <string name="buy_vip_year_save_money">🔥구하다</string>
     <string name="buy_vip_year_renewal">평가판 기간이 끝나면 %1$s/년에 자동으로 갱신됩니다.</string>
     <string name="buy_vip_year_remind_2">평가판 기간 동안 구독을 취소하면 공제되지 않습니다.</string>
-    <string name="buy_vip_year_discount">기간 한정 제안</string>
+    <string name="buy_vip_year_discount">한정 기간 특가</string>
 
     <string name="buy_vip_month_title">월간 회원</string>
 
-    <string name="buy_vip_ts_service_title">Pro 독점 세계 최고의 AI 번역 서비스</string>
-    <string name="buy_vip_ts_deepL">DeepL 번역하다</string>
-    <string name="buy_vip_ts_openAI">OpenAI 번역하다</string>
-    <string name="buy_vip_ts_claude">Claude 번역하다</string>
-    <string name="buy_vip_is_gemini">Gemini 번역하다</string>
+    <string name="buy_vip_ts_service_title">Pro 회원 전용 글로벌 최상급 AI 번역 서비스</string>
+    <string name="buy_vip_ts_deepL">DeepL 번역</string>
+    <string name="buy_vip_ts_openAI">OpenAI 번역</string>
+    <string name="buy_vip_ts_claude">Claude 번역</string>
+    <string name="buy_vip_is_gemini">Gemini 번역</string>
 
-    <string name="buy_vip_adv_title">Pro 독점 고급 기능</string>
+    <string name="buy_vip_adv_title">Pro 회원 전용 고급 기능</string>
     <string name="buy_vip_adv_pdf_pro">PDF Pro</string>
     <string name="buy_vip_adv_comic">만화 번역</string>
-    <string name="buy_vip_adv_subtitle">Youtube 이중 언어 자막 다운로드</string>
-    <string name="buy_vip_adv_sync">다중 장치 동기화 구성</string>
-    <string name="buy_vip_adv_email">우선 이메일 지원</string>
+    <string name="buy_vip_adv_subtitle">YouTube 이중 언어 자막 다운로드</string>
+    <string name="buy_vip_adv_sync">다중 기기 동기화 설정</string>
+    <string name="buy_vip_adv_email">우선 지원 이메일 서비스</string>
 
-    <string name="buy_vip_year_save_percent">연간 구독(%1$s 절약)</string>
-    <string name="buy_vip_year_month">지속적인 월간 구독</string>
+    <string name="buy_vip_year_save_percent">연간 구독 자동 갱신(%1$s 할인)</string>
+    <string name="buy_vip_year_month">월간 구독 자동 갱신</string>
     <string name="buy_vip_year_try_trial">%1$s일 무료 체험</string>
-    <string name="buy_vip_btn_buy">지금 구독하세요</string>
+    <string name="buy_vip_btn_buy">지금 구독하기</string>
 
     <string name="buy_vip_tip_01">무료 플랜에는 더 비싸고 구성이 번거롭고 엄격한 속도 제한이 있는 맞춤형 API 토큰이 필요합니다. Pro 멤버십으로 업그레이드하시면 몰입형 번역에서 제공하는 DeepL, OpenAI, Claude, Gemini 번역 서비스를 별도의 설정 없이 바로 이용하실 수 있습니다. 또한 최대 2천만 토큰의 월간 번역 할당량을 즐기실 수 있습니다.</string>
     <string name="buy_vip_tip_02">매월 500페이지의 AI 기반 PDF 문서 번역이 포함되어 복잡한 수식 인식, 표 인식 및 스캔 문서를 지원합니다.</string>
@@ -3156,9 +3156,9 @@
 
     <!--月费升级年费-->
     <string name="vip_upgrade_title">연간 Pro 멤버십으로 업그레이드</string>
-    <string name="vip_upgrade_desc">연간 요금제는 월별 요금제에 비해 연간 %1$s을 절약합니다.</string>
-    <string name="vip_upgrade_detail">지금 업그레이드하면 %1$s이(가) 자동으로 즉시 차감됩니다. (현재 패키지의 사용하지 않은 시간이 비례하여 차감되었습니다.)</string>
-    <string name="vip_upgrade_end_time">새로운 만료일은 %1$s입니다.</string>
+    <string name="vip_upgrade_desc">연간 요금제는 월간 요금제보다 매년 %1$s 절약됩니다.</string>
+    <string name="vip_upgrade_detail">지금 업그레이드하면 %1$s이 자동 결제됩니다(현재 요금제의 미사용 기간은 비례하여 차감됩니다)</string>
+    <string name="vip_upgrade_end_time">새로운 만료 날짜: %1$s</string>
     <string name="vip_upgrade_cancel">취소</string>
     <string name="vip_upgrade_btn_text">지금 업그레이드</string>
 
@@ -3168,7 +3168,7 @@
     <string name="vip_downgrade">다운그레이드는 아직 지원되지 않습니다</string>
 
     <!--slogin-->
-    <string name="app_slogin_text">더 큰 세상을 보아라</string>
+    <string name="app_slogin_text">더 넓은 세상을 만나보세요</string>
     <string name="app_toplogin_login">지금 로그인하세요</string>
     <string name="app_toplogin_desc">최고의 경험을 즐겨보세요</string>
 

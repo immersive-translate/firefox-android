@@ -3165,7 +3165,7 @@
     <string name="home_top_link_ts_video">影片翻譯</string>
     <string name="home_top_link_ts_doc">文件翻譯</string>
     <string name="home_top_link_ts_comics">漫畫翻譯</string>
-    <string name="home_top_link_ts_rednote">小紅書翻譯</string>
+    <string name="home_top_link_ts_rednote">小紅書</string>
     <string name="home_top_link_ts_more">更多工具</string>
     <string name="home_top_link_ts_more_content">敬請\n期待</string>
 
@@ -3176,7 +3176,7 @@
     <string name="buy_vip_year_save_money">🔥節省</string>
     <string name="buy_vip_year_renewal">試用期後以 %1$s/年自動續費</string>
     <string name="buy_vip_year_remind_2">試用期間取消訂閱不扣款</string>
-    <string name="buy_vip_year_discount">限時特惠</string>
+    <string name="buy_vip_year_discount">限时優惠</string>
 
     <string name="buy_vip_month_title">每月會員</string>
 
@@ -3186,12 +3186,12 @@
     <string name="buy_vip_ts_claude">Claude 翻譯</string>
     <string name="buy_vip_is_gemini">Gemini 翻譯</string>
 
-    <string name="buy_vip_adv_title">Pro專屬進階功能</string>
+    <string name="buy_vip_adv_title">Pro專屬高級功能</string>
     <string name="buy_vip_adv_pdf_pro">PDF Pro</string>
     <string name="buy_vip_adv_comic">漫畫翻譯</string>
     <string name="buy_vip_adv_subtitle">Youtube 雙語字幕下載</string>
     <string name="buy_vip_adv_sync">多設備同步配置</string>
-    <string name="buy_vip_adv_email">優先的電子郵件支持</string>
+    <string name="buy_vip_adv_email">優先email客戶支持</string>
 
     <string name="buy_vip_year_save_percent">連續包年（節省%1$s）</string>
     <string name="buy_vip_year_month">連續包月</string>

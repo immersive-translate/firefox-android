@@ -2942,7 +2942,7 @@
     <string name="home_top_link_ts_video">Video\ntranslation</string>
     <string name="home_top_link_ts_doc">Doc\ntranslation</string>
     <string name="home_top_link_ts_comics">Comic\ntranslation</string>
-    <string name="home_top_link_ts_rednote">Rednote\ntranslation</string>
+    <string name="home_top_link_ts_rednote">Rednote</string>
     <string name="home_top_link_ts_more">More\ntools</string>
     <string name="home_top_link_ts_more_content">Stay\nTuned</string>
 
@@ -2957,7 +2957,7 @@
     <string name="buy_vip_year_save_money">🔥Save</string>
     <string name="buy_vip_year_renewal">Renews at %1$s/year after trial</string>
     <string name="buy_vip_year_remind_2">Cancel anytime during the trial</string>
-    <string name="buy_vip_year_discount">Limited time offer</string>
+    <string name="buy_vip_year_discount">Limited-time offer</string>
 
     <string name="buy_vip_month_title">Monthly</string>
 
@@ -2967,16 +2967,16 @@
     <string name="buy_vip_ts_claude">Claude translate</string>
     <string name="buy_vip_is_gemini">Gemini translate</string>
 
-    <string name="buy_vip_adv_title">Pro exclusive advanced features</string>
+    <string name="buy_vip_adv_title">Pro-exclusive advanced features</string>
     <string name="buy_vip_adv_pdf_pro">PDF Pro</string>
     <string name="buy_vip_adv_comic">Comic translation</string>
     <string name="buy_vip_adv_subtitle">Youtube Subtitles Export</string>
     <string name="buy_vip_adv_sync">Cloud Sync Settings</string>
     <string name="buy_vip_adv_email">Priority email support</string>
 
-    <string name="buy_vip_year_save_percent">Annual (Save %1$s)</string>
+    <string name="buy_vip_year_save_percent">Annual (save %1$s)</string>
     <string name="buy_vip_year_month">Monthly</string>
-    <string name="buy_vip_year_try_trial">%1$s-Day Free Trial</string>
+    <string name="buy_vip_year_try_trial">Start %1$s-Day Free Trial</string>
     <string name="buy_vip_btn_buy">Subscribe Now</string>
 
     <string name="buy_vip_tip_01">The free plan requires custom API tokens, which are expensive, complicated to set up, and come with strict rate limits. After upgrading to Pro, you can instantly access Immersive Translate is built-in services including DeepL, OpenAI, Claude, and Gemini - no configuration needed, works right out of the box, with a generous monthly allowance of up to 20 million tokens.</string>
@@ -2995,8 +2995,8 @@
     <!--月费升级年费-->
     <string name="vip_upgrade_title">Upgrade to Annual Pro Membership</string>
     <string name="vip_upgrade_desc">The annual plan saves %1$s per year compared to the monthly plan</string>
-    <string name="vip_upgrade_detail">Upgrading now will automatically deduct %1$s immediately (the unused time of the current package has been deducted in proportion)</string>
-    <string name="vip_upgrade_end_time">New expiration date is %1$s</string>
+    <string name="vip_upgrade_detail">Upgrading now will automatically deduct %1$s (proportionally deducted for unused time in the current plan)</string>
+    <string name="vip_upgrade_end_time">New expiration date: %1$s</string>
     <string name="vip_upgrade_cancel">Cancel</string>
     <string name="vip_upgrade_btn_text">Upgrade Now</string>
 
@@ -3006,9 +3006,9 @@
     <string name="vip_downgrade">Downgrading is not supported</string>
 
     <!--slogin-->
-    <string name="app_slogin_text">See the bigger world</string>
-    <string name="app_toplogin_login">Login now</string>
-    <string name="app_toplogin_desc">Enjoy the best experience</string>
+    <string name="app_slogin_text">See a bigger world</string>
+    <string name="app_toplogin_login">Log in now</string>
+    <string name="app_toplogin_desc">For the best experience</string>
 
     <string name="browser_toolbar_imm_menu">Translate menu</string>
     <string name="browser_toolbar_imm_trans">Translate</string>
