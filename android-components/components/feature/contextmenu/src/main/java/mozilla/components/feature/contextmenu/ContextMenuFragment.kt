@@ -162,6 +162,7 @@ internal class ContextMenuAdapter(
         put("mozac.feature.contextmenu.share_image", R.drawable.ic_img_shared)
         put("mozac.feature.contextmenu.translate_image", R.drawable.ic_img_translate)
         put("mozac.feature.contextmenu.restore_image", R.drawable.ic_img_restore)
+        put("mozac.feature.contextmenu.ts_image_feedback", R.drawable.ic_img_img_ts_feedback)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int) = ContextMenuViewHolder(

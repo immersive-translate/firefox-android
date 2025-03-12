@@ -62,4 +62,5 @@
 
     <string name="mozac_feature_contextmenu_translate_image">翻譯圖片</string>
     <string name="mozac_feature_contextmenu_restore_image">顯示原圖</string>
+    <string name="mozac_feature_contextmenu_translate_image_feedback">問題回饋</string>
 </resources>

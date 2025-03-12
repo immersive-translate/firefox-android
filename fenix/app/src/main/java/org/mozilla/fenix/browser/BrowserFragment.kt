@@ -329,7 +329,10 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                         //handler.postDelayed(::refreshTranslateState, 500)
                         handler.postDelayed(::refreshTranslateState, 1000)
                         if (isPageLoading) {
-                            showTranslatePopTips()
+                            try {
+                                showTranslatePopTips()
+                            } catch (_: Exception) {
+                            }
                         }
                     }
                     if (isPageLoading != isLoading) {
@@ -416,7 +419,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         val callTabSessionId = getSafeCurrentTab()?.id
         callTabSessionId?.let {
             val jsonObject = JSONObject()
-            WebMessageBridge.callHandler(it, "getPageStatus", jsonObject) { result->
+            WebMessageBridge.callHandler(it, "getPageStatus", jsonObject) { result ->
                 try {
                     if (it != curTabSessionId) {
                         return@callHandler
@@ -428,7 +431,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                             browserToolbarView.view.invalidateActions()
                         }
                     }
-                } catch (_:Exception) {
+                } catch (_: Exception) {
                 }
             }
         }
@@ -1098,6 +1101,18 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                 requireContext(),
                 contextMenuCandidateAppLinksUseCases,
             )
+        )
+
+        // image translate feedback
+        candidates.add(
+            ContextMenuCandidate.createImageTranslateFeedbackCandidate(
+                context,
+                action = { sessionState, _ ->
+                    WebMessageBridge.callHandler(
+                        sessionState.id, " openImageTranslationFeedback", JSONObject(),
+                    ) {}
+                },
+            ),
         )
 
         /*return ContextMenuCandidate.defaultCandidates(

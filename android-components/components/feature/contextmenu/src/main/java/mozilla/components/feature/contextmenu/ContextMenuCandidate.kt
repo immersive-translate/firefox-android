@@ -583,6 +583,23 @@ data class ContextMenuCandidate(
         )
 
         /**
+         * 创建翻译反馈菜单
+         */
+        fun createImageTranslateFeedbackCandidate(
+            context: Context,
+            action: (SessionState, HitResult) -> Unit,
+        ) = ContextMenuCandidate(
+            id = "mozac.feature.contextmenu.ts_image_feedback",
+            label = context.getString(R.string.mozac_feature_contextmenu_translate_image_feedback),
+            showFor = { _, hitResult ->
+                hitResult.isImage()
+            },
+            action = { tab, hitResult ->
+                action(tab, hitResult)
+            },
+        )
+
+        /**
          * Context Menu item: "Share image"
          *
          * @param context [Context] used for various system interactions.
