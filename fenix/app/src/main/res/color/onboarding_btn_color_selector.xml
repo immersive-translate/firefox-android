@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#FFCCCCCC" android:state_enabled="false" />  <!-- 禁用时 -->
+    <item android:color="@color/fx_mobile_action_color_third" /> <!-- 默认颜色 -->
+</selector>

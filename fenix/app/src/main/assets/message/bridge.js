@@ -286,5 +286,11 @@
             }, function(data) {});
         }, 1000);
     });*/
+
+    // jsBridge 初始化成功 消息
+    const readyEvent = document.createEvent('Events');
+    readyEvent.initEvent('WebViewJavascriptBridgeReady');
+    readyEvent.bridge = WebViewJavascriptBridge;
+    document.dispatchEvent(readyEvent);
 })();
 

@@ -109,6 +109,7 @@ class LanguagePageView : FrameLayout {
                         binding.etSelectLang.hint = langName
                         binding.etSelectLang.setText(langName)
                         saveDefaultLanguage()
+                        callback?.onSelectLang(langCode)
                     } finally {
                     }
                 }
@@ -158,6 +159,7 @@ class LanguagePageView : FrameLayout {
                     binding.etSelectLang.hint = langName
                     binding.etSelectLang.setText(langName)
                     saveDefaultLanguage()
+                    callback?.onSelectLang(langCode)
                     return@launch
                 } finally {
                 }
@@ -168,6 +170,7 @@ class LanguagePageView : FrameLayout {
             langCode = selectLocal.country
             langName = selectLocal.displayName
             saveDefaultLanguage()
+            callback?.onSelectLang(langCode)
         }
     }
 
@@ -185,7 +188,7 @@ class LanguagePageView : FrameLayout {
     }
 
     interface Callback {
-        fun onSelectLang()
+        fun onSelectLang(language: String)
         fun onSetDefaultBrowser()
         fun onSkip()
     }

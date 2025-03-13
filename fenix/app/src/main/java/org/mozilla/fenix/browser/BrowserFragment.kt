@@ -1109,7 +1109,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                 context,
                 action = { sessionState, _ ->
                     WebMessageBridge.callHandler(
-                        sessionState.id, " openImageTranslationFeedback", JSONObject(),
+                        sessionState.id, "openImageTranslationFeedback", JSONObject(),
                     ) {}
                 },
             ),

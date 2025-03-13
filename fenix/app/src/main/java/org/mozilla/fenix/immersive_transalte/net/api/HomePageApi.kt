@@ -6,9 +6,11 @@ package org.mozilla.fenix.immersive_transalte.net.api
 
 import org.mozilla.fenix.immersive_transalte.bean.AppConfigBean
 import org.mozilla.fenix.immersive_transalte.bean.HomePageBean
+import org.mozilla.fenix.immersive_transalte.bean.OnBoardingTranslateBean
 import org.mozilla.fenix.immersive_transalte.bean.ResultData
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.HeaderMap
 import retrofit2.http.Headers
 import retrofit2.http.QueryMap
 
@@ -23,7 +25,12 @@ internal interface HomePageApi {
     @GET("/v1/app/globalconfig")
     @Headers("Cache-Control: public, max-age=60")
     fun fetchAppConfig(
-        @QueryMap params: MutableMap<String, Any?>,
+        @HeaderMap headers: MutableMap<String, Any?>,
     ): Call<ResultData<AppConfigBean>>
 
+    @GET("/v1/app/load-onboarding-translations")
+    fun fetchOnBoardingTranslations(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @QueryMap params: MutableMap<String, Any?>,
+    ): Call<ResultData<List<OnBoardingTranslateBean>>>
 }

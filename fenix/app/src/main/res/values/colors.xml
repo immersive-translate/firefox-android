@@ -387,4 +387,7 @@
     <color name="fenix_wordmark_color_private">#FFFFFFFF</color>
 
     <color name="browser_menu_tint_color">#FF15141A</color>
+
+    <color name="onboarding_ts_border">#FFECF0F7</color>
+    <color name="onboarding_ts_bg">#FFFAFBFC</color>
 </resources>

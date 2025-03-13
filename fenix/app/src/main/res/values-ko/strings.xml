@@ -3104,6 +3104,14 @@
     <string name="onboarding_third_dest">언어의 장벽을 허물고 \n더 넓은 세상을 만나보세요</string>
     <string name="onboarding_third_finish_btn">언어의 장벽이 없는 세상을 열어보세요!</string>
 
+    <string name="onboarding_ts_page_title">다음 페이지를 번역해 보세요.</string>
+    <string name="onboarding_ts_page_sub_title">주소창에 있는 번역아이콘을 클릭해서 번역해보세요</string>
+    <string name="onboarding_ts_page_success_title">🎉축하해요!</string>
+    <string name="onboarding_ts_page_success_sub_title">당신은 방금 첫 번째 이중 언어 번역을 완료했습니다!</string>
+    <string name="onboarding_ts_page_next">이제 다음 단계로 넘어갈 수 있습니다.</string>
+    <string name="onboarding_ts_page_continue">계속하다</string>
+    <string name="onboarding_ts_page_skip">뛰어넘다</string>
+
     <string name="home_top_link_ts_web">웹페이지 번역</string>
     <string name="home_top_link_ts_video">동영상 번역</string>
     <string name="home_top_link_ts_doc">문서 번역</string>

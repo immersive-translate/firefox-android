@@ -34,6 +34,7 @@ import org.mozilla.fenix.onboarding.imts.FourthPageView
 import org.mozilla.fenix.onboarding.imts.LanguagePageView
 import org.mozilla.fenix.onboarding.imts.SecondPageView
 import org.mozilla.fenix.onboarding.imts.ThirdPageView
+import org.mozilla.fenix.onboarding.imts.TranslatePageView
 import org.mozilla.fenix.onboarding.imts.ViewPageAdapter
 import org.mozilla.fenix.onboarding.store.OnboardingAddOnsStore
 
@@ -116,12 +117,14 @@ class OnboardingFragment : Fragment() {
         val context = requireContext()
         val languagePageView = LanguagePageView(context)
         val secondPageView = SecondPageView(context)
+        val translatePageView = TranslatePageView(context)
         val thirdPageView = ThirdPageView(context)
         val fourthPageView = FourthPageView(context, activity)
 
         languagePageView.setCallback(
             object : LanguagePageView.Callback {
-                override fun onSelectLang() {
+                override fun onSelectLang(language: String) {
+                    translatePageView.loadTranslateData(language)
                 }
 
                 override fun onSetDefaultBrowser() {
@@ -143,6 +146,14 @@ class OnboardingFragment : Fragment() {
             },
         )
 
+        translatePageView.setCallback(
+            object :  TranslatePageView.Callback {
+                override fun onNextClick() {
+                    binding.viewpager.setCurrentItem(3, true)
+                }
+            }
+        )
+
         thirdPageView.setCallback(
             object : ThirdPageView.Callback {
                 override fun onFinish() {
@@ -151,7 +162,7 @@ class OnboardingFragment : Fragment() {
                         id = R.id.onboardingFragment,
                         directions = OnboardingFragmentDirections.actionHome(),
                     )*/
-                    binding.viewpager.setCurrentItem(3, true)
+                    binding.viewpager.setCurrentItem(4, true)
                 }
             },
         )
@@ -176,8 +187,11 @@ class OnboardingFragment : Fragment() {
             },
         )
 
+
+
         viewpagerAdapter = ViewPageAdapter(mutableListOf(
             languagePageView, secondPageView,
+            translatePageView,
             thirdPageView, fourthPageView))
         binding.viewpager.offscreenPageLimit = viewpagerAdapter.count
         binding.viewpager.adapter = viewpagerAdapter
@@ -192,9 +206,6 @@ class OnboardingFragment : Fragment() {
                 }
                 override fun onPageSelected(position: Int) {
                     binding.pageIndicator.setIndicatorIndex(position)
-                    /*binding.pageIndicator.visibility =
-                        if (position != viewpagerAdapter.count - 1) View.GONE
-                        else View.INVISIBLE*/
                 }
                 override fun onPageScrollStateChanged(state: Int) {
                 }

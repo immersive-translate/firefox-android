@@ -2906,6 +2906,14 @@
     <string name="onboarding_third_dest">消除語言障礙\n看見更大的世界</string>
     <string name="onboarding_third_finish_btn">開啟無語言障礙的世界！</string>
 
+    <string name="onboarding_ts_page_title">請嘗試翻譯下方網頁</string>
+    <string name="onboarding_ts_page_sub_title">點擊網址列裡的翻譯圖標，即可翻譯</string>
+    <string name="onboarding_ts_page_success_title">🎉恭喜！</string>
+    <string name="onboarding_ts_page_success_sub_title">你剛剛進行了第一次雙語翻譯！</string>
+    <string name="onboarding_ts_page_next">您可以繼續下一步了～</string>
+    <string name="onboarding_ts_page_continue">繼續</string>
+    <string name="onboarding_ts_page_skip">跳過</string>
+
     <!-- Automatic translation preference screen -->
     <!-- Title of the automatic translation preference screen that will appear on the toolbar.-->
     <string name="automatic_translation_toolbar_title_preference">自動翻譯</string>

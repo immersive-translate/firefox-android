@@ -2938,6 +2938,14 @@
     <string name="onboarding_third_dest">Eliminate language barriers\nSee a bigger world</string>
     <string name="onboarding_third_finish_btn">Break language barriers!</string>
 
+    <string name="onboarding_ts_page_title">Please try to translate the following page</string>
+    <string name="onboarding_ts_page_sub_title">Click on the translation icon in the address bar to translate</string>
+    <string name="onboarding_ts_page_success_title">🎉Congratulations!</string>
+    <string name="onboarding_ts_page_success_sub_title">You have just made your first bilingual translation!</string>
+    <string name="onboarding_ts_page_next">- Now you can move on to the next step.</string>
+    <string name="onboarding_ts_page_continue">Continue</string>
+    <string name="onboarding_ts_page_skip">Skip</string>
+
     <string name="home_top_link_ts_web">Web\ntranslation</string>
     <string name="home_top_link_ts_video">Video\ntranslation</string>
     <string name="home_top_link_ts_doc">Doc\ntranslation</string>

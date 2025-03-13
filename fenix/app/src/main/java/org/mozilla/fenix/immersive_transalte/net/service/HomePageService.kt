@@ -9,6 +9,7 @@ import org.mozilla.fenix.immersive_transalte.base.http.HttpClient
 import org.mozilla.fenix.immersive_transalte.base.http.Response
 import org.mozilla.fenix.immersive_transalte.bean.AppConfigBean
 import org.mozilla.fenix.immersive_transalte.bean.HomePageBean
+import org.mozilla.fenix.immersive_transalte.bean.OnBoardingTranslateBean
 import org.mozilla.fenix.immersive_transalte.bean.ResultData
 import org.mozilla.fenix.immersive_transalte.net.api.HomePageApi
 
@@ -31,4 +32,14 @@ object HomePageService : BaseService() {
         return executeHttpAndCallback(homepageApi?.fetchAppConfig(params))
     }
 
+    /**
+     * app onboarding 翻译接口
+     */
+    suspend fun fetchOnBoardingTranslations(language: String):
+            Response<ResultData<List<OnBoardingTranslateBean>>> {
+        val params = getCommonQueryParams()
+        val queryMap = mutableMapOf<String, Any?>()
+        queryMap["language"] = language
+        return executeHttpAndCallback(homepageApi?.fetchOnBoardingTranslations(params, queryMap))
+    }
 }

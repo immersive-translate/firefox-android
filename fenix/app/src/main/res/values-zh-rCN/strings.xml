@@ -3111,6 +3111,14 @@
     <string name="onboarding_third_dest">消除语言障碍\n看见更大的世界</string>
     <string name="onboarding_third_finish_btn">开启无语言障碍的世界！</string>
 
+    <string name="onboarding_ts_page_title">请尝试翻译下方网页</string>
+    <string name="onboarding_ts_page_sub_title">点击地址栏里的翻译图标，即可翻译</string>
+    <string name="onboarding_ts_page_success_title">🎉恭喜！</string>
+    <string name="onboarding_ts_page_success_sub_title">你刚刚进行了第一次双语翻译！</string>
+    <string name="onboarding_ts_page_next">您可以继续下一步了～</string>
+    <string name="onboarding_ts_page_continue">继续</string>
+    <string name="onboarding_ts_page_skip">跳过</string>
+
     <string name="home_top_link_ts_web">网页翻译</string>
     <string name="home_top_link_ts_video">视频翻译</string>
     <string name="home_top_link_ts_doc">文档翻译</string>
