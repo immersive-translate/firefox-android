@@ -76,6 +76,7 @@
                     </LinearLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_vip_bg"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="42dp"
@@ -97,7 +98,7 @@
                                 android:layout_height="wrap_content"
                                 android:includeFontPadding="false"
                                 android:text="@string/buy_vip_year_title"
-                                android:textColor="@color/fx_mobile_text_color_primary"
+                                android:textColor="?normal_color_333333"
                                 android:textSize="22sp"
                                 android:textStyle="bold" />
 
@@ -158,7 +159,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="¥579.6/年"
-                                android:textColor="@color/fx_mobile_text_color_primary"
+                                android:textColor="?normal_color_333333"
                                 android:textSize="16sp" />
 
                             <TextView
@@ -167,7 +168,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="13dp"
                                 android:text="¥828/年"
-                                android:textColor="#FF999999"
+                                android:textColor="?normal_color_999999"
                                 android:textSize="16sp" />
 
                         </LinearLayout>
@@ -209,6 +210,7 @@
                     android:visibility="gone">
 
                     <LinearLayout
+                        android:id="@+id/ll_vip_month_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@mipmap/img_buy_vip_card_month_fg"
@@ -228,7 +230,7 @@
                                 android:layout_height="wrap_content"
                                 android:includeFontPadding="false"
                                 android:text="@string/buy_vip_month_title"
-                                android:textColor="@color/fx_mobile_text_color_primary"
+                                android:textColor="?normal_color_333333"
                                 android:textSize="22sp"
                                 android:textStyle="bold" />
 
@@ -289,7 +291,7 @@
                         android:layout_height="wrap_content"
                         android:drawablePadding="6dp"
                         android:text="试用期后按 ¥579.6/年自动续费"
-                        android:textColor="#FF999999"
+                        android:textColor="?normal_color_999999"
                         android:textSize="14sp" />
 
                     <TextView
@@ -299,7 +301,7 @@
                         android:layout_marginTop="8dp"
                         android:drawablePadding="6dp"
                         android:text="@string/buy_vip_year_remind_2"
-                        android:textColor="#FF999999"
+                        android:textColor="?normal_color_999999"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -317,7 +319,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/buy_vip_ts_service_title"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -344,14 +346,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary" />
+                        app:tint="?normal_color_333333" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_ts_deepL"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -369,14 +371,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary" />
+                        app:tint="?normal_color_333333" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_ts_openAI"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -394,14 +396,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary" />
+                        app:tint="?normal_color_333333" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_ts_claude"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -419,14 +421,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary" />
+                        app:tint="?normal_color_333333" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_is_gemini"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -445,7 +447,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/buy_vip_adv_title"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -463,14 +465,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary" />
+                        app:tint="?normal_color_333333" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_pdf_pro"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -495,14 +497,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary" />
+                        app:tint="?normal_color_333333" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_comic"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -527,14 +529,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary" />
+                        app:tint="?normal_color_333333" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_subtitle"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -552,14 +554,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary" />
+                        app:tint="?normal_color_333333" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_sync"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -578,14 +580,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary" />
+                        app:tint="?normal_color_333333" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="@string/buy_vip_adv_email"
-                        android:textColor="@color/fx_mobile_text_color_primary"
+                        android:textColor="?normal_color_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -611,7 +613,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/normal_border_color" />
+                android:background="?normal_color_ECF0F7" />
 
             <!--包年/包月切换按钮-->
             <LinearLayout
@@ -636,7 +638,7 @@
                     android:paddingEnd="4dp"
                     android:text="@string/buy_vip_year_save_percent"
                     android:textAlignment="center"
-                    android:textColor="#FFFFFFFF"
+                    android:textColor="?normal_color_FFFFFF"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -650,7 +652,7 @@
                     android:paddingEnd="4dp"
                     android:text="@string/buy_vip_year_month"
                     android:textAlignment="center"
-                    android:textColor="@color/fx_mobile_text_color_primary"
+                    android:textColor="?normal_color_333333"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 

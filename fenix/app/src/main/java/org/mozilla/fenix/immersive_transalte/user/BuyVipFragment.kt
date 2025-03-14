@@ -19,6 +19,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import mozilla.components.support.ktx.android.content.getColorFromAttr
 import org.mozilla.fenix.BrowserDirection
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
@@ -123,11 +124,13 @@ class BuyVipFragment : Fragment() {
         if (isNeedTitle) {
             showToolbar(getString(R.string.buy_vip_btn_text_upgrade))
         }
-        /*if (browsingModeManager.mode == BrowsingMode.Private) {
-            binding.root.setBackgroundColor(0xFFFFFFFF.toInt())
+        if (browsingModeManager.mode == BrowsingMode.Private) {
+            binding.clVipBg.setBackgroundResource(R.mipmap.img_buy_vip_card_year_fg_night)
+            binding.llVipMonthBg.setBackgroundResource(R.mipmap.img_buy_vip_card_month_fg_night)
         } else {
-            binding.root.setBackgroundColor(0x0)
-        }*/
+            binding.clVipBg.setBackgroundResource(R.mipmap.img_buy_vip_card_year_fg)
+            binding.llVipMonthBg.setBackgroundResource(R.mipmap.img_buy_vip_card_month_fg)
+        }
     }
 
     private fun showTips(view: View, @StringRes resId: Int) {
@@ -145,13 +148,14 @@ class BuyVipFragment : Fragment() {
     }
 
     private fun refreshPayType() {
+        val context = binding.root.context
         if (payType == 0) {
             binding.flVipYear.visibility = View.VISIBLE
             binding.flVipMonth.visibility = View.GONE
             binding.llVipYearRemind.visibility = View.VISIBLE
-            binding.btnVipYear.setTextColor(0xFFFFFFFF.toInt())
+            binding.btnVipYear.setTextColor(context.getColorFromAttr(R.attr.normal_color_FFFFFF))
             binding.btnVipYear.setBackgroundResource(R.drawable.buy_vip_btn_selected_bg)
-            binding.btnVipMonth.setTextColor(requireContext().resources.getColor(R.color.fx_mobile_text_color_primary))
+            binding.btnVipMonth.setTextColor(context.getColorFromAttr(R.attr.normal_color_333333))
             binding.btnVipMonth.setBackgroundResource(0)
             (binding.llProVipTitle.layoutParams as MarginLayoutParams).topMargin =
                 PixelUtil.dp2px(context, 24)
@@ -159,9 +163,9 @@ class BuyVipFragment : Fragment() {
             binding.flVipYear.visibility = View.GONE
             binding.flVipMonth.visibility = View.VISIBLE
             binding.llVipYearRemind.visibility = View.GONE
-            binding.btnVipYear.setTextColor(requireContext().resources.getColor(R.color.fx_mobile_text_color_primary))
+            binding.btnVipYear.setTextColor(context.getColorFromAttr(R.attr.normal_color_333333))
             binding.btnVipYear.setBackgroundResource(0)
-            binding.btnVipMonth.setTextColor(0xFFFFFFFF.toInt())
+            binding.btnVipMonth.setTextColor(context.getColorFromAttr(R.attr.normal_color_FFFFFF))
             binding.btnVipMonth.setBackgroundResource(R.drawable.buy_vip_btn_selected_bg)
             (binding.llProVipTitle.layoutParams as MarginLayoutParams).topMargin = 0
         }
@@ -170,6 +174,7 @@ class BuyVipFragment : Fragment() {
     }
 
     private fun refreshBuyButton() {
+        val context = binding.root.context
         binding.llBuyVip.setBackgroundResource(R.mipmap.img_buy_vip_bg)
         binding.btnBuy.setTextColor(0xFFFFC736.toInt())
         binding.ivBuyHot.visibility = View.VISIBLE
@@ -181,12 +186,12 @@ class BuyVipFragment : Fragment() {
                     binding.btnBuy.text = resources.getString(R.string.buy_vip_btn_text_cur)
                     binding.llBuyVip.setBackgroundResource(R.drawable.buy_vip_btn_buy_disable_bg)
                     binding.ivBuyHot.visibility = View.GONE
-                    binding.btnBuy.setTextColor(0xFF999999.toInt())
+                    binding.btnBuy.setTextColor(context.getColorFromAttr(R.attr.normal_color_999999))
                 } else {
                     binding.btnBuy.text = resources.getString(R.string.vip_downgrade)
                     binding.llBuyVip.setBackgroundResource(R.drawable.buy_vip_btn_buy_disable_bg)
                     binding.ivBuyHot.visibility = View.GONE
-                    binding.btnBuy.setTextColor(0xFF999999.toInt())
+                    binding.btnBuy.setTextColor(context.getColorFromAttr(R.attr.normal_color_999999))
                 }
                 return
             }
@@ -199,7 +204,7 @@ class BuyVipFragment : Fragment() {
                     binding.btnBuy.text = resources.getString(R.string.vip_downgrade)
                     binding.llBuyVip.setBackgroundResource(R.drawable.buy_vip_btn_buy_disable_bg)
                     binding.ivBuyHot.visibility = View.GONE
-                    binding.btnBuy.setTextColor(0xFF999999.toInt())
+                    binding.btnBuy.setTextColor(context.getColorFromAttr(R.attr.normal_color_999999))
                 }
                 return
             }
@@ -213,7 +218,7 @@ class BuyVipFragment : Fragment() {
                     binding.btnBuy.text = resources.getString(R.string.buy_vip_btn_text_cur)
                     binding.llBuyVip.setBackgroundResource(R.drawable.buy_vip_btn_buy_disable_bg)
                     binding.ivBuyHot.visibility = View.GONE
-                    binding.btnBuy.setTextColor(0xFF999999.toInt())
+                    binding.btnBuy.setTextColor(context.getColorFromAttr(R.attr.normal_color_999999))
                 }
                 return
             }

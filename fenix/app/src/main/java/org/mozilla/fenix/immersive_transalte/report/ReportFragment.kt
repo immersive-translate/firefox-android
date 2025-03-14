@@ -21,6 +21,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import mozilla.components.support.ktx.android.content.getColorFromAttr
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.FragmentReportLayoutBinding
 import org.mozilla.fenix.ext.showToolbar
@@ -90,8 +91,8 @@ class ReportFragment : Fragment() {
         if (reportType == ReportType.BUG) {
             binding.tvReportBug.setBackgroundResource(R.drawable.report_tab_item_bg)
             binding.tvReportFeat.setBackgroundColor(0x0)
-            binding.tvReportBug.setTextColor(context.getColor(R.color.fx_mobile_text_color_primary))
-            binding.tvReportFeat.setTextColor(0xFF666666.toInt())
+            binding.tvReportBug.setTextColor(context.getColorFromAttr(R.attr.normal_color_222222))
+            binding.tvReportFeat.setTextColor(context.getColorFromAttr(R.attr.normal_color_666666))
             binding.tvReportType.text = HtmlCompat.fromHtml(
                 "<font color='#FF5B5B'>*</font>${context.getString(R.string.report_type_bug)}",
                 0,
@@ -100,8 +101,8 @@ class ReportFragment : Fragment() {
         } else {
             binding.tvReportBug.setBackgroundColor(0x0)
             binding.tvReportFeat.setBackgroundResource(R.drawable.report_tab_item_bg)
-            binding.tvReportBug.setTextColor(0xFF666666.toInt())
-            binding.tvReportFeat.setTextColor(context.getColor(R.color.fx_mobile_text_color_primary))
+            binding.tvReportBug.setTextColor(context.getColorFromAttr(R.attr.normal_color_666666))
+            binding.tvReportFeat.setTextColor(context.getColorFromAttr(R.attr.normal_color_222222))
             binding.tvReportType.text = HtmlCompat.fromHtml(
                 "<font color='#FF5B5B'>*</font>${context.getString(R.string.report_type_feat)}",
                 0,

@@ -412,21 +412,21 @@
     <color name="normal_color_FAFDFF">#FFFAFDFF</color>
     <color name="normal_color_EA4C89">#FFEA4C89</color>
 
-    <color name="normal_color_FFFFFF_">#FFFFFFFF</color>
-    <color name="normal_color_000000_">#FF000000</color>
-    <color name="normal_color_222222_">#FF222222</color>
-    <color name="normal_color_333333_">#FF333333</color>
-    <color name="normal_color_666666_">#FF666666</color>
+    <color name="normal_color_FFFFFF_">#FF191919</color>
+    <color name="normal_color_000000_">#FFFFFFFF</color>
+    <color name="normal_color_222222_">#FFDBDBDB</color>
+    <color name="normal_color_333333_">#FFDBDBDB</color>
+    <color name="normal_color_666666_">#FFB3B3B3</color>
     <color name="normal_color_999999_">#FF999999</color>
     <color name="normal_color_838383_">#FF838383</color>
-    <color name="normal_color_C7C7C7_">#FFC7C7C7</color>
-    <color name="normal_color_CCCCCC_">#FFCCCCCC</color>
-    <color name="normal_color_E6E6E6_">#FFE6E6E6</color>
-    <color name="normal_color_E0E0E6_">#FFE0E0E6</color>
-    <color name="normal_color_ECF0F7_">#FFECF0F7</color>
-    <color name="normal_color_FAFBFC_">#FFFAFBFC</color>
-    <color name="normal_color_FAFDFF_">#FFFAFDFF</color>
-    <color name="normal_color_EA4C89_">#FFEA4C89</color>
+    <color name="normal_color_C7C7C7_">#FF666666</color>
+    <color name="normal_color_CCCCCC_">#FF5C5C5C</color>
+    <color name="normal_color_E6E6E6_">#FF333333</color>
+    <color name="normal_color_E0E0E6_">#FF43474B</color>
+    <color name="normal_color_ECF0F7_">#FF3E434B</color>
+    <color name="normal_color_FAFBFC_">#FF2B2E3B</color>
+    <color name="normal_color_FAFDFF_">#FF1F2123</color>
+    <color name="normal_color_EA4C89_">#FFE23C7C</color>
 
     <color name="onboarding_indicator_primary_color">#FFE6E6E6</color>
     <color name="onboarding_indicator_second_color">#FF222222</color>
