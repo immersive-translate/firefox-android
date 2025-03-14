@@ -123,11 +123,11 @@ class BuyVipFragment : Fragment() {
         if (isNeedTitle) {
             showToolbar(getString(R.string.buy_vip_btn_text_upgrade))
         }
-        if (browsingModeManager.mode == BrowsingMode.Private) {
+        /*if (browsingModeManager.mode == BrowsingMode.Private) {
             binding.root.setBackgroundColor(0xFFFFFFFF.toInt())
         } else {
             binding.root.setBackgroundColor(0x0)
-        }
+        }*/
     }
 
     private fun showTips(view: View, @StringRes resId: Int) {

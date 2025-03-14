@@ -58,7 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_set_lan_title">
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_select_lang"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -66,7 +66,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="#FF222222"
+            android:textColor="@color/fx_mobile_text_color_primary"
             android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -94,10 +94,10 @@
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:backgroundTint="@color/fx_mobile_action_color_third"
+        android:backgroundTint="@color/btn_normal_bg_color"
         android:text="@string/onboarding_lan_set_default_browser"
         android:textAlignment="center"
-        android:textColor="#FFFFFFFF"
+        android:textColor="@color/btn_normal_text_color"
         android:textSize="16sp"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_skip"

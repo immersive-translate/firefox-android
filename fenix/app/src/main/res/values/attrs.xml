@@ -131,4 +131,20 @@
         <attr name="indicatorWidth" format="dimension"/>
         <attr name="indicatorSpace" format="dimension"/>
     </declare-styleable>
+
+    <attr name="normal_color_FFFFFF" format="reference" />
+    <attr name="normal_color_000000" format="reference" />
+    <attr name="normal_color_222222" format="reference" />
+    <attr name="normal_color_333333" format="reference" />
+    <attr name="normal_color_666666" format="reference" />
+    <attr name="normal_color_999999" format="reference" />
+    <attr name="normal_color_838383" format="reference" />
+    <attr name="normal_color_C7C7C7" format="reference" />
+    <attr name="normal_color_CCCCCC" format="reference" />
+    <attr name="normal_color_E6E6E6" format="reference" />
+    <attr name="normal_color_E0E0E6" format="reference" />
+    <attr name="normal_color_ECF0F7" format="reference" />
+    <attr name="normal_color_FAFBFC" format="reference" />
+    <attr name="normal_color_FAFDFF" format="reference" />
+    <attr name="normal_color_EA4C89" format="reference" />
 </resources>

@@ -118,7 +118,7 @@ class TranslatePageView : FrameLayout {
         )
         binding.btnContinue.isEnabled = isTranslated
         binding.btnContinue.backgroundTintList = context.getColorStateList(
-            R.color.onboarding_btn_color_selector,
+            R.color.onboarding_btn_bg_color_selector,
         )
 
         // 更新动画状态
@@ -203,6 +203,7 @@ class TranslatePageView : FrameLayout {
             val translateBean = getItem(position)
             translateBean?.let {
                 holder.itemBinding.tvSource.text = it.english
+                holder.itemBinding.tvTranslated.visibility = if (isTranslated) VISIBLE else GONE
                 holder.itemBinding.tvTranslated.text = if (isTranslated) it.localizedText else ""
             }
 

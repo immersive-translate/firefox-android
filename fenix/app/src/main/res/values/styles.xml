@@ -147,6 +147,22 @@
         <item name="mozac_ic_private_mode_circle_fill_icon_color">@color/fx_mobile_text_color_primary</item>
 
         <item name="tabCounterTintColor">?attr/textPrimary</item>
+
+        <item name="normal_color_FFFFFF">@color/normal_color_FFFFFF_</item>
+        <item name="normal_color_000000">@color/normal_color_000000_</item>
+        <item name="normal_color_222222">@color/normal_color_222222_</item>
+        <item name="normal_color_333333">@color/normal_color_333333_</item>
+        <item name="normal_color_666666">@color/normal_color_666666_</item>
+        <item name="normal_color_999999">@color/normal_color_999999_</item>
+        <item name="normal_color_838383">@color/normal_color_838383_</item>
+        <item name="normal_color_C7C7C7">@color/normal_color_C7C7C7_</item>
+        <item name="normal_color_CCCCCC">@color/normal_color_CCCCCC_</item>
+        <item name="normal_color_E6E6E6">@color/normal_color_E6E6E6_</item>
+        <item name="normal_color_E0E0E6">@color/normal_color_E0E0E6_</item>
+        <item name="normal_color_ECF0F7">@color/normal_color_ECF0F7_</item>
+        <item name="normal_color_FAFBFC">@color/normal_color_FAFBFC_</item>
+        <item name="normal_color_FAFDFF">@color/normal_color_FAFDFF_</item>
+        <item name="normal_color_EA4C89">@color/normal_color_EA4C89_</item>
     </style>
 
     <!-- A theme derived from the normal activity theme, but to look and behave like a dialog -->
@@ -347,6 +363,22 @@
         <item name="mozac_ic_private_mode_circle_fill_icon_color">@color/fx_mobile_private_layer_color_2</item>
 
         <item name="tabCounterTintColor">?attr/textPrimary</item>
+
+        <item name="normal_color_FFFFFF">@color/normal_color_FFFFFF</item>
+        <item name="normal_color_000000">@color/normal_color_000000</item>
+        <item name="normal_color_222222">@color/normal_color_222222</item>
+        <item name="normal_color_333333">@color/normal_color_333333</item>
+        <item name="normal_color_666666">@color/normal_color_666666</item>
+        <item name="normal_color_999999">@color/normal_color_999999</item>
+        <item name="normal_color_838383">@color/normal_color_838383</item>
+        <item name="normal_color_C7C7C7">@color/normal_color_C7C7C7</item>
+        <item name="normal_color_CCCCCC">@color/normal_color_CCCCCC</item>
+        <item name="normal_color_E6E6E6">@color/normal_color_E6E6E6</item>
+        <item name="normal_color_E0E0E6">@color/normal_color_E0E0E6</item>
+        <item name="normal_color_ECF0F7">@color/normal_color_ECF0F7</item>
+        <item name="normal_color_FAFBFC">@color/normal_color_FAFBFC</item>
+        <item name="normal_color_FAFDFF">@color/normal_color_FAFDFF</item>
+        <item name="normal_color_EA4C89">@color/normal_color_EA4C89</item>
     </style>
 
     <style name="Mozac.Browser.Menu" parent="" tools:ignore="UnusedResources">

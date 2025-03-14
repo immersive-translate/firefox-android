@@ -193,6 +193,36 @@
 
     <color name="browser_menu_tint_color">#FFFFFFFF</color>
 
+    <color name="input_border_color">#FF3E434B</color>
+    <color name="input_bg_color">#FF2B2D30</color>
+    <color name="btn_normal_bg_color">#FFDBDBDB</color>
+    <color name="btn_normal_bg_disable_color">#FF666666</color>
+    <color name="btn_normal_text_color">#FF191919</color>
+    <color name="btn_normal_text_disable_color">#FF191919</color>
+    <color name="normal_border_color">#FF3E434B</color>
+
+    <color name="normal_color_FFFFFF">#FF191919</color>
+    <color name="normal_color_000000">#FFFFFFFF</color>
+    <color name="normal_color_222222">#FFDBDBDB</color>
+    <color name="normal_color_333333">#FFDBDBDB</color>
+    <color name="normal_color_666666">#FFB3B3B3</color>
+    <color name="normal_color_999999">#FF999999</color>
+    <color name="normal_color_838383">#FF838383</color>
+    <color name="normal_color_C7C7C7">#FF666666</color>
+    <color name="normal_color_CCCCCC">#FF5C5C5C</color>
+    <color name="normal_color_E6E6E6">#FF333333</color>
+    <color name="normal_color_E0E0E6">#FF43474B</color>
+    <color name="normal_color_ECF0F7">#FF3E434B</color>
+    <color name="normal_color_FAFBFC">#FF2B2E3B</color>
+    <color name="normal_color_FAFDFF">#FF1F2123</color>
+    <color name="normal_color_EA4C89">#FFE23C7C</color>
+
+    <color name="onboarding_indicator_primary_color">#FF333333</color>
+    <color name="onboarding_indicator_second_color">#FFDBDBDB</color>
     <color name="onboarding_ts_border">@color/photonDarkGrey50</color>
     <color name="onboarding_ts_bg">@color/photonDarkGrey60</color>
+    <color name="onboarding_ts_address_bg">#FF43474B</color>
+
+    <color name="report_tab_bg_color">#80333333</color>
+
 </resources>

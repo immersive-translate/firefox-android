@@ -51,7 +51,10 @@ class UploadImageView : FrameLayout {
             )
             scaleType = ImageView.ScaleType.CENTER_CROP
             shapeAppearanceModel = ShapeAppearanceModel.Builder()
-                .setAllCorners(CornerFamily.ROUNDED, 12F)
+                .setAllCorners(
+                    CornerFamily.ROUNDED,
+                    10F.dpToPx(context.resources.displayMetrics),
+                )
                 .build()
         }
         addView(displayImageView)

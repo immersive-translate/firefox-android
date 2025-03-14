@@ -9,7 +9,7 @@
         android:id="@+id/fl_tips_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <!-- loading progress -->
     <ProgressBar
@@ -97,7 +97,7 @@
                                 android:layout_height="wrap_content"
                                 android:includeFontPadding="false"
                                 android:text="@string/buy_vip_year_title"
-                                android:textColor="#FF333333"
+                                android:textColor="@color/fx_mobile_text_color_primary"
                                 android:textSize="22sp"
                                 android:textStyle="bold" />
 
@@ -158,7 +158,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="¥579.6/年"
-                                android:textColor="#FF333333"
+                                android:textColor="@color/fx_mobile_text_color_primary"
                                 android:textSize="16sp" />
 
                             <TextView
@@ -228,7 +228,7 @@
                                 android:layout_height="wrap_content"
                                 android:includeFontPadding="false"
                                 android:text="@string/buy_vip_month_title"
-                                android:textColor="#FF333333"
+                                android:textColor="@color/fx_mobile_text_color_primary"
                                 android:textSize="22sp"
                                 android:textStyle="bold" />
 
@@ -326,8 +326,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="4dp"
-                        android:paddingEnd="4dp"
                         android:paddingTop="3.4dp"
+                        android:paddingEnd="4dp"
                         app:srcCompat="@mipmap/img_buy_vip_pop_icon" />
 
                 </LinearLayout>
@@ -344,7 +344,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary"/>
+                        app:tint="@color/fx_mobile_text_color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -369,7 +369,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary"/>
+                        app:tint="@color/fx_mobile_text_color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -394,7 +394,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary"/>
+                        app:tint="@color/fx_mobile_text_color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -419,7 +419,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary"/>
+                        app:tint="@color/fx_mobile_text_color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -463,7 +463,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary"/>
+                        app:tint="@color/fx_mobile_text_color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -495,7 +495,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary"/>
+                        app:tint="@color/fx_mobile_text_color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -527,7 +527,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary"/>
+                        app:tint="@color/fx_mobile_text_color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -552,7 +552,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary"/>
+                        app:tint="@color/fx_mobile_text_color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -578,7 +578,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:srcCompat="@mipmap/img_buy_vip_yes_icon"
-                        app:tint="@color/fx_mobile_text_color_primary"/>
+                        app:tint="@color/fx_mobile_text_color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -611,7 +611,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/fx_mobile_line_color" />
+                android:background="@color/normal_border_color" />
 
             <!--包年/包月切换按钮-->
             <LinearLayout
