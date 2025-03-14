@@ -26,7 +26,6 @@ import org.mozilla.fenix.home.bookmarks.Bookmark
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem
 import org.mozilla.fenix.home.toplinks.TopLink
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
-import org.mozilla.fenix.onboarding.HomeCFRPresenter
 import org.mozilla.fenix.search.SearchDialogFragment
 import org.mozilla.fenix.utils.Settings
 
@@ -120,8 +119,14 @@ internal fun normalModeAdapterItems(
     }
 
     if (shouldShowCustomizeHome) {
+        shouldShowCustomizeHome = false
+    }
+    if (shouldShowCustomizeHome) {
         items.add(AdapterItem.CustomizeHomeButton)
     }
+
+    // bottom report
+    items.add(AdapterItem.BottomReport)
 
     items.add(AdapterItem.BottomSpacer)
 
@@ -163,6 +168,7 @@ private fun AppState.toAdapterList(settings: Settings): List<AdapterItem> = when
         recommendationState.pocketStories,
         firstFrameDrawn,
     )
+
     BrowsingMode.Private -> privateModeAdapterItems()
 }
 

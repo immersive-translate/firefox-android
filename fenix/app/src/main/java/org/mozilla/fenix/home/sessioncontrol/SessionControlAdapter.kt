@@ -30,6 +30,7 @@ import org.mozilla.fenix.home.recenttabs.view.RecentTabViewHolder
 import org.mozilla.fenix.home.recenttabs.view.RecentTabsHeaderViewHolder
 import org.mozilla.fenix.home.recentvisits.view.RecentVisitsHeaderViewHolder
 import org.mozilla.fenix.home.recentvisits.view.RecentlyVisitedViewHolder
+import org.mozilla.fenix.home.report.BottomReportViewHolder
 import org.mozilla.fenix.home.sessioncontrol.viewholders.CollectionHeaderViewHolder
 import org.mozilla.fenix.home.sessioncontrol.viewholders.CustomizeHomeButtonViewHolder
 import org.mozilla.fenix.home.sessioncontrol.viewholders.NoCollectionsMessageViewHolder
@@ -58,6 +59,8 @@ sealed class AdapterItem(@LayoutRes val viewType: Int) {
      * Top Login
      */
     object TopLogin: AdapterItem(TopLoginViewHolder.LAYOUT_ID)
+
+    object BottomReport: AdapterItem(BottomReportViewHolder.LAYOUT_ID)
 
     /**
      * Contains a set of [Pair]s where [Pair.first] is the index of the changed [TopSite] and
@@ -309,6 +312,11 @@ class SessionControlAdapter(
                 interactor = interactor,
             )
             TopLoginViewHolder.LAYOUT_ID -> return TopLoginViewHolder(
+                composeView = ComposeView(parent.context),
+                viewLifecycleOwner = viewLifecycleOwner,
+                interactor = interactor,
+            )
+            BottomReportViewHolder.LAYOUT_ID -> return BottomReportViewHolder(
                 composeView = ComposeView(parent.context),
                 viewLifecycleOwner = viewLifecycleOwner,
                 interactor = interactor,

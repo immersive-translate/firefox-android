@@ -18,13 +18,13 @@ class HttpCacheInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         //读接口上的@Headers里的注解配置
-        val cacheControl = request.cacheControl().toString()
+        val cacheControl = request.cacheControl.toString()
         val reqHasCacheControl = !TextUtils.isEmpty(cacheControl) && cacheControl.contains(
             MAX_AGE
         )
         val response = chain.proceed(request)
         val builder = response.newBuilder()
-        if (reqHasCacheControl && response.code() == 200) {
+        if (reqHasCacheControl && response.code == 200) {
             builder.removeHeader("Pragma").header("Cache-Control", cacheControl)
         } else {
             // 如果请求失败，或者

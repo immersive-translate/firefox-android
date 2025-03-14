@@ -89,7 +89,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(private val logger: Logge
             val DEFAULT: Logger = object : Logger {
                 override fun log(message: String?) {
                     message?.let {
-                        Platform.get().log(Platform.WARN, message, null)
+                        Platform.get().log(it, Platform.WARN, null)
                     }
                 }
             }
@@ -117,19 +117,19 @@ class HttpLoggingInterceptor @JvmOverloads constructor(private val logger: Logge
         }
         val logBody = level == Level.BODY
         val logHeaders = logBody || level == Level.HEADERS
-        val requestBody = request.body()
+        val requestBody = request.body
         val hasRequestBody = requestBody != null
-        var requestStartMessage = request.method() + ' ' + request.url()
+        var requestStartMessage = request.method + ' ' + request.url
         if (!logHeaders && hasRequestBody) {
             requestStartMessage += " (" + requestBody!!.contentLength() + "-byte body)"
         }
         logger.log(requestStartMessage)
         if (logHeaders) {
             if (!logBody || !hasRequestBody) {
-                logger.log("--> END " + request.method())
-            } else if (bodyEncoded(request.headers())) {
-                logger.log("--> END " + request.method() + " (encoded body omitted)")
-            } else if (request.body() is MultipartBody) {
+                logger.log("--> END " + request.method)
+            } else if (bodyEncoded(request.headers)) {
+                logger.log("--> END " + request.method + " (encoded body omitted)")
+            } else if (request.body is MultipartBody) {
                 //如果是MultipartBody，会log出一大推乱码的东东
             } else {
                 val buffer = Buffer()
@@ -143,7 +143,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(private val logger: Logge
         val response = chain.proceed(request)
         val tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs)
         logger.log(
-            response.code().toString() + ' ' + response.message() + " (" + tookMs + "ms" + ')'
+            response.code.toString() + ' ' + response.message + " (" + tookMs + "ms" + ')'
         )
         return response
     }

@@ -412,7 +412,11 @@ class DefaultBrowserToolbarMenuController(
             }
 
             is ToolbarMenu.Item.Upgrade -> {
-                activity.navigateToBuyVip()
+                navController.navigate(BrowserFragmentDirections.actionGlobalBuyVipFragment())
+            }
+
+            is ToolbarMenu.Item.Report -> {
+                navController.navigate(BrowserFragmentDirections.actionGlobalReport())
             }
         }
     }
@@ -498,6 +502,9 @@ class DefaultBrowserToolbarMenuController(
                 // noting to do
             }
             is ToolbarMenu.Item.Upgrade -> {
+                // noting to do
+            }
+            is ToolbarMenu.Item.Report -> {
                 // noting to do
             }
         }

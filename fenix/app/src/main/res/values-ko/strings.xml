@@ -622,6 +622,7 @@
     <!-- Preference for settings related to changing the default search engine -->
     <string name="preferences_default_search_engine">기본 검색 엔진</string>
     <string name="preferences_account_update">치받이</string>
+    <string name="preferences_report">피드백</string>
     <!-- Preference for settings related to Search -->
     <string name="preferences_search">검색</string>
     <!-- Preference for settings related to Search engines -->
@@ -3180,9 +3181,28 @@
     <string name="app_toplogin_login">지금 로그인하세요</string>
     <string name="app_toplogin_desc">최고의 경험을 즐겨보세요</string>
 
+    <string name="app_report_problem">문제가 있나요?</string>
+    <string name="app_report_contact">문의하기</string>
+
     <string name="browser_toolbar_imm_menu">번역 메뉴</string>
     <string name="browser_toolbar_imm_trans">번역</string>
     <string name="browser_toolbar_pop_translate">여기를 클릭하세요\n지금 현재 페이지를 번역하세요</string>
     <string name="browser_toolbar_pop_menu">여기를 클릭하세요\n번역 기능 패널 열기</string>
     <string name="browser_toolbar_pop_btn">알겠어요</string>
+
+    <string name="report_title">피드백</string>
+    <string name="report_tab_bug_title">버그 문제</string>
+    <string name="report_tab_feature_title">기능 요청</string>
+    <string name="report_desc">여러분의 의견을 기다리고 있습니다! 여러분의 생각, 문제, 또는 어떤 의문이든 망설이지 말고 공유해주세요. 여러분의 피드백은 저희에게 매우 중요합니다!</string>
+    <string name="report_type_bug">문제 상세 내용:</string>
+    <string name="report_type_feat">요구사항 세부정보:</string>
+    <string name="report_bug_input_hint">사용 중 발생한 문제를 자세히 설명해 주세요</string>
+    <string name="report_feat_input_hint">추가되기를 원하는 새로운 기능을 자세히 설명해 주세요</string>
+    <string name="report_email">이메일 주소 (선택 사항):</string>
+    <string name="report_email_hint">유효한 이메일 주소를 입력해주세요</string>
+    <string name="report_upload_img">이미지 업로드 (선택 사항):</string>
+    <string name="report_btn_commit">제출</string>
+    <string name="report_input_remind">설명은 비워둘 수 없습니다</string>
+    <string name="report_commit_success">제출 성공</string>
+    <string name="report_commit_failure">제출에 실패했습니다. 다시 시도해 주세요</string>
 </resources>

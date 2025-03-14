@@ -46,6 +46,7 @@ class HomeMenu(
     sealed class Item {
         object Translate: Item()
         object Upgrade: Item()
+        object Report: Item()
         object Bookmarks : Item()
         object History : Item()
         object Downloads : Item()
@@ -126,6 +127,13 @@ class HomeMenu(
             R.drawable.ic_menu_user_upgrade,
         ) {
             onItemTapped.invoke(Item.Upgrade)
+        }
+
+        val reportItem = BrowserMenuImageText(
+            context.getString(R.string.report_title),
+            R.drawable.ic_menu_report,
+        ) {
+            onItemTapped.invoke(Item.Report)
         }
 
         val bookmarksItem = BrowserMenuImageText(
@@ -243,6 +251,7 @@ class HomeMenu(
             BrowserMenuDivider(),
             whatsNewItem,
             helpItem,
+            reportItem,
             customizeHomeItem,
             BrowserMenuDivider(),
             translateItem,

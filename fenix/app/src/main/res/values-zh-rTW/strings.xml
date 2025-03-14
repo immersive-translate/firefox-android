@@ -637,6 +637,7 @@
     <!-- Preference for settings related to changing the default search engine -->
     <string name="preferences_default_search_engine">預設搜尋引擎</string>
     <string name="preferences_account_update">升級</string>
+    <string name="preferences_report">回饋</string>
     <!-- Preference for settings related to Search -->
     <string name="preferences_search">搜尋</string>
     <!-- Preference for settings related to Search engines -->
@@ -3237,9 +3238,28 @@
     <string name="app_toplogin_login">立即登入</string>
     <string name="app_toplogin_desc">享受最佳體驗</string>
 
+    <string name="app_report_problem">遇到問題了？</string>
+    <string name="app_report_contact">請聯絡我們</string>
+
     <string name="browser_toolbar_imm_menu">翻譯選單</string>
     <string name="browser_toolbar_imm_trans">翻譯</string>
     <string name="browser_toolbar_pop_translate">點這裡\n立即翻譯目前網頁</string>
     <string name="browser_toolbar_pop_menu">點這裡\n開啟翻譯功能面板</string>
     <string name="browser_toolbar_pop_btn">我知道了</string>
+
+    <string name="report_title">回饋</string>
+    <string name="report_tab_bug_title">Bug問題</string>
+    <string name="report_tab_feature_title">功能需求</string>
+    <string name="report_desc">我們期待聽到您的聲音!無論是您的想法, 問題,或任何心中的疑惑,都請毫不猶豫地與我們分享。您的回饋對我們而言意義重大!</string>
+    <string name="report_type_bug">問題詳情：</string>
+    <string name="report_type_feat">需求詳情：</string>
+    <string name="report_bug_input_hint">請詳細描述您在使用中遇到的問題</string>
+    <string name="report_feat_input_hint">請詳細描述您期待我們增加的新功能</string>
+    <string name="report_email">您的電子郵件地址（可選）：</string>
+    <string name="report_email_hint">請輸入有效的電子郵件地址</string>
+    <string name="report_upload_img">上傳圖片（可選）：</string>
+    <string name="report_btn_commit">提交</string>
+    <string name="report_input_remind">描述不能為空</string>
+    <string name="report_commit_success">提交成功</string>
+    <string name="report_commit_failure">提交失敗，請重試</string>
 </resources>

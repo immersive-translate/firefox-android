@@ -595,6 +595,7 @@
     <!-- Preference for settings related to changing the default search engine -->
     <string name="preferences_default_search_engine">Default search engine</string>
     <string name="preferences_account_update">Upgrade</string>
+    <string name="preferences_report">Feedback</string>
     <!-- Preference for settings related to Search -->
     <string name="preferences_search">Search</string>
     <!-- Preference for settings related to Search engines -->
@@ -3018,9 +3019,29 @@
     <string name="app_toplogin_login">Log in now</string>
     <string name="app_toplogin_desc">For the best experience</string>
 
+    <string name="app_report_problem">Problem?</string>
+    <string name="app_report_contact">Please contact us</string>
+
     <string name="browser_toolbar_imm_menu">Translate menu</string>
     <string name="browser_toolbar_imm_trans">Translate</string>
     <string name="browser_toolbar_pop_translate">Click here\nTranslate the current page now</string>
     <string name="browser_toolbar_pop_menu">Click here\nOpen the translation function panel</string>
     <string name="browser_toolbar_pop_btn">I see</string>
+
+    <string name="report_title">Feedback</string>
+    <string name="report_tab_bug_title">Bug Issue</string>
+    <string name="report_tab_feature_title">Feature Request</string>
+    <string name="report_desc">We look forward to hearing from you! Whether it’s your thoughts, questions, or any doubts in your mind, please do not hesitate to share them with us. Your feedback is of great importance to us!</string>
+    <string name="report_type_bug">Problem Details:</string>
+    <string name="report_type_feat">Feature Details:</string>
+    <string name="report_bug_input_hint">Please describe in detail what went wrong</string>
+    <string name="report_feat_input_hint">Please describe in detail the new features you would like us to add</string>
+    <string name="report_email">Your Email Address (Optional):</string>
+    <string name="report_email_hint">Please enter a valid email address</string>
+    <string name="report_upload_img">Upload Image (Optional):</string>
+    <string name="report_btn_commit">Submit</string>
+    <string name="report_input_remind">Description cannot be empty</string>
+    <string name="report_commit_success">Submission successful</string>
+    <string name="report_commit_failure">Submission failed, please try again</string>
+
 </resources>

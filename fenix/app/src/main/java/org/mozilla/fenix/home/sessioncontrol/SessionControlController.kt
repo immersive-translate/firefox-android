@@ -48,6 +48,7 @@ import org.mozilla.fenix.GleanMetrics.Pocket
 import org.mozilla.fenix.GleanMetrics.RecentTabs
 import org.mozilla.fenix.GleanMetrics.TopSites
 import org.mozilla.fenix.HomeActivity
+import org.mozilla.fenix.NavGraphDirections
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.collections.SaveCollectionStep
@@ -55,7 +56,6 @@ import org.mozilla.fenix.components.AppStore
 import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.appstate.AppAction
 import org.mozilla.fenix.components.appstate.AppState
-import org.mozilla.fenix.components.components
 import org.mozilla.fenix.components.metrics.MetricsUtils
 import org.mozilla.fenix.components.toolbar.navbar.shouldAddNavigationBar
 import org.mozilla.fenix.ext.components
@@ -140,6 +140,8 @@ interface SessionControlController {
     fun handleSelectTopSite(topSite: TopSite, position: Int)
 
     fun handleGotoLogin()
+
+    fun handleReport()
 
     /**
      * @see [TopSiteInteractor.onSettingsClicked]
@@ -450,6 +452,10 @@ class DefaultSessionControlController(
         }
 
         navController.navigate(R.id.browserFragment)
+    }
+
+    override fun handleReport() {
+        navController.navigate(NavGraphDirections.actionGlobalReport())
     }
 
     override fun handleSelectTopSite(topSite: TopSite, position: Int) {

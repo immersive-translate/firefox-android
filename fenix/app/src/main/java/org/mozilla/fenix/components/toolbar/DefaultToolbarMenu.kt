@@ -423,6 +423,13 @@ open class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.Upgrade)
     }
 
+    private val report = BrowserMenuImageText(
+        label = context.getString(R.string.report_title),
+        imageResource = R.drawable.ic_menu_report,
+    ) {
+        onItemTapped.invoke(ToolbarMenu.Item.Report)
+    }
+
     /*private fun syncMenuItem(): BrowserMenuItem {
         return BrowserMenuSignIn(primaryTextColor()) {
             onItemTapped.invoke(
@@ -446,6 +453,7 @@ open class DefaultToolbarMenu(
                 //syncMenuItem(),
                 immersiveTranslate,
                 gotoBuyVip,
+                report,
                 BrowserMenuDivider(),
                 findInPageItem,
                 translationsItem.apply { visible = ::shouldShowTranslations },
@@ -453,7 +461,7 @@ open class DefaultToolbarMenu(
                 openInRegularTabItem.apply { visible = ::shouldShowOpenInRegularTab },
                 customizeReaderView.apply { visible = ::shouldShowReaderViewCustomization },
                 openInApp.apply { visible = ::shouldShowOpenInApp },
-                reportSiteIssuePlaceholder,
+                //reportSiteIssuePlaceholder,
                 BrowserMenuDivider(),
                 addToHomeScreenItem.apply { visible = ::canAddToHomescreen },
                 addAppToHomeScreenItem.apply { visible = ::canAddAppToHomescreen },

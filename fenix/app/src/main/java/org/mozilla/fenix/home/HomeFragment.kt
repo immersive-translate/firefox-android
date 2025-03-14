@@ -154,6 +154,7 @@ import org.mozilla.fenix.home.recenttabs.RecentTabsListFeature
 import org.mozilla.fenix.home.recenttabs.controller.DefaultRecentTabsController
 import org.mozilla.fenix.home.recentvisits.RecentVisitsFeature
 import org.mozilla.fenix.home.recentvisits.controller.DefaultRecentVisitsController
+import org.mozilla.fenix.home.report.BottomReportStateHolder
 import org.mozilla.fenix.home.sessioncontrol.DefaultSessionControlController
 import org.mozilla.fenix.home.sessioncontrol.SessionControlInteractor
 import org.mozilla.fenix.home.sessioncontrol.SessionControlView
@@ -554,6 +555,14 @@ class HomeFragment : Fragment() {
             profilerStartTime,
             "HomeFragment.onCreateView",
         )
+
+        binding.btnReport.setOnClickListener {
+            findNavController().navigate(NavGraphDirections.actionGlobalReport())
+        }
+        BottomReportStateHolder.listener { isShowInList ->
+            binding.llReport.visibility = if (isShowInList) View.GONE else View.VISIBLE
+        }
+
         return binding.root
     }
 
@@ -1238,6 +1247,7 @@ class HomeFragment : Fragment() {
             profilerStartTime,
             "HomeFragment.onViewCreated",
         )
+
     }
 
     private fun initHomepage() {

@@ -180,6 +180,10 @@
         android:id="@+id/action_global_buyVipFragment"
         app:destination="@id/account_upgrade_graph"/>
 
+    <action
+        android:id="@+id/action_global_report"
+        app:destination="@id/report_graph"/>
+
     <dialog
         android:id="@+id/tabsTrayFragment"
         android:name="org.mozilla.fenix.tabstray.TabsTrayFragment">
@@ -1266,6 +1270,17 @@
             android:id="@+id/buyVipFragment"
             android:name="org.mozilla.fenix.immersive_transalte.user.BuyVipFragment"
             android:label="@string/preferences_account_update"/>
+
+    </navigation>
+
+    <navigation
+        android:id="@+id/report_graph"
+        app:startDestination="@id/reportFragment">
+
+        <fragment
+            android:id="@+id/reportFragment"
+            android:name="org.mozilla.fenix.immersive_transalte.report.ReportFragment"
+            android:label="@string/preferences_report"/>
 
     </navigation>
 

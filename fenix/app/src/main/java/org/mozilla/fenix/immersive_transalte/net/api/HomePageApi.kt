@@ -4,14 +4,23 @@
 
 package org.mozilla.fenix.immersive_transalte.net.api
 
+import okhttp3.MultipartBody
 import org.mozilla.fenix.immersive_transalte.bean.AppConfigBean
 import org.mozilla.fenix.immersive_transalte.bean.HomePageBean
+import org.mozilla.fenix.immersive_transalte.bean.ImageUploadBean
 import org.mozilla.fenix.immersive_transalte.bean.OnBoardingTranslateBean
 import org.mozilla.fenix.immersive_transalte.bean.ResultData
 import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.FieldMap
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.HeaderMap
 import retrofit2.http.Headers
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.PartMap
 import retrofit2.http.QueryMap
 
 internal interface HomePageApi {
@@ -33,4 +42,17 @@ internal interface HomePageApi {
         @HeaderMap headers: MutableMap<String, Any?>,
         @QueryMap params: MutableMap<String, Any?>,
     ): Call<ResultData<List<OnBoardingTranslateBean>>>
+
+    @Multipart
+    @POST("/v1/feed-back/img-upload")
+    fun uploadImage(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @Part file: MultipartBody.Part,
+    ): Call<ResultData<ImageUploadBean>>
+
+    @POST("/v1/feed-back/web-report-log")
+    fun reportProblem(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<ResultData<Any>>
 }

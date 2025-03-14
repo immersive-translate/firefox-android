@@ -139,6 +139,10 @@ class HomeMenuView(
                 homeActivity.navigateToBuyVip()
             }
 
+            HomeMenu.Item.Report -> {
+                navController.navigate(HomeFragmentDirections.actionGlobalReport())
+            }
+
             HomeMenu.Item.Settings -> {
                 HomeMenuMetrics.settingsItemClicked.record(NoExtras())
 

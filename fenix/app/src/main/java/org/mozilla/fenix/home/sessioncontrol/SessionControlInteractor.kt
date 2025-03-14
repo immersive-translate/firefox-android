@@ -148,6 +148,10 @@ interface TopLoginInteractor {
     fun onGotoLogin()
 }
 
+interface ContactInteractor {
+    fun onReport()
+}
+
 /**
  * Interface for top site related actions in the [SessionControlInteractor].
  */
@@ -246,7 +250,7 @@ class SessionControlInteractor(
     private val privateBrowsingController: PrivateBrowsingController,
     private val searchSelectorController: SearchSelectorController,
     private val toolbarController: ToolbarController,
-) : HomepageInteractor, TopLinkInteractor, TopLoginInteractor {
+) : HomepageInteractor, TopLinkInteractor, TopLoginInteractor, ContactInteractor {
 
     override fun onCollectionAddTabTapped(collection: TabCollection) {
         controller.handleCollectionAddTabTapped(collection)
@@ -448,5 +452,9 @@ class SessionControlInteractor(
 
     override fun onGotoLogin() {
         controller.handleGotoLogin()
+    }
+
+    override fun onReport() {
+        controller.handleReport()
     }
 }

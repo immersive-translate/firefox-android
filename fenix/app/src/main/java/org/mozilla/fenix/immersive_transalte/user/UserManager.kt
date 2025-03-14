@@ -93,6 +93,25 @@ object UserManager {
     }
 
     /**
+     * 获取 用户 email
+     */
+    fun getUserEmail(context: Context): String? {
+        val sp = context.getSharedPreferences(SP_KEY, Context.MODE_PRIVATE)
+        val json = sp.getString(USER_INFO_KEY, "")
+        if (json.isNullOrEmpty()) {
+            return ""
+        }
+        try {
+            val userObject = gson.fromJson(json, JsonObject::class.java)
+            userObject?.let {
+                return it.get("email")?.asString
+            }
+        } finally {
+        }
+        return ""
+    }
+
+    /**
      * 刷新用户数据
      */
     fun refreshUser(callback: (() -> Unit)? = null) {
