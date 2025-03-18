@@ -152,6 +152,10 @@ interface ContactInteractor {
     fun onReport()
 }
 
+interface UserScoreInteractor {
+    fun onUserScore(isAppReport: Boolean)
+}
+
 /**
  * Interface for top site related actions in the [SessionControlInteractor].
  */
@@ -250,7 +254,9 @@ class SessionControlInteractor(
     private val privateBrowsingController: PrivateBrowsingController,
     private val searchSelectorController: SearchSelectorController,
     private val toolbarController: ToolbarController,
-) : HomepageInteractor, TopLinkInteractor, TopLoginInteractor, ContactInteractor {
+) : HomepageInteractor, TopLinkInteractor,
+    TopLoginInteractor, ContactInteractor,
+    UserScoreInteractor {
 
     override fun onCollectionAddTabTapped(collection: TabCollection) {
         controller.handleCollectionAddTabTapped(collection)
@@ -456,5 +462,9 @@ class SessionControlInteractor(
 
     override fun onReport() {
         controller.handleReport()
+    }
+
+    override fun onUserScore(isAppReport: Boolean) {
+        controller.handleReportScore(isAppReport)
     }
 }

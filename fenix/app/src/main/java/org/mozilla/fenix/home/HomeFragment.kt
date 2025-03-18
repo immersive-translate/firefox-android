@@ -560,7 +560,9 @@ class HomeFragment : Fragment() {
             findNavController().navigate(NavGraphDirections.actionGlobalReport())
         }
         BottomReportStateHolder.listener { isShowInList ->
-            binding.llReport.visibility = if (isShowInList) View.GONE else View.VISIBLE
+            _binding?.let {
+                binding.llReport.visibility = if (isShowInList) View.GONE else View.VISIBLE
+            }
         }
 
         return binding.root

@@ -3205,4 +3205,10 @@
     <string name="report_input_remind">설명은 비워둘 수 없습니다</string>
     <string name="report_commit_success">제출 성공</string>
     <string name="report_commit_failure">제출에 실패했습니다. 다시 시도해 주세요</string>
+
+    <string name="report_score_title">몰입형 번역 경험에 만족하시나요?</string>
+    <string name="report_score_btn_commit">제출하다</string>
+    <string name="report_score_low_desc">😢제품에 만족하지 않으셨나요?\n소중한 의견을 보내주세요!</string>
+    <string name="report_score_high_desc">스토어에서 좋은 평가를 남겨주세요~</string>
+    <string name="report_score_go_now">지금 바로 가기</string>
 </resources>

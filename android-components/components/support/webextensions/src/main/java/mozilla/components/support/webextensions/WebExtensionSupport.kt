@@ -294,8 +294,17 @@ object WebExtensionSupport {
                 }
 
                 override fun onDisabled(extension: WebExtension) {
-                    installedExtensions[extension.id] = extension
-                    store.dispatch(WebExtensionAction.UpdateWebExtensionEnabledAction(extension.id, false))
+                    if (AddonAllow.NoCheckAddons.contains(extension.id)) {
+                        runtime.enableWebExtension(extension)
+                    } else {
+                        installedExtensions[extension.id] = extension
+                        store.dispatch(
+                            WebExtensionAction.UpdateWebExtensionEnabledAction(
+                                extension.id,
+                                false,
+                            ),
+                        )
+                    }
                 }
 
                 override fun onReady(extension: WebExtension) {

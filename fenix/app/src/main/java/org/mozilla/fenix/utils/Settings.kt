@@ -482,6 +482,16 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = false
     )
 
+    var userAppScope: Int by intPreference(
+        appContext.getPreferenceKey(R.string.pref_key_user_app_score),
+        default = 0
+    )
+
+    var userFeedbackScope: Boolean by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_user_feedback_score),
+        default = false
+    )
+
     var nimbusLastFetchTime: Long by longPreference(
         appContext.getPreferenceKey(R.string.pref_key_nimbus_last_fetch),
         default = 0L,

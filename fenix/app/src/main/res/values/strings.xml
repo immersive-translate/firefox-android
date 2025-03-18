@@ -3044,4 +3044,9 @@
     <string name="report_commit_success">Submission successful</string>
     <string name="report_commit_failure">Submission failed, please try again</string>
 
+    <string name="report_score_title">Are you satisfied with the Immersive Translation experience?</string>
+    <string name="report_score_btn_commit">Submit</string>
+    <string name="report_score_low_desc">😢Not satisfied with the product?\nPlease give us your valuable comments!</string>
+    <string name="report_score_high_desc">Please leave us a positive review in the app store~</string>
+    <string name="report_score_go_now">Go Now</string>
 </resources>

@@ -57,7 +57,7 @@ fun TopLogin(
                     testTagsAsResourceId = true
                 }
                 .padding(6.dp, 0.dp, 0.dp, 0.dp),
-            color = Color(0xFF333333),
+            color = FirefoxTheme.colors.textPrimary,
             text = stringResource(R.string.app_toplogin_desc),
             fontSize = 14.sp,
             style = FirefoxTheme.typography.caption,

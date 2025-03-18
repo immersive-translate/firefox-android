@@ -258,7 +258,7 @@ abstract class BaseBrowserFragment :
     OnLongPressedListener,
     AccessibilityManager.AccessibilityStateChangeListener {
 
-    private var _binding: FragmentBrowserBinding? = null
+    protected var _binding: FragmentBrowserBinding? = null
     internal val binding get() = _binding!!
 
     private lateinit var browserFragmentStore: BrowserFragmentStore

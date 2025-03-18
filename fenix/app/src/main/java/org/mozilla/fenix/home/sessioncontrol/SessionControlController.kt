@@ -5,8 +5,12 @@
 package org.mozilla.fenix.home.sessioncontrol
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
+import android.net.Uri
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
 import androidx.annotation.VisibleForTesting
@@ -142,6 +146,8 @@ interface SessionControlController {
     fun handleGotoLogin()
 
     fun handleReport()
+
+    fun handleReportScore(isAppReport: Boolean)
 
     /**
      * @see [TopSiteInteractor.onSettingsClicked]
@@ -456,6 +462,30 @@ class DefaultSessionControlController(
 
     override fun handleReport() {
         navController.navigate(NavGraphDirections.actionGlobalReport())
+    }
+
+    override fun handleReportScore(isAppReport: Boolean) {
+        Log.i("xupxxupxxupxxupx", "${isAppReport}")
+        if (isAppReport) {
+            navController.navigate(NavGraphDirections.actionGlobalReport())
+        } else {
+            openAppRating(activity)
+        }
+    }
+
+    private fun openAppRating(context: Context) {
+        try {
+            val uri = Uri.parse("market://details?id=${context.packageName}")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            // intent.setPackage("com.android.vending") // 限定跳转到 Google Play
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            val uri = Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
     }
 
     override fun handleSelectTopSite(topSite: TopSite, position: Int) {

@@ -42,7 +42,7 @@
                 android:gravity="center"
                 android:text="@string/browser_toolbar_pop_translate"
                 android:textAlignment="center"
-                android:textColor="@color/fx_mobile_text_color_primary"
+                android:textColor="#FF222222"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatTextView

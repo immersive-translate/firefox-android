@@ -427,8 +427,10 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                     val pageStatus = result.data?.optBoolean("pageTranslated") ?: false
                     if (pageStatus != isPageTranslated) {
                         isPageTranslated = pageStatus
-                        if (browserToolbarView != null) {
-                            browserToolbarView.view.invalidateActions()
+                        _binding?.let {
+                            if (browserToolbarView != null) {
+                                browserToolbarView.view.invalidateActions()
+                            }
                         }
                     }
                 } catch (_: Exception) {

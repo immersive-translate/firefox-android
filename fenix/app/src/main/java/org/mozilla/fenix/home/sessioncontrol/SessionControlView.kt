@@ -71,6 +71,9 @@ internal fun normalModeAdapterItems(
         topSites.size
     }
 
+    // user report score
+    items.add(AdapterItem.UserReportScore)
+
     // top login
     items.add(AdapterItem.TopLogin)
 

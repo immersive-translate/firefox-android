@@ -4,7 +4,6 @@
 
 package org.mozilla.fenix.home.report
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import mozilla.components.support.ktx.android.util.dpToPx
 import org.mozilla.fenix.compose.ComposeViewHolder
 import org.mozilla.fenix.home.sessioncontrol.ContactInteractor
-import org.mozilla.fenix.home.sessioncontrol.TopLinkInteractor
 import org.mozilla.fenix.home.sessioncontrol.TopSiteInteractor
 
 /**

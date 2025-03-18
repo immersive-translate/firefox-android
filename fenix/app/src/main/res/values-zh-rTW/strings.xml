@@ -3262,4 +3262,10 @@
     <string name="report_input_remind">描述不能為空</string>
     <string name="report_commit_success">提交成功</string>
     <string name="report_commit_failure">提交失敗，請重試</string>
+
+    <string name="report_score_title">- 您對沉浸式翻譯的使用體驗感到滿意嗎？</string>
+    <string name="report_score_btn_commit">提交</string>
+    <string name="report_score_low_desc">😢對產品有任何不滿意的地方嗎？\n請提供您寶貴的意見吧！</string>
+    <string name="report_score_high_desc">請提供您寶貴的意見吧！</string>
+    <string name="report_score_go_now">立即前往</string>
 </resources>
