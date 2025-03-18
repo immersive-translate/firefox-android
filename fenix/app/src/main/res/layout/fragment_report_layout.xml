@@ -85,6 +85,38 @@
         app:layout_constraintTop_toBottomOf="@id/tv_report_type" />
 
     <TextView
+        android:id="@+id/tv_upload_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/report_upload_img"
+        android:textColor="?normal_color_666666"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_description" />
+
+    <LinearLayout
+        android:id="@+id/ll_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_upload_img">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_upload"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_report_upload_img" />
+
+    </LinearLayout>
+
+    <TextView
         android:id="@+id/tv_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,7 +126,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_description" />
+        app:layout_constraintTop_toBottomOf="@id/ll_upload" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_email"
@@ -116,38 +148,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_email" />
-
-    <TextView
-        android:id="@+id/tv_upload_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/report_upload_img"
-        android:textColor="?normal_color_666666"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_email" />
-
-    <LinearLayout
-        android:id="@+id/ll_upload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_upload_img">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_upload"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_report_upload_img" />
-
-    </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_commit"

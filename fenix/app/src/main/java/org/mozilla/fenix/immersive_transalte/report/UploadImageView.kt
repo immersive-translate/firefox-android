@@ -5,23 +5,29 @@
 package org.mozilla.fenix.immersive_transalte.report
 
 import android.content.Context
-import android.graphics.Bitmap
+import android.text.TextUtils
 import android.util.AttributeSet
-import android.view.Gravity
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
-import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import mozilla.components.support.ktx.android.util.dpToPx
-
-import org.mozilla.fenix.R
+import org.mozilla.fenix.databinding.UploadImageViewLayoutBinding
+import org.mozilla.fenix.immersive_transalte.bean.UploadFileBean
+import org.mozilla.fenix.immersive_transalte.net.service.HomePageService
 
 class UploadImageView : FrameLayout {
-    private lateinit var displayImageView: ShapeableImageView
-    private lateinit var deleteView: ImageView
-    private lateinit var bitmap: Bitmap
+    private lateinit var binding: UploadImageViewLayoutBinding
+
+    private var fileBean: UploadFileBean? = null
+    private lateinit var uploadUrl: String
+    private var uploadState = 0 // 1: loading, 2: success, 3: failed
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -40,16 +46,10 @@ class UploadImageView : FrameLayout {
     }
 
     private fun init(context: Context) {
-        val size = 70.dpToPx(context.resources.displayMetrics)
-        layoutParams = LayoutParams(size, size)
-        (layoutParams as MarginLayoutParams).leftMargin = 8.dpToPx(context.resources.displayMetrics)
+        binding = UploadImageViewLayoutBinding.inflate(LayoutInflater.from(context))
+        addView(binding.root)
 
-        displayImageView = ShapeableImageView(context).apply {
-            layoutParams = LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT,
-            )
-            scaleType = ImageView.ScaleType.CENTER_CROP
+        binding.ivImage.apply {
             shapeAppearanceModel = ShapeAppearanceModel.Builder()
                 .setAllCorners(
                     CornerFamily.ROUNDED,
@@ -57,36 +57,78 @@ class UploadImageView : FrameLayout {
                 )
                 .build()
         }
-        addView(displayImageView)
 
-        // ic_delete
-        deleteView = ImageView(context).apply {
-            val deleteSize = 14.dpToPx(context.resources.displayMetrics)
-            layoutParams = LayoutParams(deleteSize, deleteSize)
-            (layoutParams as LayoutParams).apply {
-                gravity = Gravity.END or Gravity.TOP
-                topMargin = 6.dpToPx(context.resources.displayMetrics)
-                marginEnd = 6.dpToPx(context.resources.displayMetrics)
+        binding.ivRetry.setOnClickListener {
+            uploadImage()
+        }
+
+        binding.ivDelete.setOnClickListener {
+            callback?.onDelete(this@UploadImageView)
+        }
+    }
+
+    fun setImage(fileBean: UploadFileBean) {
+        this.fileBean = fileBean
+        binding.ivImage.setImageBitmap(fileBean.bitmap)
+        uploadImage()
+    }
+
+    fun isUploading(): Boolean {
+        return uploadState == 1
+    }
+
+    fun isUploadSuccess(): Boolean {
+        return uploadState == 2
+    }
+
+    fun isUploadFailed(): Boolean {
+        return uploadState == 3
+    }
+
+    fun getImageUrl(): String {
+        return uploadUrl
+    }
+
+    private fun uploadImage() {
+        binding.flProgress.visibility = VISIBLE
+        binding.progress.visibility = VISIBLE
+        binding.ivRetry.visibility = GONE
+        uploadState = 1
+        MainScope().launch(Dispatchers.Main) {
+            val response = withContext(Dispatchers.IO) {
+                HomePageService.uploadImage(fileBean!!.bitmapFile)
             }
-            setImageResource(R.drawable.ic_delete)
-            setOnClickListener {
-                deleteCallback?.invoke(this@UploadImageView)
+            if (!isAttachedToWindow) {
+                return@launch
+            }
+            val url = response?.data?.data?.objectKey
+            if (!TextUtils.isEmpty(url)) {
+                uploadState = 2
+                uploadUrl = url!!
+                binding.flProgress.visibility = GONE
+                callback?.onUpload(true)
+            } else {
+                uploadState = 3
+                binding.progress.visibility = GONE
+                binding.ivRetry.visibility = VISIBLE
+                callback?.onUpload(false)
             }
         }
-        addView(deleteView)
     }
 
-    fun setImage(bitmap: Bitmap) {
-        this.bitmap = bitmap
-        displayImageView.setImageBitmap(bitmap)
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        fileBean?.bitmapFile?.delete()
     }
 
-    fun getBitmap(): Bitmap {
-        return bitmap
+    private var callback: Callback? = null
+
+    fun setCallback(callback: Callback) {
+        this.callback = callback
     }
 
-    private var deleteCallback: ((View) -> Unit)? = null
-    fun setDeleteClickListener(deleteCallback: (View) -> Unit) {
-        this.deleteCallback = deleteCallback
+    interface Callback {
+        fun onDelete(view: View)
+        fun onUpload(isSuccess: Boolean)
     }
 }

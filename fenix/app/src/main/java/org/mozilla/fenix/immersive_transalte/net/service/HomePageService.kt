@@ -4,10 +4,12 @@
 
 package org.mozilla.fenix.immersive_transalte.net.service
 
-import android.graphics.Bitmap
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONArray
 import org.json.JSONObject
 import org.mozilla.fenix.immersive_transalte.base.http.BaseService
 import org.mozilla.fenix.immersive_transalte.base.http.HttpClient
@@ -19,7 +21,6 @@ import org.mozilla.fenix.immersive_transalte.bean.OnBoardingTranslateBean
 import org.mozilla.fenix.immersive_transalte.bean.ResultData
 import org.mozilla.fenix.immersive_transalte.net.api.HomePageApi
 import java.io.File
-import java.io.FileOutputStream
 
 object HomePageService : BaseService() {
     private val homepageApi: HomePageApi? by lazy { HttpClient.retrofit?.create(HomePageApi::class.java) }
@@ -51,18 +52,11 @@ object HomePageService : BaseService() {
         return executeHttpAndCallback(homepageApi?.fetchOnBoardingTranslations(params, queryMap))
     }
 
-    suspend fun uploadImage(bitmap: Bitmap): Response<ResultData<ImageUploadBean>>? {
+    suspend fun uploadImage(file: File): Response<ResultData<ImageUploadBean>>? {
         try {
             val params = getCommonQueryParams()
-            val file = File.createTempFile("img_" + System.currentTimeMillis(), ".jpg")
-            val outputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream) // 90% 质量
-            outputStream.flush()
-            outputStream.close()
-
             val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull()) // 文件体
             val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
-
             return executeHttpAndCallback(homepageApi?.uploadImage(params, multipartBody))
         } catch (_: Exception) {
         }
@@ -76,19 +70,25 @@ object HomePageService : BaseService() {
         urls: List<String>?,
     ): Response<ResultData<Any>> {
         val params = getCommonQueryParams()
-        val fieldMap = mutableMapOf<String, Any?>()
-        fieldMap["feedType"] = feedType
-        fieldMap["reason"] = reason
-        fieldMap["contactInfo"] = contactInfo
 
+        val metaData = JSONObject()
         urls?.let {
-            if(it.isNotEmpty()) {
-                val metaData = JSONObject()
-                metaData.put("objectKeyList", it)
-                fieldMap["metaData"] = metaData
+            val objectKeyList = JSONArray()
+            it.forEach { url ->
+                objectKeyList.put(url)
             }
+            metaData.put("objectKeyList", objectKeyList)
         }
 
-        return executeHttpAndCallback(homepageApi?.reportProblem(params, fieldMap))
+        return executeHttpAndCallback(
+            homepageApi?.reportProblem(
+                params,
+                feedType.toRequestBody("text/plain".toMediaType()),
+                reason.toRequestBody("text/plain".toMediaType()),
+                contactInfo.toRequestBody("text/plain".toMediaType()),
+                metaData.toString().toRequestBody("application/json".toMediaType()),
+            ),
+        )
+
     }
 }

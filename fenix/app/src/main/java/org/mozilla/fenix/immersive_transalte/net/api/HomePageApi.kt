@@ -5,6 +5,8 @@
 package org.mozilla.fenix.immersive_transalte.net.api
 
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import org.json.JSONObject
 import org.mozilla.fenix.immersive_transalte.bean.AppConfigBean
 import org.mozilla.fenix.immersive_transalte.bean.HomePageBean
 import org.mozilla.fenix.immersive_transalte.bean.ImageUploadBean
@@ -50,9 +52,13 @@ internal interface HomePageApi {
         @Part file: MultipartBody.Part,
     ): Call<ResultData<ImageUploadBean>>
 
+    @Multipart
     @POST("/v1/feed-back/web-report-log")
     fun reportProblem(
         @HeaderMap headers: MutableMap<String, Any?>,
-        @Body params: MutableMap<String, Any?>,
+        @Part("feedType") feedType: RequestBody,
+        @Part("reason") reason: RequestBody,
+        @Part("contactInfo") contactInfo: RequestBody,
+        @Part("metaData") metaData: RequestBody,
     ): Call<ResultData<Any>>
 }

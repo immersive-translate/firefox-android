@@ -3208,8 +3208,8 @@
     <string name="buy_vip_btn_buy">立即訂閱</string>
 
     <string name="buy_vip_tip_01">免費套餐需要自訂 API Token，價格較貴，配置繁瑣且有嚴格的速率限制。升級 Pro 會員後可直接使用沉浸式翻譯提供的 DeepL，OpenAI，Claude，Gemini 翻譯服務，無需任何配置，開箱即用，每月更可享受高達 2000 萬 token 的翻譯額度。</string>
-    <string name="buy_vip_tip_02">每月包含 500 頁 AI 驅動的 PDF 文件翻譯，支援複雜的公式識別，表格識別和掃描版文檔</string>
-    <string name="buy_vip_tip_03">每月包含 1000 張 AI 驅動的漫畫翻譯</string>
+    <string name="buy_vip_tip_02">每月包含 1000 頁 AI 驅動的 PDF 文件翻譯，支援複雜的公式識別，表格識別和掃描版文檔</string>
+    <string name="buy_vip_tip_03">每月包含 3000 張 AI 驅動的漫畫翻譯</string>
     <string name="buy_vip_tip_04">如您遇到問題，請聯絡客戶支援團隊\nsupport@immersivetranslate.com</string>
 
     <string name="buy_vip_toast_sub_mon">您已經訂閱月度會員</string>
@@ -3261,7 +3261,8 @@
     <string name="report_btn_commit">提交</string>
     <string name="report_input_remind">描述不能為空</string>
     <string name="report_commit_success">提交成功</string>
-    <string name="report_commit_failure">提交失敗，請重試</string>
+    <string name="report_commit_failure">提交失敗\n請重試</string>
+    <string name="report_upload_img_failure">圖片上傳失敗\n請重試</string>
 
     <string name="report_score_title">- 您對沉浸式翻譯的使用體驗感到滿意嗎？</string>
     <string name="report_score_btn_commit">提交</string>

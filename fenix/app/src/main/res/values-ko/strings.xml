@@ -3151,8 +3151,8 @@
     <string name="buy_vip_btn_buy">지금 구독하기</string>
 
     <string name="buy_vip_tip_01">무료 플랜에는 더 비싸고 구성이 번거롭고 엄격한 속도 제한이 있는 맞춤형 API 토큰이 필요합니다. Pro 멤버십으로 업그레이드하시면 몰입형 번역에서 제공하는 DeepL, OpenAI, Claude, Gemini 번역 서비스를 별도의 설정 없이 바로 이용하실 수 있습니다. 또한 최대 2천만 토큰의 월간 번역 할당량을 즐기실 수 있습니다.</string>
-    <string name="buy_vip_tip_02">매월 500페이지의 AI 기반 PDF 문서 번역이 포함되어 복잡한 수식 인식, 표 인식 및 스캔 문서를 지원합니다.</string>
-    <string name="buy_vip_tip_03">매월 1,000개의 AI 기반 만화 번역 포함</string>
+    <string name="buy_vip_tip_02">매월 1,000페이지의 AI 기반 PDF 문서 번역이 포함되어 복잡한 수식 인식, 표 인식 및 스캔 문서를 지원합니다.</string>
+    <string name="buy_vip_tip_03">매월 3,000개의 AI 기반 만화 번역 포함</string>
     <string name="buy_vip_tip_04">문제가 발생하면 고객 지원팀\nsupport@immersivetranslate.com에 문의하세요.</string>
 
     <string name="buy_vip_toast_sub_mon">월간 멤버십을 구독하셨습니다.</string>
@@ -3204,7 +3204,8 @@
     <string name="report_btn_commit">제출</string>
     <string name="report_input_remind">설명은 비워둘 수 없습니다</string>
     <string name="report_commit_success">제출 성공</string>
-    <string name="report_commit_failure">제출에 실패했습니다. 다시 시도해 주세요</string>
+    <string name="report_commit_failure">제출에 실패했습니다\n다시 시도해 주세요</string>
+    <string name="report_upload_img_failure">이미지 업로드 실패\n다시 시도해 주세요</string>
 
     <string name="report_score_title">몰입형 번역 경험에 만족하시나요?</string>
     <string name="report_score_btn_commit">제출하다</string>

@@ -3,7 +3,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 
-
 package org.mozilla.fenix.immersive_transalte.utils
 
 import android.content.Context

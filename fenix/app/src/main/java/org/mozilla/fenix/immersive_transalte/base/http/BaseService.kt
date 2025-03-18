@@ -37,7 +37,7 @@ open class BaseService {
     fun getCommonBodyParams(): MutableMap<String, Any?> {
         val params: MutableMap<String, Any?> = HashMap()
         params["appVersion"] = appVersion
-        params["platform"] = "android"
+        params["platForm"] = "android"
         return params
     }
 
@@ -45,7 +45,7 @@ open class BaseService {
         val params: MutableMap<String, Any?> = HashMap()
         params["t"] = time
         params["appVersion"] = appVersion
-        params["platform"] = "android"
+        params["platForm"] = "android"
         return params
     }
 

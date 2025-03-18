@@ -4,6 +4,8 @@
 
 package org.mozilla.fenix.immersive_transalte.report
 
+import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
@@ -11,13 +13,13 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -29,6 +31,7 @@ import org.mozilla.fenix.immersive_transalte.base.widget.ProcessDialog
 import org.mozilla.fenix.immersive_transalte.net.service.HomePageService
 import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.fenix.immersive_transalte.utils.ToastUtil
+
 
 enum class ReportType {
     BUG, FEATURE
@@ -43,10 +46,33 @@ class ReportFragment : Fragment() {
     private val imageLimitCount = 3
     private val imageList = mutableListOf<UploadImageView>()
 
-    private val selectImageLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uri?.let { compressImage(it) }
+    private var pickImagesLauncher: ActivityResultLauncher<Intent?> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+                handleSelectedImages(result.data!!)
+            }
         }
+
+    private fun handleSelectedImages(data: Intent) {
+        // 限制最多 3 张
+        val remainCount = imageLimitCount - imageList.size
+        if (remainCount <= 0) {
+            return
+        }
+        val imageUris = mutableListOf<Uri>()
+        if (data.clipData != null) { // 多选情况
+            val count = minOf(data.clipData!!.itemCount, remainCount)
+            for (i in 0 until count) {
+                imageUris.add(data.clipData!!.getItemAt(i).uri)
+            }
+        } else if (data.data != null) { // 单选情况
+            imageUris.add(data.data!!)
+        }
+        imageUris.forEach { uri ->
+            compressImage(uri)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,7 +92,11 @@ class ReportFragment : Fragment() {
             changeReportType(ReportType.FEATURE)
         }
         binding.ivUpload.setOnClickListener {
-            selectImageLauncher.launch("image/*")
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.setType("image/*")
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            pickImagesLauncher.launch(intent)
         }
         binding.btnCommit.setOnClickListener {
             commit()
@@ -114,19 +144,27 @@ class ReportFragment : Fragment() {
     private fun compressImage(uri: Uri) {
         scope.launch(Dispatchers.Main) {
             // 创建 bitmap
-            val bitmap = withContext(Dispatchers.IO) {
+            val fileBean = withContext(Dispatchers.IO) {
                 BitmapUtil.compress(requireContext(), uri, bmpLimitKB)
             }
-            bitmap?.let {
+            fileBean?.let {
                 val imageView = UploadImageView(requireContext())
+                imageView.setCallback(object : UploadImageView.Callback {
+                    override fun onDelete(view: View) {
+                        binding.llUpload.removeView(imageView)
+                        imageList.remove(imageView)
+                        binding.ivUpload.visibility =
+                            if (imageList.size < imageLimitCount) View.VISIBLE else View.GONE
+                    }
+
+                    override fun onUpload(isSuccess: Boolean) {
+                        if (!isSuccess) {
+                            showUploadFailed()
+                        }
+                    }
+                })
                 imageView.setImage(it)
-                imageView.setDeleteClickListener {
-                    binding.llUpload.removeView(imageView)
-                    imageList.remove(imageView)
-                    binding.ivUpload.visibility =
-                        if (imageList.size < imageLimitCount) View.VISIBLE else View.GONE
-                }
-                binding.llUpload.addView(imageView)
+                binding.llUpload.addView(imageView, 0)
                 imageList.add(imageView)
                 binding.ivUpload.visibility =
                     if (imageList.size < imageLimitCount) View.VISIBLE else View.GONE
@@ -143,49 +181,27 @@ class ReportFragment : Fragment() {
             )
             return
         }
+
         val appFeedBack = if (reportType == ReportType.BUG) "appBug" else "appFeedBack"
         val email = binding.etEmail.text?.toString()?.trim() ?: ""
 
+        val urls = mutableListOf<String>()
+        if (imageList.isNotEmpty()) {
+            imageList.forEach { imageView ->
+                if (!imageView.isUploadSuccess()) {
+                    return
+                }
+                urls.add(imageView.getImageUrl())
+            }
+        }
+
         scope.launch(Dispatchers.Main) {
             showProcessDialog()
-            // 上传图片
-            val results = if (imageList.isNotEmpty()) {
-                withContext(Dispatchers.IO) {
-                    val uploadJobs = imageList.mapIndexed { _, imageView ->
-                        async {
-                            HomePageService.uploadImage(imageView.getBitmap())
-                        }
-                    }
-                    uploadJobs.awaitAll()
-                }
-            } else null
-
-            val urls = mutableListOf<String>()
-            var isUploadOk = true
-            results?.let { responses ->
-                responses.forEach { response ->
-                    val url = response?.data?.data?.objectKey
-                    if (!TextUtils.isEmpty(url)) {
-                        urls.add(url!!)
-                    } else {
-                        isUploadOk = false
-                        return@let
-                    }
-                }
-            }
-
-            if (!isUploadOk) {
-                hideProcessDialog()
-                showCommitFailed()
-                return@launch
-            }
-
             // 上报数据
             val reportResult = withContext(Dispatchers.IO) {
                 HomePageService.reportProblem(appFeedBack, desc!!, email, urls)
             }
             hideProcessDialog()
-
             if (reportResult.isOk()) {
                 showCommitSuccess()
             } else {
@@ -211,6 +227,14 @@ class ReportFragment : Fragment() {
             requireContext(),
             R.drawable.ic_commit_failure,
             R.string.report_commit_failure,
+        ) {}.show()
+    }
+
+    private fun showUploadFailed() {
+        CommitRemindDialog(
+            requireContext(),
+            R.drawable.ic_commit_failure,
+            R.string.report_upload_img_failure,
         ) {}.show()
     }
 

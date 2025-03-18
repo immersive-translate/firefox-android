@@ -2989,8 +2989,8 @@
     <string name="buy_vip_btn_buy">Subscribe Now</string>
 
     <string name="buy_vip_tip_01">The free plan requires custom API tokens, which are expensive, complicated to set up, and come with strict rate limits. After upgrading to Pro, you can instantly access Immersive Translate is built-in services including DeepL, OpenAI, Claude, and Gemini - no configuration needed, works right out of the box, with a generous monthly allowance of up to 20 million tokens.</string>
-    <string name="buy_vip_tip_02">Includes 500 pages of AI-driven PDF document translation per month, supporting complex formula recognition, table recognition, and scanned document</string>
-    <string name="buy_vip_tip_03">Monthly includes 1000 AI-driven comic translations</string>
+    <string name="buy_vip_tip_02">Includes 1000 pages of AI-driven PDF document translation per month, supporting complex formula recognition, table recognition, and scanned document</string>
+    <string name="buy_vip_tip_03">Monthly includes 3000 AI-driven comic translations</string>
     <string name="buy_vip_tip_04">If you encounter any problems, please contact the customer support team\nsupport@immersivetranslate.com</string>
 
     <string name="buy_vip_toast_sub_mon">You have subscribed to monthly membership</string>
@@ -3042,7 +3042,8 @@
     <string name="report_btn_commit">Submit</string>
     <string name="report_input_remind">Description cannot be empty</string>
     <string name="report_commit_success">Submission successful</string>
-    <string name="report_commit_failure">Submission failed, please try again</string>
+    <string name="report_commit_failure">Submission failed\nPlease try again</string>
+    <string name="report_upload_img_failure">Image upload failed\nPlease try again</string>
 
     <string name="report_score_title">Are you satisfied with the Immersive Translation experience?</string>
     <string name="report_score_btn_commit">Submit</string>
