@@ -15,6 +15,7 @@ import org.mozilla.fenix.immersive_transalte.base.http.BaseService
 import org.mozilla.fenix.immersive_transalte.base.http.HttpClient
 import org.mozilla.fenix.immersive_transalte.base.http.Response
 import org.mozilla.fenix.immersive_transalte.bean.AppConfigBean
+import org.mozilla.fenix.immersive_transalte.bean.AppVersionBean
 import org.mozilla.fenix.immersive_transalte.bean.HomePageBean
 import org.mozilla.fenix.immersive_transalte.bean.ImageUploadBean
 import org.mozilla.fenix.immersive_transalte.bean.OnBoardingTranslateBean
@@ -63,6 +64,9 @@ object HomePageService : BaseService() {
         return null
     }
 
+    /**
+     * 问题上报
+     */
     suspend fun reportProblem(
         feedType: String,
         reason: String,
@@ -90,5 +94,15 @@ object HomePageService : BaseService() {
             ),
         )
 
+    }
+
+    /**
+     * app 版本检测
+     */
+    suspend fun checkAppUpdate(): Response<ResultData<AppVersionBean>> {
+        val params = getCommonQueryParams()
+        val queryMap = mutableMapOf<String, Any?>()
+        queryMap["clientVersion"] = appVersionCode
+        return executeHttpAndCallback(homepageApi?.checkAppVersion(params, queryMap))
     }
 }

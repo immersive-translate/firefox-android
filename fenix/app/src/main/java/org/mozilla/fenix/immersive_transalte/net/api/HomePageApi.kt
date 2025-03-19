@@ -8,6 +8,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.json.JSONObject
 import org.mozilla.fenix.immersive_transalte.bean.AppConfigBean
+import org.mozilla.fenix.immersive_transalte.bean.AppVersionBean
 import org.mozilla.fenix.immersive_transalte.bean.HomePageBean
 import org.mozilla.fenix.immersive_transalte.bean.ImageUploadBean
 import org.mozilla.fenix.immersive_transalte.bean.OnBoardingTranslateBean
@@ -61,4 +62,10 @@ internal interface HomePageApi {
         @Part("contactInfo") contactInfo: RequestBody,
         @Part("metaData") metaData: RequestBody,
     ): Call<ResultData<Any>>
+
+    @GET("/v1/app-home/check-update")
+    fun checkAppVersion(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @QueryMap params: MutableMap<String, Any?>,
+    ): Call<ResultData<AppVersionBean>>
 }

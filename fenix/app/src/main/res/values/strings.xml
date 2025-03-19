@@ -3050,4 +3050,9 @@
     <string name="report_score_low_desc">😢Not satisfied with the product?\nPlease give us your valuable comments!</string>
     <string name="report_score_high_desc">Please leave us a positive review in the app store~</string>
     <string name="report_score_go_now">Go Now</string>
+
+    <string name="app_update_new_version">New version</string>
+    <string name="app_update_btn_cancel">Not yet</string>
+    <string name="app_update_btn_confirm">Update now</string>
+
 </resources>

@@ -12,13 +12,15 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.StrictMode
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.VisibleForTesting
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -165,6 +167,7 @@ import org.mozilla.fenix.home.toolbar.SearchSelectorBinding
 import org.mozilla.fenix.home.toolbar.SearchSelectorMenuBinding
 import org.mozilla.fenix.home.topsites.DefaultTopSitesView
 import org.mozilla.fenix.home.ui.Homepage
+import org.mozilla.fenix.immersive_transalte.appupdate.AppUpdater
 import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.ImmersiveTranslateFlow
 import org.mozilla.fenix.messaging.DefaultMessageController
@@ -304,6 +307,11 @@ class HomeFragment : Fragment() {
             profilerStartTime,
             "HomeFragment.onCreate",
         )
+
+        // app check update
+        activity?.let {
+            AppUpdater.checkVersion(it as AppCompatActivity)
+        }
     }
 
     @Suppress("LongMethod")

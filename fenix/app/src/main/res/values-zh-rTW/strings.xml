@@ -3269,4 +3269,8 @@
     <string name="report_score_low_desc">😢對產品有任何不滿意的地方嗎？\n請提供您寶貴的意見吧！</string>
     <string name="report_score_high_desc">請提供您寶貴的意見吧！</string>
     <string name="report_score_go_now">立即前往</string>
+
+    <string name="app_update_new_version">發現新版本</string>
+    <string name="app_update_btn_cancel">暫不</string>
+    <string name="app_update_btn_confirm">立即更新</string>
 </resources>

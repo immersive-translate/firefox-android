@@ -135,6 +135,7 @@ import org.mozilla.fenix.home.intent.OpenSpecificTabIntentProcessor
 import org.mozilla.fenix.home.intent.ReEngagementIntentProcessor
 import org.mozilla.fenix.home.intent.SpeechProcessingIntentProcessor
 import org.mozilla.fenix.home.intent.StartSearchIntentProcessor
+import org.mozilla.fenix.immersive_transalte.appupdate.AppUpdater
 import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.PrivacyRemindDialog
 import org.mozilla.fenix.immersive_transalte.QuitAppDialog
@@ -520,6 +521,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         initJavaScriptBridge()
         autoCheckImmersive()
         initImageDetect()
+        AppUpdater.init(this)
     }
 
     private fun initImageDetect() {

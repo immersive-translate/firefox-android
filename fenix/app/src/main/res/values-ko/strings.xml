@@ -3212,4 +3212,8 @@
     <string name="report_score_low_desc">😢제품에 만족하지 않으셨나요?\n소중한 의견을 보내주세요!</string>
     <string name="report_score_high_desc">스토어에서 좋은 평가를 남겨주세요~</string>
     <string name="report_score_go_now">지금 바로 가기</string>
+
+    <string name="app_update_new_version">새로운 버전이 있습니다</string>
+    <string name="app_update_btn_cancel">취소</string>
+    <string name="app_update_btn_confirm">고쳐 쓰다</string>
 </resources>

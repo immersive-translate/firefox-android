@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.immersive_transalte.base.http
 
+import android.os.Build
 import org.mozilla.fenix.FenixApplication
 import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.immersive_transalte.base.http.httpcallbak.OnHttpListener
@@ -23,9 +24,27 @@ open class BaseService {
         }
     }
 
-    private val appVersion: String? by lazy {
-        val cxt = FenixApplication.application
-        cxt.packageManager.getPackageInfo(cxt.packageName, 0).versionName
+    private val appVersionName: String? by lazy {
+        try {
+            val cxt = FenixApplication.application
+            cxt.packageManager.getPackageInfo(cxt.packageName, 0).versionName
+        } catch (_: Exception) {
+        }
+        ""
+    }
+
+    @Suppress("DEPRECATION")
+    protected val appVersionCode: Long by lazy {
+        try {
+            val cxt = FenixApplication.application
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                cxt.packageManager.getPackageInfo(cxt.packageName, 0).longVersionCode
+            } else {
+                cxt.packageManager.getPackageInfo(cxt.packageName, 0).versionCode.toLong()
+            }
+        } catch (_: Exception) {
+            Long.MAX_VALUE
+        }
     }
 
     private val token: String?
@@ -36,7 +55,7 @@ open class BaseService {
 
     fun getCommonBodyParams(): MutableMap<String, Any?> {
         val params: MutableMap<String, Any?> = HashMap()
-        params["appVersion"] = appVersion
+        params["appVersion"] = appVersionName
         params["platForm"] = "android"
         return params
     }
@@ -44,7 +63,7 @@ open class BaseService {
     fun getCommonQueryParams(): MutableMap<String, Any?> {
         val params: MutableMap<String, Any?> = HashMap()
         params["t"] = time
-        params["appVersion"] = appVersion
+        params["appVersion"] = appVersionName
         params["platForm"] = "android"
         return params
     }
