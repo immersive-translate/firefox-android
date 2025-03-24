@@ -8,6 +8,8 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.HtmlCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -30,6 +33,7 @@ import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.immersive_transalte.base.widget.ProcessDialog
 import org.mozilla.fenix.immersive_transalte.net.service.HomePageService
 import org.mozilla.fenix.immersive_transalte.user.UserManager
+import org.mozilla.fenix.immersive_transalte.utils.StringUtil
 import org.mozilla.fenix.immersive_transalte.utils.ToastUtil
 
 
@@ -53,6 +57,8 @@ class ReportFragment : Fragment() {
                 handleSelectedImages(result.data!!)
             }
         }
+
+    private val handler = Handler(Looper.getMainLooper())
 
     private fun handleSelectedImages(data: Intent) {
         // 限制最多 3 张
@@ -107,6 +113,26 @@ class ReportFragment : Fragment() {
                 binding.etEmail.setText(it)
             }
         }
+
+        binding.etEmail.addTextChangedListener(
+            afterTextChanged = {
+                handler.removeCallbacksAndMessages(null)
+                handler.postDelayed(
+                    {
+                        val email = binding.etEmail.text?.toString()?.trim() ?: ""
+                        val isInValid = !TextUtils.isEmpty(email) && !StringUtil.isValidEmail(email)
+                        binding.etEmail.setBackgroundResource(
+                            if (!isInValid) R.drawable.report_input_bg
+                            else R.drawable.report_input_invalid_bg,
+                        )
+                        binding.tvEmailInvalid.visibility =
+                            if (isInValid) View.VISIBLE else View.INVISIBLE
+                    },
+                    300,
+                )
+            },
+        )
+
         refreshUI()
     }
 
@@ -184,6 +210,11 @@ class ReportFragment : Fragment() {
 
         val appFeedBack = if (reportType == ReportType.BUG) "appBug" else "appFeedBack"
         val email = binding.etEmail.text?.toString()?.trim() ?: ""
+
+        val isInValid = !TextUtils.isEmpty(email) && !StringUtil.isValidEmail(email)
+        if (isInValid) {
+            return
+        }
 
         val urls = mutableListOf<String>()
         if (imageList.isNotEmpty()) {

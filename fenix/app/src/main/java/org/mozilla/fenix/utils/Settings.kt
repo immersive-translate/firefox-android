@@ -492,6 +492,11 @@ class Settings(private val appContext: Context) : PreferencesHolder {
         default = false
     )
 
+    var translateCount: Int by intPreference(
+        appContext.getPreferenceKey(R.string.pref_key_translate_count),
+        default = 0
+    )
+
     var nimbusLastFetchTime: Long by longPreference(
         appContext.getPreferenceKey(R.string.pref_key_nimbus_last_fetch),
         default = 0L,

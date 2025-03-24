@@ -31,6 +31,7 @@ internal interface HomePageApi {
     @GET("/v1/app-home/toplinks")
     @Headers("Cache-Control: public, max-age=60")
     fun fetchTopLinks(
+        @HeaderMap headers: MutableMap<String, Any?>,
         @QueryMap params: MutableMap<String, Any?>,
     ): Call<ResultData<HomePageBean>>
 

@@ -26,6 +26,7 @@ class AppUpdateDialog(
     init {
         setContentView(binding.root)
         setCanceledOnTouchOutside(false)
+        setCancelable(false)
         binding.tvNewVer.text = "V${appVersion.versionName}"
         getUpdateContent()?.let {
             binding.tvVerContent.text = it
@@ -40,6 +41,7 @@ class AppUpdateDialog(
         }
         binding.btnClose.setOnClickListener {
             dismiss()
+            onCancel.invoke()
         }
     }
 

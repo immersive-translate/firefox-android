@@ -129,6 +129,13 @@ object ImmersiveTracker {
         event.addPartnerParameter("pay_type", "$vipType")
         event.addPartnerParameter("user_id", "$userId")
         Adjust.trackEvent(event)
+
+        // 总的付费埋点
+        val trackEvent = AdjustEvent("2y25ob")
+        trackEvent.setRevenue(money.toDouble(), currency)
+        trackEvent.addPartnerParameter("pay_type", "$vipType")
+        trackEvent.addPartnerParameter("user_id", "$userId")
+        Adjust.trackEvent(trackEvent)
     }
 
     fun getAdjustAttribution(): AdjustAttribution? {

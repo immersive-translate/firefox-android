@@ -600,6 +600,36 @@
 
                 </LinearLayout>
 
+                <!--华为提审-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:paddingStart="30dp"
+                    android:paddingEnd="30dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_hw_try"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:includeFontPadding="false"
+                        android:text="@string/buy_vip_hw_try"
+                        android:textColor="?normal_color_999999"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_hw_cancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:textColor="?normal_color_999999"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </ScrollView>
@@ -614,6 +644,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?normal_color_ECF0F7" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <CheckBox
+                    android:id="@+id/cb_hw_agreement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/hw_agreement_checkbox"
+                    android:padding="6dp"
+                    android:checked="true"/>
+
+                <TextView
+                    android:id="@+id/tv_hw_agreement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?normal_color_999999"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
 
             <!--包年/包月切换按钮-->
             <LinearLayout

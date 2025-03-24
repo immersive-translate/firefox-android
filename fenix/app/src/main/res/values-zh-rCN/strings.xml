@@ -3188,8 +3188,8 @@
     <string name="app_toplogin_login">立即登录</string>
     <string name="app_toplogin_desc">享受最佳体验</string>
 
-    <string name="app_report_problem">遇到了问题？</string>
-    <string name="app_report_contact">请联系我们</string>
+    <string name="app_report_problem">遇到了问题？请 </string>
+    <string name="app_report_contact">联系我们</string>
 
     <string name="browser_toolbar_imm_menu">翻译菜单</string>
     <string name="browser_toolbar_imm_trans">翻译</string>
@@ -3206,6 +3206,7 @@
     <string name="report_bug_input_hint">请详细描述您在使用中遇到的问题</string>
     <string name="report_feat_input_hint">请详细描述您期待我们增加的新功能</string>
     <string name="report_email">您的电子邮件地址（可选）：</string>
+    <string name="report_email_invalid">请输入正确的邮箱格式</string>
     <string name="report_email_hint">请输入有效的电子邮件地址</string>
     <string name="report_upload_img">上传图片（可选）：</string>
     <string name="report_btn_commit">提交</string>
@@ -3223,4 +3224,12 @@
     <string name="app_update_new_version">发现新版本</string>
     <string name="app_update_btn_cancel">暂不</string>
     <string name="app_update_btn_confirm">立即更新</string>
+
+    <string name="buy_vip_hw_try">免费试用：如未在试用结束前取消订阅，将按当前所选套餐价格自动扣费</string>
+    <string name="buy_vip_hw_cancel">取消续订：除非是在当前订阅期限结束之前提前至少%1$s小时取消续订，你的年缴套餐将以相同的期限自动续订。订阅可以随时在应用设置中取消，无需任何额外费用。取消后，您的订阅将在套餐期限结束时终止。确认开始即视为你已接受以下服务条款：%2$s</string>
+    <string name="buy_vip_hw_recurring_payment_agreement">定期付款协议</string>
+    <string name="buy_vip_hw_i_read">我已阅读并同意%1$s</string>
+    <string name="buy_vip_hw_agreement_dialog_title">同意条款</string>
+    <string name="buy_vip_hw_agreement_dialog_desc">点击“同意并继续”，\n即视为已接受%1$s</string>
+    <string name="buy_vip_hw_agreement_agree">同意并继续</string>
 </resources>

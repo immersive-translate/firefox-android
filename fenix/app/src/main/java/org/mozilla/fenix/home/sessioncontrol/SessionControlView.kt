@@ -24,6 +24,8 @@ import org.mozilla.fenix.ext.shouldShowRecentSyncedTabs
 import org.mozilla.fenix.ext.shouldShowRecentTabs
 import org.mozilla.fenix.home.bookmarks.Bookmark
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem
+import org.mozilla.fenix.home.report.BottomReportStateHolder
+import org.mozilla.fenix.home.reportscore.ReportScoreStateHolder
 import org.mozilla.fenix.home.toplinks.TopLink
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.search.SearchDialogFragment
@@ -258,6 +260,8 @@ class SessionControlView(
         if (loginPoi >= 0) {
             sessionControlAdapter.notifyItemChanged(loginPoi)
         }
+        BottomReportStateHolder.refreshState(view)
+        ReportScoreStateHolder.refreshState()
     }
 }
 

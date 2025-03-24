@@ -3105,13 +3105,13 @@
     <string name="onboarding_third_dest">언어의 장벽을 허물고 \n더 넓은 세상을 만나보세요</string>
     <string name="onboarding_third_finish_btn">언어의 장벽이 없는 세상을 열어보세요!</string>
 
-    <string name="onboarding_ts_page_title">다음 페이지를 번역해 보세요.</string>
-    <string name="onboarding_ts_page_sub_title">주소창에 있는 번역아이콘을 클릭해서 번역해보세요</string>
-    <string name="onboarding_ts_page_success_title">🎉축하해요!</string>
-    <string name="onboarding_ts_page_success_sub_title">당신은 방금 첫 번째 이중 언어 번역을 완료했습니다!</string>
-    <string name="onboarding_ts_page_next">이제 다음 단계로 넘어갈 수 있습니다.</string>
-    <string name="onboarding_ts_page_continue">계속하다</string>
-    <string name="onboarding_ts_page_skip">뛰어넘다</string>
+    <string name="onboarding_ts_page_title">아래 웹페이지를 번역해 보세요</string>
+    <string name="onboarding_ts_page_sub_title">주소창의 번역 아이콘을 클릭하면 번역할 수 있습니다</string>
+    <string name="onboarding_ts_page_success_title">🎉축하합니다!</string>
+    <string name="onboarding_ts_page_success_sub_title">방금 첫 번째 이중 언어 번역을 완료했어요!</string>
+    <string name="onboarding_ts_page_next">이제 다음 단계를 진행할 수 있습니다.</string>
+    <string name="onboarding_ts_page_continue">계속</string>
+    <string name="onboarding_ts_page_skip">스킵</string>
 
     <string name="home_top_link_ts_web">웹페이지 번역</string>
     <string name="home_top_link_ts_video">동영상 번역</string>
@@ -3181,8 +3181,8 @@
     <string name="app_toplogin_login">지금 로그인하세요</string>
     <string name="app_toplogin_desc">최고의 경험을 즐겨보세요</string>
 
-    <string name="app_report_problem">문제가 있나요?</string>
-    <string name="app_report_contact">문의하기</string>
+    <string name="app_report_problem">문제가 발생했나요?제발 </string>
+    <string name="app_report_contact">저희에게 문의해주세요</string>
 
     <string name="browser_toolbar_imm_menu">번역 메뉴</string>
     <string name="browser_toolbar_imm_trans">번역</string>
@@ -3193,27 +3193,36 @@
     <string name="report_title">피드백</string>
     <string name="report_tab_bug_title">버그 문제</string>
     <string name="report_tab_feature_title">기능 요청</string>
-    <string name="report_desc">여러분의 의견을 기다리고 있습니다! 여러분의 생각, 문제, 또는 어떤 의문이든 망설이지 말고 공유해주세요. 여러분의 피드백은 저희에게 매우 중요합니다!</string>
+    <string name="report_desc">여러분의 의견을 기다리고 있습니다! 의견, 문제 또는 질문을 망설이지 말고 저희에게 공유해주세요. 여러분의 피드백은 매우 중요합니다!</string>
     <string name="report_type_bug">문제 상세 내용:</string>
-    <string name="report_type_feat">요구사항 세부정보:</string>
+    <string name="report_type_feat">요청 상세 내용:</string>
     <string name="report_bug_input_hint">사용 중 발생한 문제를 자세히 설명해 주세요</string>
-    <string name="report_feat_input_hint">추가되기를 원하는 새로운 기능을 자세히 설명해 주세요</string>
+    <string name="report_feat_input_hint">추가되었으면 하는 새로운 기능을 자세히 설명해 주세요</string>
     <string name="report_email">이메일 주소 (선택 사항):</string>
+    <string name="report_email_invalid">올바른 이메일 형식을 입력하세요</string>
     <string name="report_email_hint">유효한 이메일 주소를 입력해주세요</string>
     <string name="report_upload_img">이미지 업로드 (선택 사항):</string>
     <string name="report_btn_commit">제출</string>
     <string name="report_input_remind">설명은 비워둘 수 없습니다</string>
     <string name="report_commit_success">제출 성공</string>
-    <string name="report_commit_failure">제출에 실패했습니다\n다시 시도해 주세요</string>
-    <string name="report_upload_img_failure">이미지 업로드 실패\n다시 시도해 주세요</string>
+    <string name="report_commit_failure">제출 실패\n다시 시도</string>
+    <string name="report_upload_img_failure">이미지 업로드 실패\n다시 시도</string>
 
-    <string name="report_score_title">몰입형 번역 경험에 만족하시나요?</string>
+    <string name="report_score_title">몰입형 번역에 만족하시나요?</string>
     <string name="report_score_btn_commit">제출하다</string>
     <string name="report_score_low_desc">😢제품에 만족하지 않으셨나요?\n소중한 의견을 보내주세요!</string>
-    <string name="report_score_high_desc">스토어에서 좋은 평가를 남겨주세요~</string>
+    <string name="report_score_high_desc">앱스토어에 좋은 리뷰를 남겨주세요~</string>
     <string name="report_score_go_now">지금 바로 가기</string>
 
-    <string name="app_update_new_version">새로운 버전이 있습니다</string>
-    <string name="app_update_btn_cancel">취소</string>
-    <string name="app_update_btn_confirm">고쳐 쓰다</string>
+    <string name="app_update_new_version">새로운 버전을 발견했습니다</string>
+    <string name="app_update_btn_cancel">나중에</string>
+    <string name="app_update_btn_confirm">지금 업데이트</string>
+
+    <string name="buy_vip_hw_try">무료 체험: 체험 종료 전에 구독을 취소하지 않으면, 선택한 요금제에 따라 자동으로 결제가 진행됩니다</string>
+    <string name="buy_vip_hw_cancel">자동 갱신 취소: 현재 구독 기간이 종료되기 최소 %1$s시간 전에 자동 갱신을 취소하지 않으면, 연간 요금제가 동일한 기간으로 자동 갱신됩니다. 구독은 앱 설정에서 언제든지 추가 비용 없이 취소할 수 있으며, 취소 후에는 현재 구독 기간이 종료될 때까지 이용 가능합니다. 시작을 확인하는 즉시 다음 서비스 약관에 동의한 것으로 간주됩니다: %2$s</string>
+    <string name="buy_vip_hw_recurring_payment_agreement">정기 결제 약관을</string>
+    <string name="buy_vip_hw_i_read">%1$s 읽고 동의했습니다</string>
+    <string name="buy_vip_hw_agreement_dialog_title">약관 동의</string>
+    <string name="buy_vip_hw_agreement_dialog_desc">"동의하고 계속하기"를 클릭하면\n%1$s 동의한 것으로 간주됩니다</string>
+    <string name="buy_vip_hw_agreement_agree">동의하고 계속하기</string>
 </resources>

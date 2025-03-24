@@ -29,8 +29,8 @@ open class BaseService {
             val cxt = FenixApplication.application
             cxt.packageManager.getPackageInfo(cxt.packageName, 0).versionName
         } catch (_: Exception) {
+            ""
         }
-        ""
     }
 
     @Suppress("DEPRECATION")
@@ -57,6 +57,7 @@ open class BaseService {
         val params: MutableMap<String, Any?> = HashMap()
         params["appVersion"] = appVersionName
         params["platForm"] = "android"
+        params["platform"] = "android"
         return params
     }
 
@@ -65,6 +66,7 @@ open class BaseService {
         params["t"] = time
         params["appVersion"] = appVersionName
         params["platForm"] = "android"
+        params["platform"] = "android"
         return params
     }
 

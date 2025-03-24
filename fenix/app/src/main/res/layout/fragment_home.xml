@@ -138,7 +138,6 @@
             android:id="@+id/btn_report"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
             android:text="@string/app_report_contact"
             android:textColor="#FF4181F0"
             android:textSize="14sp" />

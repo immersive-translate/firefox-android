@@ -5,8 +5,15 @@
 package org.mozilla.fenix.immersive_transalte.user
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +41,7 @@ import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
 import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.net.service.MemberService
 import org.mozilla.fenix.immersive_transalte.utils.PixelUtil
+import org.mozilla.fenix.settings.SupportUtils
 import kotlin.math.ceil
 
 
@@ -87,7 +95,11 @@ class BuyVipFragment : Fragment() {
             if (userInfo != null) {
                 createOrderClick()
             } else {
-                gotoUserLogin()
+                if (binding.cbHwAgreement.isChecked) {
+                    gotoUserLogin()
+                } else {
+                    gotoHwPrivacyPolicy()
+                }
             }
         }
 
@@ -114,9 +126,45 @@ class BuyVipFragment : Fragment() {
                 PixelUtil.dp2px(context, 10)
         }
 
+
         refreshPayType()
+        refreshHwAgreement()
         // 加载数据
         loadData()
+    }
+
+    private fun refreshHwAgreement() {
+        val context = binding.root.context
+        // 取消续订
+        val hwReadDesc = context.getString(R.string.buy_vip_hw_i_read)
+        val recurringAgreementDesc = context.getString(R.string.buy_vip_hw_recurring_payment_agreement)
+        val hwDesc = String.format(hwReadDesc, recurringAgreementDesc)
+        val contentSpan = SpannableString(hwDesc)
+        val textColor = ForegroundColorSpan(0xFF4181F0.toInt())
+        val startSpan = contentSpan.indexOf(recurringAgreementDesc)
+        contentSpan.setSpan(
+            textColor,
+            startSpan,
+            startSpan + recurringAgreementDesc.length,
+            Spanned.SPAN_INCLUSIVE_EXCLUSIVE,
+        )
+        contentSpan.setSpan(
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    gotoHwRecurringPaymentAgreement()
+                }
+
+                override fun updateDrawState(ds: TextPaint) {
+                    ds.isUnderlineText = false
+                }
+            },
+            startSpan,
+            startSpan + recurringAgreementDesc.length,
+            Spanned.SPAN_INCLUSIVE_EXCLUSIVE,
+        )
+        binding.tvHwAgreement.text = contentSpan
+        binding.tvHwAgreement.movementMethod = LinkMovementMethod.getInstance()
+        binding.tvHwAgreement.highlightColor = Color.TRANSPARENT
     }
 
     override fun onResume() {
@@ -170,7 +218,43 @@ class BuyVipFragment : Fragment() {
             (binding.llProVipTitle.layoutParams as MarginLayoutParams).topMargin = 0
         }
 
+        refreshHwCancelDesc()
         refreshBuyButton()
+    }
+
+    private fun refreshHwCancelDesc() {
+        val context = binding.root.context
+        // 取消续订
+        val hwCancelTextDesc = context.getString(R.string.buy_vip_hw_cancel)
+        val recurringAgreementDesc = context.getString(R.string.buy_vip_hw_recurring_payment_agreement)
+        val hours = if (payType == 0) "72" else "24"
+        val hwDesc = String.format(hwCancelTextDesc, hours, recurringAgreementDesc)
+        val contentSpan = SpannableString(hwDesc)
+        val textColor = ForegroundColorSpan(0xFF4181F0.toInt())
+        val startSpan = contentSpan.indexOf(recurringAgreementDesc)
+        contentSpan.setSpan(
+            textColor,
+            startSpan,
+            startSpan + recurringAgreementDesc.length,
+            Spanned.SPAN_INCLUSIVE_EXCLUSIVE,
+        )
+        contentSpan.setSpan(
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    gotoHwRecurringPaymentAgreement()
+                }
+
+                override fun updateDrawState(ds: TextPaint) {
+                    ds.isUnderlineText = false
+                }
+            },
+            startSpan,
+            startSpan + recurringAgreementDesc.length,
+            Spanned.SPAN_INCLUSIVE_EXCLUSIVE,
+        )
+        binding.tvHwCancel.movementMethod = LinkMovementMethod.getInstance()
+        binding.tvHwCancel.text = contentSpan
+        binding.tvHwCancel.highlightColor = Color.TRANSPARENT
     }
 
     private fun refreshBuyButton() {
@@ -234,11 +318,14 @@ class BuyVipFragment : Fragment() {
                             "${it.trialPeriodDays}",
                         )
                     else resources.getString(R.string.buy_vip_btn_buy)
+
+                binding.tvHwTry.visibility = if (it.isEnableTrial) View.VISIBLE else View.GONE
             }
             binding.ivBuyHot.visibility = View.VISIBLE
         } else {
             binding.btnBuy.text = resources.getString(R.string.buy_vip_btn_buy)
             binding.ivBuyHot.visibility = View.GONE
+            binding.tvHwTry.visibility = View.GONE
         }
     }
 
@@ -538,6 +625,29 @@ class BuyVipFragment : Fragment() {
     ) {
         val uid = userInfo?.uid ?: 0
         ImmersiveTracker.trackPurchase(money, currency, vipType, uid)
+    }
+
+    private fun gotoHwRecurringPaymentAgreement() {
+        activity?.let {
+            HwAgreementDialog(
+                context = it,
+                url = SupportUtils.APP_HW_AGREEMENT_URL,
+            ).show(binding.root)
+        }
+    }
+
+    private fun gotoHwPrivacyPolicy() {
+        activity?.let {
+            HwPrivacyRemindDialog(
+                activity = it,
+                onAgree = {
+                    binding.cbHwAgreement.isChecked = true
+                },
+                onShowHwAgreement = {
+                    gotoHwRecurringPaymentAgreement()
+                },
+            ).show(binding.root)
+        }
     }
 
     override fun onDestroy() {

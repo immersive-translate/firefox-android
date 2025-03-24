@@ -31,7 +31,7 @@ object HomePageService : BaseService() {
      */
     suspend fun fetchHomeTopLinks(): Response<ResultData<HomePageBean>> {
         val params = getCommonQueryParams()
-        return executeHttpAndCallback(homepageApi?.fetchTopLinks(params))
+        return executeHttpAndCallback(homepageApi?.fetchTopLinks(params, params))
     }
 
     /**

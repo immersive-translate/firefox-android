@@ -2908,10 +2908,10 @@
     <string name="onboarding_third_finish_btn">開啟無語言障礙的世界！</string>
 
     <string name="onboarding_ts_page_title">請嘗試翻譯下方網頁</string>
-    <string name="onboarding_ts_page_sub_title">點擊網址列裡的翻譯圖標，即可翻譯</string>
+    <string name="onboarding_ts_page_sub_title">點擊位於網址列的翻譯圖示，即可翻譯</string>
     <string name="onboarding_ts_page_success_title">🎉恭喜！</string>
-    <string name="onboarding_ts_page_success_sub_title">你剛剛進行了第一次雙語翻譯！</string>
-    <string name="onboarding_ts_page_next">您可以繼續下一步了～</string>
+    <string name="onboarding_ts_page_success_sub_title">你剛剛完成了第一次雙語翻譯！</string>
+    <string name="onboarding_ts_page_next">您可以繼續進行下一步了～</string>
     <string name="onboarding_ts_page_continue">繼續</string>
     <string name="onboarding_ts_page_skip">跳過</string>
 
@@ -3238,8 +3238,8 @@
     <string name="app_toplogin_login">立即登入</string>
     <string name="app_toplogin_desc">享受最佳體驗</string>
 
-    <string name="app_report_problem">遇到問題了？</string>
-    <string name="app_report_contact">請聯絡我們</string>
+    <string name="app_report_problem">遇到問題了嗎？請 </string>
+    <string name="app_report_contact">聯絡我們</string>
 
     <string name="browser_toolbar_imm_menu">翻譯選單</string>
     <string name="browser_toolbar_imm_trans">翻譯</string>
@@ -3248,29 +3248,38 @@
     <string name="browser_toolbar_pop_btn">我知道了</string>
 
     <string name="report_title">回饋</string>
-    <string name="report_tab_bug_title">Bug問題</string>
+    <string name="report_tab_bug_title">程式錯誤（Bug）</string>
     <string name="report_tab_feature_title">功能需求</string>
-    <string name="report_desc">我們期待聽到您的聲音!無論是您的想法, 問題,或任何心中的疑惑,都請毫不猶豫地與我們分享。您的回饋對我們而言意義重大!</string>
+    <string name="report_desc">我們期待聽到您的聲音！無論是您的想法、問題，或任何疑惑，都請毫不猶豫地與我們分享。您的回饋對我們而言意義重大！</string>
     <string name="report_type_bug">問題詳情：</string>
     <string name="report_type_feat">需求詳情：</string>
     <string name="report_bug_input_hint">請詳細描述您在使用中遇到的問題</string>
-    <string name="report_feat_input_hint">請詳細描述您期待我們增加的新功能</string>
-    <string name="report_email">您的電子郵件地址（可選）：</string>
+    <string name="report_feat_input_hint">請詳細描述您期待我們新增的功能</string>
+    <string name="report_email">您的電子郵件地址（選填）：</string>
+    <string name="report_email_invalid">請輸入正確的郵件格式</string>
     <string name="report_email_hint">請輸入有效的電子郵件地址</string>
-    <string name="report_upload_img">上傳圖片（可選）：</string>
-    <string name="report_btn_commit">提交</string>
+    <string name="report_upload_img">上傳圖片（選填）：</string>
+    <string name="report_btn_commit">送出</string>
     <string name="report_input_remind">描述不能為空</string>
-    <string name="report_commit_success">提交成功</string>
-    <string name="report_commit_failure">提交失敗\n請重試</string>
+    <string name="report_commit_success">送出成功</string>
+    <string name="report_commit_failure">送出失敗\n請重試</string>
     <string name="report_upload_img_failure">圖片上傳失敗\n請重試</string>
 
-    <string name="report_score_title">- 您對沉浸式翻譯的使用體驗感到滿意嗎？</string>
+    <string name="report_score_title">您對沉浸式翻譯的使用體驗感到滿意嗎？</string>
     <string name="report_score_btn_commit">提交</string>
     <string name="report_score_low_desc">😢對產品有任何不滿意的地方嗎？\n請提供您寶貴的意見吧！</string>
-    <string name="report_score_high_desc">請提供您寶貴的意見吧！</string>
+    <string name="report_score_high_desc">請前往應用程式商店給個好評吧～</string>
     <string name="report_score_go_now">立即前往</string>
 
     <string name="app_update_new_version">發現新版本</string>
     <string name="app_update_btn_cancel">暫不</string>
     <string name="app_update_btn_confirm">立即更新</string>
+
+    <string name="buy_vip_hw_try">免費試用：如未在試用結束前取消訂閱，將依照目前所選方案的價格自動扣款</string>
+    <string name="buy_vip_hw_cancel">取消續訂：除非在目前訂閱期限結束前至少%1$s小時取消續訂，您的年繳方案將自動以相同期限續訂，並向您收取相同的費用。訂閱可隨時於應用程式的設定中取消，且不需支付任何額外費用。取消後，您的訂閱將於方案期限結束時終止。確認開始即表示您已接受以下服務條款：%2$s</string>
+    <string name="buy_vip_hw_recurring_payment_agreement">定期付款協議</string>
+    <string name="buy_vip_hw_i_read">我已閱讀並同意%1$s</string>
+    <string name="buy_vip_hw_agreement_dialog_title">同意條款</string>
+    <string name="buy_vip_hw_agreement_dialog_desc">點擊「同意並繼續」，\n即視為已接受%1$s</string>
+    <string name="buy_vip_hw_agreement_agree">同意並繼續</string>
 </resources>

@@ -5,12 +5,10 @@
 package org.mozilla.fenix.home.report
 
 import android.view.View
-import android.view.ViewGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import mozilla.components.support.ktx.android.util.dpToPx
 import org.mozilla.fenix.compose.ComposeViewHolder
 import org.mozilla.fenix.home.sessioncontrol.ContactInteractor
 import org.mozilla.fenix.home.sessioncontrol.TopSiteInteractor
@@ -33,13 +31,7 @@ class BottomReportViewHolder(
     init {
         composeView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             val recyclerView = composeView.parent as RecyclerView
-            val root = recyclerView.parent as ViewGroup
-            recyclerView.post {
-                val value = root.height - recyclerView.height -
-                        (56 * 3).dpToPx(root.context.resources.displayMetrics)
-                val isScrollable = value <= 0
-                BottomReportStateHolder.updateState(isScrollable)
-            }
+            BottomReportStateHolder.refreshState(recyclerView)
         }
     }
 

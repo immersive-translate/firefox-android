@@ -61,6 +61,7 @@ import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.runIfFragmentIsAttached
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.home.HomeFragment
+import org.mozilla.fenix.home.reportscore.ReportScoreStateHolder
 import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
 import org.mozilla.fenix.immersive_transalte.webmessage.JavaScriptMessageHandler
 import org.mozilla.fenix.immersive_transalte.webmessage.OnPageCallback
@@ -357,6 +358,9 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                             handler.postDelayed({
                                 refreshTranslateState()
                             }, 100)
+                        }
+                        if (!isPageTranslated) {
+                            ReportScoreStateHolder.track()
                         }
                     }
                 },

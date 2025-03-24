@@ -20,6 +20,9 @@ class UserScoreViewHolder(
 
     @Composable
     override fun Content() {
+        if (!ReportScoreStateHolder.isShow.value) {
+            return
+        }
         val context = composeView.context
         val userFeedbackScope = context.settings().userFeedbackScope
         if (userFeedbackScope) {

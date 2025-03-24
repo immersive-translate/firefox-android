@@ -41,12 +41,13 @@ object AppUpdater {
 
     private var appVersion: AppVersion? = null
     private var installFile: File? = null
+    private var isChecked = false
 
     // init ActivityResultLauncher
     fun init(activity: AppCompatActivity) {
         installPermissionLauncher = activity.registerForActivityResult(
             ActivityResultContracts.StartActivityForResult(),
-        ) {
+        ) { _ ->
             installFile?.let {
                 gotoInstall(it, activity)
             }
@@ -54,6 +55,10 @@ object AppUpdater {
     }
 
     fun checkVersion(activity: AppCompatActivity) {
+        if (isChecked) {
+            return
+        }
+        isChecked = true
         Handler(Looper.getMainLooper()).postDelayed({ checkAppUpdate(activity) }, 500)
     }
 
@@ -87,8 +92,12 @@ object AppUpdater {
             installFile?.let {
                 AppUpdateDialog(
                     activity, appVersion!!,
-                    { saveVersionNotify(activity) },
-                    { gotoInstall(activity) },
+                    onCancel = { saveVersionNotify(activity) },
+                    onUpdate = {
+                        installFile?.let {
+                            installApk(it, activity)
+                        }
+                    },
                 ).show()
             }
 
@@ -130,15 +139,6 @@ object AppUpdater {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         activity.startActivity(intent)
-    }
-
-    /**
-     * goto install apk
-     */
-    fun gotoInstall(activity: Activity) {
-        installFile?.let {
-            gotoInstall(it, activity)
-        }
     }
 
     /**

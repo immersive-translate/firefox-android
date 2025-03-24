@@ -2941,9 +2941,9 @@
 
     <string name="onboarding_ts_page_title">Please try to translate the following page</string>
     <string name="onboarding_ts_page_sub_title">Click on the translation icon in the address bar to translate</string>
-    <string name="onboarding_ts_page_success_title">🎉Congratulations!</string>
+    <string name="onboarding_ts_page_success_title">🎉Congratulations!!</string>
     <string name="onboarding_ts_page_success_sub_title">You have just made your first bilingual translation!</string>
-    <string name="onboarding_ts_page_next">- Now you can move on to the next step.</string>
+    <string name="onboarding_ts_page_next">You can move on to the next step.</string>
     <string name="onboarding_ts_page_continue">Continue</string>
     <string name="onboarding_ts_page_skip">Skip</string>
 
@@ -3019,8 +3019,8 @@
     <string name="app_toplogin_login">Log in now</string>
     <string name="app_toplogin_desc">For the best experience</string>
 
-    <string name="app_report_problem">Problem?</string>
-    <string name="app_report_contact">Please contact us</string>
+    <string name="app_report_problem">Problem?Please </string>
+    <string name="app_report_contact">contact us</string>
 
     <string name="browser_toolbar_imm_menu">Translate menu</string>
     <string name="browser_toolbar_imm_trans">Translate</string>
@@ -3033,17 +3033,18 @@
     <string name="report_tab_feature_title">Feature Request</string>
     <string name="report_desc">We look forward to hearing from you! Whether it’s your thoughts, questions, or any doubts in your mind, please do not hesitate to share them with us. Your feedback is of great importance to us!</string>
     <string name="report_type_bug">Problem Details:</string>
-    <string name="report_type_feat">Feature Details:</string>
+    <string name="report_type_feat">Requirement Details:</string>
     <string name="report_bug_input_hint">Please describe in detail what went wrong</string>
     <string name="report_feat_input_hint">Please describe in detail the new features you would like us to add</string>
     <string name="report_email">Your Email Address (Optional):</string>
+    <string name="report_email_invalid">Please enter the correct email format</string>
     <string name="report_email_hint">Please enter a valid email address</string>
     <string name="report_upload_img">Upload Image (Optional):</string>
     <string name="report_btn_commit">Submit</string>
     <string name="report_input_remind">Description cannot be empty</string>
-    <string name="report_commit_success">Submission successful</string>
-    <string name="report_commit_failure">Submission failed\nPlease try again</string>
-    <string name="report_upload_img_failure">Image upload failed\nPlease try again</string>
+    <string name="report_commit_success">Submitted</string>
+    <string name="report_commit_failure">Submission Failed\nPlease try again</string>
+    <string name="report_upload_img_failure">Upload Failed\nPlease try again</string>
 
     <string name="report_score_title">Are you satisfied with the Immersive Translation experience?</string>
     <string name="report_score_btn_commit">Submit</string>
@@ -3051,8 +3052,16 @@
     <string name="report_score_high_desc">Please leave us a positive review in the app store~</string>
     <string name="report_score_go_now">Go Now</string>
 
-    <string name="app_update_new_version">New version</string>
-    <string name="app_update_btn_cancel">Not yet</string>
-    <string name="app_update_btn_confirm">Update now</string>
+    <string name="app_update_new_version">New Version Found</string>
+    <string name="app_update_btn_cancel">Later</string>
+    <string name="app_update_btn_confirm">Update Now</string>
+
+    <string name="buy_vip_hw_try">Free Trial: If the subscription is not cancelled before the end of the trial, it will be automatically charged at the current selected package price</string>
+    <string name="buy_vip_hw_cancel">Cancellation Renewal: Your annual subscription will be automatically renewed for the same term unless it is cancelled at least %1$s hours in advance before the end of the current subscription term. Subscriptions can be cancelled at any time in the app settings at no additional cost. Upon cancellation, your subscription will terminate at the end of the subscription term. Confirmation of commencement is deemed to be your acceptance of the following terms of service: %2$s</string>
+    <string name="buy_vip_hw_recurring_payment_agreement">Recurring Payment Agreement</string>
+    <string name="buy_vip_hw_i_read">I have read and agreed to the %1$s</string>
+    <string name="buy_vip_hw_agreement_dialog_title">Agree to Terms</string>
+    <string name="buy_vip_hw_agreement_dialog_desc">By clicking ‘Agree and Continue’,\nyou accept the %1$s</string>
+    <string name="buy_vip_hw_agreement_agree">Agree and Continue</string>
 
 </resources>

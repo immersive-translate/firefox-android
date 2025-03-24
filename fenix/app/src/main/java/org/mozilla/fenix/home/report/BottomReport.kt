@@ -59,7 +59,7 @@ fun BottomReport(
                     indication = null,
                     onClick = { onReport() },
                 )
-                .padding(3.dp, 0.dp, 0.dp, 0.dp),
+                .padding(0.dp, 0.dp, 0.dp, 0.dp),
             color = Color(0xFF4181F0),
             text = stringResource(R.string.app_report_contact),
             fontSize = 14.sp,

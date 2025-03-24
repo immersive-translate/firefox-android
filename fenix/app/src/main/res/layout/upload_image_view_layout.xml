@@ -29,7 +29,7 @@
                 android:id="@+id/fl_progress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#99B1B1B1">
+                android:background="#80000000">
 
                 <ProgressBar
                     android:id="@+id/progress"
