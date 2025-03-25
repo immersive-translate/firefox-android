@@ -3256,7 +3256,6 @@
     <string name="report_bug_input_hint">請詳細描述您在使用中遇到的問題</string>
     <string name="report_feat_input_hint">請詳細描述您期待我們新增的功能</string>
     <string name="report_email">您的電子郵件地址（選填）：</string>
-    <string name="report_email_invalid">請輸入正確的郵件格式</string>
     <string name="report_email_hint">請輸入有效的電子郵件地址</string>
     <string name="report_upload_img">上傳圖片（選填）：</string>
     <string name="report_btn_commit">送出</string>

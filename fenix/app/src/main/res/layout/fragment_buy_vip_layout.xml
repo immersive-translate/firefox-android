@@ -618,7 +618,8 @@
                         android:includeFontPadding="false"
                         android:text="@string/buy_vip_hw_try"
                         android:textColor="?normal_color_999999"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:visibility="gone"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_hw_cancel"

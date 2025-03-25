@@ -32,6 +32,7 @@ import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
 import org.mozilla.fenix.browser.browsingmode.BrowsingMode
 import org.mozilla.fenix.databinding.FragmentBuyVipLayoutBinding
+import org.mozilla.fenix.ext.hideToolbar
 import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
@@ -171,6 +172,8 @@ class BuyVipFragment : Fragment() {
         super.onResume()
         if (isNeedTitle) {
             showToolbar(getString(R.string.buy_vip_btn_text_upgrade))
+        } else {
+            hideToolbar()
         }
         if (browsingModeManager.mode == BrowsingMode.Private) {
             binding.clVipBg.setBackgroundResource(R.mipmap.img_buy_vip_card_year_fg_night)
@@ -284,11 +287,13 @@ class BuyVipFragment : Fragment() {
             if (it.isSubYearVipTry) {
                 if (payType == 0) {
                     binding.btnBuy.text = resources.getString(R.string.vip_year_btn_try_upgrade)
+                    binding.tvHwTry.visibility = View.VISIBLE
                 } else {
                     binding.btnBuy.text = resources.getString(R.string.vip_downgrade)
                     binding.llBuyVip.setBackgroundResource(R.drawable.buy_vip_btn_buy_disable_bg)
                     binding.ivBuyHot.visibility = View.GONE
                     binding.btnBuy.setTextColor(context.getColorFromAttr(R.attr.normal_color_999999))
+                    binding.tvHwTry.visibility = View.GONE
                 }
                 return
             }

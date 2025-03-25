@@ -143,7 +143,7 @@ class TranslatePageView : FrameLayout {
             translates?.let {
                 translateBeans.clear()
                 translateBeans.addAll(it)
-                translateAdapter.setData(translateBeans)
+                translateAdapter.setData("en" == language, translateBeans)
                 refreshTranslateState()
             }
         }
@@ -156,11 +156,13 @@ class TranslatePageView : FrameLayout {
     private class TranslateAdapter(context: Context?) : BaseAdapter() {
         private val inflater: LayoutInflater = LayoutInflater.from(context)
         private var translates = ArrayList<OnBoardingTranslateBean>()
+        private var isEnglish = false
         var isTranslated = false
 
-        fun setData(translates: ArrayList<OnBoardingTranslateBean>) {
+        fun setData(isEnglish: Boolean, translates: ArrayList<OnBoardingTranslateBean>) {
             isTranslated = false
             this.translates = translates
+            this.isEnglish = isEnglish
             notifyDataSetChanged()
         }
 
@@ -202,7 +204,7 @@ class TranslatePageView : FrameLayout {
 
             val translateBean = getItem(position)
             translateBean?.let {
-                holder.itemBinding.tvSource.text = it.english
+                holder.itemBinding.tvSource.text = if (!isEnglish) it.english else it.zhcnText
                 holder.itemBinding.tvTranslated.visibility = if (isTranslated) VISIBLE else GONE
                 holder.itemBinding.tvTranslated.text = if (isTranslated) it.localizedText else ""
             }

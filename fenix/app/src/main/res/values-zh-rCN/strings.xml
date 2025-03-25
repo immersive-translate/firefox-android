@@ -3206,7 +3206,6 @@
     <string name="report_bug_input_hint">请详细描述您在使用中遇到的问题</string>
     <string name="report_feat_input_hint">请详细描述您期待我们增加的新功能</string>
     <string name="report_email">您的电子邮件地址（可选）：</string>
-    <string name="report_email_invalid">请输入正确的邮箱格式</string>
     <string name="report_email_hint">请输入有效的电子邮件地址</string>
     <string name="report_upload_img">上传图片（可选）：</string>
     <string name="report_btn_commit">提交</string>

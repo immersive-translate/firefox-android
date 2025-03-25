@@ -167,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:text="@string/report_email_invalid"
+                android:text="@string/report_email_hint"
                 android:textColor="#FFF53F3F"
                 android:textSize="12sp"
                 android:visibility="invisible"

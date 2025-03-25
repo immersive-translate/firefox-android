@@ -3037,7 +3037,6 @@
     <string name="report_bug_input_hint">Please describe in detail what went wrong</string>
     <string name="report_feat_input_hint">Please describe in detail the new features you would like us to add</string>
     <string name="report_email">Your Email Address (Optional):</string>
-    <string name="report_email_invalid">Please enter the correct email format</string>
     <string name="report_email_hint">Please enter a valid email address</string>
     <string name="report_upload_img">Upload Image (Optional):</string>
     <string name="report_btn_commit">Submit</string>
@@ -3048,7 +3047,7 @@
 
     <string name="report_score_title">Are you satisfied with the Immersive Translation experience?</string>
     <string name="report_score_btn_commit">Submit</string>
-    <string name="report_score_low_desc">😢Not satisfied with the product?\nPlease give us your valuable comments!</string>
+    <string name="report_score_low_desc">😢Not happy with the product?\nShare your feedback with us!</string>
     <string name="report_score_high_desc">Please leave us a positive review in the app store~</string>
     <string name="report_score_go_now">Go Now</string>
 

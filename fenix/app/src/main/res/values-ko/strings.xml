@@ -3199,7 +3199,6 @@
     <string name="report_bug_input_hint">사용 중 발생한 문제를 자세히 설명해 주세요</string>
     <string name="report_feat_input_hint">추가되었으면 하는 새로운 기능을 자세히 설명해 주세요</string>
     <string name="report_email">이메일 주소 (선택 사항):</string>
-    <string name="report_email_invalid">올바른 이메일 형식을 입력하세요</string>
     <string name="report_email_hint">유효한 이메일 주소를 입력해주세요</string>
     <string name="report_upload_img">이미지 업로드 (선택 사항):</string>
     <string name="report_btn_commit">제출</string>

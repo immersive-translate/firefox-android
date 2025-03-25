@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class OnBoardingTranslateBean implements Serializable {
     private String key;
     private String english;
+    private String zhcnText;
     private String localizedText;
 
     public String getKey() {
@@ -17,6 +18,14 @@ public class OnBoardingTranslateBean implements Serializable {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getZhcnText() {
+        return zhcnText;
+    }
+
+    public void setZhcnText(String zhcnText) {
+        this.zhcnText = zhcnText;
     }
 
     public String getEnglish() {
