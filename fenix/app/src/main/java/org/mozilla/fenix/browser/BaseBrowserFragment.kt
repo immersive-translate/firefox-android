@@ -1443,6 +1443,7 @@ abstract class BaseBrowserFragment :
                     OldToolbarPosition.BOTTOM -> bottomToolbarHeight
                     OldToolbarPosition.TOP -> topToolbarHeight
                 }
+
                 (getSwipeRefreshLayout().layoutParams as CoordinatorLayout.LayoutParams).behavior =
                     OldEngineViewClippingBehavior(
                         context,
@@ -1451,6 +1452,13 @@ abstract class BaseBrowserFragment :
                         toolbarHeight,
                         toolbarPosition,
                     )
+            }
+
+            // top固定，但是bottom不固定
+            if (context.settings().isFixTopToolbar) {
+                val swipeRefreshParams =
+                    getSwipeRefreshLayout().layoutParams as CoordinatorLayout.LayoutParams
+                swipeRefreshParams.bottomMargin = bottomToolbarHeight
             }
         } else {
             // Ensure webpage's bottom elements are aligned to the very bottom of the engineView.

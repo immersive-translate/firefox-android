@@ -296,6 +296,7 @@ class BrowserToolbarView(
             ToolbarPosition.TOP -> {
                 if (settings.shouldUseFixedTopToolbar ||
                     !settings.isDynamicToolbarEnabled ||
+                    settings.isFixTopToolbar ||
                     shouldDisableScroll
                 ) {
                     expandToolbarAndMakeItFixed()

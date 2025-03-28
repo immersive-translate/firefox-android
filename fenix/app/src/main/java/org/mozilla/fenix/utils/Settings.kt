@@ -914,6 +914,8 @@ class Settings(private val appContext: Context) : PreferencesHolder {
                 )
         }
 
+    // 固定地址栏在头部
+    val isFixTopToolbar = true
     /**
      * Prefer to use a fixed top toolbar when:
      * - a talkback service is enabled or

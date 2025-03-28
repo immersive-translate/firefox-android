@@ -38,6 +38,7 @@ import androidx.core.splashscreen.SplashScreenViewProvider
 import androidx.core.view.doOnAttach
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -1175,6 +1176,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
      * @param newTab Whether or not to load the URL in a new tab.
      * @param from The [BrowserDirection] to indicate which fragment the browser is being
      * opened from.
+     * @param isReturnHome Whether or not to return to the home fragment.
      * @param customTabSessionId Optional custom tab session ID if navigating from a custom tab.
      * @param engine Optional [SearchEngine] to use when performing a search.
      * @param forceSearch Whether or not to force performing a search.
@@ -1187,6 +1189,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         searchTermOrURL: String,
         newTab: Boolean,
         from: BrowserDirection,
+        isReturnHome: Boolean = true,
         customTabSessionId: String? = null,
         engine: SearchEngine? = null,
         forceSearch: Boolean = false,
@@ -1194,7 +1197,7 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         historyMetadata: HistoryMetadataKey? = null,
         additionalHeaders: Map<String, String>? = null,
     ) {
-        openToBrowser(from, customTabSessionId)
+        openToBrowser(from, customTabSessionId, isReturnHome)
         load(
             searchTermOrURL = searchTermOrURL,
             newTab = newTab,
@@ -1206,12 +1209,20 @@ open class HomeActivity : LocaleAwareAppCompatActivity(), NavHostActivity {
         )
     }
 
-    fun openToBrowser(from: BrowserDirection, customTabSessionId: String? = null) {
-        if (navHost.navController.alreadyOnDestination(R.id.browserFragment)) return
+    fun openToBrowser(from: BrowserDirection, customTabSessionId: String? = null,
+                      isReturnHome: Boolean = true) {
+        var navOptions: NavOptions? = null
+        if (isReturnHome) {
+            if (navHost.navController.alreadyOnDestination(R.id.browserFragment)) return
+        } else {
+            navOptions = NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .build()
+        }
         @IdRes val fragmentId = if (from.fragmentId != 0) from.fragmentId else null
         val directions = getNavDirections(from, customTabSessionId)
         if (directions != null) {
-            navHost.navController.nav(fragmentId, directions)
+            navHost.navController.nav(fragmentId, directions, navOptions)
         }
     }
 
