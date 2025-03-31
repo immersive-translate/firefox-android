@@ -25,12 +25,13 @@ import org.json.JSONObject
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.OnboardingPageLanguageLayoutBinding
 import org.mozilla.fenix.ext.components
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.LanguageJson
 import java.util.Locale
 
 
 @SuppressLint("ClickableViewAccessibility")
-class LanguagePageView : FrameLayout {
+class LanguagePageView : FrameLayout, OnPageListener {
     private lateinit var binding: OnboardingPageLanguageLayoutBinding
     private var callback: Callback? = null
 
@@ -134,6 +135,7 @@ class LanguagePageView : FrameLayout {
         binding.btnSkip.setOnClickListener {
             dismissLangPopWin()
             callback?.onSkip()
+            ImmersiveTracker.appTrack("Onboarding_Step1_Later_Click")
         }
     }
 
@@ -191,5 +193,9 @@ class LanguagePageView : FrameLayout {
         fun onSelectLang(language: String)
         fun onSetDefaultBrowser()
         fun onSkip()
+    }
+
+    override fun onPageShow() {
+        ImmersiveTracker.appTrack("Onboarding_Step1_Show")
     }
 }

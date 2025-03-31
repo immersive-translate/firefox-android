@@ -19,10 +19,11 @@ import kotlinx.coroutines.launch
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.OnboardingTranslateItemLayoutBinding
 import org.mozilla.fenix.databinding.OnboardingTranslatePageLayoutBinding
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.bean.OnBoardingTranslateBean
 import org.mozilla.fenix.immersive_transalte.net.service.HomePageService
 
-class TranslatePageView : FrameLayout {
+class TranslatePageView : FrameLayout, OnPageListener {
     private lateinit var binding: OnboardingTranslatePageLayoutBinding
     private var callback: Callback? = null
     private lateinit var translateAdapter: TranslateAdapter
@@ -52,14 +53,22 @@ class TranslatePageView : FrameLayout {
         binding.listParagraph.adapter = translateAdapter
 
         binding.btnTranslate.setOnClickListener {
-            binding.root.postDelayed({ handlerTranslate() }, 100)
+            binding.root.postDelayed(
+                {
+                    handlerTranslate()
+                    ImmersiveTracker.appTrack("Onboarding_Step3_Translate_Click")
+                },
+                100,
+            )
         }
 
         binding.btnSkip.setOnClickListener {
             callback?.onNextClick()
+            ImmersiveTracker.appTrack("Onboarding_Step3_Skip_Click")
         }
         binding.btnContinue.setOnClickListener {
             callback?.onNextClick()
+            ImmersiveTracker.appTrack("Onboarding_Step3_Continue_Click")
         }
 
         binding.lottieTsSuccess.addAnimatorListener(
@@ -215,5 +224,9 @@ class TranslatePageView : FrameLayout {
 
     private class ViewHolder {
         lateinit var itemBinding: OnboardingTranslateItemLayoutBinding
+    }
+
+    override fun onPageShow() {
+        ImmersiveTracker.appTrack("Onboarding_Step3_Show")
     }
 }

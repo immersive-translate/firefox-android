@@ -13,9 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.OnboardingPageFourthLayoutBinding
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.user.BuyVipFragment
 
-class FourthPageView : FrameLayout {
+class FourthPageView : FrameLayout, OnPageListener {
     private lateinit var binding: OnboardingPageFourthLayoutBinding
     private var callback: Callback? = null
     private var activity: FragmentActivity? = null
@@ -42,6 +43,7 @@ class FourthPageView : FrameLayout {
         )
         binding.btnSkip.setOnClickListener {
             callback?.onNextClick()
+            ImmersiveTracker.appTrack("Onboarding_Step5_Subscribe_Skip_Click")
         }
     }
 
@@ -87,5 +89,9 @@ class FourthPageView : FrameLayout {
     interface Callback {
         fun onGotoBuy()
         fun onNextClick()
+    }
+
+    override fun onPageShow() {
+        ImmersiveTracker.appTrack("Onboarding_Step5_Show")
     }
 }

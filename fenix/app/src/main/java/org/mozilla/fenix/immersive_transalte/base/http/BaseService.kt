@@ -24,7 +24,7 @@ open class BaseService {
         }
     }
 
-    private val appVersionName: String? by lazy {
+    protected val appVersionName: String? by lazy {
         try {
             val cxt = FenixApplication.application
             cxt.packageManager.getPackageInfo(cxt.packageName, 0).versionName

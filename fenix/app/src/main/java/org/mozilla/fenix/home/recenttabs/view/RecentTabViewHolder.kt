@@ -14,6 +14,7 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.compose.ComposeViewHolder
 import org.mozilla.fenix.home.recenttabs.interactor.RecentTabInteractor
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.wallpapers.WallpaperState
 
 /**
@@ -49,7 +50,10 @@ class RecentTabViewHolder(
         RecentTabs(
             recentTabs = recentTabs.value ?: emptyList(),
             backgroundColor = wallpaperState.cardBackgroundColor,
-            onRecentTabClick = { recentTabInteractor.onRecentTabClicked(it) },
+            onRecentTabClick = {
+                recentTabInteractor.onRecentTabClicked(it)
+                ImmersiveTracker.appTrack("Homepage_Recent_Click")
+            },
             menuItems = listOf(
                 RecentTabMenuItem(
                     title = stringResource(id = R.string.recent_tab_menu_item_remove),

@@ -20,6 +20,7 @@ import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem.RecentHistoryGroup
 import org.mozilla.fenix.home.recentvisits.RecentlyVisitedItem.RecentHistoryHighlight
 import org.mozilla.fenix.home.recentvisits.interactor.RecentVisitsInteractor
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.wallpapers.WallpaperState
 
 /**
@@ -74,6 +75,7 @@ class RecentlyVisitedViewHolder(
                         interactor.onRecentHistoryGroupClicked(recentlyVisitedItem)
                     }
                 }
+                ImmersiveTracker.appTrack("Homepage_Prior_Click")
             },
         )
     }

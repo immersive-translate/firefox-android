@@ -188,11 +188,12 @@ class OnboardingFragment : Fragment() {
         )
 
 
-
-        viewpagerAdapter = ViewPageAdapter(mutableListOf(
+        val pages = mutableListOf(
             languagePageView, secondPageView,
             translatePageView,
-            thirdPageView, fourthPageView))
+            thirdPageView, fourthPageView)
+
+        viewpagerAdapter = ViewPageAdapter(pages)
         binding.viewpager.offscreenPageLimit = viewpagerAdapter.count
         binding.viewpager.adapter = viewpagerAdapter
         binding.viewpager.addOnPageChangeListener(
@@ -202,15 +203,19 @@ class OnboardingFragment : Fragment() {
                     positionOffset: Float,
                     positionOffsetPixels: Int,
                 ) {
-
                 }
                 override fun onPageSelected(position: Int) {
                     binding.pageIndicator.setIndicatorIndex(position)
+                    pages[position].onPageShow()
                 }
                 override fun onPageScrollStateChanged(state: Int) {
                 }
             },
         )
+
+        binding.root.post {
+            pages[0].onPageShow()
+        }
     }
 
     override fun onResume() {

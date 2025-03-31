@@ -10,8 +10,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import org.mozilla.fenix.databinding.OnboardingPageThirdLayoutBinding
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 
-class ThirdPageView : FrameLayout {
+class ThirdPageView : FrameLayout, OnPageListener {
     private lateinit var binding: OnboardingPageThirdLayoutBinding
     private var callback: Callback? = null
 
@@ -36,6 +37,7 @@ class ThirdPageView : FrameLayout {
         )
         binding.btnFinish.setOnClickListener {
             callback?.onFinish()
+            ImmersiveTracker.appTrack("Onboarding_Step4_Continue_Click")
         }
     }
 
@@ -45,5 +47,9 @@ class ThirdPageView : FrameLayout {
 
     interface Callback {
         fun onFinish()
+    }
+
+    override fun onPageShow() {
+        ImmersiveTracker.appTrack("Onboarding_Step4_Show")
     }
 }

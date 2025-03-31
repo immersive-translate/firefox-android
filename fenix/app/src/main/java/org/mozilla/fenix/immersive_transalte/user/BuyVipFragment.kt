@@ -54,6 +54,7 @@ class BuyVipFragment : Fragment() {
             val fragment = BuyVipFragment()
             fragment.isNeedTitle = isNeedTitle
             fragment.callback = callback
+            fragment.trackName = if (isNeedTitle) "Billing_" else "Onboarding_Step5_"
             return fragment
         }
     }
@@ -115,6 +116,12 @@ class BuyVipFragment : Fragment() {
         }
         binding.ivPopEmail.setOnClickListener {
             showTips(it, R.string.buy_vip_tip_04)
+        }
+
+        binding.cbHwAgreement.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                trackEvent("Checkbox_Click")
+            }
         }
 
         if (!isNeedTitle) {
@@ -182,6 +189,7 @@ class BuyVipFragment : Fragment() {
             binding.clVipBg.setBackgroundResource(R.mipmap.img_buy_vip_card_year_fg)
             binding.llVipMonthBg.setBackgroundResource(R.mipmap.img_buy_vip_card_month_fg)
         }
+        trackEvent("Show")
     }
 
     private fun showTips(view: View, @StringRes resId: Int) {
@@ -443,6 +451,7 @@ class BuyVipFragment : Fragment() {
         val isSubTrial = userInfo?.isSubYearVipTry ?: false
         if (isSubTrial) {
             trialVipUpgrade();
+            trackEvent("Upgrade")
             return
         }
 
@@ -453,6 +462,7 @@ class BuyVipFragment : Fragment() {
             if (isSubMonthVip) {
                 // 升级到包年
                 monthVipUpgrade()
+                trackEvent("Upgrade")
             } else {
                 // 试用逻辑 | 直接年费逻辑
                 priceId?.let {
@@ -462,6 +472,7 @@ class BuyVipFragment : Fragment() {
                     }
                     createOrder(it, isTrial, true)
                 }
+                trackEvent("Subscribe_Yearly_Click")
             }
             return
         }
@@ -471,6 +482,7 @@ class BuyVipFragment : Fragment() {
             priceId?.let {
                 createOrder(it, false, false)
             }
+            trackEvent("Subscribe_Monthly_Click")
             return
         }
     }
@@ -639,6 +651,7 @@ class BuyVipFragment : Fragment() {
                 url = SupportUtils.APP_HW_AGREEMENT_URL,
             ).show(binding.root)
         }
+        trackEvent("Agreement_Click")
     }
 
     private fun gotoHwPrivacyPolicy() {
@@ -670,6 +683,11 @@ class BuyVipFragment : Fragment() {
         if (processDialog != null && processDialog!!.isShowing) {
             processDialog!!.dismiss()
         }
+    }
+
+    private var trackName = if (isNeedTitle) "Billing_" else "Onboarding_Step5_"
+    private fun trackEvent(name: String) {
+        ImmersiveTracker.appTrack("${trackName}${name}")
     }
 
     private var callback: Callback? = null

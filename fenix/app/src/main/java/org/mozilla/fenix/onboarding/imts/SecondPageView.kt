@@ -10,8 +10,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import org.mozilla.fenix.databinding.OnboardingPageSecondLayoutBinding
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 
-class SecondPageView : FrameLayout {
+class SecondPageView : FrameLayout, OnPageListener {
     private lateinit var binding: OnboardingPageSecondLayoutBinding
     private var callback: Callback? = null
 
@@ -36,6 +37,7 @@ class SecondPageView : FrameLayout {
         )
         binding.btnISee.setOnClickListener {
             callback?.onNextClick()
+            ImmersiveTracker.appTrack("Onboarding_Step2_Know_Click")
         }
     }
 
@@ -45,5 +47,9 @@ class SecondPageView : FrameLayout {
 
     interface Callback {
         fun onNextClick()
+    }
+
+    override fun onPageShow() {
+        ImmersiveTracker.appTrack("Onboarding_Step2_Show")
     }
 }

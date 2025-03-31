@@ -16,11 +16,15 @@ import com.adjust.sdk.LogLevel
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.google.android.gms.appset.AppSet
+import com.google.android.gms.appset.AppSetIdClient
+import com.google.android.gms.tasks.Tasks
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.mozilla.fenix.Config
+import org.mozilla.fenix.immersive_transalte.net.service.TrackerService
 
 
 /**
@@ -31,10 +35,14 @@ object ImmersiveTracker {
     private const val appToken = "yrf6oviwfshs"
     private var isInit = false
     private var adjustAttribution: AdjustAttribution? = null
+    private var adJustDeviceId = ""
+    private var adJustAdId = ""
+
+    private val trackScope = MainScope()
 
     fun initTrack(ctx: Application) {
         @OptIn(DelicateCoroutinesApi::class)
-        GlobalScope.launch(Dispatchers.IO) {
+        trackScope.launch(Dispatchers.IO) {
             initAdjust(ctx)
             initFB(ctx)
         }
@@ -60,7 +68,10 @@ object ImmersiveTracker {
         val logLevel = if (isRelease) LogLevel.WARN else LogLevel.VERBOSE
         val config = AdjustConfig(ctx, appToken, environment)
         config.setLogLevel(logLevel)
-        config.setOnAttributionChangedListener { p0 -> adjustAttribution = p0; }
+        config.setOnAttributionChangedListener { p0 ->
+            adjustAttribution = p0
+            adJustAdId = Adjust.getAdid() ?: ""
+        }
         Adjust.onCreate(config)
         ctx.registerActivityLifecycleCallbacks(
             object : ActivityLifecycleCallbacks {
@@ -89,6 +100,12 @@ object ImmersiveTracker {
             },
         )
         isInit = true
+
+        // 获取 deviceId 和 adid
+        val client: AppSetIdClient = AppSet.getClient(ctx)
+        val taskResult = Tasks.await(client.appSetIdInfo)
+        adJustDeviceId = taskResult.id
+        adJustAdId = Adjust.getAdid() ?: ""
     }
 
     fun track(trackMessage: String) {
@@ -140,5 +157,22 @@ object ImmersiveTracker {
 
     fun getAdjustAttribution(): AdjustAttribution? {
         return adjustAttribution
+    }
+
+    fun getAdjustDeviceId(): String {
+        return adJustDeviceId
+    }
+
+    fun getAdjustAdId(): String {
+        return adJustAdId
+    }
+
+    fun appTrack(
+        eventName: String,
+        eventParams: Map<String, Any?>? = null,
+    ) {
+        trackScope.launch(Dispatchers.IO) {
+            TrackerService.appTrack(eventName, eventParams)
+        }
     }
 }

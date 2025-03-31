@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.StrictMode
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -1161,6 +1162,9 @@ class HomeFragment : Fragment() {
         PrivateBrowsingButtonView(binding.privateBrowsingButton, browsingModeManager) { newMode ->
             sessionControlInteractor.onPrivateModeButtonClicked(newMode)
             Homepage.privateModeIconTapped.record(mozilla.telemetry.glean.private.NoExtras())
+            if(newMode == BrowsingMode.Private) {
+                ImmersiveTracker.appTrack("Private_On")
+            }
         }
 
         consumeFrom(requireComponents.core.store) {
@@ -1494,6 +1498,8 @@ class HomeFragment : Fragment() {
         evaluateMessagesForMicrosurvey(components)
 
         sessionControlView?.refresh()
+
+        ImmersiveTracker.appTrack("Homepage_Show")
     }
 
     private fun evaluateMessagesForMicrosurvey(components: Components) =

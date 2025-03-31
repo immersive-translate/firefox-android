@@ -13,9 +13,10 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.DialogUpcommingLayoutBinding
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.base.widget.ProcessDialog
-import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
+import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.net.service.MemberService
 
 /**
@@ -34,9 +35,14 @@ class MonthUpgradeDialog(
         binding = DialogUpcommingLayoutBinding.inflate(LayoutInflater.from(context))
         setContentView(binding.root)
         setCanceledOnTouchOutside(false)
-        binding.ivClose.setOnClickListener { dismiss() }
-        binding.tvCancel.setOnClickListener { dismiss() }
-
+        binding.ivClose.setOnClickListener {
+            dismiss()
+            trackEvent("Close")
+        }
+        binding.tvCancel.setOnClickListener {
+            dismiss()
+            trackEvent("Cancel")
+        }
 
         val desc = context.getString(
             R.string.vip_upgrade_desc,
@@ -58,8 +64,10 @@ class MonthUpgradeDialog(
 
         binding.llUpgrade.setOnClickListener {
             upgrade(product, onUpgradeSuccess)
+            trackEvent("Upgrade")
         }
 
+        trackEvent("Show")
     }
 
     private fun upgrade(product: VipProductBean, onUpgradeSuccess: () -> Unit) {
@@ -79,6 +87,11 @@ class MonthUpgradeDialog(
             dismiss()
 
         }
+    }
+
+    private val trackName = "RetentionWindow_"
+    private fun trackEvent(name: String) {
+        ImmersiveTracker.appTrack("${trackName}${name}")
     }
 
     private var processDialog: ProcessDialog? = null

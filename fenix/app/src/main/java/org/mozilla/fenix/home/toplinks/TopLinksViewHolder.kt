@@ -9,15 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.LifecycleOwner
 import mozilla.components.lib.state.ext.observeAsComposableState
-import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.components.components
 import org.mozilla.fenix.compose.ComposeViewHolder
 import org.mozilla.fenix.home.sessioncontrol.TopLinkInteractor
 import org.mozilla.fenix.home.sessioncontrol.TopSiteInteractor
-import org.mozilla.fenix.home.topsites.TopSiteColors
-import org.mozilla.fenix.home.topsites.TopSites
-import org.mozilla.fenix.perf.StartupTimeline
-import org.mozilla.fenix.wallpapers.WallpaperState
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 
 /**
  * View holder for top sites.
@@ -32,6 +28,15 @@ class TopLinksViewHolder(
     viewLifecycleOwner: LifecycleOwner,
     private val interactor: TopLinkInteractor,
 ) : ComposeViewHolder(composeView, viewLifecycleOwner) {
+    private val tracks = HashMap<Long, String>().apply {
+        put(1L, "Homepage_Web_Click")
+        put(2L, "Homepage_Video_Click")
+        put(3L, "Homepage_Doc_Click")
+        put(4L, "Homepage_Manga_Click")
+        put(5L, "Homepage_Image_Click")
+        put(6L, "Homepage_Rednote_Click")
+        put(7L, "Homepage_Bilin_Click")
+    }
 
     @Composable
     override fun Content() {
@@ -43,8 +48,18 @@ class TopLinksViewHolder(
                 topLinks = it,
                 onTopLinkClick = { topLink ->
                     interactor.onSelectTopLink(topLink, it.indexOf(topLink))
+                    track(topLink.id)
                 },
             )
+        }
+    }
+
+    private fun track(id: Long?) {
+        val eventName = id?.let {
+            tracks[it]
+        }
+        eventName?.let {
+            ImmersiveTracker.appTrack(it)
         }
     }
 

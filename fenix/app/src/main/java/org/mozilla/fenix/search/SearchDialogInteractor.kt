@@ -6,6 +6,7 @@ package org.mozilla.fenix.search
 
 import mozilla.components.browser.state.search.SearchEngine
 import mozilla.components.concept.engine.EngineSession.LoadUrlFlags
+import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.search.awesomebar.AwesomeBarInteractor
 import org.mozilla.fenix.search.toolbar.SearchSelectorMenu
 import org.mozilla.fenix.search.toolbar.ToolbarInteractor
@@ -21,6 +22,7 @@ class SearchDialogInteractor(
 
     override fun onUrlCommitted(url: String, fromHomeScreen: Boolean) {
         searchController.handleUrlCommitted(url, fromHomeScreen)
+        ImmersiveTracker.appTrack("SearchBar_Continue")
     }
 
     override fun onEditingCanceled() {
