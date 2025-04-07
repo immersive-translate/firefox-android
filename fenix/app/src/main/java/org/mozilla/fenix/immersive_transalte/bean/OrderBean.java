@@ -7,17 +7,17 @@ package org.mozilla.fenix.immersive_transalte.bean;
 import java.io.Serializable;
 
 public class OrderBean implements Serializable {
-    private String imtSessionId;
+    private long imtSessionId;
     private String redirect;
     private String clientSecret;
     private String prePayId;
     private String jsApiUiPackage;
 
-    public String getImtSessionId() {
+    public long getImtSessionId() {
         return imtSessionId;
     }
 
-    public void setImtSessionId(String imtSessionId) {
+    public void setImtSessionId(long imtSessionId) {
         this.imtSessionId = imtSessionId;
     }
 

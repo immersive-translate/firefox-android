@@ -6,6 +6,7 @@ package org.mozilla.fenix.immersive_transalte.net.service
 
 import android.os.Build
 import org.json.JSONObject
+import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.base.http.BaseService
 import org.mozilla.fenix.immersive_transalte.base.http.HttpClient
@@ -13,7 +14,8 @@ import org.mozilla.fenix.immersive_transalte.base.http.Response
 import org.mozilla.fenix.immersive_transalte.net.api.TrackerApi
 
 object TrackerService : BaseService() {
-    private const val trackUrl = "https://analytics.immersivetranslate.com"
+    private val trackUrl = Constant.appTrackUrl
+    private val adjustS2sUrl = Constant.apiBaseUrl
     private val trackerApi: TrackerApi? by lazy { HttpClient.retrofit?.create(TrackerApi::class.java) }
 
     suspend fun appTrack(
@@ -46,7 +48,7 @@ object TrackerService : BaseService() {
         event.put("version", appVersionName)
         event.put("event_name", eventName)
         event.put("device_id", ImmersiveTracker.getAdjustDeviceId())
-        
+
         val extParams = JSONObject()
         eventParams?.let { params ->
             val keys = params.keys
@@ -57,5 +59,15 @@ object TrackerService : BaseService() {
         event.put("ex_char_arg1", extParams.toString())
 
         return event
+    }
+
+    suspend fun adjustS2sSession(params: MutableMap<String, Any?>): Response<Any?> {
+        val url = "${adjustS2sUrl}/adjust/sessions"
+        return executeHttpAndCallback(trackerApi?.adjustS2sSession(url, params))
+    }
+
+    suspend fun adjustS2sEvent(params: MutableMap<String, Any?>): Response<Any?> {
+        val url = "${adjustS2sUrl}/adjust/events"
+        return executeHttpAndCallback(trackerApi?.adjustS2sEvent(url, params))
     }
 }

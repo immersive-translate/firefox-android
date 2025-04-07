@@ -17,4 +17,15 @@ internal interface TrackerApi {
         @Body params: MutableMap<String, Any?>,
     ): Call<Any?>
 
+    @POST
+    fun adjustS2sSession(
+        @Url url: String,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<Any?>
+
+    @POST
+    fun adjustS2sEvent(
+        @Url url: String,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<Any?>
 }

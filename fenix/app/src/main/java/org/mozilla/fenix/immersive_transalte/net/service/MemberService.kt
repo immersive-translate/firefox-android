@@ -49,12 +49,16 @@ object MemberService : BaseService() {
         startTrial: Boolean,
         successUrl: String,
         cancelUrl: String,
+        trackerCampaign: String?,
     ): Response<ResultData<OrderBean>> {
         val params = getCommonBodyParams()
         params["priceId"] = priceId
         params["startTrial"] = startTrial
         params["successUrl"] = successUrl
         params["cancelUrl"] = cancelUrl
+        trackerCampaign?.let {
+            params["trackerCampaign"] = it
+        }
         params["returnUrl"] = "https://immersivetranslate.com/pricing"
         params["platform"] = "android"
         return executeHttpAndCallback(memberApi?.createOrder(getHeadersMap(), params))
@@ -100,9 +104,13 @@ object MemberService : BaseService() {
      */
     suspend fun vipUpgrade(
         priceId: String,
+        trackerCampaign: String?
     ): Response<ResultData<UpgradeBean>> {
         val params = getCommonQueryParams()
         params["priceId"] = priceId
+        trackerCampaign?.let {
+            params["trackerCampaign"] = it
+        }
         return executeHttpAndCallback(memberApi?.vipUpgrade(getHeadersMap(), params))
     }
 }

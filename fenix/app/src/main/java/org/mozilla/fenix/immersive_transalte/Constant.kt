@@ -28,4 +28,6 @@ object Constant {
     val profile = if (isDebug) "https://test.immersivetranslate.com/profile"
     else "https://immersivetranslate.com/profile"
 
+    val appTrackUrl = "https://analytics.immersivetranslate.com"
+
 }

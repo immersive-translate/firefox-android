@@ -131,6 +131,7 @@ class LanguagePageView : FrameLayout, OnPageListener {
         binding.btnSetDefaultBrowser.setOnClickListener {
             dismissLangPopWin()
             callback?.onSetDefaultBrowser()
+            ImmersiveTracker.appTrack("Onboarding_Step1_Default_Click")
         }
         binding.btnSkip.setOnClickListener {
             dismissLangPopWin()

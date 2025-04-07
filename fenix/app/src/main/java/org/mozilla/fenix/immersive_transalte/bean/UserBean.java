@@ -259,6 +259,7 @@ public class UserBean implements Serializable {
         private String planCurrency;
         private String priceId;
         private int subscriptionDay;
+        private long subscriptionGoodsOrderId;
 
         public String getSubscriptionType() {
             return subscriptionType;
@@ -378,6 +379,14 @@ public class UserBean implements Serializable {
 
         public void setSubscriptionDay(int subscriptionDay) {
             this.subscriptionDay = subscriptionDay;
+        }
+
+        public long getSubscriptionGoodsOrderId() {
+            return subscriptionGoodsOrderId;
+        }
+
+        public void setSubscriptionGoodsOrderId(long subscriptionGoodsOrderId) {
+            this.subscriptionGoodsOrderId = subscriptionGoodsOrderId;
         }
     }
 }

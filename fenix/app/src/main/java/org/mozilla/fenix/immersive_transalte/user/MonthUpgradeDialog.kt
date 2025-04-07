@@ -15,6 +15,7 @@ import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.DialogUpcommingLayoutBinding
 import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.base.widget.ProcessDialog
+import org.mozilla.fenix.immersive_transalte.bean.UpgradeBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
 import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.net.service.MemberService
@@ -27,7 +28,8 @@ class MonthUpgradeDialog(
     context: Context,
     product: VipProductBean,
     upcomming: VipUpgradeBean,
-    onUpgradeSuccess: () -> Unit,
+    private val trackerCampaign: String?,
+    private val onUpgradeSuccess: (upgradeBean: UpgradeBean) -> Unit,
 ) : Dialog(context, R.style.remind_dialog_style) {
     private val binding: DialogUpcommingLayoutBinding
 
@@ -63,25 +65,27 @@ class MonthUpgradeDialog(
         )
 
         binding.llUpgrade.setOnClickListener {
-            upgrade(product, onUpgradeSuccess)
+            upgrade(product)
             trackEvent("Upgrade")
         }
 
         trackEvent("Show")
     }
 
-    private fun upgrade(product: VipProductBean, onUpgradeSuccess: () -> Unit) {
+    private fun upgrade(product: VipProductBean) {
         showProcessDialog()
         MainScope().launch(Dispatchers.Main) {
 
             val priceId = product.entities?.year?.priceId
             val upgradeData = priceId?.let {
-                MemberService.vipUpgrade(it).data?.data
+                MemberService.vipUpgrade(it, trackerCampaign).data?.data
             }
             hideProcessDialog()
 
-            if (upgradeData != null && upgradeData.isSubYearVip) {
-                onUpgradeSuccess()
+            upgradeData?.let {
+                if (it.isSubYearVip) {
+                    onUpgradeSuccess.invoke(it)
+                }
             }
 
             dismiss()

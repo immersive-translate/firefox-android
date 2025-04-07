@@ -36,4 +36,11 @@ public class UpgradeBean implements Serializable {
                 && "yearly".equals(subscription.getSubscriptionType())
                 && subscription.isTrial();
     }
+
+    public long getImtOrderId() {
+        if (subscription == null) {
+            return 0;
+        }
+        return subscription.getSubscriptionGoodsOrderId();
+    }
 }

@@ -27,6 +27,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mozilla.components.support.ktx.android.content.getColorFromAttr
+import mozilla.components.support.ktx.android.org.json.toJSON
 import org.mozilla.fenix.BrowserDirection
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
@@ -68,6 +69,10 @@ class BuyVipFragment : Fragment() {
     private var productInfo: VipProductBean? = null
     private var trailList: List<String>? = null
     private var isNeedTitle = true
+
+    // 归因参数
+    private val trackerCampaign: String?
+        get() = ImmersiveTracker.getAdjustAttribution()?.toMap()?.toJSON()?.toString()
 
     private val browsingModeManager get() = (activity as HomeActivity).browsingModeManager
 
@@ -510,14 +515,14 @@ class BuyVipFragment : Fragment() {
             delay(100)
             product?.let {
                 TrialUpgradeDialog(
-                    requireContext(), it, upcomming,
-                    {
+                    requireContext(), it, upcomming, trackerCampaign,
+                    { upgradeBean ->
                         (requireActivity() as HomeActivity).openToBrowserAndLoad(
                             searchTermOrURL = Constant.paySuccess,
                             newTab = true,
                             from = BrowserDirection.FromGlobal,
                         )
-                        trackTrialUpgradeToYearVip(upcomming)
+                        trackTrialUpgradeToYearVip(upcomming, upgradeBean.imtOrderId)
                     },
                 ).show()
             }
@@ -545,12 +550,12 @@ class BuyVipFragment : Fragment() {
             delay(100)
             product?.let {
                 MonthUpgradeDialog(
-                    requireContext(), it, upcomming,
-                    {
+                    requireContext(), it, upcomming, trackerCampaign,
+                    { upgradeBean ->
                         (requireActivity() as HomeActivity).openToBrowserAndLoad(
                             Constant.paySuccess, true, BrowserDirection.FromGlobal,
                         )
-                        trackMonthUpgradeToYearVip(upcomming)
+                        trackMonthUpgradeToYearVip(upcomming, upgradeBean.imtOrderId)
                     },
                 ).show()
             }
@@ -570,6 +575,7 @@ class BuyVipFragment : Fragment() {
                 priceId, isEnableTrial,
                 Constant.profile,
                 Constant.profile,
+                trackerCampaign
             )
             hideProcessDialog()
             delay(100)
@@ -580,7 +586,8 @@ class BuyVipFragment : Fragment() {
                         (requireActivity() as HomeActivity).openToBrowserAndLoad(
                             Constant.paySuccess, true, BrowserDirection.FromGlobal,
                         )
-                        trackTrialOrMonthVip(isEnableTrial, isYearVip)
+                        val imtSessionId = orderBean.data?.data?.imtSessionId ?: 0
+                        trackTrialOrMonthVip(isEnableTrial, isYearVip, imtSessionId)
                     },
                     onPayFailed = {
                     },
@@ -595,27 +602,30 @@ class BuyVipFragment : Fragment() {
     /**
      * 月费升级到年费
      */
-    private fun trackMonthUpgradeToYearVip(upgradeVip: VipUpgradeBean) {
+    private fun trackMonthUpgradeToYearVip(upgradeVip: VipUpgradeBean, imtOrderId: Long) {
         val money = (upgradeVip.amount_remaining / 100)
         val currency = upgradeVip.currency
         val vipType = 4
-        trackPurchase(money, currency, vipType)
+        trackPurchase(money, currency, vipType, 0, imtOrderId)
     }
 
     /**
      * 试用升级到年费
      */
-    private fun trackTrialUpgradeToYearVip(upgradeVip: VipUpgradeBean) {
+    private fun trackTrialUpgradeToYearVip(upgradeVip: VipUpgradeBean, imtOrderId: Long) {
         val money = upgradeVip.amount_remaining / 100.0F
         val currency = upgradeVip.currency
         val vipType = 3
-        trackPurchase(money, currency, vipType)
+        trackPurchase(money, currency, vipType , 0, imtOrderId)
     }
 
     /**
      * 试用或者月费会员
      */
-    private fun trackTrialOrMonthVip(isEnableTrial: Boolean, isYearVip: Boolean) {
+    private fun trackTrialOrMonthVip(
+        isEnableTrial: Boolean, isYearVip: Boolean,
+        imtSessionId: Long,
+    ) {
         var money = 0F
         var currency = ""
         val vipType:Int
@@ -632,16 +642,19 @@ class BuyVipFragment : Fragment() {
                 currency = vip.currency
             }
         }
-        trackPurchase(money, currency, vipType)
+        trackPurchase(money, currency, vipType, imtSessionId, 0)
     }
 
     private fun trackPurchase(
         money: Float,
         currency: String,
         vipType: Int,
+        imtSessionId: Long = 0,
+        imtOrderId: Long = 0
     ) {
         val uid = userInfo?.uid ?: 0
-        ImmersiveTracker.trackPurchase(money, currency, vipType, uid)
+        ImmersiveTracker.trackPurchase(money, currency, vipType, uid,
+            imtSessionId, imtOrderId)
     }
 
     private fun gotoHwRecurringPaymentAgreement() {

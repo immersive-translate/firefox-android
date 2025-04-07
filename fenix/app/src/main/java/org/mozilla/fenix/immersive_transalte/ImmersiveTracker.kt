@@ -4,6 +4,7 @@
 
 package org.mozilla.fenix.immersive_transalte
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.app.Application.ActivityLifecycleCallbacks
@@ -16,6 +17,7 @@ import com.adjust.sdk.LogLevel
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.android.gms.appset.AppSet
 import com.google.android.gms.appset.AppSetIdClient
 import com.google.android.gms.tasks.Tasks
@@ -34,15 +36,21 @@ import org.mozilla.fenix.immersive_transalte.net.service.TrackerService
 object ImmersiveTracker {
     private const val appToken = "yrf6oviwfshs"
     private var isInit = false
+
     private var adjustAttribution: AdjustAttribution? = null
     private var adJustDeviceId = ""
-    private var adJustAdId = ""
+    private var adJustAdid = ""
+    private var gpsInfo: AdvertisingIdClient.Info? = null
+
+    private lateinit var adjustS2STracker: AdjustS2STracker
 
     private val trackScope = MainScope()
 
+    @SuppressLint("HardwareIds")
     fun initTrack(ctx: Application) {
         @OptIn(DelicateCoroutinesApi::class)
         trackScope.launch(Dispatchers.IO) {
+            adjustS2STracker = AdjustS2STracker(ctx)
             initAdjust(ctx)
             initFB(ctx)
         }
@@ -70,8 +78,11 @@ object ImmersiveTracker {
         config.setLogLevel(logLevel)
         config.setOnAttributionChangedListener { p0 ->
             adjustAttribution = p0
-            adJustAdId = Adjust.getAdid() ?: ""
+            adJustAdid = Adjust.getAdid() ?: ""
+            adjustS2STracker.setIds(adJustDeviceId, adJustAdid, gpsInfo)
+            adjustS2STracker.setAttribution(adjustAttribution)
         }
+
         Adjust.onCreate(config)
         ctx.registerActivityLifecycleCallbacks(
             object : ActivityLifecycleCallbacks {
@@ -101,11 +112,20 @@ object ImmersiveTracker {
         )
         isInit = true
 
-        // 获取 deviceId 和 adid
+        // 获取 set_id 和 adid
         val client: AppSetIdClient = AppSet.getClient(ctx)
         val taskResult = Tasks.await(client.appSetIdInfo)
         adJustDeviceId = taskResult.id
-        adJustAdId = Adjust.getAdid() ?: ""
+        adJustAdid = Adjust.getAdid() ?: ""
+
+        // gps_adid
+        try {
+            gpsInfo = AdvertisingIdClient.getAdvertisingIdInfo(ctx)
+        } catch (_: Exception) {
+        }
+
+        adjustS2STracker.setIds(adJustDeviceId, adJustAdid, gpsInfo)
+        adjustS2STracker.setAttribution(Adjust.getAttribution())
     }
 
     fun track(trackMessage: String) {
@@ -123,6 +143,8 @@ object ImmersiveTracker {
         currency: String,
         vipType: Int,
         userId: Long,
+        imtSessionId: Long,
+        imtOrderId: Long
     ) {
         if (!isInit) {
             return
@@ -153,10 +175,16 @@ object ImmersiveTracker {
         trackEvent.addPartnerParameter("pay_type", "$vipType")
         trackEvent.addPartnerParameter("user_id", "$userId")
         Adjust.trackEvent(trackEvent)
+
+        // s2s 上报
+        adjustS2sTrackRevenue(
+            "rugbsl", money.toDouble(), currency,
+            imtSessionId, imtOrderId,
+        )
     }
 
     fun getAdjustAttribution(): AdjustAttribution? {
-        return adjustAttribution
+        return adjustAttribution ?: Adjust.getAttribution()
     }
 
     fun getAdjustDeviceId(): String {
@@ -164,7 +192,7 @@ object ImmersiveTracker {
     }
 
     fun getAdjustAdId(): String {
-        return adJustAdId
+        return adJustAdid
     }
 
     fun appTrack(
@@ -173,6 +201,35 @@ object ImmersiveTracker {
     ) {
         trackScope.launch(Dispatchers.IO) {
             TrackerService.appTrack(eventName, eventParams)
+        }
+    }
+
+    fun adjustS2sTrackSession() {
+        trackScope.launch(Dispatchers.IO) {
+            adjustS2STracker.trackSession()
+        }
+    }
+
+    fun adjustS2sTrackEvent(eventToken: String, eventParams: Map<String, String>? = null) {
+        trackScope.launch(Dispatchers.IO) {
+            adjustS2STracker.trackEvent(eventToken, eventParams)
+        }
+    }
+
+    private fun adjustS2sTrackRevenue(
+        eventToken: String,
+        revenue: Double,
+        currency: String,
+        imtSessionId: Long,
+        imtOrderId: Long,
+        eventParams: Map<String, String>? = null,
+    ) {
+        trackScope.launch(Dispatchers.IO) {
+            adjustS2STracker.trackEventRevenue(
+                eventToken, revenue, currency,
+                imtSessionId, imtOrderId,
+                eventParams,
+            )
         }
     }
 }
