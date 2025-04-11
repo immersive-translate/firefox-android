@@ -184,6 +184,10 @@
         android:id="@+id/action_global_report"
         app:destination="@id/report_graph"/>
 
+    <action
+        android:id="@+id/action_global_login"
+        app:destination="@id/login_graph"/>
+
     <dialog
         android:id="@+id/tabsTrayFragment"
         android:name="org.mozilla.fenix.tabstray.TabsTrayFragment">
@@ -1281,6 +1285,17 @@
             android:id="@+id/reportFragment"
             android:name="org.mozilla.fenix.immersive_transalte.report.ReportFragment"
             android:label="@string/preferences_report"/>
+
+    </navigation>
+
+    <navigation
+        android:id="@+id/login_graph"
+        app:startDestination="@id/loginFragment">
+
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="org.mozilla.fenix.immersive_transalte.login.LoginFragment"
+            android:label="@string/preferences_login"/>
 
     </navigation>
 

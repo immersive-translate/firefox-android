@@ -5,6 +5,12 @@
 package org.mozilla.fenix.immersive_transalte.base.http
 
 import android.os.Build
+import android.text.TextUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import org.mozilla.fenix.FenixApplication
 import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.immersive_transalte.base.http.httpcallbak.OnHttpListener
@@ -19,6 +25,7 @@ import kotlin.coroutines.suspendCoroutine
 open class BaseService {
 
     companion object {
+        private val scope = MainScope()
         init {
             HttpClient.baseApiUrl = Constant.apiBaseUrl
         }
@@ -57,7 +64,6 @@ open class BaseService {
         val params: MutableMap<String, Any?> = HashMap()
         params["appVersion"] = appVersionName
         params["platForm"] = "android"
-        params["platform"] = "android"
         return params
     }
 
@@ -66,13 +72,16 @@ open class BaseService {
         params["t"] = time
         params["appVersion"] = appVersionName
         params["platForm"] = "android"
-        params["platform"] = "android"
         return params
     }
 
     fun getHeadersMap(): MutableMap<String, Any?> {
         val params: MutableMap<String, Any?> = HashMap()
-        params["token"] = token
+        params["appVersion"] = appVersionName
+        params["platForm"] = "android"
+        token?.let {
+            params["token"] = it
+        }
         return params
     }
 
@@ -102,7 +111,12 @@ open class BaseService {
                     if (response.code() == 200) {
                         onHttpListener?.doSuccess(resultObject)
                     } else {
-                        onHttpListener?.doError(resultObject)
+                        val errorString = response.errorBody()?.string()
+                        if (!TextUtils.isEmpty(errorString)) {
+                            handleError(resultObject, errorString!!)
+                        } else {
+                            onHttpListener?.doError(resultObject)
+                        }
                     }
                 }
 
@@ -110,6 +124,25 @@ open class BaseService {
                     val result = Response<T>()
                     result.msg = t.message
                     onHttpListener?.doError(result)
+                }
+
+                private fun handleError(
+                    resultObject : org.mozilla.fenix.immersive_transalte.base.http.Response<T>,
+                    errorString: String) {
+                    scope.launch(Dispatchers.Main) {
+                        val jo = withContext(Dispatchers.IO) {
+                            try {
+                                JSONObject(errorString)
+                            } catch (_: Exception) {
+                                null
+                            }
+                        }
+                        jo?.let {
+                            resultObject.errorCode = it.optInt("code")
+                            resultObject.msg = it.optString("error")
+                        }
+                        onHttpListener?.doError(resultObject)
+                    }
                 }
             },
         )

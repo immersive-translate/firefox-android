@@ -4,13 +4,13 @@
 
 package org.mozilla.fenix.immersive_transalte.net.api
 
-import com.google.gson.JsonObject
 import org.mozilla.fenix.immersive_transalte.bean.OrderBean
 import org.mozilla.fenix.immersive_transalte.bean.ResultData
 import org.mozilla.fenix.immersive_transalte.bean.UpgradeBean
-import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
 import org.mozilla.fenix.immersive_transalte.bean.UserBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
+import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
+import org.mozilla.fenix.immersive_transalte.bean.WebLoginBean
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -53,13 +53,73 @@ internal interface MemberApi {
     fun upcoming(
         @HeaderMap headers: MutableMap<String, Any?>,
         @QueryMap params: MutableMap<String, Any?>,
-    ) :Call<ResultData<VipUpgradeBean>>
+    ): Call<ResultData<VipUpgradeBean>>
 
 
     @POST("v1/user-subscription/one-click-upgrade")
     fun vipUpgrade(
         @HeaderMap headers: MutableMap<String, Any?>,
-        @QueryMap params: MutableMap<String, Any?>
+        @QueryMap params: MutableMap<String, Any?>,
     ): Call<ResultData<UpgradeBean>>
 
+    @POST("/v1/user-account/web-login")
+    @Headers("Content-Type: application/json")
+    fun webLogin(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<ResultData<WebLoginBean>>
+
+    @POST("/v1/user/device-info?force=true")
+    @Headers("Content-Type: application/json")
+    fun updateDeviceInfo(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<Any?>
+
+    @POST("/v1/user-account/find-password-code")
+    @Headers("Content-Type: application/json")
+    fun getPwdCode(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<Any?>
+
+    @POST("/v1/user-account/reset-password")
+    @Headers("Content-Type: application/json")
+    fun resetPassword(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<Any?>
+
+    @POST("/v1/user-account/re-activate")
+    @Headers("Content-Type: application/json")
+    fun getActiveEmailVerifyCode(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<Any?>
+
+    @POST("/v1/user-account/register")
+    @Headers("Content-Type: application/json")
+    fun register(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<Any?>
+
+    @POST("/v1/user-account/activate")
+    @Headers("Content-Type: application/json")
+    fun activeEmail(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @Body params: MutableMap<String, Any?>,
+    ): Call<Any?>
+
+    @GET("/v1/user-account/web-oauth-callback")
+    fun loginWithAccessToken(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @QueryMap params: MutableMap<String, Any?>,
+    ): Call<ResultData<WebLoginBean>>
+
+    @GET("/v1/user-account/wechat-app-oauth-callback")
+    fun loginWithWxToken(
+        @HeaderMap headers: MutableMap<String, Any?>,
+        @QueryMap params: MutableMap<String, Any?>,
+    ): Call<ResultData<WebLoginBean>>
 }

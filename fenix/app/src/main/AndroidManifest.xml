@@ -465,6 +465,18 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/download_file_paths"/>
         </provider>
+
+        <activity
+            android:name="com.immersivetranslate.browser.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity="${applicationId}"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
     </application>
+
+    <queries>
+        <package android:name="com.tencent.mm" />
+    </queries>
 
 </manifest>

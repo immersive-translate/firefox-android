@@ -217,6 +217,21 @@
     <color name="normal_color_FAFDFF">#FF1F2123</color>
     <color name="normal_color_EA4C89">#FFE23C7C</color>
 
+    <color name="normal_color_EC5E95">#FFEA4C89</color>
+    <color name="normal_color_E34A85">#FFD5467D</color>
+    <color name="normal_color_EE71A2">#FFA93A65</color>
+    <color name="normal_color_F4A5C4">#FF7E2F4D</color>
+    <color name="normal_color_F9C9DC">#FF522335</color>
+    <color name="normal_color_FDEDF3">#FF26171D</color>
+    <color name="normal_color_F3F5F6">#FF252626</color>
+    <color name="normal_color_F6F8F9">#FF2D2E2E</color>
+    <color name="normal_color_EDF1F2">#FF202121</color>
+    <color name="normal_color_FAFBFB">#FF1D1E1E</color>
+    <color name="normal_color_F53F3F">#FFDF3B3B</color>
+    <color name="normal_color_21BB45">#FF20AA40</color>
+    <color name="normal_color_4181F0">#FF4181F0</color>
+    <color name="normal_color_A0C0F8">#FF204078</color>
+
     <color name="onboarding_indicator_primary_color">#FF333333</color>
     <color name="onboarding_indicator_second_color">#FFDBDBDB</color>
     <color name="onboarding_ts_border">@color/photonDarkGrey50</color>

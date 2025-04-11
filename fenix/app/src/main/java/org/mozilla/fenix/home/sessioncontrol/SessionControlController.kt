@@ -10,7 +10,6 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
 import androidx.annotation.VisibleForTesting
@@ -67,7 +66,6 @@ import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.home.HomeFragment
 import org.mozilla.fenix.home.HomeFragmentDirections
 import org.mozilla.fenix.home.toplinks.TopLink
-import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.immersive_transalte.UrlLanguageFormater
 import org.mozilla.fenix.messaging.MessageController
 import org.mozilla.fenix.onboarding.WallpaperOnboardingDialogFragment.Companion.THUMBNAILS_SELECTION_COUNT
@@ -445,7 +443,7 @@ class DefaultSessionControlController(
     }
 
     override fun handleGotoLogin() {
-        val url = Constant.loginPage
+        /*val url = Constant.loginPage
         val existingTabForUrl = store.state.tabs.firstOrNull { url == it.content.url }
         if (existingTabForUrl == null) {
             addTabUseCase.invoke(
@@ -456,8 +454,8 @@ class DefaultSessionControlController(
         } else {
             selectTabUseCase.invoke(existingTabForUrl.id)
         }
-
-        navController.navigate(R.id.browserFragment)
+        navController.navigate(R.id.browserFragment)*/
+        navController.navigate(NavGraphDirections.actionGlobalLogin())
     }
 
     override fun handleReport() {
@@ -465,7 +463,6 @@ class DefaultSessionControlController(
     }
 
     override fun handleReportScore(isAppReport: Boolean) {
-        Log.i("xupxxupxxupxxupx", "${isAppReport}")
         if (isAppReport) {
             navController.navigate(NavGraphDirections.actionGlobalReport())
         } else {

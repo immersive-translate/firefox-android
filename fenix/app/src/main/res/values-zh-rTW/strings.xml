@@ -638,6 +638,7 @@
     <string name="preferences_default_search_engine">預設搜尋引擎</string>
     <string name="preferences_account_update">升級</string>
     <string name="preferences_report">回饋</string>
+    <string name="preferences_login">登入</string>
     <!-- Preference for settings related to Search -->
     <string name="preferences_search">搜尋</string>
     <!-- Preference for settings related to Search engines -->
@@ -3281,4 +3282,101 @@
     <string name="buy_vip_hw_agreement_dialog_title">同意條款</string>
     <string name="buy_vip_hw_agreement_dialog_desc">點擊「同意並繼續」，\n即視為已接受%1$s</string>
     <string name="buy_vip_hw_agreement_agree">同意並繼續</string>
+
+    <string name="login_title">註冊並登入</string>
+    <string name="login_desc">登入後立即享有沉浸式翻譯全部免費功能～</string>
+    <string name="login_btn_google">使用 Google 登錄</string>
+    <string name="login_or">或</string>
+    <string name="login_btn_email">使用電子郵件登入</string>
+    <string name="login_btn_apple">使用蘋果帳號登入</string>
+    <string name="login_btn_fb">使用 Facebook 登錄</string>
+    <string name="login_btn_wx">使用微信登入</string>
+    <string name="login_hw_agreement">註冊即表示您同意 %1$s 及 %2$s</string>
+    <string name="login_hw_condition">條件和條款</string>
+    <string name="login_hw_privacy">隱私權政策</string>
+
+    <string name="login_remind_dialog_desc">為保障您的個人資訊安全，請閱讀並同意\n%1$s 及 %2$s</string>
+
+    <string name="email_login_account_title">帳號：</string>
+    <string name="email_login_pwd_title">密碼：</string>
+    <string name="email_login_pwd_hint">請輸入您的密碼：</string>
+    <string name="email_login_forget_pwd">忘記密碼？</string>
+    <string name="email_login_auto_register">首次登入將會自動註冊</string>
+    <string name="email_login_login_btn_text">登入/註冊</string>
+
+    <string name="email_login_reset_title">重置密碼</string>
+    <string name="email_login_reset_success">重置密碼成功</string>
+    <string name="email_login_reset_verify_code">驗證碼：</string>
+    <string name="email_login_reset_verify_code_hint">請輸入您的驗證碼</string>
+    <string name="email_login_reset_verify_code_btn">取得驗證碼</string>
+    <string name="email_login_reset_pwd">新密碼：</string>
+    <string name="email_login_reset_pwd_confirm">確認新密碼：</string>
+    <string name="email_login_reset_ok">密碼重置成功</string>
+    <string name="email_login_reset_goto_login">去登錄</string>
+    <string name="email_login_reset_pwd_invalid">密碼錯誤</string>
+    <string name="email_login_reset_pwd_unknown_email">未找到信箱</string>
+
+    <string name="email_verify_email_hint">請輸入驗證代碼</string>
+    <string name="email_verify_btn_verify">驗證郵箱</string>
+    <string name="email_verify_account_desc">已經有賬戶了？</string>
+    <string name="email_verify_account_login">登錄</string>
+    <string name="email_verify_code_err">感謝註冊，但您的激活碼錯誤。您可以重新獲取驗證碼再次激活。</string>
+    <string name="wx_login_no_install">沒有安裝微信</string>
+
+    <string name="register_pwd_length_toast">密碼長度最少 6 個字符，最多 72 個字符。</string>
+    <string name="login_pwd_err_toast">郵箱或密碼不正確，請重新輸入。</string>
+    <string name="login_success">登錄成功</string>
+
+    <!--web-login-->
+    <string name="error_account_login_1000">郵箱或密碼不正確，請重新輸入</string>
+    <string name="error_account_login_1001">郵箱未激活，請登錄郵箱帳戶</string>
+    <string name="error_account_login_1002">郵箱已激活，請登入郵箱帳戶</string>
+    <string name="error_account_login_1003">帳戶已禁用，請聯繫 support@immersivetranslate.com</string>
+    <string name="error_account_login_1004">帳戶已註銷，請聯繫 support@immersivetranslate.com</string>
+    <string name="error_account_login_1005">用戶名已存在</string>
+    <string name="error_account_login_1006">密碼長度最大為 72 個字符</string>
+    <string name="error_account_login_1007">登入失敗，請稍後再試</string>
+    <string name="error_account_login_1008">用戶名最長為 50 個字符</string>
+    <string name="error_account_login_1009">郵箱未註冊</string>
+    <string name="error_account_login_1010">郵箱已存在</string>
+    <string name="error_account_login_1011">郵箱格式不正確</string>
+    <string name="error_account_login_1014">一次性升級郵箱最近 3 個月已發送</string>
+    <string name="error_account_login_1015">郵箱驗證碼發送過於頻繁，請稍後再試</string>
+    <string name="error_account_login_1016">帳戶和密碼不正確過於頻繁，請稍後再試</string>
+
+    <!--register-->
+    <string name="error_register_1022">密碼是必填項目</string>
+    <string name="error_register_1023">密碼長度最少 6 個字符，最多 72 個字符</string>
+    <string name="error_register_1024">密碼必須包含至少一個字母和一個數字</string>
+    <string name="error_register_1003">此郵箱在禁止註冊列表中，目前無法註冊</string>
+    <string name="error_register_1004">帳戶受限</string>
+    <string name="error_register_1006">密碼長度最大為 72 個字符</string>
+
+    <!--auth callback-->
+    <string name="error_auth_callback_1007">登入失敗，請稍後再試</string>
+
+    <!--find pass code-->
+    <string name="error_find_pwd_verify_1015">Em郵箱驗證碼發送過於頻繁，請稍後再試</string>
+    <string name="error_find_pwd_verify_1011">無效的郵箱</string>
+    <string name="error_find_pwd_verify_1009">未找到電子郵箱</string>
+
+    <!--reset password-->
+    <string name="error_reset_password_1002">密碼是必填項目</string>
+    <string name="error_reset_password_1023">密碼長度最少 6 個字符，最多 72 個字符</string>
+    <string name="error_reset_password_1024">密碼必須包含至少一個字母和一個數字</string>
+    <string name="error_reset_password_1025">重設密碼過於頻繁，請稍後再試</string>
+    <string name="error_reset_password_1026">驗證碼無效，請重試</string>
+    <string name="error_reset_password_1027">電子郵箱無效，請檢查郵箱帳戶</string>
+    <string name="error_reset_password_1029">郵箱驗證碼發送過於頻繁，請稍後再試</string>
+
+    <!--account activate-->
+    <string name="error_account_activate_1030">透過郵箱驗證碼激活用戶過於頻繁，請稍後再試</string>
+    <string name="error_account_activate_1031">T感謝註冊，但您的激活碼已過期。您可以重新獲取驗證碼再次激活</string>
+    <string name="error_account_activate_1032">感謝註冊，但您的激活碼錯誤。您可以重新獲取驗證碼再次激活</string>
+    <string name="error_account_activate_1028">郵箱無效</string>
+    <string name="error_account_activate_1033">感謝註冊，您的帳戶已激活。祝您在 immersivetranslate.com 玩得愉快</string>
+
+    <!--re active code-->
+    <string name="error_re_active_code_1029">郵箱驗證碼發送過於頻繁，請稍後再試</string>
+    <string name="error_re_active_code_1028">郵箱無效</string>
 </resources>

@@ -38,6 +38,7 @@ object JavaScriptMessageHandler {
         registerGotoBuyVipHandler(context)
         registerPageTranslateStateHandler()
         registerImageTextRecognitionHandler()
+        registerGetUserInfoHandler(context)
     }
 
     private fun registerDefaultBrowserHandler(context: Activity) {
@@ -208,6 +209,31 @@ object JavaScriptMessageHandler {
                 continuation.resume(response)
             }
         }
+    }
+
+    private fun registerGetUserInfoHandler(context: Activity) {
+        WebMessageBridge.registerHandler(
+            "getUserInfo",
+            object : RequestHandler {
+                override fun process(
+                    message: WebMessage,
+                    callback: (response: JSONObject?) -> Unit,
+                ) {
+                    val jsonObject = UserManager.getUserInfo(context)?.let {
+                        try {
+                            JSONObject(it)
+                        } catch (_: Exception) {
+                            null
+                        }
+                    }
+                    val result = getResult(true)
+                    jsonObject?.let {
+                        result.put("userInfo", jsonObject)
+                    }
+                    callback(result)
+                }
+            },
+        )
     }
 
     fun addPageStateCallback(onPageCallback: OnPageCallback) {

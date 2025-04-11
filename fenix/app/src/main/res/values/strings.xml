@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<resources xmlns:tools="http://schemas.android.com/tools"  xmlns:moz="http://mozac.org/tools">
+<resources xmlns:moz="http://mozac.org/tools" xmlns:tools="http://schemas.android.com/tools">
     <!-- App name for private browsing mode. The first parameter is the name of the app defined in app_name (for example: Fenix)-->
     <string name="app_name_private_5">Private %s</string>
     <!-- App name for private browsing mode. The first parameter is the name of the app defined in app_name (for example: Fenix)-->
@@ -336,10 +336,10 @@
     <string name="browser_menu_tools_description" moz:removedIn="133" tools:ignore="UnusedResources">Reader View, Print, Share, Open app</string>
     <!-- Browser menu description that describes the various tools related menu items inside of the tools sub-menu
          The first parameter is the label of the report site issue (for example: Report Site issue) -->
-    <string name="browser_menu_tools_description_with_translate_2"  moz:removedIn="133" tools:ignore="UnusedResources">Reader View, Translate,%s Print, Share, Open app</string>
+    <string name="browser_menu_tools_description_with_translate_2" moz:removedIn="133" tools:ignore="UnusedResources">Reader View, Translate,%s Print, Share, Open app</string>
     <!-- Browser menu description that describes the various tools related menu items inside of the tools sub-menu
          The first parameter is the label of the report site issue (for example: Report Site issue) -->
-    <string name="browser_menu_tools_description_2"  moz:removedIn="133" tools:ignore="UnusedResources">Reader View,%s Print, Share, Open app</string>
+    <string name="browser_menu_tools_description_2" moz:removedIn="133" tools:ignore="UnusedResources">Reader View,%s Print, Share, Open app</string>
     <!-- Browser menu description that describes the various tools related menu items inside of the tools sub-menu
          The first parameter is the label of the report site issue (for example: Report Site issue) -->
     <string name="browser_menu_tools_description_with_translate_with_report_site">Reader View, Translate, %s, Print, Share, Open app</string>
@@ -433,7 +433,7 @@
     <!-- Header text for the search selector menu -->
     <string name="search_header_menu_item_2">This time search in:</string>
     <!-- Content description (not visible, for screen readers etc.): Search engine icon. The first parameter is the search engine name (for example: DuckDuckGo). -->
-    <string name="search_engine_icon_content_description" tools:ignore="UnusedResources" moz:removedIn="133">%s search engine</string>
+    <string name="search_engine_icon_content_description" moz:removedIn="133" tools:ignore="UnusedResources">%s search engine</string>
     <!-- Content description (not visible, for screen readers etc.): Search engine icon.
     The parameter is the search engine name (for example: DuckDuckGo). -->
     <string name="search_engine_icon_content_description_1">Search engine: %s</string>
@@ -531,9 +531,9 @@
     <!-- Onboarding sub header for the add-ons card, used by Nimbus experiments. -->
     <string name="onboarding_add_on_sub_header" tools:ignore="UnusedResources">Add third-party extensions to enhance your security, productivity, and more.</string>
     <!-- Onboarding add-ons card, for checking more add-ons on, used by Nimbus experiments. -->
-    <string name="onboarding_add_on_explore_more_extensions" tools:ignore="UnusedResources" moz:removedIn="133">Explore more extensions.</string>
+    <string name="onboarding_add_on_explore_more_extensions" moz:removedIn="133" tools:ignore="UnusedResources">Explore more extensions.</string>
     <!-- Onboarding add-ons card, button for start browsing, used by Nimbus experiments. -->
-    <string name="onboarding_add_on_start_browsing_button" tools:ignore="UnusedResources" moz:removedIn="133">Start browsing.</string>
+    <string name="onboarding_add_on_start_browsing_button" moz:removedIn="133" tools:ignore="UnusedResources">Start browsing.</string>
     <!-- Onboarding add-ons card, for checking more add-ons on, used by Nimbus experiments. -->
     <string name="onboarding_add_on_explore_more_extensions_2">Explore more extensions</string>
     <!-- Onboarding add-ons card, button for start browsing, used by Nimbus experiments. -->
@@ -596,6 +596,7 @@
     <string name="preferences_default_search_engine">Default search engine</string>
     <string name="preferences_account_update">Upgrade</string>
     <string name="preferences_report">Feedback</string>
+    <string name="preferences_login">Login</string>
     <!-- Preference for settings related to Search -->
     <string name="preferences_search">Search</string>
     <!-- Preference for settings related to Search engines -->
@@ -3062,5 +3063,102 @@
     <string name="buy_vip_hw_agreement_dialog_title">Agree to Terms</string>
     <string name="buy_vip_hw_agreement_dialog_desc">By clicking ‘Agree and Continue’,\nyou accept the %1$s</string>
     <string name="buy_vip_hw_agreement_agree">Agree and Continue</string>
+
+    <string name="login_title">Register and login</string>
+    <string name="login_desc">After logging in, you can enjoy all the free features of Immersive Translation～</string>
+    <string name="login_btn_google">Login with Google</string>
+    <string name="login_or">or</string>
+    <string name="login_btn_email">Login with email</string>
+    <string name="login_btn_apple">Login with Apple</string>
+    <string name="login_btn_fb">Login with Facebook</string>
+    <string name="login_btn_wx">Login with WeChat</string>
+    <string name="login_hw_agreement">By signing up, you agree to %1$s and %2$s</string>
+    <string name="login_hw_condition">Terms and Conditions</string>
+    <string name="login_hw_privacy">Privacy Policy</string>
+
+    <string name="login_remind_dialog_desc">To protect the security of your personal information, please read and agree to\n%1$s , %2$s</string>
+
+    <string name="email_login_account_title">Account:</string>
+    <string name="email_login_pwd_title">Password:</string>
+    <string name="email_login_pwd_hint">Please enter your password:</string>
+    <string name="email_login_forget_pwd">Forgot password?</string>
+    <string name="email_login_auto_register">First login will automatically register</string>
+    <string name="email_login_login_btn_text">Login/Register</string>
+
+    <string name="email_login_reset_title">Reset Password</string>
+    <string name="email_login_reset_success">Reset password successful</string>
+    <string name="email_login_reset_verify_code">Verification code:</string>
+    <string name="email_login_reset_verify_code_hint">Please enter your verification code</string>
+    <string name="email_login_reset_verify_code_btn">Get verification code</string>
+    <string name="email_login_reset_pwd">New Password:</string>
+    <string name="email_login_reset_pwd_confirm">Confirm new password:</string>
+    <string name="email_login_reset_ok">Password reset successful</string>
+    <string name="email_login_reset_goto_login">Login</string>
+    <string name="email_login_reset_pwd_invalid">Wrong password</string>
+    <string name="email_login_reset_pwd_unknown_email">Email not found</string>
+
+    <string name="email_verify_email_hint">Please enter the verification code</string>
+    <string name="email_verify_btn_verify">Verify Email</string>
+    <string name="email_verify_account_desc">Already have an account?</string>
+    <string name="email_verify_account_login">Login</string>
+    <string name="email_verify_code_err">Thank you for registering, but your activation code is incorrect. You can retrieve the verification code again to activate.</string>
+    <string name="wx_login_no_install">WeChat is not installed</string>
+
+    <string name="register_pwd_length_toast">Password length minimum 6 characters, maximum 72 characters</string>
+    <string name="login_pwd_err_toast">Email or password is incorrect, please enter correctly</string>
+    <string name="login_success">Login successful</string>
+
+    <!--web-login-->
+    <string name="error_account_login_1000">Email or password is incorrect, please enter correctly</string>
+    <string name="error_account_login_1001">The email address not activated,please login your email account</string>
+    <string name="error_account_login_1002">The email address activated,please login your email account</string>
+    <string name="error_account_login_1003">Your account is disabled, please contact support@immersivetranslate.com</string>
+    <string name="error_account_login_1004">Your account is deactivated, please contact support@immersivetranslate.com</string>
+    <string name="error_account_login_1005">This username is already in use.</string>
+    <string name="error_account_login_1006">Password length maximum 72 characters.</string>
+    <string name="error_account_login_1007">Oauth login fail, Please try again later.</string>
+    <string name="error_account_login_1008">Username must be at most 50 characters.</string>
+    <string name="error_account_login_1009">Email address has not registered.</string>
+    <string name="error_account_login_1010">This email is already in use.</string>
+    <string name="error_account_login_1011">Invalid email.</string>
+    <string name="error_account_login_1014">onetime upgrade email latest 3 month sended</string>
+    <string name="error_account_login_1015">Email verification codes were sent too frequently. Please try again later</string>
+    <string name="error_account_login_1016">The account and password are incorrect too frequently. Please try again later.</string>
+
+    <!--register-->
+    <string name="error_register_1022">Password is required.</string>
+    <string name="error_register_1023">Password length minimum 6 characters, maximum 72 characters.</string>
+    <string name="error_register_1024">Password must contain at least one letter, one number.</string>
+    <string name="error_register_1003">The email is on the prohibited registration list and cannot be registered at this time.</string>
+    <string name="error_register_1004">An account is limited.</string>
+    <string name="error_register_1006">Password length maximum 72 characters.</string>
+
+    <!--auth callback-->
+    <string name="error_auth_callback_1007">Password is required.</string>
+
+    <!--find pass code-->
+    <string name="error_find_pwd_verify_1015">Email verification codes were sent too frequently. Please try again later</string>
+    <string name="error_find_pwd_verify_1011">Invalid email.</string>
+    <string name="error_find_pwd_verify_1009">email not found.</string>
+
+    <!--reset password-->
+    <string name="error_reset_password_1002">Password is required.</string>
+    <string name="error_reset_password_1023">Password length minimum 6 characters, maximum 72 characters.</string>
+    <string name="error_reset_password_1024">Password must contain at least one letter, one number.</string>
+    <string name="error_reset_password_1025">Reset Password too frequently. Please try again later.</string>
+    <string name="error_reset_password_1026">invalid code,please try again.</string>
+    <string name="error_reset_password_1027">invalid email,please check email account.</string>
+    <string name="error_reset_password_1029">Email verification codes were sent too frequently. Please try again later.</string>
+
+    <!--account activate-->
+    <string name="error_account_activate_1030">Activate user by email code too frequently. Please try again later.</string>
+    <string name="error_account_activate_1031">Thank you for registration,but your activationCode has expired. You can click `Request a new code` to activate again.</string>
+    <string name="error_account_activate_1032">Thank you for registration,but your activationCode error. You can click `Request a new code` to activate again.</string>
+    <string name="error_account_activate_1028">email invalid.</string>
+    <string name="error_account_activate_1033">Thank you for registration, and you have already activated your account. Have fun with immersivetranslate.com.</string>
+
+    <!--re active code-->
+    <string name="error_re_active_code_1029">Email verification codes were sent too frequently. Please try again later.</string>
+    <string name="error_re_active_code_1028">email invalid.</string>
 
 </resources>

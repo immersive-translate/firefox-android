@@ -412,6 +412,23 @@
     <color name="normal_color_FAFDFF">#FFFAFDFF</color>
     <color name="normal_color_EA4C89">#FFEA4C89</color>
 
+    <color name="normal_color_EC5E95">#FFEC5E95</color>
+    <color name="normal_color_E34A85">#FFE34A85</color>
+    <color name="normal_color_EE71A2">#FFEE71A2</color>
+    <color name="normal_color_F4A5C4">#FFF4A5C4</color>
+    <color name="normal_color_F9C9DC">#FFF9C9DC</color>
+    <color name="normal_color_FDEDF3">#FFFDEDF3</color>
+
+    <color name="normal_color_F3F5F6">#FFF3F5F6</color>
+    <color name="normal_color_F6F8F9">#FFF6F8F9</color>
+    <color name="normal_color_EDF1F2">#FFEDF1F2</color>
+    <color name="normal_color_FAFBFB">#FFFAFBFB</color>
+    <color name="normal_color_F53F3F">#FFF53F3F</color>
+    <color name="normal_color_21BB45">#FF21BB45</color>
+    <color name="normal_color_4181F0">#FF4181F0</color>
+    <color name="normal_color_A0C0F8">#FFA0C0F8</color>
+
+    <!-- ############## -->
     <color name="normal_color_FFFFFF_">#FF191919</color>
     <color name="normal_color_000000_">#FFFFFFFF</color>
     <color name="normal_color_222222_">#FFDBDBDB</color>
@@ -427,6 +444,21 @@
     <color name="normal_color_FAFBFC_">#FF2B2E3B</color>
     <color name="normal_color_FAFDFF_">#FF1F2123</color>
     <color name="normal_color_EA4C89_">#FFE23C7C</color>
+
+    <color name="normal_color_EC5E95_">#FFEA4C89</color>
+    <color name="normal_color_E34A85_">#FFD5467D</color>
+    <color name="normal_color_EE71A2_">#FFA93A65</color>
+    <color name="normal_color_F4A5C4_">#FF7E2F4D</color>
+    <color name="normal_color_F9C9DC_">#FF522335</color>
+    <color name="normal_color_FDEDF3_">#FF26171D</color>
+    <color name="normal_color_F3F5F6_">#FF252626</color>
+    <color name="normal_color_F6F8F9_">#FF2D2E2E</color>
+    <color name="normal_color_EDF1F2_">#FF202121</color>
+    <color name="normal_color_FAFBFB_">#FF1D1E1E</color>
+    <color name="normal_color_F53F3F_">#FFDF3B3B</color>
+    <color name="normal_color_21BB45_">#FF20AA40</color>
+    <color name="normal_color_4181F0_">#FF4181F0</color>
+    <color name="normal_color_A0C0F8_">#FF204078</color>
 
     <color name="onboarding_indicator_primary_color">#FFE6E6E6</color>
     <color name="onboarding_indicator_second_color">#FF222222</color>

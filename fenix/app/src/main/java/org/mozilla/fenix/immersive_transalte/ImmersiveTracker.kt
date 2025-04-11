@@ -21,6 +21,7 @@ import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.google.android.gms.appset.AppSet
 import com.google.android.gms.appset.AppSetIdClient
 import com.google.android.gms.tasks.Tasks
+import com.immersivetranslate.browser.wxapi.WxApi
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -53,6 +54,7 @@ object ImmersiveTracker {
             adjustS2STracker = AdjustS2STracker(ctx)
             initAdjust(ctx)
             initFB(ctx)
+            WxApi.init(ctx)
         }
     }
 

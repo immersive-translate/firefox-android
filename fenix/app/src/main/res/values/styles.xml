@@ -163,6 +163,21 @@
         <item name="normal_color_FAFBFC">@color/normal_color_FAFBFC</item>
         <item name="normal_color_FAFDFF">@color/normal_color_FAFDFF</item>
         <item name="normal_color_EA4C89">@color/normal_color_EA4C89</item>
+
+        <item name="normal_color_EC5E95">@color/normal_color_EC5E95</item>
+        <item name="normal_color_E34A85">@color/normal_color_E34A85</item>
+        <item name="normal_color_EE71A2">@color/normal_color_EE71A2</item>
+        <item name="normal_color_F4A5C4">@color/normal_color_F4A5C4</item>
+        <item name="normal_color_F9C9DC">@color/normal_color_F9C9DC</item>
+        <item name="normal_color_FDEDF3">@color/normal_color_FDEDF3</item>
+        <item name="normal_color_F3F5F6">@color/normal_color_F3F5F6</item>
+        <item name="normal_color_F6F8F9">@color/normal_color_F6F8F9</item>
+        <item name="normal_color_EDF1F2">@color/normal_color_EDF1F2</item>
+        <item name="normal_color_FAFBFB">@color/normal_color_FAFBFB</item>
+        <item name="normal_color_F53F3F">@color/normal_color_F53F3F</item>
+        <item name="normal_color_21BB45">@color/normal_color_21BB45</item>
+        <item name="normal_color_4181F0">@color/normal_color_4181F0</item>
+        <item name="normal_color_A0C0F8">@color/normal_color_A0C0F8</item>
     </style>
 
     <!-- A theme derived from the normal activity theme, but to look and behave like a dialog -->
@@ -379,6 +394,21 @@
         <item name="normal_color_FAFBFC">@color/normal_color_FAFBFC_</item>
         <item name="normal_color_FAFDFF">@color/normal_color_FAFDFF_</item>
         <item name="normal_color_EA4C89">@color/normal_color_EA4C89_</item>
+
+        <item name="normal_color_EC5E95">@color/normal_color_EC5E95_</item>
+        <item name="normal_color_E34A85">@color/normal_color_E34A85_</item>
+        <item name="normal_color_EE71A2">@color/normal_color_EE71A2_</item>
+        <item name="normal_color_F4A5C4">@color/normal_color_F4A5C4_</item>
+        <item name="normal_color_F9C9DC">@color/normal_color_F9C9DC_</item>
+        <item name="normal_color_FDEDF3">@color/normal_color_FDEDF3_</item>
+        <item name="normal_color_F3F5F6">@color/normal_color_F3F5F6_</item>
+        <item name="normal_color_F6F8F9">@color/normal_color_F6F8F9_</item>
+        <item name="normal_color_EDF1F2">@color/normal_color_EDF1F2_</item>
+        <item name="normal_color_FAFBFB">@color/normal_color_FAFBFB_</item>
+        <item name="normal_color_F53F3F">@color/normal_color_F53F3F_</item>
+        <item name="normal_color_21BB45">@color/normal_color_21BB45_</item>
+        <item name="normal_color_4181F0">@color/normal_color_4181F0_</item>
+        <item name="normal_color_A0C0F8">@color/normal_color_A0C0F8_</item>
     </style>
 
     <style name="Mozac.Browser.Menu" parent="" tools:ignore="UnusedResources">
@@ -791,6 +821,11 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
 </resources>

@@ -21,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.text.HtmlCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -248,7 +249,7 @@ class ReportFragment : Fragment() {
             R.string.report_commit_success,
         ) {
             if (!isDetached) {
-                activity?.supportFragmentManager?.popBackStack()
+                NavHostFragment.findNavController(this).popBackStack()
             }
         }.show()
     }

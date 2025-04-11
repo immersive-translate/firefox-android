@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="?normal_color_A0C0F8" android:state_enabled="false" />  <!-- 禁用时 -->
+    <item android:color="?normal_color_4181F0" /> <!-- 默认颜色 -->
+</selector>

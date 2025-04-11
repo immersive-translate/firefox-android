@@ -47,6 +47,8 @@ object SupportUtils {
     const val APP_OPT_URL = "https://dash.immersivetranslate.com/"
     const val APP_AGREEMENT_URL = "https://immersivetranslate.com/docs/TERMS/"
     const val APP_HW_AGREEMENT_URL = "https://browser.immersivetranslate.com/subscription-agreement"
+    const val APP_LOGIN_HW_CONDITION_URL = "https://immersivetranslate.com/zh-Hans/docs/TERMS/"
+    const val APP_LOGIN_HW_PRIVACY_URL = "https://immersivetranslate.com/zh-Hans/docs/PRIVACY/"
 
     const val FXACCOUNT_SUMO_URL = "https://support.mozilla.org/kb/access-mozilla-services-firefox-account"
 

@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.mozilla.fenix.FenixApplication
+import org.mozilla.fenix.immersive_transalte.bean.UserBean
 import org.mozilla.fenix.immersive_transalte.net.service.MemberService
 
 object UserManager {
@@ -28,9 +29,19 @@ object UserManager {
         sp.edit().putString(USER_INFO_KEY, json).apply()
     }
 
+    fun saveUser(context: Context, user: UserBean) {
+        val userInfo = gson.toJson(user)
+        saveUser(context, userInfo)
+    }
+
     fun clearUser(context: Context) {
         val sp = context.getSharedPreferences(SP_KEY, Context.MODE_PRIVATE)
         sp.edit().remove(USER_INFO_KEY).apply()
+    }
+
+    fun getUserInfo(context: Context): String? {
+        val sp = context.getSharedPreferences(SP_KEY, Context.MODE_PRIVATE)
+        return sp.getString(USER_INFO_KEY, null)
     }
 
     /**

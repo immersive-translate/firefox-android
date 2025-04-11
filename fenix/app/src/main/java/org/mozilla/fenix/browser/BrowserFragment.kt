@@ -425,7 +425,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
             val jsonObject = JSONObject()
             WebMessageBridge.callHandler(it, "getPageStatus", jsonObject) { result ->
                 try {
-                    if (it != curTabSessionId) {
+                    if (it != curTabSessionId || isDetached) {
                         return@callHandler
                     }
                     val pageStatus = result.data?.optBoolean("pageTranslated") ?: false

@@ -5,12 +5,18 @@
 package org.mozilla.fenix.immersive_transalte.utils
 
 import android.content.Context
+import android.view.Gravity
 import android.widget.Toast
 import androidx.annotation.StringRes
 
 object ToastUtil {
 
-    fun toast(context: Context, msg: String, isLong: Boolean, gravity: Int) {
+    fun toast(
+        context: Context,
+        msg: String,
+        isLong: Boolean = false,
+        gravity: Int = Gravity.BOTTOM,
+    ) {
         val toast = Toast.makeText(
             context, msg,
             if (isLong) Toast.LENGTH_LONG
@@ -20,7 +26,12 @@ object ToastUtil {
         toast.show()
     }
 
-    fun toast(context: Context, @StringRes resId: Int, isLong: Boolean, gravity: Int) {
+    fun toast(
+        context: Context,
+        @StringRes resId: Int,
+        isLong: Boolean = false,
+        gravity: Int = Gravity.BOTTOM,
+    ) {
         val msg = context.getString(resId)
         toast(context, msg, isLong, gravity)
     }

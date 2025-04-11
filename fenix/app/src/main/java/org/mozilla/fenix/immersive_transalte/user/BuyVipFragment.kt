@@ -41,8 +41,10 @@ import org.mozilla.fenix.immersive_transalte.base.widget.ProcessDialog
 import org.mozilla.fenix.immersive_transalte.bean.UserBean
 import org.mozilla.fenix.immersive_transalte.bean.VipProductBean
 import org.mozilla.fenix.immersive_transalte.bean.VipUpgradeBean
+import org.mozilla.fenix.immersive_transalte.login.LoginFragmentDialog
 import org.mozilla.fenix.immersive_transalte.net.service.MemberService
 import org.mozilla.fenix.immersive_transalte.utils.PixelUtil
+import org.mozilla.fenix.immersive_transalte.utils.SimpleEventBus
 import org.mozilla.fenix.settings.SupportUtils
 import kotlin.math.ceil
 
@@ -75,6 +77,10 @@ class BuyVipFragment : Fragment() {
         get() = ImmersiveTracker.getAdjustAttribution()?.toMap()?.toJSON()?.toString()
 
     private val browsingModeManager get() = (activity as HomeActivity).browsingModeManager
+
+    private val onLogin: (obj: Any?) -> Unit = {
+        loadData()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -144,6 +150,7 @@ class BuyVipFragment : Fragment() {
         refreshHwAgreement()
         // 加载数据
         loadData()
+        SimpleEventBus.register(SimpleEventBus.EVENT_LOGIN, onLogin)
     }
 
     private fun refreshHwAgreement() {
@@ -426,12 +433,25 @@ class BuyVipFragment : Fragment() {
     }
 
     private fun gotoUserLogin() {
+        /*if (!isNeedTitle) {
+            callback?.onGotoBuy()
+        }*/
+        /*(requireActivity() as HomeActivity).openToBrowserAndLoad(
+            "${Constant.loginPage}?app_action=gotoUpgrade", true,
+            BrowserDirection.FromGlobal,
+        )*/
+        LoginFragmentDialog().show(childFragmentManager, "DialogLoginFragment")
+    }
+
+    /**
+     * 支付成功
+     */
+    private fun  gotoPaySuccessPage() {
         if (!isNeedTitle) {
             callback?.onGotoBuy()
         }
         (requireActivity() as HomeActivity).openToBrowserAndLoad(
-            "${Constant.loginPage}?app_action=gotoUpgrade", true,
-            BrowserDirection.FromGlobal,
+            Constant.paySuccess, true, BrowserDirection.FromGlobal,
         )
     }
 
@@ -517,11 +537,12 @@ class BuyVipFragment : Fragment() {
                 TrialUpgradeDialog(
                     requireContext(), it, upcomming, trackerCampaign,
                     { upgradeBean ->
-                        (requireActivity() as HomeActivity).openToBrowserAndLoad(
+                        /*(requireActivity() as HomeActivity).openToBrowserAndLoad(
                             searchTermOrURL = Constant.paySuccess,
                             newTab = true,
                             from = BrowserDirection.FromGlobal,
-                        )
+                        )*/
+                        gotoPaySuccessPage()
                         trackTrialUpgradeToYearVip(upcomming, upgradeBean.imtOrderId)
                     },
                 ).show()
@@ -552,9 +573,10 @@ class BuyVipFragment : Fragment() {
                 MonthUpgradeDialog(
                     requireContext(), it, upcomming, trackerCampaign,
                     { upgradeBean ->
-                        (requireActivity() as HomeActivity).openToBrowserAndLoad(
+                        /*(requireActivity() as HomeActivity).openToBrowserAndLoad(
                             Constant.paySuccess, true, BrowserDirection.FromGlobal,
-                        )
+                        )*/
+                        gotoPaySuccessPage()
                         trackMonthUpgradeToYearVip(upcomming, upgradeBean.imtOrderId)
                     },
                 ).show()
@@ -583,9 +605,10 @@ class BuyVipFragment : Fragment() {
                 BuyVipPopWindow(
                     requireActivity(), it, userInfo!!,
                     onPaySuccess = {
-                        (requireActivity() as HomeActivity).openToBrowserAndLoad(
+                        /*(requireActivity() as HomeActivity).openToBrowserAndLoad(
                             Constant.paySuccess, true, BrowserDirection.FromGlobal,
-                        )
+                        )*/
+                        gotoPaySuccessPage()
                         val imtSessionId = orderBean.data?.data?.imtSessionId ?: 0
                         trackTrialOrMonthVip(isEnableTrial, isYearVip, imtSessionId)
                     },
@@ -683,6 +706,7 @@ class BuyVipFragment : Fragment() {
 
     override fun onDestroy() {
         scope.cancel()
+        SimpleEventBus.unregister(SimpleEventBus.EVENT_LOGIN, onLogin)
         super.onDestroy()
     }
 

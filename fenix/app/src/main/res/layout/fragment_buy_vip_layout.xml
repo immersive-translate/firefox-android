@@ -658,8 +658,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/hw_agreement_checkbox"
-                    android:padding="6dp"
-                    android:checked="true"/>
+                    android:padding="6dp"/>
 
                 <TextView
                     android:id="@+id/tv_hw_agreement"

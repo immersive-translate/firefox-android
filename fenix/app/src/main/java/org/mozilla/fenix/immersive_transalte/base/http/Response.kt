@@ -8,7 +8,8 @@ import java.io.Serializable
 
 class Response<T> : Serializable {
 
-    var code: Int = 0;
+    var code: Int = 0
+    var errorCode: Int = 0
     var msg: String? = null
     var data: T? = null
 
