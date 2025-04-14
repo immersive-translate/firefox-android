@@ -12,7 +12,7 @@
         android:paddingStart="24dp"
         android:paddingTop="16dp"
         android:paddingEnd="24dp"
-        android:paddingBottom="26dp">
+        android:paddingBottom="36dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"

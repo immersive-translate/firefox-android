@@ -41,8 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:paddingStart="54dp"
-            android:paddingEnd="54dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
             android:text="@string/login_desc"
             android:textAlignment="center"
             android:textColor="?normal_color_333333"
@@ -254,11 +254,11 @@
             android:id="@+id/ll_hw_agreement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="26dp"
+            android:layout_marginBottom="6dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -269,7 +269,10 @@
                 android:layout_height="wrap_content"
                 android:button="@drawable/hw_agreement_checkbox"
                 android:checked="false"
-                android:padding="6dp" />
+                android:paddingEnd="6dp"
+                android:paddingStart="6dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_hw_agreement"

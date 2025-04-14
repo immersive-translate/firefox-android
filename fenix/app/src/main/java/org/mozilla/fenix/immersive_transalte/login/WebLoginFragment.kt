@@ -7,7 +7,6 @@ package org.mozilla.fenix.immersive_transalte.login
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -142,7 +141,6 @@ class WebLoginFragment : Fragment() {
             val params: MutableMap<String, String?> = mutableMapOf()
             params["state"] = "Apple_imt"
             params["access_token"] = getQueryParameter(callbackUri, "code")
-            Log.i("xupxxupxxupxxupx", "code: ${params["access_token"]}")
             val jsonObject = JSONObject()
             jsonObject.put("type", "apple")
             jsonObject.put("params", params)

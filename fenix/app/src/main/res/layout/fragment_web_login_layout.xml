@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/dialog_login_web_bg"
         android:paddingTop="20dp"
-        android:paddingBottom="20dp">
+        android:paddingBottom="6dp">
 
         <org.mozilla.geckoview.GeckoView
             android:id="@+id/geckoview"

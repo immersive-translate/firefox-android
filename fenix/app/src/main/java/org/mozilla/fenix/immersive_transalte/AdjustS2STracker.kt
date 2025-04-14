@@ -100,6 +100,7 @@ class AdjustS2STracker(
     suspend fun trackEvent(eventToken: String, eventParams: Map<String, String>? = null) {
         val params = getTrackEventParams()
         params["event_token"] = eventToken
+        params["eventToken"] = eventToken
         eventParams?.let {
             params["callback_params"] = it.toJSON().toString()
         }
@@ -117,6 +118,7 @@ class AdjustS2STracker(
     ) {
         val params = getTrackEventParams()
         params["event_token"] = eventToken
+        params["eventToken"] = eventToken
         params["revenue"] = revenue
         params["currency"] = currency
         if (imtSessionId > 0) {

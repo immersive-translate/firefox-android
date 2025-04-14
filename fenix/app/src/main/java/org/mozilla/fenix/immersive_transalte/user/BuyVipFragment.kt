@@ -106,12 +106,20 @@ class BuyVipFragment : Fragment() {
         }
         binding.llBuyVip.setOnClickListener {
             if (userInfo != null) {
-                createOrderClick()
+                if (binding.cbHwAgreement.isChecked) {
+                    createOrderClick()
+                } else {
+                    gotoHwPrivacyPolicy {
+                        createOrderClick()
+                    }
+                }
             } else {
                 if (binding.cbHwAgreement.isChecked) {
                     gotoUserLogin()
                 } else {
-                    gotoHwPrivacyPolicy()
+                    gotoHwPrivacyPolicy {
+                        gotoUserLogin()
+                    }
                 }
             }
         }
@@ -127,6 +135,13 @@ class BuyVipFragment : Fragment() {
         }
         binding.ivPopEmail.setOnClickListener {
             showTips(it, R.string.buy_vip_tip_04)
+        }
+
+        binding.ivPopBabel.setOnClickListener {
+            showTips(it, R.string.buy_vip_tip_05)
+        }
+        binding.ivPopImage.setOnClickListener {
+            showTips(it, R.string.buy_vip_tip_06)
         }
 
         binding.cbHwAgreement.setOnCheckedChangeListener { _, isChecked ->
@@ -204,10 +219,13 @@ class BuyVipFragment : Fragment() {
         trackEvent("Show")
     }
 
+    private var tipsPopupWindow: BuyVipTipsPopWindow? = null
     private fun showTips(view: View, @StringRes resId: Int) {
-        BuyVipTipsPopWindow(
+        tipsPopupWindow = BuyVipTipsPopWindow(
             requireActivity(), resId,
-        ).show(binding.flTipsContainer, view)
+        ).apply {
+            show(binding.flTipsContainer, view)
+        }
     }
 
     private fun changePayType(payType: Int) {
@@ -690,18 +708,26 @@ class BuyVipFragment : Fragment() {
         trackEvent("Agreement_Click")
     }
 
-    private fun gotoHwPrivacyPolicy() {
+    private fun gotoHwPrivacyPolicy(onAgree: (() -> Unit)? = null) {
         activity?.let {
             HwPrivacyRemindDialog(
                 activity = it,
                 onAgree = {
                     binding.cbHwAgreement.isChecked = true
+                    binding.root.postDelayed(
+                        { onAgree?.invoke() }, 300
+                    )
                 },
                 onShowHwAgreement = {
                     gotoHwRecurringPaymentAgreement()
                 },
             ).show(binding.root)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        tipsPopupWindow?.dismiss()
     }
 
     override fun onDestroy() {

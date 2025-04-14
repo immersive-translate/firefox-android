@@ -26,6 +26,7 @@ import org.mozilla.fenix.databinding.FragmentLoginLayoutBinding
 import org.mozilla.fenix.ext.showToolbar
 import org.mozilla.fenix.immersive_transalte.base.widget.ProcessDialog
 import org.mozilla.fenix.immersive_transalte.user.HwAgreementDialog
+import org.mozilla.fenix.immersive_transalte.utils.FastClickUtil
 import org.mozilla.fenix.immersive_transalte.utils.SimpleEventBus
 import org.mozilla.fenix.immersive_transalte.utils.ToastUtil
 import org.mozilla.fenix.settings.SupportUtils
@@ -45,6 +46,7 @@ class LoginFragment : Fragment() {
     private lateinit var loginManager: ThirdLoginManager
     private val scope = MainScope()
     private val fbLoginManager = FbLoginManager()
+    private val fastClickUtil = FastClickUtil()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,7 +88,9 @@ class LoginFragment : Fragment() {
             /*if (isDialog) {
                 EmailLoginFragmentDialog().show(parentFragmentManager, "DialogLoginFragment")
             }*/
-            EmailLoginFragmentDialog().show(parentFragmentManager, "DialogLoginFragment")
+            if (!fastClickUtil.isFastClick()) {
+                EmailLoginFragmentDialog().show(parentFragmentManager, "DialogLoginFragment")
+            }
         }
 
         binding.llLoginGoogle.setOnClickListener {
@@ -105,6 +109,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginWithThird(loginType: Int) {
+        if (fastClickUtil.isFastClick()) {
+            return
+        }
         val ctx = binding.root.context
         val isFacebookSdk = (loginType == ThirdLoginManager.TYPE_FACEBOOK)
                 && fbLoginManager.isInstall(ctx)

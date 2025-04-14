@@ -62,12 +62,14 @@ object TrackerService : BaseService() {
     }
 
     suspend fun adjustS2sSession(params: MutableMap<String, Any?>): Response<Any?> {
-        val url = "${adjustS2sUrl}/adjust/sessions"
-        return executeHttpAndCallback(trackerApi?.adjustS2sSession(url, params))
+        val url = "${adjustS2sUrl}/adjust/session"
+        val headerMap = getHeadersMap()
+        return executeHttpAndCallback(trackerApi?.adjustS2sSession(url, headerMap, params))
     }
 
     suspend fun adjustS2sEvent(params: MutableMap<String, Any?>): Response<Any?> {
-        val url = "${adjustS2sUrl}/adjust/events"
-        return executeHttpAndCallback(trackerApi?.adjustS2sEvent(url, params))
+        val url = "${adjustS2sUrl}/adjust/event"
+        val headerMap = getHeadersMap()
+        return executeHttpAndCallback(trackerApi?.adjustS2sEvent(url, headerMap, params))
     }
 }

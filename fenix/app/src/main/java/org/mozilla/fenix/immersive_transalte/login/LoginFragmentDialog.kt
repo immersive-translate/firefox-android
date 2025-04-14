@@ -5,21 +5,22 @@
 package org.mozilla.fenix.immersive_transalte.login
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.DialogInterface
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDialogFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.DialogLoginFragmentLayoutBinding
-import org.mozilla.fenix.immersive_transalte.DeviceUtil
 import org.mozilla.fenix.immersive_transalte.utils.SimpleEventBus
 
 
-class LoginFragmentDialog : AppCompatDialogFragment() {
+class LoginFragmentDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogLoginFragmentLayoutBinding
     private lateinit var loginFragment: LoginFragment
 
@@ -39,16 +40,43 @@ class LoginFragmentDialog : AppCompatDialogFragment() {
             .beginTransaction()
             .add(R.id.fl_container, loginFragment)
             .commitNowAllowingStateLoss()
-        
+
         binding.ivClose.setOnClickListener {
             dismiss()
         }
         SimpleEventBus.register(SimpleEventBus.EVENT_LOGIN, onLogin)
     }
 
-    override fun onStart() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.setOnShowListener { d ->
+            val bottomSheet = (d as BottomSheetDialog).findViewById<View>(R.id.design_bottom_sheet)
+            bottomSheet?.let {
+                val behavior = BottomSheetBehavior.from(it)
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                behavior.skipCollapsed = true
+                it.setBackgroundColor(Color.TRANSPARENT)
+                /*WindowCompat.setDecorFitsSystemWindows(dialog.window!!, false)
+                ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { view, insets ->
+                    val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                    view.setPadding(0, 0, 0, systemBars.bottom)
+                    insets
+                }*/
+            }
+        }
+        return dialog
+    }
+
+    /*override fun onStart() {
         super.onStart()
         dialog?.let {
+            it.window?.let { window ->
+                WindowInsetsControllerCompat(window, window.decorView).apply {
+                    hide(WindowInsetsCompat.Type.navigationBars())
+                    systemBarsBehavior =
+                        WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                }
+            }
             val displaySize = DeviceUtil.getDeviceRealSize(binding.root.context)
             it.window?.setLayout(displaySize.width, displaySize.height)
             it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -56,10 +84,10 @@ class LoginFragmentDialog : AppCompatDialogFragment() {
             it.window?.setGravity(Gravity.BOTTOM)
             it.window?.setWindowAnimations(R.style.BottomDialogAnimation)
         }
-    }
+    }*/
 
-    override fun dismiss() {
-        super.dismiss()
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
         SimpleEventBus.unregister(SimpleEventBus.EVENT_LOGIN, onLogin)
     }
 

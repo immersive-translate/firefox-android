@@ -58,6 +58,7 @@ interface ToolbarMenu {
         object IMM_Translate: Item()
         object Upgrade: Item()
         object Report: Item()
+        object Subscription: Item()
     }
 
     val menuBuilder: BrowserMenuBuilder

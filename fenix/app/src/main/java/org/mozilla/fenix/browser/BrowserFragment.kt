@@ -407,7 +407,13 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                 if (page.isDestroyed || isDetached) {
                     return@ImmTranslateTipsWindow
                 }
-                ImmTranslateTipsWindow(page, Type.Menu) {
+                ImmTranslateTipsWindow(page, Type.Menu, onIKnownClick = {
+                    val sessionId = getSafeCurrentTab()?.id
+                    sessionId?.let {
+                        val jsonObject = JSONObject()
+                        WebMessageBridge.callHandler(it, "openMenu", jsonObject) {}
+                    }
+                }) {
                     isBrowserMenuTipShown = true
                     application.settings().showBrowserMenuTips = false
                 }.show(binding.flTipsContainer, binding.swipeRefresh)

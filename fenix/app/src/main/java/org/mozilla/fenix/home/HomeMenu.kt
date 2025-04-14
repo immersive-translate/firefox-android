@@ -47,6 +47,7 @@ class HomeMenu(
         object Translate: Item()
         object Upgrade: Item()
         object Report: Item()
+        object Subscription: Item()
         object Bookmarks : Item()
         object History : Item()
         object Downloads : Item()
@@ -115,16 +116,18 @@ class HomeMenu(
     private fun coreMenuItems(): List<BrowserMenuItem> {
         val settings = context.components.settings
 
+        // R.drawable.ic_menu_imm_translate
         val translateItem = BrowserMenuImageText(
             context.getString(R.string.library_translate),
-            R.drawable.ic_menu_imm_translate,
+            R.drawable.ic_menu_im_translate,
         ) {
             onItemTapped.invoke(Item.Translate)
         }
 
+        // R.drawable.ic_menu_user_upgrade
         val gotoBuyVip = BrowserMenuImageText(
             context.getString(R.string.library_upgrade),
-            R.drawable.ic_menu_user_upgrade,
+            R.drawable.ic_menu_im_user_upgrade,
         ) {
             onItemTapped.invoke(Item.Upgrade)
         }
@@ -134,6 +137,13 @@ class HomeMenu(
             R.drawable.ic_menu_report,
         ) {
             onItemTapped.invoke(Item.Report)
+        }
+
+        val subscriptionItem = BrowserMenuImageText(
+            context.getString(R.string.library_subscription),
+            R.drawable.ic_menu_subscription,
+        ) {
+            onItemTapped.invoke(Item.Subscription)
         }
 
         val bookmarksItem = BrowserMenuImageText(
@@ -256,6 +266,8 @@ class HomeMenu(
             BrowserMenuDivider(),
             translateItem,
             gotoBuyVip,
+            subscriptionItem,
+            BrowserMenuDivider(),
             settingsItem,
             if (settings.shouldDeleteBrowsingDataOnQuit) quitItem else null,
         ).also { items ->

@@ -6,6 +6,7 @@ package org.mozilla.fenix.immersive_transalte.net.api
 
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.HeaderMap
 import retrofit2.http.POST
 import retrofit2.http.Url
 
@@ -20,12 +21,14 @@ internal interface TrackerApi {
     @POST
     fun adjustS2sSession(
         @Url url: String,
+        @HeaderMap headers: MutableMap<String, Any?>,
         @Body params: MutableMap<String, Any?>,
     ): Call<Any?>
 
     @POST
     fun adjustS2sEvent(
         @Url url: String,
+        @HeaderMap headers: MutableMap<String, Any?>,
         @Body params: MutableMap<String, Any?>,
     ): Call<Any?>
 }

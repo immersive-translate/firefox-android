@@ -411,14 +411,14 @@ open class DefaultToolbarMenu(
 
     private val immersiveTranslate = BrowserMenuImageText(
         label = context.getString(R.string.library_translate),
-        imageResource = R.drawable.ic_menu_imm_translate,
+        imageResource = R.drawable.ic_menu_im_translate,
     ) {
         onItemTapped.invoke(ToolbarMenu.Item.IMM_Translate)
     }
 
     private val gotoBuyVip = BrowserMenuImageText(
         label = context.getString(R.string.library_upgrade),
-        imageResource = R.drawable.ic_menu_user_upgrade,
+        imageResource = R.drawable.ic_menu_im_user_upgrade,
     ) {
         onItemTapped.invoke(ToolbarMenu.Item.Upgrade)
     }
@@ -428,6 +428,13 @@ open class DefaultToolbarMenu(
         imageResource = R.drawable.ic_menu_report,
     ) {
         onItemTapped.invoke(ToolbarMenu.Item.Report)
+    }
+
+    private val subscription = BrowserMenuImageText(
+        label = context.getString(R.string.library_subscription),
+        imageResource = R.drawable.ic_menu_subscription
+    ) {
+        onItemTapped.invoke(ToolbarMenu.Item.Subscription)
     }
 
     /*private fun syncMenuItem(): BrowserMenuItem {
@@ -454,6 +461,7 @@ open class DefaultToolbarMenu(
                 immersiveTranslate,
                 gotoBuyVip,
                 report,
+                subscription,
                 BrowserMenuDivider(),
                 findInPageItem,
                 translationsItem.apply { visible = ::shouldShowTranslations },

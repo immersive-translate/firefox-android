@@ -1060,6 +1060,7 @@
     <!-- Library -->
     <string name="library_translate">몰입형 번역 설정</string>
     <string name="library_upgrade">치받이</string>
+    <string name="library_subscription">구독 관리</string>
     <!-- Option in Library to open Downloads page -->
     <string name="library_downloads">다운로드</string>
     <!-- Option in library to open Bookmarks page -->
@@ -3136,8 +3137,10 @@
     <string name="buy_vip_ts_service_title">Pro 회원 전용 글로벌 최상급 AI 번역 서비스</string>
     <string name="buy_vip_ts_deepL">DeepL 번역</string>
     <string name="buy_vip_ts_openAI">OpenAI 번역</string>
+    <string name="buy_vip_ts_deepseek">Deepseek 번역</string>
     <string name="buy_vip_ts_claude">Claude 번역</string>
     <string name="buy_vip_is_gemini">Gemini 번역</string>
+    <string name="buy_vip_is_zp">Zhipu 4 Plus 번역</string>
 
     <string name="buy_vip_adv_title">Pro 회원 전용 고급 기능</string>
     <string name="buy_vip_adv_pdf_pro">PDF Pro</string>
@@ -3145,6 +3148,8 @@
     <string name="buy_vip_adv_subtitle">YouTube 이중 언어 자막 다운로드</string>
     <string name="buy_vip_adv_sync">다중 기기 동기화 설정</string>
     <string name="buy_vip_adv_email">우선 지원 이메일 서비스</string>
+    <string name="buy_vip_adv_babel_doc">BabelDOC은 PDF 번역 시 서식을 유지합니다</string>
+    <string name="buy_vip_adv_image">이미지 번역</string>
 
     <string name="buy_vip_year_save_percent">연간 구독 자동 갱신(%1$s 할인)</string>
     <string name="buy_vip_year_month">월간 구독 자동 갱신</string>
@@ -3155,6 +3160,8 @@
     <string name="buy_vip_tip_02">매월 1,000페이지의 AI 기반 PDF 문서 번역이 포함되어 복잡한 수식 인식, 표 인식 및 스캔 문서를 지원합니다.</string>
     <string name="buy_vip_tip_03">매월 3,000개의 AI 기반 만화 번역 포함</string>
     <string name="buy_vip_tip_04">문제가 발생하면 고객 지원팀\nsupport@immersivetranslate.com에 문의하세요.</string>
+    <string name="buy_vip_tip_05">매월 10,000페이지 AI 구동 PDF 문서의 타이포그래피 번역을 지원하며, 복잡한 공식 인식이 가능하나 스캔된 버전은 지원하지 않습니다</string>
+    <string name="buy_vip_tip_06">월간 3000개의 AI 기반 이미지 번역이 포함되어 있으며, 이 할당량은 만화 번역과 공유됩니다</string>
 
     <string name="buy_vip_toast_sub_mon">월간 멤버십을 구독하셨습니다.</string>
     <string name="buy_vip_toast_sub_year">연간회원권을 구독하셨습니다.</string>
@@ -3240,20 +3247,20 @@
 
     <string name="login_remind_dialog_desc">개인정보 보호를 위해,\n%1$s 및 %2$s읽고 동의해주세요</string>
 
-    <string name="email_login_account_title">계정:</string>
-    <string name="email_login_pwd_title">비밀번호:</string>
-    <string name="email_login_pwd_hint">비밀번호를 입력하세요:</string>
+    <string name="email_login_account_title">계정</string>
+    <string name="email_login_pwd_title">비밀번호</string>
+    <string name="email_login_pwd_hint">비밀번호를 입력하세요</string>
     <string name="email_login_forget_pwd">비밀번호를 잊어버리셨나요?</string>
     <string name="email_login_auto_register">처음 로그인하면 자동으로 등록됩니다</string>
     <string name="email_login_login_btn_text">로그인/회원가입</string>
 
     <string name="email_login_reset_title">비밀번호 재설정</string>
     <string name="email_login_reset_success">비밀번호 재설정에 성공</string>
-    <string name="email_login_reset_verify_code">인증코드:</string>
+    <string name="email_login_reset_verify_code">인증코드</string>
     <string name="email_login_reset_verify_code_hint">인증번호를 입력해주세요</string>
     <string name="email_login_reset_verify_code_btn">인증 코드 받기</string>
-    <string name="email_login_reset_pwd">새 비밀번호:</string>
-    <string name="email_login_reset_pwd_confirm">새 비밀번호 확인:</string>
+    <string name="email_login_reset_pwd">새 비밀번호</string>
+    <string name="email_login_reset_pwd_confirm">새 비밀번호 확인</string>
     <string name="email_login_reset_ok">비밀번호 재설정 성공</string>
     <string name="email_login_reset_goto_login">로그인으로 이동</string>
     <string name="email_login_reset_pwd_invalid">잘못된 비밀번호</string>

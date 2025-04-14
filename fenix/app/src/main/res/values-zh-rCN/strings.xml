@@ -1070,6 +1070,7 @@
     <!-- Library -->
     <string name="library_translate">沉浸式翻译设置</string>
     <string name="library_upgrade">升级</string>
+    <string name="library_subscription">订阅管理</string>
     <!-- Option in Library to open Downloads page -->
     <string name="library_downloads">下载</string>
     <!-- Option in library to open Bookmarks page -->
@@ -3143,8 +3144,10 @@
     <string name="buy_vip_ts_service_title">Pro专属全球顶尖AI翻译服务</string>
     <string name="buy_vip_ts_deepL">DeepL 翻译</string>
     <string name="buy_vip_ts_openAI">OpenAI 翻译</string>
+    <string name="buy_vip_ts_deepseek">Deepseek 翻译</string>
     <string name="buy_vip_ts_claude">Claude 翻译</string>
     <string name="buy_vip_is_gemini">Gemini 翻译</string>
+    <string name="buy_vip_is_zp">Zhipu 4 Plus 翻译</string>
 
     <string name="buy_vip_adv_title">Pro专属高级功能</string>
     <string name="buy_vip_adv_pdf_pro">PDF Pro</string>
@@ -3152,6 +3155,8 @@
     <string name="buy_vip_adv_subtitle">Youtube 双语字幕下载</string>
     <string name="buy_vip_adv_sync">多设备同步配置</string>
     <string name="buy_vip_adv_email">优先的电子邮件支持</string>
+    <string name="buy_vip_adv_babel_doc">BabelDOC 保留排版 PDF 翻译</string>
+    <string name="buy_vip_adv_image">图片翻译</string>
 
     <string name="buy_vip_year_save_percent">连续包年（节省%1$s）</string>
     <string name="buy_vip_year_month">连续包月</string>
@@ -3162,6 +3167,8 @@
     <string name="buy_vip_tip_02">每月包含 1000 页 AI 驱动的 PDF 文档翻译，支持复杂的公式识别，表格识别和扫描版文档</string>
     <string name="buy_vip_tip_03">每月包含 3000 张 AI 驱动的漫画翻译</string>
     <string name="buy_vip_tip_04">如您遇到问题，请联系客户支持团队\nsupport@immersivetranslate.com</string>
+    <string name="buy_vip_tip_05">每月 10000 页 AI 驱动的 PDF 文档保留排版翻译，支持复杂的公式识别，暂不支持扫描版</string>
+    <string name="buy_vip_tip_06">每月包含 3000 张 AI 驱动的图片翻译，额度与漫画翻译共享</string>
 
     <string name="buy_vip_toast_sub_mon">您已经订阅月度会员</string>
     <string name="buy_vip_toast_sub_year">您已经订阅年度会员</string>
@@ -3247,20 +3254,20 @@
 
     <string name="login_remind_dialog_desc">为保障您的个人信息安全，请阅读并同意\n%1$s 和 %2$s</string>
 
-    <string name="email_login_account_title">账号：</string>
-    <string name="email_login_pwd_title">密码：</string>
-    <string name="email_login_pwd_hint">请输入您的密码：</string>
+    <string name="email_login_account_title">账号</string>
+    <string name="email_login_pwd_title">密码</string>
+    <string name="email_login_pwd_hint">请输入您的密码</string>
     <string name="email_login_forget_pwd">忘记密码？</string>
     <string name="email_login_auto_register">首次登录将会自动注册</string>
     <string name="email_login_login_btn_text">登录/注册</string>
 
     <string name="email_login_reset_title">重置密码</string>
     <string name="email_login_reset_success">重置密码成功</string>
-    <string name="email_login_reset_verify_code">验证码：</string>
+    <string name="email_login_reset_verify_code">验证码</string>
     <string name="email_login_reset_verify_code_hint">请输入您的验证码</string>
     <string name="email_login_reset_verify_code_btn">获取验证码</string>
-    <string name="email_login_reset_pwd">新密码：</string>
-    <string name="email_login_reset_pwd_confirm">确认新密码：</string>
+    <string name="email_login_reset_pwd">新密码</string>
+    <string name="email_login_reset_pwd_confirm">确认新密码</string>
     <string name="email_login_reset_ok">密码重置成功</string>
     <string name="email_login_reset_goto_login">去登录</string>
     <string name="email_login_reset_pwd_invalid">密码错误</string>

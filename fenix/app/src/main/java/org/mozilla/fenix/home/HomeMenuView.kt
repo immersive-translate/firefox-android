@@ -28,6 +28,7 @@ import org.mozilla.fenix.components.menu.MenuAccessPoint
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.settings
+import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.settings.deletebrowsingdata.deleteAndQuit
 import org.mozilla.fenix.theme.ThemeManager
@@ -141,6 +142,15 @@ class HomeMenuView(
 
             HomeMenu.Item.Report -> {
                 navController.navigate(HomeFragmentDirections.actionGlobalReport())
+            }
+
+            HomeMenu.Item.Subscription -> {
+                val userCenterUrl = Constant.profile
+                homeActivity.openToBrowserAndLoad(
+                    searchTermOrURL = userCenterUrl,
+                    newTab = true,
+                    from = BrowserDirection.FromHome,
+                )
             }
 
             HomeMenu.Item.Settings -> {

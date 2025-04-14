@@ -53,6 +53,7 @@ import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.navigateSafe
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
+import org.mozilla.fenix.immersive_transalte.Constant
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.settings.deletebrowsingdata.deleteAndQuit
 import org.mozilla.fenix.utils.Settings
@@ -418,6 +419,15 @@ class DefaultBrowserToolbarMenuController(
             is ToolbarMenu.Item.Report -> {
                 navController.navigate(BrowserFragmentDirections.actionGlobalReport())
             }
+
+            is ToolbarMenu.Item.Subscription -> {
+                val userCenterUrl = Constant.profile
+                activity.openToBrowserAndLoad(
+                    searchTermOrURL = userCenterUrl,
+                    newTab = true,
+                    from = BrowserDirection.FromGlobal,
+                )
+            }
         }
     }
 
@@ -506,6 +516,8 @@ class DefaultBrowserToolbarMenuController(
             }
             is ToolbarMenu.Item.Report -> {
                 // noting to do
+            }
+            is ToolbarMenu.Item.Subscription -> {
             }
         }
     }

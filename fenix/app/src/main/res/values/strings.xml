@@ -1013,6 +1013,7 @@
     <!-- Library -->
     <string name="library_translate">Immersive Translate Setting</string>
     <string name="library_upgrade">Upgrade</string>
+    <string name="library_subscription">Subscription management</string>
     <!-- Option in Library to open Downloads page -->
     <string name="library_downloads">Downloads</string>
     <!-- Option in library to open Bookmarks page -->
@@ -2974,8 +2975,10 @@
     <string name="buy_vip_ts_service_title">Pro AI Translation Services</string>
     <string name="buy_vip_ts_deepL">DeepL translate</string>
     <string name="buy_vip_ts_openAI">OpenAI translate</string>
+    <string name="buy_vip_ts_deepseek">Deepseek translate</string>
     <string name="buy_vip_ts_claude">Claude translate</string>
     <string name="buy_vip_is_gemini">Gemini translate</string>
+    <string name="buy_vip_is_zp">Zhipu 4 Plus translate</string>
 
     <string name="buy_vip_adv_title">Pro-exclusive advanced features</string>
     <string name="buy_vip_adv_pdf_pro">PDF Pro</string>
@@ -2983,6 +2986,8 @@
     <string name="buy_vip_adv_subtitle">Youtube Subtitles Export</string>
     <string name="buy_vip_adv_sync">Cloud Sync Settings</string>
     <string name="buy_vip_adv_email">Priority email support</string>
+    <string name="buy_vip_adv_babel_doc">BabelDOC retains layout PDF translation</string>
+    <string name="buy_vip_adv_image">Image Translation</string>
 
     <string name="buy_vip_year_save_percent">Annual (save %1$s)</string>
     <string name="buy_vip_year_month">Monthly</string>
@@ -2993,6 +2998,8 @@
     <string name="buy_vip_tip_02">Includes 1000 pages of AI-driven PDF document translation per month, supporting complex formula recognition, table recognition, and scanned document</string>
     <string name="buy_vip_tip_03">Monthly includes 3000 AI-driven comic translations</string>
     <string name="buy_vip_tip_04">If you encounter any problems, please contact the customer support team\nsupport@immersivetranslate.com</string>
+    <string name="buy_vip_tip_05">10,000 pages per month of AI-driven PDF document translation preserving layout, supporting complex formula recognition, currently does not support scanned versions</string>
+    <string name="buy_vip_tip_06">Monthly includes 3000 AI-powered image translations, with the quota shared with comic translations</string>
 
     <string name="buy_vip_toast_sub_mon">You have subscribed to monthly membership</string>
     <string name="buy_vip_toast_sub_year">You have subscribed to annual membership</string>
@@ -3078,20 +3085,20 @@
 
     <string name="login_remind_dialog_desc">To protect the security of your personal information, please read and agree to\n%1$s , %2$s</string>
 
-    <string name="email_login_account_title">Account:</string>
-    <string name="email_login_pwd_title">Password:</string>
-    <string name="email_login_pwd_hint">Please enter your password:</string>
+    <string name="email_login_account_title">Account</string>
+    <string name="email_login_pwd_title">Password</string>
+    <string name="email_login_pwd_hint">Please enter your password</string>
     <string name="email_login_forget_pwd">Forgot password?</string>
     <string name="email_login_auto_register">First login will automatically register</string>
     <string name="email_login_login_btn_text">Login/Register</string>
 
     <string name="email_login_reset_title">Reset Password</string>
     <string name="email_login_reset_success">Reset password successful</string>
-    <string name="email_login_reset_verify_code">Verification code:</string>
+    <string name="email_login_reset_verify_code">Verification code</string>
     <string name="email_login_reset_verify_code_hint">Please enter your verification code</string>
     <string name="email_login_reset_verify_code_btn">Get verification code</string>
-    <string name="email_login_reset_pwd">New Password:</string>
-    <string name="email_login_reset_pwd_confirm">Confirm new password:</string>
+    <string name="email_login_reset_pwd">New Password</string>
+    <string name="email_login_reset_pwd_confirm">Confirm new password</string>
     <string name="email_login_reset_ok">Password reset successful</string>
     <string name="email_login_reset_goto_login">Login</string>
     <string name="email_login_reset_pwd_invalid">Wrong password</string>

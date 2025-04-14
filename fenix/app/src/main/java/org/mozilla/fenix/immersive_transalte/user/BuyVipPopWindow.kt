@@ -118,7 +118,7 @@ class BuyVipPopWindow(
 
     fun show(parent: View) {
         showAtLocation(parent, Gravity.BOTTOM, 0, 0)
-        setStatusBarTheme(true)
+        // setStatusBarTheme(true)
     }
 
     override fun dismiss() {

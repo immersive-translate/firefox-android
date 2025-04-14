@@ -5,24 +5,24 @@
 package org.mozilla.fenix.immersive_transalte.login
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.DialogInterface
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDialogFragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.mozilla.fenix.R
 import org.mozilla.fenix.databinding.DialogLoginFragmentLayoutBinding
-import org.mozilla.fenix.immersive_transalte.DeviceUtil
 import org.mozilla.fenix.immersive_transalte.utils.SimpleEventBus
 
 class EmailVerifyFragmentDialog(
     private val username: String,
     private val password: String,
-) : AppCompatDialogFragment() {
+) : BottomSheetDialogFragment() {
     private lateinit var binding: DialogLoginFragmentLayoutBinding
     private lateinit var activityEmailFragment: EmailVerifyFragment
 
@@ -56,16 +56,24 @@ class EmailVerifyFragmentDialog(
         SimpleEventBus.register(SimpleEventBus.EVENT_LOGIN, onLogin)
     }
 
-    override fun onStart() {
-        super.onStart()
-        dialog?.let {
-            val displaySize = DeviceUtil.getDeviceRealSize(binding.root.context)
-            it.window?.setLayout(displaySize.width, displaySize.height)
-            it.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            // it.window?.setBackgroundDrawable(ColorDrawable(0x6F000000))
-            it.window?.setGravity(Gravity.BOTTOM)
-            it.window?.setWindowAnimations(R.style.BottomDialogAnimation)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.setOnShowListener { d ->
+            val bottomSheet = (d as BottomSheetDialog).findViewById<View>(R.id.design_bottom_sheet)
+            bottomSheet?.let {
+                val behavior = BottomSheetBehavior.from(it)
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                behavior.skipCollapsed = true
+                it.setBackgroundColor(Color.TRANSPARENT)
+                /*WindowCompat.setDecorFitsSystemWindows(dialog.window!!, false)
+                ViewCompat.setOnApplyWindowInsetsListener(bottomSheet) { view, insets ->
+                    val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                    view.setPadding(0, 0, 0, systemBars.bottom)
+                    insets
+                }*/
+            }
         }
+        return dialog
     }
 
     override fun onDismiss(dialog: DialogInterface) {

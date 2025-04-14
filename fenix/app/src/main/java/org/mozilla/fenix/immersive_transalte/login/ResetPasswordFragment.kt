@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,6 +79,29 @@ class ResetPasswordFragment : Fragment() {
         }
         binding.etPwdConfirm.addTextChangedListener {
             checkResetEnable()
+        }
+
+        binding.cbPwdVisible.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // 显示密码
+                binding.etPwd.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+            } else {
+                // 隐藏密码
+                binding.etPwd.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
+            }
+        }
+        binding.cbPwdConfirmVisible.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // 显示密码
+                binding.etPwdConfirm.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+            } else {
+                // 隐藏密码
+                binding.etPwdConfirm.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
+            }
         }
     }
 
