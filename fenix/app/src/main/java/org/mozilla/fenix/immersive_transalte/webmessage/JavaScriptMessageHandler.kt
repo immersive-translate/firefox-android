@@ -228,7 +228,7 @@ object JavaScriptMessageHandler {
                     }
                     val result = getResult(true)
                     jsonObject?.let {
-                        result.put("userInfo", jsonObject)
+                        result.put("data", jsonObject)
                     }
                     callback(result)
                 }

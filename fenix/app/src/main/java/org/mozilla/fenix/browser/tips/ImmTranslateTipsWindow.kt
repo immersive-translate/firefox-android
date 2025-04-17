@@ -40,8 +40,10 @@ class ImmTranslateTipsWindow(
         binding.btnKnown.text = context.getString(R.string.browser_toolbar_pop_btn)
         if (type == Type.Translate) {
             binding.tvContent.text = context.getString(R.string.browser_toolbar_pop_translate)
+            binding.btnKnown.text = context.getString(R.string.browser_toolbar_pop_btn)
         } else {
             binding.tvContent.text = context.getString(R.string.browser_toolbar_pop_menu)
+            binding.btnKnown.text = context.getString(R.string.browser_toolbar_pop_btn_try)
         }
     }
 

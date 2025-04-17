@@ -3137,7 +3137,7 @@
     <string name="buy_vip_ts_service_title">Pro 회원 전용 글로벌 최상급 AI 번역 서비스</string>
     <string name="buy_vip_ts_deepL">DeepL 번역</string>
     <string name="buy_vip_ts_openAI">OpenAI 번역</string>
-    <string name="buy_vip_ts_deepseek">Deepseek 번역</string>
+    <string name="buy_vip_ts_deepseek">DeepSeek 번역</string>
     <string name="buy_vip_ts_claude">Claude 번역</string>
     <string name="buy_vip_is_gemini">Gemini 번역</string>
     <string name="buy_vip_is_zp">Zhipu 4 Plus 번역</string>
@@ -3197,6 +3197,7 @@
     <string name="browser_toolbar_pop_translate">여기를 클릭하세요\n지금 현재 페이지를 번역하세요</string>
     <string name="browser_toolbar_pop_menu">여기를 클릭하세요\n번역 기능 패널 열기</string>
     <string name="browser_toolbar_pop_btn">알겠어요</string>
+    <string name="browser_toolbar_pop_btn_try">해보기</string>
 
     <string name="report_title">피드백</string>
     <string name="report_tab_bug_title">버그 문제</string>

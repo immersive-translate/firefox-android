@@ -1455,7 +1455,8 @@ abstract class BaseBrowserFragment :
             }
 
             // top固定，但是bottom不固定
-            if (context.settings().isFixTopToolbar) {
+            if (context.settings().toolbarPosition == ToolbarPosition.TOP
+                && context.settings().isFixTopToolbar) {
                 val swipeRefreshParams =
                     getSwipeRefreshLayout().layoutParams as CoordinatorLayout.LayoutParams
                 swipeRefreshParams.bottomMargin = bottomToolbarHeight

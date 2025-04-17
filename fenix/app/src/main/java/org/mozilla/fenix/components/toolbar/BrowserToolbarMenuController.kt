@@ -36,7 +36,6 @@ import org.mozilla.fenix.GleanMetrics.AppMenu
 import org.mozilla.fenix.GleanMetrics.Collections
 import org.mozilla.fenix.GleanMetrics.Events
 import org.mozilla.fenix.GleanMetrics.ReaderMode
-import org.mozilla.fenix.GleanMetrics.Translations
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.NavGraphDirections
 import org.mozilla.fenix.R
@@ -54,6 +53,7 @@ import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.navigateSafe
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.immersive_transalte.Constant
+import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.settings.deletebrowsingdata.deleteAndQuit
 import org.mozilla.fenix.utils.Settings
@@ -405,8 +405,10 @@ class DefaultBrowserToolbarMenuController(
             is ToolbarMenu.Item.IMM_Translate -> {
                 val tsAddon = activity.components.immersiveTranslateService.getInstalledTSAddon()
                 val tsSettingUrl = tsAddon?.installedState?.optionsPageUrl ?: SupportUtils.APP_OPT_URL
+                val token = UserManager.getUserToken(activity)
+                val url = if (token.isNullOrEmpty()) tsSettingUrl else "$tsSettingUrl?token=$token"
                 activity.openToBrowserAndLoad(
-                    searchTermOrURL = tsSettingUrl,
+                    searchTermOrURL = url,
                     newTab = true,
                     from = BrowserDirection.FromGlobal,
                 )

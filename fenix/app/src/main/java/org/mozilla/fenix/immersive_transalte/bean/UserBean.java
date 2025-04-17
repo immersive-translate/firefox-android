@@ -287,7 +287,7 @@ public class UserBean implements Serializable {
         private int packageDeepLUnUsed;
         private int totalAsrAudioUsedCount;
         private int totalAsrAudioQuota;
-        private int deepLCharacterUsedCountResetTime;
+        private long deepLCharacterUsedCountResetTime;
         private long openAITokenUsedCountResetTime;
         private long mathPixUsedCountResetTime;
         private long comicsPageUsedCountResetTime;
@@ -643,11 +643,11 @@ public class UserBean implements Serializable {
             this.totalAsrAudioQuota = totalAsrAudioQuota;
         }
 
-        public int getDeepLCharacterUsedCountResetTime() {
+        public long getDeepLCharacterUsedCountResetTime() {
             return deepLCharacterUsedCountResetTime;
         }
 
-        public void setDeepLCharacterUsedCountResetTime(int deepLCharacterUsedCountResetTime) {
+        public void setDeepLCharacterUsedCountResetTime(long deepLCharacterUsedCountResetTime) {
             this.deepLCharacterUsedCountResetTime = deepLCharacterUsedCountResetTime;
         }
 

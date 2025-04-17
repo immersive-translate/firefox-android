@@ -29,6 +29,7 @@ import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.immersive_transalte.Constant
+import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.settings.deletebrowsingdata.deleteAndQuit
 import org.mozilla.fenix.theme.ThemeManager
@@ -119,8 +120,10 @@ class HomeMenuView(
             HomeMenu.Item.Translate -> {
                 val tsAddon = context.components.immersiveTranslateService.getInstalledTSAddon()
                 val optUrl = tsAddon?.installedState?.optionsPageUrl ?: SupportUtils.APP_OPT_URL
+                val token = UserManager.getUserToken(context)
+                val url = if (token.isNullOrEmpty()) optUrl else "$optUrl?token=$token"
                 homeActivity.openToBrowserAndLoad(
-                    searchTermOrURL = optUrl,
+                    searchTermOrURL = url,
                     newTab = true,
                     from = BrowserDirection.FromHome,
                 )

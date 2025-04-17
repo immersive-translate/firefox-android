@@ -2975,7 +2975,7 @@
     <string name="buy_vip_ts_service_title">Pro AI Translation Services</string>
     <string name="buy_vip_ts_deepL">DeepL translate</string>
     <string name="buy_vip_ts_openAI">OpenAI translate</string>
-    <string name="buy_vip_ts_deepseek">Deepseek translate</string>
+    <string name="buy_vip_ts_deepseek">DeepSeek translate</string>
     <string name="buy_vip_ts_claude">Claude translate</string>
     <string name="buy_vip_is_gemini">Gemini translate</string>
     <string name="buy_vip_is_zp">Zhipu 4 Plus translate</string>
@@ -3035,6 +3035,7 @@
     <string name="browser_toolbar_pop_translate">Click here\nTranslate the current page now</string>
     <string name="browser_toolbar_pop_menu">Click here\nOpen the translation function panel</string>
     <string name="browser_toolbar_pop_btn">I see</string>
+    <string name="browser_toolbar_pop_btn_try">Try it out</string>
 
     <string name="report_title">Feedback</string>
     <string name="report_tab_bug_title">Bug Issue</string>

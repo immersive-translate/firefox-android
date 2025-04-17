@@ -33,6 +33,8 @@ import mozilla.components.feature.tab.collections.TabCollection
 import mozilla.components.feature.tabs.WindowFeature
 import mozilla.components.support.base.feature.UserInteractionHandler
 import mozilla.components.support.base.feature.ViewBoundFeatureWrapper
+import mozilla.components.support.ktx.kotlin.isExtensionUrl
+import mozilla.components.support.ktx.kotlin.isResourceUrl
 import mozilla.components.support.utils.ext.isLandscape
 import mozilla.telemetry.glean.private.NoExtras
 import org.json.JSONObject
@@ -386,14 +388,18 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         return false
     }
 
+    private var tips: ImmTranslateTipsWindow? = null
     private fun showTranslatePopTips() {
-        if (isBrowserMenuTipShown) {
+        if (isBrowserMenuTipShown || tips?.isShowing == true) {
             return
         }
 
         val url = getSafeCurrentTab()?.content?.url
         url?.let {
-            if (checkWhiteList(it)) {
+            if (checkWhiteList(it)
+                || it.isResourceUrl()
+                || it.isExtensionUrl()
+            ) {
                 return
             }
         }
@@ -403,11 +409,11 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                 return
             }
             val application = page.application
-            ImmTranslateTipsWindow(page, Type.Translate) {
+            tips = ImmTranslateTipsWindow(page, Type.Translate) {
                 if (page.isDestroyed || isDetached) {
                     return@ImmTranslateTipsWindow
                 }
-                ImmTranslateTipsWindow(page, Type.Menu, onIKnownClick = {
+                tips = ImmTranslateTipsWindow(page, Type.Menu, onIKnownClick = {
                     val sessionId = getSafeCurrentTab()?.id
                     sessionId?.let {
                         val jsonObject = JSONObject()
@@ -416,8 +422,12 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                 }) {
                     isBrowserMenuTipShown = true
                     application.settings().showBrowserMenuTips = false
-                }.show(binding.flTipsContainer, binding.swipeRefresh)
-            }.show(binding.flTipsContainer, binding.swipeRefresh)
+                }.apply {
+                    show(binding.flTipsContainer, binding.swipeRefresh)
+                }
+            }.apply {
+                show(binding.flTipsContainer, binding.swipeRefresh)
+            }
         }
     }
 
@@ -941,6 +951,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
 
     override fun onDestroyView() {
         super.onDestroyView()
+        tips?.dismiss()
         isTablet = false
         leadingAction = null
         forwardAction = null

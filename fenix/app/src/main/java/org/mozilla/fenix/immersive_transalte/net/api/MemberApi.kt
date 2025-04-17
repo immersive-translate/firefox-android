@@ -62,7 +62,7 @@ internal interface MemberApi {
         @QueryMap params: MutableMap<String, Any?>,
     ): Call<ResultData<UpgradeBean>>
 
-    @POST("/v1/user-account/web-login")
+    @POST("/v1/user-account/get-web-login-url")
     @Headers("Content-Type: application/json")
     fun webLogin(
         @HeaderMap headers: MutableMap<String, Any?>,

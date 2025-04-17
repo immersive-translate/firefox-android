@@ -7,9 +7,11 @@ package org.mozilla.fenix.immersive_transalte
 import android.content.Context
 import android.os.Build
 import com.adjust.sdk.AdjustAttribution
+import com.adjust.sdk.AdjustConfig
 import com.adjust.sdk.AndroidIdUtil
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import mozilla.components.support.ktx.android.org.json.toJSON
+import org.mozilla.fenix.Config
 import org.mozilla.fenix.immersive_transalte.net.service.TrackerService
 import org.mozilla.fenix.immersive_transalte.utils.AppUtil
 import org.mozilla.fenix.immersive_transalte.utils.TimeUtil
@@ -25,10 +27,10 @@ class AdjustS2STracker(
         put("android_id", androidId)
         put("attribution_deeplink", 1)
 
-        /*val environment = if (Config.channel.isRelease)
+        val environment = if (Config.channel.isRelease)
             AdjustConfig.ENVIRONMENT_PRODUCTION else
             AdjustConfig.ENVIRONMENT_SANDBOX
-        put("environment", environment)*/
+        put("environment", environment)
 
         put("app_version", AppUtil.getVersionName(ctx))
         put("package_name", ctx.packageName)

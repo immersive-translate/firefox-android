@@ -3144,10 +3144,10 @@
     <string name="buy_vip_ts_service_title">Pro专属全球顶尖AI翻译服务</string>
     <string name="buy_vip_ts_deepL">DeepL 翻译</string>
     <string name="buy_vip_ts_openAI">OpenAI 翻译</string>
-    <string name="buy_vip_ts_deepseek">Deepseek 翻译</string>
+    <string name="buy_vip_ts_deepseek">DeepSeek 翻译</string>
     <string name="buy_vip_ts_claude">Claude 翻译</string>
     <string name="buy_vip_is_gemini">Gemini 翻译</string>
-    <string name="buy_vip_is_zp">Zhipu 4 Plus 翻译</string>
+    <string name="buy_vip_is_zp">智谱 4 Plus 翻译</string>
 
     <string name="buy_vip_adv_title">Pro专属高级功能</string>
     <string name="buy_vip_adv_pdf_pro">PDF Pro</string>
@@ -3204,6 +3204,7 @@
     <string name="browser_toolbar_pop_translate">点击这里\n立即翻译当前网页</string>
     <string name="browser_toolbar_pop_menu">点击这里\n打开翻译功能面板</string>
     <string name="browser_toolbar_pop_btn">我知道了</string>
+    <string name="browser_toolbar_pop_btn_try">试试看</string>
 
     <string name="report_title">反馈</string>
     <string name="report_tab_bug_title">Bug问题</string>
@@ -3245,7 +3246,7 @@
     <string name="login_btn_google">使用 Google 登录</string>
     <string name="login_or">或</string>
     <string name="login_btn_email">使用电子邮箱登录</string>
-    <string name="login_btn_apple">使用苹果账号登录</string>
+    <string name="login_btn_apple">使用 Apple 登录</string>
     <string name="login_btn_fb">使用 Facebook 登录</string>
     <string name="login_btn_wx">使用微信登录</string>
     <string name="login_hw_agreement">注册即表示您同意 %1$s 和 %2$s</string>
