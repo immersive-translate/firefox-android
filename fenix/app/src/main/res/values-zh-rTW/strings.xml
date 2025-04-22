@@ -3251,8 +3251,10 @@
 
     <string name="browser_toolbar_imm_menu">翻譯選單</string>
     <string name="browser_toolbar_imm_trans">翻譯</string>
+    <string name="browser_toolbar_imm_report">回饋</string>
     <string name="browser_toolbar_pop_translate">點這裡\n立即翻譯目前網頁</string>
     <string name="browser_toolbar_pop_menu">點這裡\n開啟翻譯功能面板</string>
+    <string name="browser_toolbar_pop_report">如遇到問題\n請點這裡回饋</string>
     <string name="browser_toolbar_pop_btn">我知道了</string>
     <string name="browser_toolbar_pop_btn_try">試試看</string>
 

@@ -3201,8 +3201,10 @@
 
     <string name="browser_toolbar_imm_menu">翻译菜单</string>
     <string name="browser_toolbar_imm_trans">翻译</string>
+    <string name="browser_toolbar_imm_report">反馈</string>
     <string name="browser_toolbar_pop_translate">点击这里\n立即翻译当前网页</string>
     <string name="browser_toolbar_pop_menu">点击这里\n打开翻译功能面板</string>
+    <string name="browser_toolbar_pop_report">如遇到问题\n请点击这里反馈</string>
     <string name="browser_toolbar_pop_btn">我知道了</string>
     <string name="browser_toolbar_pop_btn_try">试试看</string>
 

@@ -99,6 +99,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
     private var refreshAction: BrowserToolbar.TwoStateButton? = null
     private var immTranslateAction: BrowserToolbar.TwoStateButton? = null
     private var immMenuAction: BrowserToolbar.Button? = null
+    private var immReportAction: BrowserToolbar.Button? = null
     private var isTablet: Boolean = false
 
     override fun onDestroy() {
@@ -152,6 +153,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         //initSharePageAction(context)
         initImmTranslateAction(context)
         initImmTranslateMenuAction(context)
+        initReportAction(context)
         initReloadAction(context)
 
         thumbnailsFeature.set(
@@ -409,25 +411,39 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
                 return
             }
             val application = page.application
+            // step 1
             tips = ImmTranslateTipsWindow(page, Type.Translate) {
                 if (page.isDestroyed || isDetached) {
                     return@ImmTranslateTipsWindow
                 }
-                tips = ImmTranslateTipsWindow(page, Type.Menu, onIKnownClick = {
-                    val sessionId = getSafeCurrentTab()?.id
-                    sessionId?.let {
-                        val jsonObject = JSONObject()
-                        WebMessageBridge.callHandler(it, "openMenu", jsonObject) {}
+
+                // step 2
+                tips = ImmTranslateTipsWindow(page, Type.Report) {
+
+                    // step 3
+                    tips = ImmTranslateTipsWindow(page, Type.Menu, onIKnownClick = {
+                        val sessionId = getSafeCurrentTab()?.id
+                        sessionId?.let {
+                            val jsonObject = JSONObject()
+                            WebMessageBridge.callHandler(it, "openMenu", jsonObject) {}
+                        }
+                    }) {
+                        isBrowserMenuTipShown = true
+                        application.settings().showBrowserMenuTips = false
+                    }.apply {
+                        show(binding.flTipsContainer, binding.swipeRefresh)
                     }
-                }) {
-                    isBrowserMenuTipShown = true
-                    application.settings().showBrowserMenuTips = false
+                    // step 3 end
+
                 }.apply {
                     show(binding.flTipsContainer, binding.swipeRefresh)
                 }
+                // step 2 end
+
             }.apply {
                 show(binding.flTipsContainer, binding.swipeRefresh)
             }
+            // end
         }
     }
 
@@ -482,6 +498,32 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         )
 
         immMenuAction?.let {
+            browserToolbarView.view.addPageAction(it)
+        }
+    }
+
+    /**
+     * 现场反馈
+     */
+    private fun initReportAction(context: Context) {
+        if (immReportAction != null) return
+        immReportAction = BrowserToolbar.Button(
+            imageDrawable = AppCompatResources.getDrawable(
+                context,
+                R.drawable.ic_imm_report_home_24,
+            )!!,
+            contentDescription = context.getString(R.string.browser_toolbar_imm_report),
+            iconTintColorResource = ThemeManager.resolveAttribute(R.attr.textPrimary, context),
+            listener = {
+                val sessionId = getSafeCurrentTab()?.id
+                sessionId?.let {
+                    val jsonObject = JSONObject()
+                    WebMessageBridge.callHandler(
+                        it, "openWebTranslationFeedback", jsonObject,
+                    ) {}
+                }
+            },
+        ).also {
             browserToolbarView.view.addPageAction(it)
         }
     }
@@ -856,6 +898,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         addNavigationActions(context)
         initImmTranslateAction(context)
         initImmTranslateMenuAction(context)
+        initReportAction(context)
         val enableTint = ThemeManager.resolveAttribute(R.attr.textPrimary, context)
         if (refreshAction == null) {
             refreshAction = BrowserToolbar.TwoStateButton(
@@ -919,6 +962,9 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         immMenuAction?.let {
             browserToolbarView.view.removeNavigationAction(it)
         }
+        immReportAction?.let {
+            browserToolbarView.view.removeNavigationAction(it)
+        }
     }
 
     override fun onStart() {
@@ -959,6 +1005,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler, OnPageCal
         refreshAction = null
         immMenuAction = null
         immTranslateAction = null
+        immReportAction = null
     }
 
     private fun updateHistoryMetadata() {

@@ -3032,8 +3032,10 @@
 
     <string name="browser_toolbar_imm_menu">Translate menu</string>
     <string name="browser_toolbar_imm_trans">Translate</string>
+    <string name="browser_toolbar_imm_report">Feedback</string>
     <string name="browser_toolbar_pop_translate">Click here\nTranslate the current page now</string>
     <string name="browser_toolbar_pop_menu">Click here\nOpen the translation function panel</string>
+    <string name="browser_toolbar_pop_report">Have any questions,\nplease click Feedback</string>
     <string name="browser_toolbar_pop_btn">I see</string>
     <string name="browser_toolbar_pop_btn_try">Try it out</string>
 

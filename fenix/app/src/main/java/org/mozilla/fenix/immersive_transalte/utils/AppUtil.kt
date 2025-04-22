@@ -6,6 +6,8 @@ package org.mozilla.fenix.immersive_transalte.utils
 
 import android.content.Context
 import android.content.res.Configuration
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.WindowManager
@@ -99,6 +101,19 @@ object AppUtil {
 
                 else -> ""
             }
+        }
+    }
+
+    fun getNetworkType(context: Context): String {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = cm.activeNetwork ?: return "无网络"
+        val capabilities = cm.getNetworkCapabilities(network) ?: return "未知网络"
+
+        return when {
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> "Wi-Fi"
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> "移动数据"
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> "以太网"
+            else -> "其他网络"
         }
     }
 

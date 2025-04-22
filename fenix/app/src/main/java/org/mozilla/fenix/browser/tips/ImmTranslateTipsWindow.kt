@@ -41,9 +41,12 @@ class ImmTranslateTipsWindow(
         if (type == Type.Translate) {
             binding.tvContent.text = context.getString(R.string.browser_toolbar_pop_translate)
             binding.btnKnown.text = context.getString(R.string.browser_toolbar_pop_btn)
-        } else {
+        } else if (type == Type.Menu){
             binding.tvContent.text = context.getString(R.string.browser_toolbar_pop_menu)
             binding.btnKnown.text = context.getString(R.string.browser_toolbar_pop_btn_try)
+        } else if (type == Type.Report) {
+            binding.tvContent.text = context.getString(R.string.browser_toolbar_pop_report)
+            binding.btnKnown.text = context.getString(R.string.browser_toolbar_pop_btn)
         }
     }
 
@@ -58,15 +61,21 @@ class ImmTranslateTipsWindow(
             val isPad = isPad(parent.context)
             xOff -= if (type == Type.Translate) {
                 if (isPad) {
-                    PixelUtil.dp2px(contentView.context, 196)
+                    PixelUtil.dp2px(contentView.context, 216)
                 } else {
-                    PixelUtil.dp2px(contentView.context, 100)
+                    PixelUtil.dp2px(contentView.context, 120)
+                }
+            } else if (type == Type.Menu){
+                if (isPad) {
+                    PixelUtil.dp2px(contentView.context, 176)
+                } else {
+                    PixelUtil.dp2px(contentView.context, 80)
                 }
             } else {
                 if (isPad) {
-                    PixelUtil.dp2px(contentView.context, 148)
+                    PixelUtil.dp2px(contentView.context, 138)
                 } else {
-                    PixelUtil.dp2px(contentView.context, 52)
+                    PixelUtil.dp2px(contentView.context, 42)
                 }
             }
             showAsDropDown(parent, xOff, yOff)
@@ -92,6 +101,7 @@ class ImmTranslateTipsWindow(
 
     sealed class Type {
         data object Menu : Type()
+        data object Report : Type()
         data object Translate : Type()
     }
 }

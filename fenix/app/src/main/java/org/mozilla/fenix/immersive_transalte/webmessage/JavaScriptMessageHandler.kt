@@ -5,8 +5,10 @@
 package org.mozilla.fenix.immersive_transalte.webmessage
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import com.immersivetranslate.mltextdetect.detect.ImageTextDetectManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -17,6 +19,7 @@ import org.json.JSONObject
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.immersive_transalte.user.UserManager
+import org.mozilla.fenix.immersive_transalte.utils.AppUtil
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -39,6 +42,7 @@ object JavaScriptMessageHandler {
         registerPageTranslateStateHandler()
         registerImageTextRecognitionHandler()
         registerGetUserInfoHandler(context)
+        registerGetBaseInfoHandler(context)
     }
 
     private fun registerDefaultBrowserHandler(context: Activity) {
@@ -236,6 +240,28 @@ object JavaScriptMessageHandler {
         )
     }
 
+    private fun registerGetBaseInfoHandler(context: Context) {
+        WebMessageBridge.registerHandler(
+            "getBaseInfo",
+            object : RequestHandler {
+                override fun process(
+                    message: WebMessage,
+                    callback: (response: JSONObject?) -> Unit,
+                ) {
+                    val data = JSONObject()
+                    val model = "${Build.MANUFACTURER}_${Build.BRAND}_${Build.BOARD}_${Build.MODEL}"
+                    data.put("appVersion", AppUtil.getVersionName(context))
+                    data.put("osVersion", AppUtil.getOsVersion(context))
+                    data.put("deviceType", AppUtil.getDeviceType(context))
+                    data.put("deviceModel", model)
+                    data.put("network", AppUtil.getNetworkType(context))
+                    val result = getResult(true, data)
+                    callback(result)
+                }
+            },
+        )
+    }
+
     fun addPageStateCallback(onPageCallback: OnPageCallback) {
         if (!pageStateCallbacks.contains(onPageCallback)) {
             pageStateCallbacks.add(onPageCallback)
@@ -249,6 +275,14 @@ object JavaScriptMessageHandler {
     private fun getResult(isOK: Boolean): JSONObject {
         val result = JSONObject()
         result.put("isOk", isOK)
+        return result
+    }
+
+    private fun getResult(isOK: Boolean, data: JSONObject?): JSONObject {
+        val result = getResult(isOK)
+        data?.let {
+            result.put("data", it)
+        }
         return result
     }
 

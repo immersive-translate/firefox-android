@@ -128,7 +128,7 @@
         android:scaleType="center"
         app:layout_constraintEnd_toEndOf="@+id/mozac_browser_toolbar_background"
         app:layout_constraintTop_toTopOf="parent"
-        mozac:actionContainerItemSize="@dimen/mozac_browser_toolbar_button_container_item_size"
+        mozac:actionContainerItemSize="@dimen/mozac_browser_toolbar_page_actions_button_container_item_size"
         tools:layout_width="@dimen/mozac_browser_toolbar_button_width" />
 
     <!-- Browser Actions -->

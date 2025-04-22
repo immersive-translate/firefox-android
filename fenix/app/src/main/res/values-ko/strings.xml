@@ -3194,8 +3194,10 @@
 
     <string name="browser_toolbar_imm_menu">번역 메뉴</string>
     <string name="browser_toolbar_imm_trans">번역</string>
+    <string name="browser_toolbar_imm_report">피드백</string>
     <string name="browser_toolbar_pop_translate">여기를 클릭하세요\n지금 현재 페이지를 번역하세요</string>
     <string name="browser_toolbar_pop_menu">여기를 클릭하세요\n번역 기능 패널 열기</string>
+    <string name="browser_toolbar_pop_report">문의사항이 있으시면\n피드백을 클릭해주세요</string>
     <string name="browser_toolbar_pop_btn">알겠어요</string>
     <string name="browser_toolbar_pop_btn_try">해보기</string>
 
