@@ -3171,4 +3171,23 @@
     <string name="error_re_active_code_1029">Email verification codes were sent too frequently. Please try again later.</string>
     <string name="error_re_active_code_1028">email invalid.</string>
 
+    <string name="web_ts_title">Web translation</string>
+    <string name="web_ts_desc">Click the “Translate icon” in the address bar of any web page to translate it with one click</string>
+    <string name="web_ts_featured_title">🔥 Globally selected websites</string>
+    <string name="web_ts_featured_more">More</string>
+    <string name="web_ts_youtube">YouTube</string>
+    <string name="web_ts_google">Google</string>
+    <string name="web_ts_chatgpt">GhatGPT</string>
+    <string name="web_ts_bilin">Bilin</string>
+    <string name="web_ts_x">X</string>
+    <string name="web_ts_reddit">Reddit</string>
+    <string name="web_ts_wiki">Wiki</string>
+    <string name="web_ts_amazon">Amazon</string>
+    <string name="web_links_title">Immersive Translation Selections</string>
+
+    <string name="video_ts_title">Video translation</string>
+    <string name="video_ts_auto_translate">Automatically turn on bilingual subtitles</string>
+    <string name="video_ts_desc">#1On the video website#2Click the “Settings icon” in the address bar&lt;br&gt;Turn on bilingual subtitles in the immersive translation control panel</string>
+    <string name="video_ts_featured_title">Video sites that already support bilingual subtitles</string>
+    <string name="video_links_title">🔥Featured Video</string>
 </resources>

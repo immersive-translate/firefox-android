@@ -3339,4 +3339,24 @@
     <!--re active code-->
     <string name="error_re_active_code_1029">邮箱验证码发送过于频繁，请稍后再试</string>
     <string name="error_re_active_code_1028">邮箱无效</string>
+
+    <string name="web_ts_title">网页翻译</string>
+    <string name="web_ts_desc">任何网页中点击地址栏中的“翻译图标”\n即可一键翻译</string>
+    <string name="web_ts_featured_title">🔥 全球精选网站</string>
+    <string name="web_ts_featured_more">查看更多</string>
+    <string name="web_ts_youtube">YouTube</string>
+    <string name="web_ts_google">Google</string>
+    <string name="web_ts_chatgpt">GhatGPT</string>
+    <string name="web_ts_bilin">Bilin</string>
+    <string name="web_ts_x">X</string>
+    <string name="web_ts_reddit">Reddit</string>
+    <string name="web_ts_wiki">Wiki</string>
+    <string name="web_ts_amazon">Amazon</string>
+    <string name="web_links_title">沉浸式翻译精选</string>
+
+    <string name="video_ts_title">视频翻译</string>
+    <string name="video_ts_auto_translate">自动开启双语字幕</string>
+    <string name="video_ts_desc">#1在视频网站中#2点击地址栏中的“设置图标”&lt;br&gt;在沉浸式翻译控制板中开启双语字幕</string>
+    <string name="video_ts_featured_title">已支持双语字幕的视频网站</string>
+    <string name="video_links_title">🔥 精选视频</string>
 </resources>

@@ -188,6 +188,14 @@
         android:id="@+id/action_global_login"
         app:destination="@id/login_graph"/>
 
+    <action
+        android:id="@+id/action_global_web_ts"
+        app:destination="@id/web_ts_graph"/>
+
+    <action
+        android:id="@+id/action_global_video_ts"
+        app:destination="@id/video_ts_graph"/>
+
     <dialog
         android:id="@+id/tabsTrayFragment"
         android:name="org.mozilla.fenix.tabstray.TabsTrayFragment">
@@ -1296,6 +1304,26 @@
             android:id="@+id/loginFragment"
             android:name="org.mozilla.fenix.immersive_transalte.login.LoginFragment"
             android:label="@string/preferences_login"/>
+
+    </navigation>
+
+    <navigation
+        android:id="@+id/web_ts_graph"
+        app:startDestination="@id/webTsFragment">
+
+        <fragment
+            android:id="@+id/webTsFragment"
+            android:name="org.mozilla.fenix.immersive_transalte.home.WebTranslateFragment"/>
+
+    </navigation>
+
+    <navigation
+        android:id="@+id/video_ts_graph"
+        app:startDestination="@id/videoTsFragment">
+
+        <fragment
+            android:id="@+id/videoTsFragment"
+            android:name="org.mozilla.fenix.immersive_transalte.home.VideoTranslateFragment"/>
 
     </navigation>
 

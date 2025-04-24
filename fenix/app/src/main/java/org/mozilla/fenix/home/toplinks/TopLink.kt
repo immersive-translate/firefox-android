@@ -20,5 +20,17 @@ data class TopLink(
     val title_en: String = "",
     val title_ko: String = "",
 
-    val isMore: Boolean = false
-)
+    val isMore: Boolean = false,
+) {
+
+    fun isWebTranslate(): Boolean {
+        return linkUrl.startsWith("https://browser.immersivetranslate.com/web")
+    }
+
+    fun isVideoTranslate(): Boolean {
+        return linkUrl.startsWith("https://browser.immersivetranslate.com/video")
+    }
+
+}
+
+

@@ -143,6 +143,12 @@
         <attr name="backgroundColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="FixLineFlowLayout">
+        <attr name="lineViewCount" format="integer" />
+        <attr name="horizontalSpacing" format="dimension" />
+        <attr name="verticalSpacing" format="dimension" />
+    </declare-styleable>
+
     <attr name="normal_color_FFFFFF" format="reference" />
     <attr name="normal_color_000000" format="reference" />
     <attr name="normal_color_222222" format="reference" />

@@ -645,6 +645,8 @@ dependencies {
 
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android:+'
 
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+
     //implementation 'com.stripe:stripe-android:20.53.0'
     //implementation 'com.stripe:stripe-android:21.3.1'
 

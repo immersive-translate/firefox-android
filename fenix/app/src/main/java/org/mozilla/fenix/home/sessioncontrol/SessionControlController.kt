@@ -424,6 +424,17 @@ class DefaultSessionControlController(
             return
         }
 
+        // web
+        if (topLink.isWebTranslate()) {
+            navController.navigate(NavGraphDirections.actionGlobalWebTs())
+            return
+        }
+        // video
+        if (topLink.isVideoTranslate()) {
+            navController.navigate(NavGraphDirections.actionGlobalVideoTs())
+            return
+        }
+
         val url = UrlLanguageFormater.handleUrl(activity.components, topLink.linkUrl)
         val existingTabForUrl = store.state.tabs.firstOrNull { url == it.content.url }
 

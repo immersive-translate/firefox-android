@@ -1422,8 +1422,12 @@ abstract class BaseBrowserFragment :
     ) {
         val context = requireContext()
 
+        val isToolbarFix = context.settings().toolbarPosition == ToolbarPosition.TOP
+                && context.settings().isFixTopToolbar
+
         if (isToolbarDynamic(context) && webAppToolbarShouldBeVisible) {
-            getEngineView().setDynamicToolbarMaxHeight(topToolbarHeight + bottomToolbarHeight)
+            val bToolbarHeight = if (!isToolbarFix) bottomToolbarHeight else 0
+            getEngineView().setDynamicToolbarMaxHeight(topToolbarHeight + bToolbarHeight)
 
             if (context.settings().navigationToolbarEnabled || shouldShowMicrosurveyPrompt(context)) {
                 (getSwipeRefreshLayout().layoutParams as CoordinatorLayout.LayoutParams).behavior =
@@ -1455,8 +1459,7 @@ abstract class BaseBrowserFragment :
             }
 
             // top固定，但是bottom不固定
-            if (context.settings().toolbarPosition == ToolbarPosition.TOP
-                && context.settings().isFixTopToolbar) {
+            if (isToolbarFix) {
                 val swipeRefreshParams =
                     getSwipeRefreshLayout().layoutParams as CoordinatorLayout.LayoutParams
                 swipeRefreshParams.bottomMargin = bottomToolbarHeight
