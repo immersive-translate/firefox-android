@@ -34,8 +34,8 @@ object WebDataProvider {
         add(FeatureItem(R.mipmap.ic_web_chatgpt, R.string.web_ts_chatgpt, "https://chatgpt.com/"))
         add(FeatureItem(R.mipmap.ic_web_bilin, R.string.web_ts_bilin, "https://bilin.ai/"))
 
-        add(FeatureItem(R.mipmap.ic_web_reddit, R.string.web_ts_reddit, "https://x.com/"))
-        add(FeatureItem(R.mipmap.ic_web_x, R.string.web_ts_x, "https://www.reddit.com/"))
+        add(FeatureItem(R.mipmap.ic_web_reddit, R.string.web_ts_reddit, "https://www.reddit.com/"))
+        add(FeatureItem(R.mipmap.ic_web_x, R.string.web_ts_x, "https://x.com/"))
         add(FeatureItem(R.mipmap.ic_web_wiki, R.string.web_ts_wiki, "https://www.wikipedia.org/"))
         add(FeatureItem(R.mipmap.ic_web_amazon, R.string.web_ts_amazon, "https://www.amazon.com/"))
     }

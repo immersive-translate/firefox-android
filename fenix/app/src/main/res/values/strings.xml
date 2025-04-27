@@ -3181,8 +3181,12 @@
     <string name="web_ts_bilin">Bilin</string>
     <string name="web_ts_x">X</string>
     <string name="web_ts_reddit">Reddit</string>
-    <string name="web_ts_wiki">Wiki</string>
+    <string name="web_ts_wiki">Wikipedia</string>
     <string name="web_ts_amazon">Amazon</string>
+
+    <string name="web_ts_udemy">Udemy</string>
+    <string name="web_ts_nebula">NEBULA</string>
+
     <string name="web_links_title">Immersive Translation Selections</string>
 
     <string name="video_ts_title">Video translation</string>

@@ -3350,8 +3350,8 @@
     <string name="web_ts_bilin">Bilin</string>
     <string name="web_ts_x">X</string>
     <string name="web_ts_reddit">Reddit</string>
-    <string name="web_ts_wiki">Wiki</string>
-    <string name="web_ts_amazon">Amazon</string>
+    <string name="web_ts_wiki">维基百科</string>
+    <string name="web_ts_amazon">亚马逊</string>
     <string name="web_links_title">沉浸式翻译精选</string>
 
     <string name="video_ts_title">视频翻译</string>

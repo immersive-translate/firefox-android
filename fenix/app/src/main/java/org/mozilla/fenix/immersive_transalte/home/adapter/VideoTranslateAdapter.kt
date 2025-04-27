@@ -150,7 +150,7 @@ private class VideoFeaturedWebsViewHolder(
         else R.drawable.chevron_right_down
         viewBinding.ivMore.setImageResource(resId)
 
-        val items = VideoDataProvider.getFeaturedWebs(isShowMore)
+        val items = VideoDataProvider.getFeaturedWebs()
         viewBinding.featuredWebs.setFeatureItems(items)
     }
 

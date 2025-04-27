@@ -30,13 +30,15 @@
             android:layout_height="wrap_content"
             android:text="@string/web_ts_featured_more"
             android:textColor="?normal_color_4181F0"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/chevron_right_down" />
+            app:srcCompat="@drawable/chevron_right_down"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

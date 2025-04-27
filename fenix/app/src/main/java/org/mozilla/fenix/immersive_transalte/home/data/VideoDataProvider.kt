@@ -10,34 +10,10 @@ import org.mozilla.fenix.immersive_transalte.home.bean.WebItem
 
 object VideoDataProvider {
     private val featuredWebs = mutableListOf<FeatureItem>().apply {
-        add(
-            FeatureItem(
-                R.mipmap.ic_web_youtube,
-                R.string.web_ts_youtube,
-                "https://www.youtube.com/",
-            ),
-        )
-        add(FeatureItem(R.mipmap.ic_web_google, R.string.web_ts_google, "https://www.google.com/"))
-        add(FeatureItem(R.mipmap.ic_web_chatgpt, R.string.web_ts_chatgpt, "https://chatgpt.com/"))
-        add(FeatureItem(R.mipmap.ic_web_bilin, R.string.web_ts_bilin, "https://bilin.ai/"))
-    }
-
-    private val featuredWebsOfAll = mutableListOf<FeatureItem>().apply {
-        add(
-            FeatureItem(
-                R.mipmap.ic_web_youtube,
-                R.string.web_ts_youtube,
-                "https://www.youtube.com/",
-            ),
-        )
-        add(FeatureItem(R.mipmap.ic_web_google, R.string.web_ts_google, "https://www.google.com/"))
-        add(FeatureItem(R.mipmap.ic_web_chatgpt, R.string.web_ts_chatgpt, "https://chatgpt.com/"))
-        add(FeatureItem(R.mipmap.ic_web_bilin, R.string.web_ts_bilin, "https://bilin.ai/"))
-
-        add(FeatureItem(R.mipmap.ic_web_reddit, R.string.web_ts_reddit, "https://x.com/"))
-        add(FeatureItem(R.mipmap.ic_web_x, R.string.web_ts_x, "https://www.reddit.com/"))
-        add(FeatureItem(R.mipmap.ic_web_wiki, R.string.web_ts_wiki, "https://www.wikipedia.org/"))
-        add(FeatureItem(R.mipmap.ic_web_amazon, R.string.web_ts_amazon, "https://www.amazon.com/"))
+        add(FeatureItem(R.mipmap.ic_web_youtube, R.string.web_ts_youtube, "https://www.youtube.com/"))
+        add(FeatureItem(R.mipmap.ic_web_x, R.string.web_ts_google, "https://x.com/"))
+        add(FeatureItem(R.mipmap.ic_web_udemy, R.string.web_ts_udemy, "https://www.udemy.com/"))
+        add(FeatureItem(R.mipmap.ic_web_nebula, R.string.web_ts_nebula, "https://nebula.tv/featured"))
     }
 
     private val webLinks = mutableListOf<WebItem>().apply {
@@ -139,8 +115,8 @@ object VideoDataProvider {
         )
     }
 
-    fun getFeaturedWebs(isAll: Boolean): MutableList<FeatureItem> {
-        return if (isAll) featuredWebsOfAll else featuredWebs
+    fun getFeaturedWebs(): MutableList<FeatureItem> {
+        return featuredWebs
     }
 
     fun getWebLinks(): MutableList<WebItem> {
