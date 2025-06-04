@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:moz="http://mozac.org/tools">
 
 
-    <string name="app_name" translatable="false">沉浸式翻译</string>
-    <string name="wordmark_text">沉浸式翻译</string>
+    <string name="app_name" translatable="false">Babel浏览器</string>
+    <string name="wordmark_text">Babel浏览器</string>
     <!-- App name for private browsing mode. The first parameter is the name of the app defined in app_name (for example: Fenix)-->
     <string name="app_name_private_5">私密 %s</string>
     <!-- App name for private browsing mode. The first parameter is the name of the app defined in app_name (for example: Fenix)-->
@@ -64,7 +64,7 @@
 
     <!-- About content. The first parameter is the name of the application. (For example: Fenix) -->
     <!--<string name="about_content">%1$s 由 Mozilla 倾力打造。</string>-->
-    <string name="about_content">沉浸式翻译是一款基于火狐浏览器技术的定制产品，由沉浸式翻译团队独立开发。火狐浏览器是Mozilla的一个开源项目。</string>
+    <string name="about_content">Babel浏览器是一款基于火狐浏览器技术的定制产品，由Babel浏览器团队独立开发。火狐浏览器是Mozilla的一个开源项目。</string>
 
     <!-- Private Browsing -->
     <!-- Explanation for private browsing displayed to users on home view when they first enable private mode
@@ -500,8 +500,8 @@
     <!-- Title for set firefox as default browser screen used by Nimbus experiments. -->
     <!-- Title for set firefox as default browser screen used by Nimbus experiments.
         Note: The word "Firefox" should NOT be translated -->
-    <string name="juno_onboarding_default_browser_title_nimbus_3" tools:ignore="BrandUsage,UnusedResources">探究 沉浸式翻译 何以受亿万用户青睐</string>
-    <string name="juno_onboarding_default_browser_title_nimbus" moz:removedIn="120" tools:ignore="UnusedResources">将 沉浸式翻译 设为主力浏览器</string>
+    <string name="juno_onboarding_default_browser_title_nimbus_3" tools:ignore="BrandUsage,UnusedResources">探究 Babel浏览器 何以受亿万用户青睐</string>
+    <string name="juno_onboarding_default_browser_title_nimbus" moz:removedIn="120" tools:ignore="UnusedResources">将 Babel浏览器 设为主力浏览器</string>
     <!-- Title for set firefox as default browser screen used by Nimbus experiments. -->
     <string name="juno_onboarding_default_browser_title_nimbus_4" tools:ignore="UnusedResources">更多保障上网安全的选项</string>
     <!-- Description for set firefox as default browser screen used by Nimbus experiments. -->
@@ -513,7 +513,7 @@
     <string name="juno_onboarding_default_browser_title_nimbus_2">浏览新世界，从现在开始</string>
     <!-- Description for set firefox as default browser screen used by Nimbus experiments. Nimbus experiments do not support string placeholders.
         Note: The word "Firefox" should NOT be translated -->
-    <string name="juno_onboarding_default_browser_description_nimbus" moz:removedIn="120" tools:ignore="UnusedResources">沉浸式翻译 始终以人为本，并通过拦截跨站跟踪器等机制保护您的隐私。\n\n可阅读我们的隐私声明详细了解 </string>
+    <string name="juno_onboarding_default_browser_description_nimbus" moz:removedIn="120" tools:ignore="UnusedResources">Babel浏览器 始终以人为本，并通过拦截跨站跟踪器等机制保护您的隐私。\n\n可阅读我们的隐私声明详细了解 </string>
     <!-- Description for set firefox as default browser screen used by Nimbus experiments. -->
     <string name="juno_onboarding_default_browser_description_nimbus_2">让我们成为你探索世界的第一步：一键设置，享受更流畅、便捷的双语浏览体验。</string>
     <!-- Text for the link to the privacy notice webpage for set as firefox default browser screen.
@@ -527,17 +527,17 @@
     <string name="juno_onboarding_sign_in_title_2">在设备间流转，数据照样密不透风</string>
     <!-- Description for sign in to sync screen. Nimbus experiments do not support string placeholders.
      Note: The word "Firefox" should NOT be translated -->
-    <string name="juno_onboarding_sign_in_description_3" tools:ignore="BrandUsage">沉浸式翻译 会在同步时加密您的密码、书签等数据。</string>
+    <string name="juno_onboarding_sign_in_description_3" tools:ignore="BrandUsage">Babel浏览器 会在同步时加密您的密码、书签等数据。</string>
     <!-- Text for the button to sign in to sync on the device -->
     <string name="juno_onboarding_sign_in_positive_button" tools:ignore="UnusedResources">登录</string>
     <!-- Text for the button dismiss the screen and move on with the flow -->
     <string name="juno_onboarding_sign_in_negative_button" tools:ignore="UnusedResources">暂时不要</string>
     <!-- Title for enable notification permission screen used by Nimbus experiments. Nimbus experiments do not support string placeholders.
         Note: The word "Firefox" should NOT be translated -->
-    <string name="juno_onboarding_enable_notifications_title_nimbus_2" tools:ignore="BrandUsage">允许通知可让 沉浸式翻译 更好地为您保驾护航</string>
+    <string name="juno_onboarding_enable_notifications_title_nimbus_2" tools:ignore="BrandUsage">允许通知可让 Babel浏览器 更好地为您保驾护航</string>
     <!-- Description for enable notification permission screen used by Nimbus experiments. Nimbus experiments do not support string placeholders.
        Note: The word "Firefox" should NOT be translated -->
-    <string name="juno_onboarding_enable_notifications_description_nimbus_2" tools:ignore="BrandUsage">在设备间安全发送标签页，并探索 沉浸式翻译 中更多保护隐私的特色功能。</string>
+    <string name="juno_onboarding_enable_notifications_description_nimbus_2" tools:ignore="BrandUsage">在设备间安全发送标签页，并探索 Babel浏览器 中更多保护隐私的特色功能。</string>
     <!-- Text for the button to request notification permission on the device -->
     <string name="juno_onboarding_enable_notifications_positive_button" tools:ignore="UnusedResources">开启通知</string>
     <!-- Text for the button dismiss the screen and move on with the flow -->
@@ -545,14 +545,14 @@
 
     <!-- Title for add search widget screen used by Nimbus experiments. Nimbus experiments do not support string placeholders.
         Note: The word "Firefox" should NOT be translated -->
-    <string name="juno_onboarding_add_search_widget_title" tools:ignore="UnusedResources">试试 沉浸式翻译 搜索微件</string>
+    <string name="juno_onboarding_add_search_widget_title" tools:ignore="UnusedResources">试试 Babel浏览器 搜索微件</string>
 
     <!-- Description for add search widget screen used by Nimbus experiments. Nimbus experiments do not support string placeholders.
         Note: The word "Firefox" should NOT be translated -->
-    <string name="juno_onboarding_add_search_widget_description" tools:ignore="UnusedResources">将 沉浸式翻译 添加至主屏幕，随手就能打开隐私为先、可拦截跨站跟踪器的浏览器。</string>
+    <string name="juno_onboarding_add_search_widget_description" tools:ignore="UnusedResources">将 Babel浏览器 添加至主屏幕，随手就能打开隐私为先、可拦截跨站跟踪器的浏览器。</string>
     <!-- Text for the button to add search widget on the device used by Nimbus experiments. Nimbus experiments do not support string placeholders.
         Note: The word "Firefox" should NOT be translated -->
-    <string name="juno_onboarding_add_search_widget_positive_button" tools:ignore="UnusedResources">添加 沉浸式翻译 微件</string>
+    <string name="juno_onboarding_add_search_widget_positive_button" tools:ignore="UnusedResources">添加 Babel浏览器 微件</string>
 
     <!-- Text for the button to dismiss the screen and move on with the flow -->
     <string name="juno_onboarding_add_search_widget_negative_button" tools:ignore="UnusedResources">暂时不要</string>
@@ -642,9 +642,9 @@
     <!-- Preference Category for settings related to Search address bar -->
     <string name="preferences_settings_address_bar">地址栏首选项</string>
     <!-- Preference Category for settings to Firefox Suggest -->
-    <string name="preference_search_address_bar_fx_suggest" tools:ignore="BrandUsage">地址栏 - 沉浸式翻译 建议</string>
+    <string name="preference_search_address_bar_fx_suggest" tools:ignore="BrandUsage">地址栏 - Babel浏览器 建议</string>
     <!-- Preference link to Learn more about Firefox Suggest -->
-    <string name="preference_search_learn_about_fx_suggest" tools:ignore="BrandUsage">详细了解 沉浸式翻译 建议</string>
+    <string name="preference_search_learn_about_fx_suggest" tools:ignore="BrandUsage">详细了解 Babel浏览器 建议</string>
     <!-- Preference link to rating Fenix on the Play Store -->
     <string name="preferences_rate">在 Google Play 上评分</string>
     <!-- Preference linking to about page for Fenix
@@ -910,7 +910,7 @@
     <!-- Title of the Nimbus message for extension general availability-->
     <string name="addon_ga_message_title_2" tools:ignore="UnusedResources">扩展上新</string>
     <!-- Body of the Nimbus message for add-ons general availability. 'Firefox' intentionally hardcoded here-->
-    <string name="addon_ga_message_body" tools:ignore="BrandUsage,UnusedResources">探索百余件新鲜扩展，让 沉浸式翻译 用起来更得心应手。</string>
+    <string name="addon_ga_message_body" tools:ignore="BrandUsage,UnusedResources">探索百余件新鲜扩展，让 Babel浏览器 用起来更得心应手。</string>
 
     <!-- Button text of the Nimbus message for extensions general availability. -->
     <string name="addon_ga_message_button_2" tools:ignore="UnusedResources">发现更多扩展</string>
@@ -976,7 +976,7 @@
     <!-- Name of the "receive tabs" notification channel. Displayed in the "App notifications" system settings for the app -->
     <string name="fxa_received_tab_channel_name">收到标签页</string>
     <!-- Description of the "receive tabs" notification channel. Displayed in the "App notifications" system settings for the app -->
-    <string name="fxa_received_tab_channel_description">收到来自其他 沉浸式翻译 设备的标签页通知。</string>
+    <string name="fxa_received_tab_channel_description">收到来自其他 Babel浏览器 设备的标签页通知。</string>
 
     <!--  The body for these is the URL of the tab received  -->
     <string name="fxa_tab_received_notification_name">收到标签页</string>
@@ -1068,7 +1068,7 @@
     <string name="preference_gestures_swipe_toolbar_switch_tabs_2">横向滑动地址栏切换标签页</string>
 
     <!-- Library -->
-    <string name="library_translate">沉浸式翻译设置</string>
+    <string name="library_translate">Babel浏览器设置</string>
     <string name="library_upgrade">升级</string>
     <string name="library_subscription">订阅管理</string>
     <!-- Option in Library to open Downloads page -->
@@ -1673,7 +1673,7 @@
     <!-- An option to connect additional devices -->
     <string name="sync_connect_device">连接其他设备</string>
     <!-- The dialog text shown when additional devices are not available -->
-    <string name="sync_connect_device_dialog" tools:ignore="BrandUsage">请在至少另一台设备上的 沉浸式翻译 登录才能发送标签页。</string>
+    <string name="sync_connect_device_dialog" tools:ignore="BrandUsage">请在至少另一台设备上的 Babel浏览器 登录才能发送标签页。</string>
     <!-- Confirmation dialog button -->
     <string name="sync_confirmation_button">明白了</string>
 
@@ -1703,10 +1703,10 @@
 
     <!-- Title shown in the notification that pops up to remind the user to set fenix as default browser.
     The app name is in the text, due to limitations with localizing Nimbus experiments -->
-    <string name="nimbus_notification_default_browser_title" tools:ignore="UnusedResources">沉浸式翻译 又快、又有隐私</string>
+    <string name="nimbus_notification_default_browser_title" tools:ignore="UnusedResources">Babel浏览器 又快、又有隐私</string>
     <!-- Text shown in the notification that pops up to remind the user to set fenix as default browser.
     The app name is in the text, due to limitations with localizing Nimbus experiments -->
-    <string name="nimbus_notification_default_browser_text" tools:ignore="UnusedResources">将 沉浸式翻译 设为您的默认浏览器</string>
+    <string name="nimbus_notification_default_browser_text" tools:ignore="UnusedResources">将 Babel浏览器 设为您的默认浏览器</string>
     <!-- Title shown in the notification that pops up to re-engage the user -->
     <string name="notification_re_engagement_title">试用隐私浏览功能</string>
     <!-- Text shown in the notification that pops up to re-engage the user.
@@ -1726,7 +1726,7 @@
     <!-- Survey -->
     <!-- Text shown in the fullscreen message that pops up to ask user to take a short survey.
     The app name is in the text, due to limitations with localizing Nimbus experiments -->
-    <string name="nimbus_survey_message_text">请填写这份简短的问卷，帮助 沉浸式翻译 变得更好。</string>
+    <string name="nimbus_survey_message_text">请填写这份简短的问卷，帮助 Babel浏览器 变得更好。</string>
     <!-- Preference for taking the short survey. -->
     <string name="preferences_take_survey">问卷调查</string>
     <!-- Preference for not taking the short survey. -->
@@ -2020,7 +2020,7 @@
     <string name="about_crashes">崩溃信息</string>
     <!-- About page link text to open privacy notice link -->
     <string name="about_privacy_notice">Firefox 隐私声明</string>
-    <string name="about_privacy_notice_app">沉浸式翻译 隐私声明</string>
+    <string name="about_privacy_notice_app">Babel浏览器 隐私声明</string>
     <!-- About page link text to open know your rights link -->
     <string name="about_know_your_rights">了解您关于 Firefox 的权利</string>
     <!-- About page link text to open licensing information link -->
@@ -2414,7 +2414,7 @@
     <!-- Text displayed when user has disabled tab syncing in Firefox Sync Account -->
     <string name="synced_tabs_enable_tab_syncing">请启用标签页同步。</string>
     <!-- Text displayed when user has no tabs that have been synced -->
-    <string name="synced_tabs_no_tabs" tools:ignore="BrandUsage">您其他设备上的 沉浸式翻译 没有打开任何标签页。</string>
+    <string name="synced_tabs_no_tabs" tools:ignore="BrandUsage">您其他设备上的 Babel浏览器 没有打开任何标签页。</string>
     <!-- Text displayed in the synced tabs screen when a user is not signed in to Firefox Sync describing Synced Tabs -->
     <string name="synced_tabs_sign_in_message">查看您其他设备上的标签页列表。</string>
     <!-- Text displayed on a button in the synced tabs screen to link users to sign in when a user is not signed in to Firefox Sync -->
@@ -2480,7 +2480,7 @@
     <!-- The header text of the auto-close message when the user is asked if they want to turn on the auto-closing of inactive tabs. -->
     <string name="inactive_tabs_auto_close_message_header" tools:ignore="UnusedResources">要一个月后自动关闭吗？</string>
     <!-- A description below the header to notify the user what the inactive tabs auto-close feature is. -->
-    <string name="inactive_tabs_auto_close_message_description" tools:ignore="BrandUsage,UnusedResources">沉浸式翻译 可自动关闭您一个月内未查看的标签页。</string>
+    <string name="inactive_tabs_auto_close_message_description" tools:ignore="BrandUsage,UnusedResources">Babel浏览器 可自动关闭您一个月内未查看的标签页。</string>
     <!-- A call to action below the description to allow the user to turn on the auto closing of inactive tabs. -->
     <string name="inactive_tabs_auto_close_message_action" tools:ignore="UnusedResources">启用自动关闭标签页功能</string>
 
@@ -2489,7 +2489,7 @@
 
     <!-- Awesome bar suggestion's headers -->
     <!-- Search suggestions title for Firefox Suggest. -->
-    <string name="firefox_suggest_header" tools:ignore="BrandUsage">沉浸式翻译 建议</string>
+    <string name="firefox_suggest_header" tools:ignore="BrandUsage">Babel浏览器 建议</string>
 
     <!-- Title for search suggestions when Google is the default search suggestion engine. -->
     <string name="google_search_engine_suggestion_header">Google 搜索</string>
@@ -2500,7 +2500,7 @@
     <!-- Default browser card title -->
     <string name="default_browser_experiment_card_title">切换默认浏览器</string>
     <!-- Default browser card text -->
-    <string name="default_browser_experiment_card_text" tools:ignore="BrandUsage">将网站、电子邮件及聊天工具中的链接设为在 沉浸式翻译 中自动打开。</string>
+    <string name="default_browser_experiment_card_text" tools:ignore="BrandUsage">将网站、电子邮件及聊天工具中的链接设为在 Babel浏览器 中自动打开。</string>
 
     <!-- Content description for close button in collection placeholder. -->
     <string name="remove_home_collection_placeholder_content_description">移除</string>
@@ -2524,7 +2524,7 @@
     <!-- Title of an app feature. Smaller than a heading. The first parameter is product name Pocket -->
     <string name="pocket_stories_feature_title_2">由 %s 提供。</string>
     <!-- Caption for describing a certain feature. The placeholder is for a clickable text (eg: Learn more) which will load an url in a new tab when clicked.  -->
-    <string name="pocket_stories_feature_caption" tools:ignore="BrandUsage">沉浸式翻译 系列产品。%s</string>
+    <string name="pocket_stories_feature_caption" tools:ignore="BrandUsage">Babel浏览器 系列产品。%s</string>
     <!-- Clickable text for opening an external link for more information about Pocket. -->
     <string name="pocket_stories_feature_learn_more">详细了解</string>
 
@@ -3083,8 +3083,8 @@
 
     <string name="privacy_remind_dialog_title">温馨提示</string>
     <string name="privacy_remind_dialog_us">《用户协议》</string>
-    <string name="privacy_remind_dialog_itp">《沉浸式翻译浏览器隐私政策》</string>
-    <string name="privacy_remind_dialog_content">欢迎使用沉浸式翻译。在使用沉浸式翻译前，请认真阅读%1$s和%2$s。根据《常见类型移动互联网应用程序必要个人信息范围规定》，沉浸式翻译的主要功能为网址浏览、搜索、文件处理、文件管理等，扩展功能包括沉浸式翻译账号等。同意基本功能隐私政策仅代表同意使用网址浏览、搜索、文件处理、文件管理等主要功能时收集、处理相关必要信息，沉浸式翻译账号等拓展功能收集个人信息将在您使用具体功能时单独征求您的同意。</string>
+    <string name="privacy_remind_dialog_itp">《Babel浏览器隐私政策》</string>
+    <string name="privacy_remind_dialog_content">欢迎使用Babel浏览器。在使用Babel浏览器前，请认真阅读%1$s和%2$s。根据《常见类型移动互联网应用程序必要个人信息范围规定》，Babel浏览器的主要功能为网址浏览、搜索、文件处理、文件管理等，扩展功能包括Babel浏览器账号等。同意基本功能隐私政策仅代表同意使用网址浏览、搜索、文件处理、文件管理等主要功能时收集、处理相关必要信息，Babel浏览器账号等拓展功能收集个人信息将在您使用具体功能时单独征求您的同意。</string>
     <string name="privacy_remind_dialog_disagree">不同意</string>
     <string name="privacy_remind_dialog_agree">同意并继续</string>
 
@@ -3093,8 +3093,8 @@
     <string name="quit_app_dialog_btn_quit">退出应用</string>
     <string name="quit_app_dialog_btn_known">我知道了</string>
 
-    <string name="onboarding_lan_title">将沉浸式翻译设置为默认浏览器</string>
-    <string name="onboarding_lan_subtitle">任何外文网页默认用沉浸式翻译浏览器打开并自动翻译；\n搜索结果自动翻译为母语。</string>
+    <string name="onboarding_lan_title">将Babel浏览器设置为默认浏览器</string>
+    <string name="onboarding_lan_subtitle">任何外文网页默认用Babel浏览器浏览器打开并自动翻译；\n搜索结果自动翻译为母语。</string>
     <string name="onboarding_lan_set_title">您的母语：</string>
     <string name="onboarding_lan_set_default_browser">设为默认浏览器</string>
     <string name="onboarding_lan_skip">稍后再设置</string>
@@ -3163,7 +3163,7 @@
     <string name="buy_vip_year_try_trial">免费试用%1$s天</string>
     <string name="buy_vip_btn_buy">立即订阅</string>
 
-    <string name="buy_vip_tip_01">免费套餐需要自定义 API Token，价格较贵，配置繁琐且有严格的速率限制。升级 Pro 会员后可直接使用沉浸式翻译提供的 DeepL，OpenAI，Claude，Gemini 翻译服务，无需任何配置，开箱即用，每月更可享受高达 2000 万 token 的翻译额度。</string>
+    <string name="buy_vip_tip_01">免费套餐需要自定义 API Token，价格较贵，配置繁琐且有严格的速率限制。升级 Pro 会员后可直接使用Babel浏览器提供的 DeepL，OpenAI，Claude，Gemini 翻译服务，无需任何配置，开箱即用，每月更可享受高达 2000 万 token 的翻译额度。</string>
     <string name="buy_vip_tip_02">每月包含 1000 页 AI 驱动的 PDF 文档翻译，支持复杂的公式识别，表格识别和扫描版文档</string>
     <string name="buy_vip_tip_03">每月包含 3000 张 AI 驱动的漫画翻译</string>
     <string name="buy_vip_tip_04">如您遇到问题，请联系客户支持团队\nsupport@immersivetranslate.com</string>
@@ -3225,7 +3225,7 @@
     <string name="report_commit_failure">提交失败\n请重试</string>
     <string name="report_upload_img_failure">图片上传失败\n请重试</string>
 
-    <string name="report_score_title">您对沉浸式翻译的体验满意吗？</string>
+    <string name="report_score_title">您对Babel浏览器的体验满意吗？</string>
     <string name="report_score_btn_commit">提交</string>
     <string name="report_score_low_desc">😢对产品不满意？\n请给我们提供您宝贵的意见吧！</string>
     <string name="report_score_high_desc">请前往应用商店给个好评吧～</string>
@@ -3244,7 +3244,7 @@
     <string name="buy_vip_hw_agreement_agree">同意并继续</string>
 
     <string name="login_title">注册并登录</string>
-    <string name="login_desc">登录后立即享有沉浸式翻译全部免费功能～</string>
+    <string name="login_desc">登录后立即享有Babel浏览器全部免费功能～</string>
     <string name="login_btn_google">使用 Google 登录</string>
     <string name="login_or">或</string>
     <string name="login_btn_email">使用电子邮箱登录</string>
@@ -3352,11 +3352,11 @@
     <string name="web_ts_reddit">Reddit</string>
     <string name="web_ts_wiki">维基百科</string>
     <string name="web_ts_amazon">亚马逊</string>
-    <string name="web_links_title">沉浸式翻译精选</string>
+    <string name="web_links_title">Babel浏览器精选</string>
 
     <string name="video_ts_title">视频翻译</string>
     <string name="video_ts_auto_translate">自动开启双语字幕</string>
-    <string name="video_ts_desc">#1在视频网站中#2点击地址栏中的“设置图标”&lt;br&gt;在沉浸式翻译控制板中开启双语字幕</string>
+    <string name="video_ts_desc">#1在视频网站中#2点击地址栏中的“设置图标”&lt;br&gt;在Babel浏览器控制板中开启双语字幕</string>
     <string name="video_ts_featured_title">已支持双语字幕的视频网站</string>
     <string name="video_links_title">🔥 精选视频</string>
 </resources>

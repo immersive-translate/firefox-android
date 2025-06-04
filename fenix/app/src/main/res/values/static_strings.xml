@@ -4,9 +4,9 @@
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <resources>
     <!-- Name of the application -->
-    <string name="app_name" translatable="false">Immersive Translate</string>
-    <string name="firefox" translatable="false">Immersive Translate</string>
-    <string name="wordmark_text">Immersive Translate</string>
+    <string name="app_name" translatable="false">Babel Browser</string>
+    <string name="firefox" translatable="false">Babel Browser</string>
+    <string name="wordmark_text">Babel Browser</string>
 
     <!-- Preference for developers -->
     <string name="preference_leakcanary" translatable="false">LeakCanary</string>

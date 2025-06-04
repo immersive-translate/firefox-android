@@ -160,12 +160,12 @@ android {
         debug {
             shrinkResources false
             minifyEnabled false
-            applicationIdSuffix ".browser.debug"
+            applicationIdSuffix ".browser.babel.debug"
             resValue "bool", "IS_DEBUG", "true"
             pseudoLocalesEnabled true
         }
         nightly releaseTemplate >> {
-            applicationIdSuffix ".browser.nightly"
+            applicationIdSuffix ".browser.babel.nightly"
             buildConfigField "boolean", "USE_RELEASE_VERSIONING", "true"
             def deepLinkSchemeValue = "immersivetranslate"
             buildConfigField "String", "DEEP_LINK_SCHEME", "\"$deepLinkSchemeValue\""
@@ -175,7 +175,7 @@ android {
         }
         beta releaseTemplate >> {
             buildConfigField "boolean", "USE_RELEASE_VERSIONING", "true"
-            applicationIdSuffix ".browser.beta"
+            applicationIdSuffix ".browser.babel.beta"
             def deepLinkSchemeValue = "immersivetranslate"
             buildConfigField "String", "DEEP_LINK_SCHEME", "\"$deepLinkSchemeValue\""
             manifestPlaceholders.putAll([
@@ -186,13 +186,13 @@ android {
                     // fatal consequences. For example see:
                     //  - https://issuetracker.google.com/issues/36924841
                     //  - https://issuetracker.google.com/issues/36905922
-                    "sharedUserId": "com.immersivetranslate.browser.sharedID",
+                    "sharedUserId": "com.immersivetranslate.browser.babel.sharedID",
                     "deepLinkScheme": deepLinkSchemeValue,
             ])
         }
         release releaseTemplate >> {
             buildConfigField "boolean", "USE_RELEASE_VERSIONING", "true"
-            applicationIdSuffix ".browser"
+            applicationIdSuffix ".browser.babel"
             def deepLinkSchemeValue = "immersivetranslate"
             buildConfigField "String", "DEEP_LINK_SCHEME", "\"$deepLinkSchemeValue\""
             manifestPlaceholders.putAll([
@@ -203,7 +203,7 @@ android {
                     // fatal consequences. For example see:
                     //  - https://issuetracker.google.com/issues/36924841
                     //  - https://issuetracker.google.com/issues/36905922
-                    "sharedUserId": "com.immersivetranslate.browser.sharedID",
+                    "sharedUserId": "com.immersivetranslate.browser.babel.sharedID",
                     "deepLinkScheme": deepLinkSchemeValue,
             ])
         }
