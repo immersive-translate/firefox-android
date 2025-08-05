@@ -45,7 +45,7 @@ class GoogleAppUpdateDialog(
         intent.setPackage("com.android.vending")
         try {
             context.startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
+        } catch (e: Exception) {
             // 如果没有安装 Google Play 商店 App，则使用浏览器跳转
             intent.setData("https://play.google.com/store/apps/details?id=${newAppPackageName}".toUri())
             context.startActivity(intent)
