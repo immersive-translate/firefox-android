@@ -29,6 +29,7 @@ import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.settings
 import org.mozilla.fenix.immersive_transalte.Constant
+import org.mozilla.fenix.immersive_transalte.appupdate.GoogleAppUpdateDialog
 import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.settings.deletebrowsingdata.deleteAndQuit
@@ -154,6 +155,10 @@ class HomeMenuView(
                     newTab = true,
                     from = BrowserDirection.FromHome,
                 )
+            }
+
+            HomeMenu.Item.NewVersion -> {
+                GoogleAppUpdateDialog.checkShow(homeActivity, false)
             }
 
             HomeMenu.Item.Settings -> {

@@ -3066,6 +3066,10 @@
     <string name="app_update_btn_cancel">Later</string>
     <string name="app_update_btn_confirm">Update Now</string>
 
+    <string name="app_update_new_google_version">Try the new app</string>
+    <string name="app_update_new_google_version_desc">The current app is built on the firefox browser. However, during development iterations, we found it difficult to maintain a good user experience when adding new translation features within a browser-based environment. Therefore, we’ve created a brand-new version of Immersive Translate. In the future, native features such as text translation and document translation will be gradually introduced.\nThe current app will no longer be maintained.Members who subscribed within the app will continue to enjoy their benefits.</string>
+    <string name="app_update_new_google_version_download">Download</string>
+
     <string name="buy_vip_hw_try">Free Trial: If the subscription is not cancelled before the end of the trial, it will be automatically charged at the current selected package price</string>
     <string name="buy_vip_hw_cancel">Cancellation Renewal: Your annual subscription will be automatically renewed for the same term unless it is cancelled at least %1$s hours in advance before the end of the current subscription term. Subscriptions can be cancelled at any time in the app settings at no additional cost. Upon cancellation, your subscription will terminate at the end of the subscription term. Confirmation of commencement is deemed to be your acceptance of the following terms of service: %2$s</string>
     <string name="buy_vip_hw_recurring_payment_agreement">Recurring Payment Agreement</string>

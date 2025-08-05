@@ -3235,6 +3235,10 @@
     <string name="app_update_btn_cancel">暂不</string>
     <string name="app_update_btn_confirm">立即更新</string>
 
+    <string name="app_update_new_google_version">邀你体验新版App</string>
+    <string name="app_update_new_google_version_desc">当前的 App 基于 Firefox 浏览器打造，在迭代过程中我们发现基于浏览器增加新的翻译特性很难维持好的体验。因此我们打造了一个新的「沉浸式翻译」。未来在新的 App 中会陆续上线文本翻译、文档翻译等原生特性。\n当前的 App 将停止维护。App 中订阅的会员依然继续享有权益。</string>
+    <string name="app_update_new_google_version_download">下载新版本</string>
+
     <string name="buy_vip_hw_try">免费试用：如未在试用结束前取消订阅，将按当前所选套餐价格自动扣费</string>
     <string name="buy_vip_hw_cancel">取消续订：除非是在当前订阅期限结束之前提前至少%1$s小时取消续订，你的年缴套餐将以相同的期限自动续订。订阅可以随时在应用设置中取消，无需任何额外费用。取消后，您的订阅将在套餐期限结束时终止。确认开始即视为你已接受以下服务条款：%2$s</string>
     <string name="buy_vip_hw_recurring_payment_agreement">定期付款协议</string>

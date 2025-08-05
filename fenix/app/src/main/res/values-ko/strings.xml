@@ -3228,6 +3228,10 @@
     <string name="app_update_btn_cancel">나중에</string>
     <string name="app_update_btn_confirm">지금 업데이트</string>
 
+    <string name="app_update_new_google_version">새로운 앱을 경험해 보세요.</string>
+    <string name="app_update_new_google_version_desc">현재 앱은 Firefox 브라우저를 기반으로 제작되었습니다. 하지만 개발을 거치면서 브라우저 기반 환경에서 새로운 번역 기능을 추가하는 것이 좋은 사용자 경험을 유지하기 어렵다는 것을 깨달았습니다. 그래서 저희는 새로운 「몰입형 번역」 앱을 새롭게 개발하였습니다. 앞으로는 텍스트 번역, 문서 번역 등 다양한 네이티브 기능들이 순차적으로 추가될 예정입니다.\n현재 앱은 유지보수를 중단합니다. 앱 내 구독 회원은 계속해서 혜택을 누릴 수 있습니다.</string>
+    <string name="app_update_new_google_version_download">새 버전 다운로드</string>
+
     <string name="buy_vip_hw_try">무료 체험: 체험 종료 전에 구독을 취소하지 않으면, 선택한 요금제에 따라 자동으로 결제가 진행됩니다</string>
     <string name="buy_vip_hw_cancel">자동 갱신 취소: 현재 구독 기간이 종료되기 최소 %1$s시간 전에 자동 갱신을 취소하지 않으면, 연간 요금제가 동일한 기간으로 자동 갱신됩니다. 구독은 앱 설정에서 언제든지 추가 비용 없이 취소할 수 있으며, 취소 후에는 현재 구독 기간이 종료될 때까지 이용 가능합니다. 시작을 확인하는 즉시 다음 서비스 약관에 동의한 것으로 간주됩니다: %2$s</string>
     <string name="buy_vip_hw_recurring_payment_agreement">정기 결제 약관을</string>

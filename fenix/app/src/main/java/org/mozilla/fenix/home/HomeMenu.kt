@@ -51,6 +51,7 @@ class HomeMenu(
         object Bookmarks : Item()
         object History : Item()
         object Downloads : Item()
+        object NewVersion : Item()
 
         /**
          * The Passwords menu item
@@ -144,6 +145,13 @@ class HomeMenu(
             R.drawable.ic_menu_subscription,
         ) {
             onItemTapped.invoke(Item.Subscription)
+        }
+
+        val newVersionItem = BrowserMenuImageText(
+            context.getString(R.string.app_update_new_google_version),
+            R.drawable.ic_menu_new_version,
+        ) {
+            onItemTapped.invoke(Item.NewVersion)
         }
 
         val bookmarksItem = BrowserMenuImageText(
@@ -266,6 +274,7 @@ class HomeMenu(
             BrowserMenuDivider(),
             translateItem,
             gotoBuyVip,
+            if (Config.isGoogleChannel) newVersionItem else null,
             subscriptionItem,
             BrowserMenuDivider(),
             settingsItem,

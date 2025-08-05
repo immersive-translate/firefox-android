@@ -53,6 +53,7 @@ import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.navigateSafe
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.immersive_transalte.Constant
+import org.mozilla.fenix.immersive_transalte.appupdate.GoogleAppUpdateDialog
 import org.mozilla.fenix.immersive_transalte.user.UserManager
 import org.mozilla.fenix.settings.SupportUtils
 import org.mozilla.fenix.settings.deletebrowsingdata.deleteAndQuit
@@ -418,6 +419,10 @@ class DefaultBrowserToolbarMenuController(
                 navController.navigate(BrowserFragmentDirections.actionGlobalBuyVipFragment())
             }
 
+            is ToolbarMenu.Item.NewVersion -> {
+                GoogleAppUpdateDialog.checkShow(activity, false)
+            }
+
             is ToolbarMenu.Item.Report -> {
                 navController.navigate(BrowserFragmentDirections.actionGlobalReport())
             }
@@ -520,6 +525,8 @@ class DefaultBrowserToolbarMenuController(
                 // noting to do
             }
             is ToolbarMenu.Item.Subscription -> {
+            }
+            is ToolbarMenu.Item.NewVersion -> {
             }
         }
     }

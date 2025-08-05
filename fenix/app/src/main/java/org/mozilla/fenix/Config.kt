@@ -61,5 +61,7 @@ object Config {
         }
     }
 
+    val isGoogleChannel = BuildConfig.localPluginChannel == "google"
+
     const val isForceEnablePullToRefresh = true
 }

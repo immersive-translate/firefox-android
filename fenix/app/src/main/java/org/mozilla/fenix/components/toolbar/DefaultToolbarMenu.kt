@@ -437,6 +437,13 @@ open class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.Subscription)
     }
 
+    private val newVersion = BrowserMenuImageText(
+        label = context.getString(R.string.app_update_new_google_version),
+        imageResource = R.drawable.ic_menu_new_version
+    ) {
+        onItemTapped.invoke(ToolbarMenu.Item.NewVersion)
+    }
+
     /*private fun syncMenuItem(): BrowserMenuItem {
         return BrowserMenuSignIn(primaryTextColor()) {
             onItemTapped.invoke(
@@ -460,6 +467,7 @@ open class DefaultToolbarMenu(
                 //syncMenuItem(),
                 immersiveTranslate,
                 gotoBuyVip,
+                if (Config.isGoogleChannel) newVersion else null,
                 report,
                 subscription,
                 BrowserMenuDivider(),

@@ -59,6 +59,7 @@ interface ToolbarMenu {
         object Upgrade: Item()
         object Report: Item()
         object Subscription: Item()
+        object NewVersion: Item()
     }
 
     val menuBuilder: BrowserMenuBuilder

@@ -3285,6 +3285,10 @@
     <string name="app_update_btn_cancel">暫不</string>
     <string name="app_update_btn_confirm">立即更新</string>
 
+    <string name="app_update_new_google_version">邀你體驗新版App</string>
+    <string name="app_update_new_google_version_desc">目前的 App 是以 Firefox 瀏覽器為基礎開發的，但在迭代過程中，我們發現基於瀏覽器新增翻譯功能，很難維持良好的使用體驗。因此，我們重新打造了一款全新的「沉浸式翻譯」App。未來將陸續推出原生的文本翻譯、文件翻譯等功能。\n目前這款 App 將停止維護。App 中訂閱的會員仍可繼續享有權益。</string>
+    <string name="app_update_new_google_version_download">下載新版本</string>
+
     <string name="buy_vip_hw_try">免費試用：如未在試用結束前取消訂閱，將依照目前所選方案的價格自動扣款</string>
     <string name="buy_vip_hw_cancel">取消續訂：除非在目前訂閱期限結束前至少%1$s小時取消續訂，您的年繳方案將自動以相同期限續訂，並向您收取相同的費用。訂閱可隨時於應用程式的設定中取消，且不需支付任何額外費用。取消後，您的訂閱將於方案期限結束時終止。確認開始即表示您已接受以下服務條款：%2$s</string>
     <string name="buy_vip_hw_recurring_payment_agreement">定期付款協議</string>

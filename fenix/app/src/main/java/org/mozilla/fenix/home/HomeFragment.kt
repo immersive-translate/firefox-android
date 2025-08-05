@@ -102,6 +102,8 @@ import mozilla.components.ui.colors.PhotonColors
 import mozilla.components.ui.tabcounter.TabCounterMenu
 import mozilla.telemetry.glean.private.NoExtras
 import org.mozilla.fenix.BrowserDirection
+import org.mozilla.fenix.BuildConfig
+import org.mozilla.fenix.Config
 import org.mozilla.fenix.GleanMetrics.HomeScreen
 import org.mozilla.fenix.GleanMetrics.Homepage
 import org.mozilla.fenix.GleanMetrics.Metrics
@@ -171,6 +173,7 @@ import org.mozilla.fenix.home.ui.Homepage
 import org.mozilla.fenix.immersive_transalte.appupdate.AppUpdater
 import org.mozilla.fenix.immersive_transalte.ImmersiveTracker
 import org.mozilla.fenix.immersive_transalte.ImmersiveTranslateFlow
+import org.mozilla.fenix.immersive_transalte.appupdate.GoogleAppUpdateDialog
 import org.mozilla.fenix.messaging.DefaultMessageController
 import org.mozilla.fenix.messaging.FenixMessageSurfaceId
 import org.mozilla.fenix.messaging.MessagingFeature
@@ -311,7 +314,11 @@ class HomeFragment : Fragment() {
 
         // app check update
         activity?.let {
-            AppUpdater.checkVersion(it as AppCompatActivity)
+            if (!Config.isGoogleChannel) {
+                AppUpdater.checkVersion(it as AppCompatActivity)
+            } else {
+                GoogleAppUpdateDialog.checkShow(it, true)
+            }
         }
     }
 
