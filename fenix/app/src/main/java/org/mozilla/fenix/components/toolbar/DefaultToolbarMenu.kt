@@ -416,12 +416,12 @@ open class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.IMM_Translate)
     }
 
-    private val gotoBuyVip = BrowserMenuImageText(
+    /*private val gotoBuyVip = BrowserMenuImageText(
         label = context.getString(R.string.library_upgrade),
         imageResource = R.drawable.ic_menu_im_user_upgrade,
     ) {
         onItemTapped.invoke(ToolbarMenu.Item.Upgrade)
-    }
+    }*/
 
     private val report = BrowserMenuImageText(
         label = context.getString(R.string.report_title),
@@ -466,7 +466,7 @@ open class DefaultToolbarMenu(
                 extensionsItem,
                 //syncMenuItem(),
                 immersiveTranslate,
-                gotoBuyVip,
+                // gotoBuyVip,
                 if (Config.isGoogleChannel) newVersion else null,
                 report,
                 subscription,

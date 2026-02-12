@@ -30,7 +30,6 @@ import org.mozilla.fenix.ext.nav
 import org.mozilla.fenix.ext.openSetDefaultBrowserOption
 import org.mozilla.fenix.ext.requireComponents
 import org.mozilla.fenix.ext.settings
-import org.mozilla.fenix.onboarding.imts.FourthPageView
 import org.mozilla.fenix.onboarding.imts.LanguagePageView
 import org.mozilla.fenix.onboarding.imts.SecondPageView
 import org.mozilla.fenix.onboarding.imts.ThirdPageView
@@ -119,7 +118,7 @@ class OnboardingFragment : Fragment() {
         val secondPageView = SecondPageView(context)
         val translatePageView = TranslatePageView(context)
         val thirdPageView = ThirdPageView(context)
-        val fourthPageView = FourthPageView(context, activity)
+        // val fourthPageView = FourthPageView(context, activity)
 
         languagePageView.setCallback(
             object : LanguagePageView.Callback {
@@ -162,12 +161,17 @@ class OnboardingFragment : Fragment() {
                         id = R.id.onboardingFragment,
                         directions = OnboardingFragmentDirections.actionHome(),
                     )*/
-                    binding.viewpager.setCurrentItem(4, true)
+                    //binding.viewpager.setCurrentItem(4, true)
+                    requireComponents.fenixOnboarding.finish()
+                    findNavController().nav(
+                        id = R.id.onboardingFragment,
+                        directions = OnboardingFragmentDirections.actionHome(),
+                    )
                 }
             },
         )
 
-        fourthPageView.setCallback(
+        /*fourthPageView.setCallback(
             object : FourthPageView.Callback {
                 override fun onNextClick() {
                     requireComponents.fenixOnboarding.finish()
@@ -185,13 +189,13 @@ class OnboardingFragment : Fragment() {
                     )
                 }
             },
-        )
+        )*/
 
 
         val pages = mutableListOf(
             languagePageView, secondPageView,
             translatePageView,
-            thirdPageView, fourthPageView)
+            thirdPageView/*, fourthPageView*/)
 
         viewpagerAdapter = ViewPageAdapter(pages)
         binding.viewpager.offscreenPageLimit = viewpagerAdapter.count

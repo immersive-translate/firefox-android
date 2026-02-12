@@ -126,12 +126,12 @@ class HomeMenu(
         }
 
         // R.drawable.ic_menu_user_upgrade
-        val gotoBuyVip = BrowserMenuImageText(
+        /*val gotoBuyVip = BrowserMenuImageText(
             context.getString(R.string.library_upgrade),
             R.drawable.ic_menu_im_user_upgrade,
         ) {
             onItemTapped.invoke(Item.Upgrade)
-        }
+        }*/
 
         val reportItem = BrowserMenuImageText(
             context.getString(R.string.report_title),
@@ -273,7 +273,7 @@ class HomeMenu(
             customizeHomeItem,
             BrowserMenuDivider(),
             translateItem,
-            gotoBuyVip,
+            // gotoBuyVip,
             if (Config.isGoogleChannel) newVersionItem else null,
             subscriptionItem,
             BrowserMenuDivider(),

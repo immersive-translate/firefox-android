@@ -316,9 +316,9 @@ class HomeFragment : Fragment() {
         activity?.let {
             if (!Config.isGoogleChannel) {
                 AppUpdater.checkVersion(it as AppCompatActivity)
-            } else {
+            } /*else {
                 GoogleAppUpdateDialog.checkShow(it, true)
-            }
+            }*/
         }
     }
 
