@@ -1,0 +1,26 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    packaging {
+        resources {
+            excludes += ['META-INF/LICENSE.md', 'META-INF/LICENSE-notice.md']
+        }
+    }
+
+    namespace = 'mozilla.components.tooling.fetch.tests'
+}
+
+dependencies {
+    implementation project(':components:concept-fetch')
+
+    implementation libs.junit4
+    implementation libs.kotlinx.coroutines
+    implementation libs.mockwebserver
+}
+
+apply from: '../../../common-config.gradle'
