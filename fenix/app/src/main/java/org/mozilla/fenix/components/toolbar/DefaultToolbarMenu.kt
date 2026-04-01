@@ -430,12 +430,12 @@ open class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.Report)
     }
 
-    private val subscription = BrowserMenuImageText(
+   /*private val subscription = BrowserMenuImageText(
         label = context.getString(R.string.library_subscription),
         imageResource = R.drawable.ic_menu_subscription
     ) {
         onItemTapped.invoke(ToolbarMenu.Item.Subscription)
-    }
+    }*/
 
     private val newVersion = BrowserMenuImageText(
         label = context.getString(R.string.app_update_new_google_version),
@@ -469,7 +469,7 @@ open class DefaultToolbarMenu(
                 // gotoBuyVip,
                 if (Config.isGoogleChannel) newVersion else null,
                 report,
-                subscription,
+                // subscription,
                 BrowserMenuDivider(),
                 findInPageItem,
                 translationsItem.apply { visible = ::shouldShowTranslations },

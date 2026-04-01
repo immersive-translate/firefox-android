@@ -140,12 +140,12 @@ class HomeMenu(
             onItemTapped.invoke(Item.Report)
         }
 
-        val subscriptionItem = BrowserMenuImageText(
+        /*val subscriptionItem = BrowserMenuImageText(
             context.getString(R.string.library_subscription),
             R.drawable.ic_menu_subscription,
         ) {
             onItemTapped.invoke(Item.Subscription)
-        }
+        }*/
 
         val newVersionItem = BrowserMenuImageText(
             context.getString(R.string.app_update_new_google_version),
@@ -275,7 +275,7 @@ class HomeMenu(
             translateItem,
             // gotoBuyVip,
             if (Config.isGoogleChannel) newVersionItem else null,
-            subscriptionItem,
+            // subscriptionItem,
             BrowserMenuDivider(),
             settingsItem,
             if (settings.shouldDeleteBrowsingDataOnQuit) quitItem else null,
