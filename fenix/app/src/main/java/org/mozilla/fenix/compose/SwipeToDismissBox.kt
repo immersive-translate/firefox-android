@@ -103,6 +103,7 @@ private const val SWIPE_ANIMATION_DURATION_MS = 230
 class SwipeToDismissState(
     density: Density,
     decayAnimationSpec: DecayAnimationSpec<Float>,
+    @Suppress("DEPRECATION")
     val anchoredDraggableState: AnchoredDraggableState<SwipeToDismissAnchor> = AnchoredDraggableState(
         initialValue = SwipeToDismissAnchor.Default,
         positionalThreshold = { distance: Float -> distance * DISMISS_THRESHOLD },

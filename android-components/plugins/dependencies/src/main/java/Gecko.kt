@@ -10,7 +10,7 @@ object Gecko {
      * GeckoView Version.
      */
     //const val version = "125.0.20240425211020"
-    const val version = "133.0.20241204213141"
+    const val version = "136.0.20250317200840"
     // 133.0.20241202233018
     // const val version = "134.0.20250120135430"
     //const val version = "136.0.20250317200840"

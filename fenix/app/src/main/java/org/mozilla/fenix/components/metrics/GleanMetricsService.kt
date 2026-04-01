@@ -70,7 +70,7 @@ class GleanMetricsService(
     override fun start() {
         logger.debug("Enabling Glean.")
         // Initialization of Glean already happened in FenixApplication.
-        Glean.setUploadEnabled(true)
+        Glean.setCollectionEnabled(true)
 
         if (initialized) return
         initialized = true
@@ -90,7 +90,7 @@ class GleanMetricsService(
     }
 
     override fun stop() {
-        Glean.setUploadEnabled(false)
+        Glean.setCollectionEnabled(false)
     }
 
     override fun track(event: Event) {

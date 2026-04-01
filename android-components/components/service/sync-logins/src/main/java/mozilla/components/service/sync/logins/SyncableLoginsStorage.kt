@@ -8,9 +8,12 @@ import android.content.Context
 import androidx.annotation.GuardedBy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import mozilla.appservices.logins.DatabaseLoginsStorage
+import mozilla.appservices.logins.createStaticKeyManager
 import mozilla.components.concept.storage.EncryptedLogin
+import mozilla.components.concept.storage.KeyGenerationReason
 import mozilla.components.concept.storage.Login
 import mozilla.components.concept.storage.LoginEntry
 import mozilla.components.concept.storage.LoginsStorage
@@ -71,7 +74,7 @@ typealias InvalidRecordException = mozilla.appservices.logins.LoginsApiException
 /**
  * Error encrypting/decrypting logins data
  */
-typealias IncorrectKey = mozilla.appservices.logins.LoginsApiException.IncorrectKey
+typealias IncorrectKey = mozilla.appservices.logins.LoginsApiException.InvalidKey
 
 /**
  * Implements [LoginsStorage] and [SyncableStore] using the application-services logins library.
@@ -84,10 +87,17 @@ class SyncableLoginsStorage(
 ) : LoginsStorage, SyncableStore, AutoCloseable {
     private val logger = Logger("SyncableLoginsStorage")
     private val coroutineContext by lazy { Dispatchers.IO }
-    val crypto by lazy { LoginsCrypto(context, securePrefs.value, this) }
+    val crypto by lazy { LoginsCrypto(context, securePrefs.value) }
 
     internal val conn by lazy {
-        LoginStorageConnection.init(dbPath = context.getDatabasePath(DB_NAME).absolutePath)
+        val managedKey = runBlocking(coroutineContext) { crypto.getOrGenerateKey() }
+        LoginStorageConnection.init(
+            dbPath = context.getDatabasePath(DB_NAME).absolutePath,
+            keyManager = createStaticKeyManager(managedKey.key),
+        )
+        if (managedKey.wasGenerated is KeyGenerationReason.RecoveryNeeded) {
+            LoginStorageConnection.getStorage().wipeLocal()
+        }
         LoginStorageConnection
     }
 
@@ -123,7 +133,7 @@ class SyncableLoginsStorage(
      */
     @Throws(LoginsApiException::class)
     override suspend fun get(guid: String): Login? = withContext(coroutineContext) {
-        conn.getStorage().get(guid)?.toEncryptedLogin()?.let { crypto.decryptLogin(it) }
+        conn.getStorage().get(guid)?.toLogin()
     }
 
     /**
@@ -142,8 +152,7 @@ class SyncableLoginsStorage(
      */
     @Throws(LoginsApiException::class)
     override suspend fun list(): List<Login> = withContext(coroutineContext) {
-        val key = crypto.getOrGenerateKey()
-        conn.getStorage().list().map { crypto.decryptLogin(it.toEncryptedLogin(), key) }
+        conn.getStorage().list().map { it.toLogin() }
     }
 
     /**
@@ -154,7 +163,8 @@ class SyncableLoginsStorage(
      */
     @Throws(IncorrectKey::class, InvalidRecordException::class, LoginsApiException::class)
     override suspend fun add(entry: LoginEntry) = withContext(coroutineContext) {
-        conn.getStorage().add(entry.toLoginEntry(), crypto.getOrGenerateKey().key).toEncryptedLogin()
+        val key = crypto.getOrGenerateKey()
+        conn.getStorage().add(entry.toLoginEntry()).toEncryptedLogin(key)
     }
 
     /**
@@ -171,7 +181,8 @@ class SyncableLoginsStorage(
         LoginsApiException::class,
     )
     override suspend fun update(guid: String, entry: LoginEntry) = withContext(coroutineContext) {
-        conn.getStorage().update(guid, entry.toLoginEntry(), crypto.getOrGenerateKey().key).toEncryptedLogin()
+        val key = crypto.getOrGenerateKey()
+        conn.getStorage().update(guid, entry.toLoginEntry()).toEncryptedLogin(key)
     }
 
     /**
@@ -182,7 +193,8 @@ class SyncableLoginsStorage(
      */
     @Throws(IncorrectKey::class, InvalidRecordException::class, LoginsApiException::class)
     override suspend fun addOrUpdate(entry: LoginEntry) = withContext(coroutineContext) {
-        conn.getStorage().addOrUpdate(entry.toLoginEntry(), crypto.getOrGenerateKey().key).toEncryptedLogin()
+        val key = crypto.getOrGenerateKey()
+        conn.getStorage().addOrUpdate(entry.toLoginEntry()).toEncryptedLogin(key)
     }
 
     override fun registerWithSyncManager() {
@@ -194,8 +206,7 @@ class SyncableLoginsStorage(
      */
     @Throws(LoginsApiException::class)
     override suspend fun getByBaseDomain(origin: String): List<Login> = withContext(coroutineContext) {
-        val key = crypto.getOrGenerateKey()
-        conn.getStorage().getByBaseDomain(origin).map { crypto.decryptLogin(it.toEncryptedLogin(), key) }
+        conn.getStorage().getByBaseDomain(origin).map { it.toLogin() }
     }
 
     /**
@@ -204,7 +215,7 @@ class SyncableLoginsStorage(
      */
     @Throws(LoginsApiException::class)
     override suspend fun findLoginToUpdate(entry: LoginEntry): Login? = withContext(coroutineContext) {
-        conn.getStorage().findLoginToUpdate(entry.toLoginEntry(), crypto.getOrGenerateKey().key)?.toLogin()
+        conn.getStorage().findLoginToUpdate(entry.toLoginEntry())?.toLogin()
     }
 
     /**
@@ -225,9 +236,12 @@ internal object LoginStorageConnection : Closeable {
     @GuardedBy("this")
     private var storage: DatabaseLoginsStorage? = null
 
-    internal fun init(dbPath: String = DB_NAME) = synchronized(this) {
+    internal fun init(
+        dbPath: String = DB_NAME,
+        keyManager: mozilla.appservices.logins.KeyManager,
+    ) = synchronized(this) {
         if (storage == null) {
-            storage = DatabaseLoginsStorage(dbPath)
+            storage = DatabaseLoginsStorage(dbPath, keyManager)
         }
         storage
     }

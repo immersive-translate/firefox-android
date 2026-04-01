@@ -448,7 +448,12 @@ class GleanCrashReporterService(
                 DecodeSequenceMode.WHITESPACE_SEPARATED,
             )
             for (action in actionSequence) {
-                action.submit()
+                try {
+                    action.submit()
+                } catch (t: Throwable) {
+                    // Never crash app startup due to telemetry replay.
+                    logger.error("Error submitting persisted crash action", t)
+                }
             }
         } catch (e: IOException) {
             logger.error("Error reading crash file", e)

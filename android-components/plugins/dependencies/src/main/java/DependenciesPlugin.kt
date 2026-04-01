@@ -19,7 +19,7 @@ object Versions {
     const val serialization = "1.6.3"
     const val python_envs_plugin = "0.0.31"
 
-    const val mozilla_glean = "62.0.0"
+    const val mozilla_glean = "63.1.0"
 
     const val maven_ant_tasks = "2.1.3"
     const val jacoco = "0.8.12"
@@ -27,7 +27,7 @@ object Versions {
     const val okio = "3.9.0"
     const val androidsvg = "1.4"
 
-    const val android_gradle_plugin = "8.7.2"
+    const val android_gradle_plugin = "8.9.1"
 
     // This has to be synced to the gradlew plugin version. See
     // http://googlesamples.github.io/android-custom-lint-rules/api-guide/example.md.html#example:samplelintcheckgithubproject/lintversion?

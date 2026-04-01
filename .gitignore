@@ -102,3 +102,4 @@ DerivedData
 .build
 
 fenix/app/src/main/assets/ts/*
+.gradle-user-home

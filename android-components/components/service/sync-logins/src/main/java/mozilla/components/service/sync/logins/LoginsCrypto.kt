@@ -9,7 +9,6 @@ import android.content.SharedPreferences
 import mozilla.appservices.logins.KeyRegenerationEventReason
 import mozilla.appservices.logins.checkCanary
 import mozilla.appservices.logins.createCanary
-import mozilla.appservices.logins.decryptFields
 import mozilla.appservices.logins.recordKeyRegenerationEvent
 import mozilla.components.concept.storage.EncryptedLogin
 import mozilla.components.concept.storage.KeyGenerationReason
@@ -31,7 +30,6 @@ import mozilla.components.lib.dataprotect.SecureAbove22Preferences
 class LoginsCrypto(
     private val context: Context,
     private val securePrefs: SecureAbove22Preferences,
-    private val storage: SyncableLoginsStorage,
 ) : KeyManager() {
     private val plaintextPrefs by lazy { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
 
@@ -42,7 +40,6 @@ class LoginsCrypto(
             is KeyGenerationReason.RecoveryNeeded.AbnormalState -> KeyRegenerationEventReason.Other
         }
         recordKeyRegenerationEvent(telemetryEventReason)
-        storage.conn.getStorage().wipeLocal()
     }
 
     override fun getStoredCanary(): String? {
@@ -97,18 +94,15 @@ class LoginsCrypto(
      * decrypt multiple logins to avoid constructing the key multiple times.
      */
     fun decryptLogin(login: EncryptedLogin, key: ManagedKey): Login {
-        val secFields = decryptFields(login.secFields, key.key)
-        // Note: The autofill code catches errors on decryptFields and returns
-        // null, but it's not as easy to recover in this case since the code
-        // almost certainly going to need to a [Login], so we just throw in
-        // that case.  Decryption errors shouldn't be happen as long as the
-        // canary checking code below is working correctly
+        val secFields = decodeSecFields(login.secFields, key)
+        // A-C still exposes EncryptedLogin in the interface. For AppServices 137+ this payload
+        // is a local reversible encoding, decoded here back into a plaintext Login.
 
         return Login(
             guid = login.guid,
             origin = login.origin,
-            username = secFields.username,
-            password = secFields.password,
+            username = secFields.first,
+            password = secFields.second,
             formActionOrigin = login.formActionOrigin,
             httpRealm = login.httpRealm,
             usernameField = login.usernameField,

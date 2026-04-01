@@ -75,7 +75,6 @@ import org.mozilla.geckoview.GeckoRuntime
 import org.mozilla.geckoview.GeckoSession
 import org.mozilla.geckoview.GeckoSession.NavigationDelegate
 import org.mozilla.geckoview.GeckoSession.PermissionDelegate.ContentPermission
-import org.mozilla.geckoview.GeckoSession.Recommendation
 import org.mozilla.geckoview.GeckoSessionSettings
 import org.mozilla.geckoview.WebRequestError
 import org.mozilla.geckoview.WebResponse
@@ -102,6 +101,8 @@ class GeckoEngineSession(
     private val context: CoroutineContext = Dispatchers.IO,
     openGeckoSession: Boolean = true,
 ) : CoroutineScope, EngineSession() {
+    private val shoppingNotSupportedError =
+        UnsupportedOperationException("Shopping analysis APIs are not supported by this GeckoView version.")
 
     // This logger is temporary and parsed by FNPRMS for performance measurements. It can be
     // removed once FNPRMS is replaced: https://github.com/mozilla-mobile/android-components/issues/8662
@@ -757,41 +758,7 @@ class GeckoEngineSession(
         onResult: (List<ProductRecommendation>) -> Unit,
         onException: (Throwable) -> Unit,
     ) {
-        geckoSession.requestRecommendations(url).then(
-            { response: List<Recommendation>? ->
-                if (response == null) {
-                    logger.error("Invalid value: unable to get analysis result from Gecko Engine.")
-                    onException(
-                        java.lang.IllegalStateException(
-                            "Invalid value: unable to get analysis result from Gecko Engine.",
-                        ),
-                    )
-                    return@then GeckoResult()
-                }
-
-                val productRecommendations = response.map { it: Recommendation ->
-                    ProductRecommendation(
-                        url = it.url,
-                        analysisUrl = it.analysisUrl,
-                        adjustedRating = it.adjustedRating,
-                        sponsored = it.sponsored,
-                        imageUrl = it.imageUrl,
-                        aid = it.aid,
-                        name = it.name,
-                        grade = it.grade,
-                        price = it.price,
-                        currency = it.currency,
-                    )
-                }
-                onResult(productRecommendations)
-                GeckoResult<ProductRecommendation>()
-            },
-            { throwable ->
-                logger.error("Requesting product analysis failed.", throwable)
-                onException(throwable)
-                GeckoResult()
-            },
-        )
+        onException(shoppingNotSupportedError)
     }
 
     /**
@@ -803,61 +770,7 @@ class GeckoEngineSession(
         onResult: (ProductAnalysis) -> Unit,
         onException: (Throwable) -> Unit,
     ) {
-        geckoSession.requestAnalysis(url).then(
-            { response ->
-                if (response == null) {
-                    logger.error(
-                        "Invalid value: unable to get analysis result from Gecko Engine.",
-                    )
-                    onException(
-                        java.lang.IllegalStateException(
-                            "Invalid value: unable to get analysis result from Gecko Engine.",
-                        ),
-                    )
-                    return@then GeckoResult()
-                }
-
-                val highlights = if (
-                    response.highlights?.quality == null &&
-                    response.highlights?.price == null &&
-                    response.highlights?.shipping == null &&
-                    response.highlights?.appearance == null &&
-                    response.highlights?.competitiveness == null
-                ) {
-                    null
-                } else {
-                    Highlight(
-                        response.highlights?.quality?.toList(),
-                        response.highlights?.price?.toList(),
-                        response.highlights?.shipping?.toList(),
-                        response.highlights?.appearance?.toList(),
-                        response.highlights?.competitiveness?.toList(),
-                    )
-                }
-
-                val analysisResult = ProductAnalysis(
-                    productId = response.productId,
-                    analysisURL = response.analysisURL,
-                    grade = response.grade,
-                    adjustedRating = response.adjustedRating,
-                    needsAnalysis = response.needsAnalysis,
-                    pageNotSupported = response.pageNotSupported,
-                    notEnoughReviews = response.notEnoughReviews,
-                    lastAnalysisTime = response.lastAnalysisTime,
-                    deletedProductReported = response.deletedProductReported,
-                    deletedProduct = response.deletedProduct,
-                    highlights = highlights,
-                )
-
-                onResult(analysisResult)
-                GeckoResult<ProductAnalysis>()
-            },
-            { throwable ->
-                logger.error("Requesting product analysis failed.", throwable)
-                onException(throwable)
-                GeckoResult()
-            },
-        )
+        onException(shoppingNotSupportedError)
     }
 
     /**
@@ -868,25 +781,7 @@ class GeckoEngineSession(
         onResult: (String) -> Unit,
         onException: (Throwable) -> Unit,
     ) {
-        geckoSession.requestCreateAnalysis(url).then(
-            { response ->
-                val errorMessage = "Invalid value: unable to reanalyze product from Gecko Engine."
-                if (response == null) {
-                    logger.error(errorMessage)
-                    onException(
-                        java.lang.IllegalStateException(errorMessage),
-                    )
-                    return@then GeckoResult()
-                }
-                onResult(response)
-                GeckoResult<String>()
-            },
-            { throwable ->
-                logger.error("Request to reanalyze product failed.", throwable)
-                onException(throwable)
-                GeckoResult()
-            },
-        )
+        onException(shoppingNotSupportedError)
     }
 
     /**
@@ -897,29 +792,7 @@ class GeckoEngineSession(
         onResult: (ProductAnalysisStatus) -> Unit,
         onException: (Throwable) -> Unit,
     ) {
-        geckoSession.requestAnalysisStatus(url).then(
-            { response ->
-                val errorMessage = "Invalid value: unable to request analysis status from Gecko Engine."
-                if (response == null) {
-                    logger.error(errorMessage)
-                    onException(
-                        java.lang.IllegalStateException(errorMessage),
-                    )
-                    return@then GeckoResult()
-                }
-                val analysisStatusResult = ProductAnalysisStatus(
-                    status = response.status,
-                    progress = response.progress,
-                )
-                onResult(analysisStatusResult)
-                GeckoResult<ProductAnalysisStatus>()
-            },
-            { throwable ->
-                logger.error("Request for product analysis status failed.", throwable)
-                onException(throwable)
-                GeckoResult()
-            },
-        )
+        onException(shoppingNotSupportedError)
     }
 
     /**
@@ -930,25 +803,7 @@ class GeckoEngineSession(
         onResult: (Boolean) -> Unit,
         onException: (Throwable) -> Unit,
     ) {
-        geckoSession.sendClickAttributionEvent(aid).then(
-            { response ->
-                val errorMessage = "Invalid value: unable to send click attribution event through Gecko Engine."
-                if (response == null) {
-                    logger.error(errorMessage)
-                    onException(
-                        java.lang.IllegalStateException(errorMessage),
-                    )
-                    return@then GeckoResult()
-                }
-                onResult(response)
-                GeckoResult<Boolean>()
-            },
-            { throwable ->
-                logger.error("Sending click attribution event failed.", throwable)
-                onException(throwable)
-                GeckoResult()
-            },
-        )
+        onException(shoppingNotSupportedError)
     }
 
     /**
@@ -959,25 +814,7 @@ class GeckoEngineSession(
         onResult: (Boolean) -> Unit,
         onException: (Throwable) -> Unit,
     ) {
-        geckoSession.sendImpressionAttributionEvent(aid).then(
-            { response ->
-                val errorMessage = "Invalid value: unable to send impression attribution event through Gecko Engine."
-                if (response == null) {
-                    logger.error(errorMessage)
-                    onException(
-                        java.lang.IllegalStateException(errorMessage),
-                    )
-                    return@then GeckoResult()
-                }
-                onResult(response)
-                GeckoResult<Boolean>()
-            },
-            { throwable ->
-                logger.error("Sending impression attribution event failed.", throwable)
-                onException(throwable)
-                GeckoResult()
-            },
-        )
+        onException(shoppingNotSupportedError)
     }
 
     /**
@@ -988,25 +825,7 @@ class GeckoEngineSession(
         onResult: (Boolean) -> Unit,
         onException: (Throwable) -> Unit,
     ) {
-        geckoSession.sendPlacementAttributionEvent(aid).then(
-            { response ->
-                val errorMessage = "Invalid value: unable to send placement attribution event through Gecko Engine."
-                if (response == null) {
-                    logger.error(errorMessage)
-                    onException(
-                        java.lang.IllegalStateException(errorMessage),
-                    )
-                    return@then GeckoResult()
-                }
-                onResult(response)
-                GeckoResult<Boolean>()
-            },
-            { throwable ->
-                logger.error("Sending placement attribution event failed.", throwable)
-                onException(throwable)
-                GeckoResult()
-            },
-        )
+        onException(shoppingNotSupportedError)
     }
 
     /**
@@ -1017,25 +836,7 @@ class GeckoEngineSession(
         onResult: (String) -> Unit,
         onException: (Throwable) -> Unit,
     ) {
-        geckoSession.reportBackInStock(url).then(
-            { response ->
-                val errorMessage = "Invalid value: unable to report back in stock from Gecko Engine."
-                if (response == null) {
-                    logger.error(errorMessage)
-                    onException(
-                        java.lang.IllegalStateException(errorMessage),
-                    )
-                    return@then GeckoResult()
-                }
-                onResult(response)
-                GeckoResult<String>()
-            },
-            { throwable ->
-                logger.error("Request for reporting back in stock failed.", throwable)
-                onException(throwable)
-                GeckoResult()
-            },
-        )
+        onException(shoppingNotSupportedError)
     }
 
     /**

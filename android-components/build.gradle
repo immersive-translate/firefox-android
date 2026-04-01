@@ -94,6 +94,24 @@ subprojects {
                     details.useVersion Versions.mozilla_glean
                 }
             }
+
+            // GeckoView 144+ pulls kotlin-stdlib 2.x; keep stdlib aligned with the project Kotlin compiler.
+            if (details.requested.group == 'org.jetbrains.kotlin' &&
+                    details.requested.name.startsWith('kotlin-stdlib')) {
+                details.useVersion Versions.kotlin
+            }
+
+            // Keep kotlinx.serialization aligned with Kotlin 1.9.x.
+            if (details.requested.group == 'org.jetbrains.kotlinx' &&
+                    details.requested.name.startsWith('kotlinx-serialization')) {
+                details.useVersion Versions.serialization
+            }
+
+            // Try newer JNA to evaluate RELRO warning behavior on libjnidispatch.so.
+            if (details.requested.group == 'net.java.dev.jna' &&
+                    details.requested.name == 'jna') {
+                details.useVersion '5.18.1'
+            }
         }
 
         resolutionStrategy.capabilitiesResolution.withCapability("org.mozilla.telemetry:glean-native") {
