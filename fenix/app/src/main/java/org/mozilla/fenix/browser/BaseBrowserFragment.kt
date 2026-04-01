@@ -1969,6 +1969,7 @@ abstract class BaseBrowserFragment :
 
                 val context = requireContext()
                 resumeDownloadDialogState(selectedTab.id, context.components.core.store, context)
+                @Suppress("DEPRECATION")
                 it.announceForAccessibility(selectedTab.toDisplayTitle())
             }
         } else {

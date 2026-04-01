@@ -26,9 +26,9 @@ internal class UiStoreDispatcher : StoreDispatcher {
      */
     override fun assertOnThread() {
         val currentThread = Thread.currentThread()
-        val expectedThreadId = Looper.getMainLooper().thread.id
+        val expectedThread = Looper.getMainLooper().thread
 
-        if (currentThread.id == expectedThreadId) {
+        if (currentThread === expectedThread) {
             return
         }
 

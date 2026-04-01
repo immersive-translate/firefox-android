@@ -6,6 +6,7 @@ package mozilla.components.support.locale
 
 import java.util.Locale
 
+@Suppress("DEPRECATION")
 fun String.toLocale(): Locale {
     val index: Int = if (contains('-')) {
         indexOf('-')

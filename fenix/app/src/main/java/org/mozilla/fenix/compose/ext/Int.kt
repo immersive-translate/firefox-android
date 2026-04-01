@@ -12,4 +12,4 @@ import java.util.Locale as JavaLocale
  * Returns a localized string representation of the value.
  */
 fun Int.toLocaleString(): String =
-    NumberFormat.getNumberInstance(JavaLocale(Locale.current.language)).format(this)
+    NumberFormat.getNumberInstance(JavaLocale.forLanguageTag(Locale.current.language)).format(this)

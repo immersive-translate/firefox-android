@@ -53,10 +53,9 @@ internal class DefaultStoreDispatcher(
      */
     override fun assertOnThread() {
         val currentThread = Thread.currentThread()
-        val currentThreadId = currentThread.id
-        val expectedThreadId = storeThreadFactory.threadId
+        val expectedThread = storeThreadFactory.storeThread
 
-        if (currentThreadId == expectedThreadId) {
+        if (currentThread === expectedThread) {
             return
         }
 

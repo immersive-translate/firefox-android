@@ -217,6 +217,7 @@ class AddonsManagementFragment : Fragment(R.layout.fragment_add_ons_management) 
     }
 
     private fun announceForAccessibility(announcementText: CharSequence) {
+        @Suppress("DEPRECATION")
         val event = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             AccessibilityEvent(AccessibilityEvent.TYPE_ANNOUNCEMENT)
         } else {

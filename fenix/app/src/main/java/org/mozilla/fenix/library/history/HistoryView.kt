@@ -147,6 +147,7 @@ class HistoryView(
             recentlyClosedNav.isVisible = !userHasHistory
         }
         if (!userHasHistory) {
+            @Suppress("DEPRECATION")
             binding.historyEmptyView.announceForAccessibility(context.getString(R.string.history_empty_message))
         }
     }

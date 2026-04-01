@@ -107,6 +107,7 @@ class FindInPageBar @JvmOverloads constructor(
             )
             val accessibilityLabel = String.format(accessibilityFormat, ordinal, numberOfMatches)
             resultsCountTextView.contentDescription = accessibilityLabel
+            @Suppress("DEPRECATION")
             announceForAccessibility(accessibilityLabel)
         }
     }

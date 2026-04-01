@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadFactory
  * that allows asserting whether a caller is on the created thread.
  *
  * For usage with [Executors.newSingleThreadExecutor]: Only the last created thread is kept and
- * compared when [StoreDispatcher.assertOnThread] is called with [threadId].
+ * compared when [StoreDispatcher.assertOnThread] is called with [storeThread].
  *
  * @param threadNamePrefix Optional prefix with which to name threads for the [Store]. If not provided,
  * the naming scheme will be deferred to [Executors.defaultThreadFactory]
@@ -31,8 +31,8 @@ internal class StoreThreadFactory(
         Executors.defaultThreadFactory()
     }
 
-    val threadId: Long?
-        get() = thread?.id
+    val storeThread: Thread?
+        get() = thread
 
     override fun newThread(r: Runnable): Thread {
         return actualFactory.newThread(r).also {

@@ -48,10 +48,8 @@ object ThreadUtils {
 
     fun assertOnUiThread() {
         val currentThread = Thread.currentThread()
-        val currentThreadId = currentThread.id
-        val expectedThreadId = uiThread.id
 
-        if (currentThreadId == expectedThreadId) {
+        if (currentThread === uiThread) {
             return
         }
 

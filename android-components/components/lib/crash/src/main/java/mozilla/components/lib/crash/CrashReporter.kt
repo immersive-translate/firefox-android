@@ -336,6 +336,7 @@ class CrashReporter internal constructor(
             val handler = null
             val requiredPermission = null
             val activityOptions = ActivityOptions.makeBasic()
+            @Suppress("DEPRECATION")
             activityOptions.pendingIntentBackgroundActivityStartMode =
                 MODE_BACKGROUND_ACTIVITY_START_ALLOWED
 
